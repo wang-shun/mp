@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config> 
+	<!-- 应用ID --> 
+	<appid>meetingroom</appid> 
+	<!-- 应用名称 --> 
+	<appname>会议室预定</appname> 
+	<!-- 应用版本 --> 
+	<version>${project.version}.${env.BUILD_NUMBER}</version> 
+	<!-- 应用描述 --> 
+	<description>会议室预定</description> 
+	<!-- 启动页 --> 
+	<htmlname>index.html</htmlname> 
+	<!-- 是否隐藏标题 1 隐藏 0 不隐藏--> 
+	<hiddentitlebutton>1</hiddentitlebutton> 
+	<!-- 是否隐返回 1 隐藏 0 不隐藏--> 
+	<hiddenbackbutton>1</hiddenbackbutton> 
+	<!-- 是否隐藏关闭 1 隐藏 0 不隐藏--> 
+	<hiddenclosebutton>1</hiddenclosebutton> 
+	<!-- 是否隐藏更多 1 隐藏 0 不隐藏--> 
+	<hiddenmenubutton>1</hiddenmenubutton> 
+	<logo>logo.png</logo> 
+</config> 

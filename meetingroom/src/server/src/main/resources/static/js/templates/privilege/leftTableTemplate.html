@@ -1,0 +1,5 @@
+<% for(var i=0,roomData; roomData=room[i++];) { %>
+    <tr>
+        <td class="SID-td-room" data-roomId="<%=roomData.roomId%>"><a href="javascript:void(0)" data-roomId="<%=roomData.roomId%>" style="pointer-events: none;"><%=roomData.roomName%></a></td>
+    </tr>
+<% } %>

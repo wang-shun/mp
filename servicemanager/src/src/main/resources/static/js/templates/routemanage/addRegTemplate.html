@@ -1,0 +1,72 @@
+<div class="outmain-cons">
+<form id="formMsg">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+
+            <div class="form-item">
+                <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+                    <!--<input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="databassType" value="" />-->
+                <label class="form-item-label" style="width:25%"><span>*</span>选择服务：</label>
+                <div class="form-item-editbox" style="width:40%">
+                        <select class="SID-services form-item-text form-item-select" name = "services">
+                        </select>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width:25%"><span>*</span>服务名称：</label>
+                <div class="form-item-editbox" style="width:40%">
+		            <input class="SID-serviceName form-item-text {required: true}" maxlength="30" type="text" name="serviceName" value="" />
+		        </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item" style="display:none">
+                <label class="form-item-label" style="width:25%"><span>*</span>路由路径：</label>
+                <div class="form-item-editbox" style="width:40%">
+		            <input class="SID-path form-item-text {required: true}" maxlength="30" type="text" name="path" value="" />
+		        </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+            	<label class="form-item-label" style="width:25%">配置项：</label>
+                <div class="form-item-editbox" style="width:13%;">
+		            <input id="retryable" type="checkbox" class="SID-retryable" name="retryable" checked/><label style="margin: 0 5px" for="retryable">失败重试</label>
+		        </div>
+		        <div class="form-item-editbox" style="width:13%;">
+		            <input id="stripPrefix" type="checkbox" class="SID-stripPrefix" name="stripPrefix" checked/><label style="margin: 0 5px" for="stripPrefix">严格前缀</label>
+		        </div>
+		        <div class="form-item-editbox" style="width:13%;">
+		            <input id="needAuth" type="checkbox" class="SID-needAuth" name="needAuth" checked/><label style="margin: 0 5px" for="needAuth">是否鉴权</label>
+		        </div>
+            </div>
+            
+            <div class="form-item authResourceBox">
+                <label class="form-item-label" style="width:25%"><span>*</span>鉴权资源：</label>
+                <div class="form-item-editbox" style="width:40%">
+		            <input class="SID-authResource form-item-text {required: true}" maxlength="30" type="text" name="authResource" value="/api/**" />
+		        </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width:25%">敏感的HTTP头：</label>
+                <div class="form-item-editbox" style="width:40%">
+		            <textarea class="form-item-textarea SID-sensitiveHeaders" maxlength="40" name="sensitiveHeaders"></textarea>
+		        </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+			<!-- 其余参数 -->
+            <input class="SID-enabled" type="hidden" name="enabled" value=""/>
+        </div>
+
+    </div>
+</form>
+</div>
+<style>
+</style>
+</script>

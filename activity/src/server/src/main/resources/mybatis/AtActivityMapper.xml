@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.activity.dao.AtActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.activity.entity.AtActivity" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ecid" property="ecid" jdbcType="VARCHAR" />
+    <result column="act_content" property="actContent" jdbcType="VARCHAR" />
+    <result column="act_start_time" property="actStartTime" jdbcType="TIMESTAMP" />
+    <result column="act_end_time" property="actEndTime" jdbcType="TIMESTAMP" />
+    <result column="act_address" property="actAddress" jdbcType="VARCHAR" />
+    <result column="act_coordinate" property="actCoordinate" jdbcType="VARCHAR" />
+    <result column="enter_end_time" property="enterEndTime" jdbcType="TIMESTAMP" />
+    <result column="con_tel" property="conTel" jdbcType="VARCHAR" />
+    <result column="num_limit" property="numLimit" jdbcType="NUMERIC" />
+    <result column="enter_num" property="enterNum" jdbcType="NUMERIC" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="VARCHAR" />
+    <result column="act_poster_url" property="actPosterUrl" jdbcType="VARCHAR" />
+    <result column="dis_group_id" property="disGroupId" jdbcType="VARCHAR" />
+    <result column="act_title" property="actTitle" jdbcType="VARCHAR" />
+    <result column="default_image" property="defaultImage" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="AtActivityWhere">
+  	<if test="ecid != null">
+	  and a.ecid =  #{ecid,jdbcType=VARCHAR}
+    </if>
+  	<if test="title != null">
+	  and a.act_title like  #{title,jdbcType=VARCHAR}
+    </if>
+  	<if test="content != null">
+	  and a.act_content like  #{content,jdbcType=VARCHAR}
+    </if>
+    <if test="address != null">
+	  and a.act_address like  #{address,jdbcType=VARCHAR}
+    </if>
+     <if test="actStartTime != null">
+	  and a.act_start_time >=  #{actStartTime,jdbcType=VARCHAR}
+    </if>
+     <if test="actEndTime != null">
+	  and a.act_end_time  &lt;  #{actEndTime,jdbcType=VARCHAR}
+    </if>
+     <if test="numLimit != null">
+	  and a.num_limit >=  #{numLimit,jdbcType=VARCHAR}
+    </if>
+     <if test="phone != null">
+	  and a.phone =  #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+	  and a.name =  #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="idCard != null">
+	  and a.id_card =  #{idCard,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+	  and a.remark =  #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="sex != null">
+	  and a.sex =  #{sex,jdbcType=VARCHAR}
+    </if>
+    <if test="date != null">
+	  and a.act_start_time > #{date,jdbcType=TIMESTAMP}
+    </if>
+  </sql>
+  
+	<!-- 获得列表查询  -->
+	<select id="getActList" parameterType="java.util.Map" resultType="ActivityDetail">
+	select a.id as id,a.ecid,a.act_content as actContent,a.act_start_time as actStartTime
+    	  ,a.act_end_time as actEndTime,a.act_address as actAddress,a.default_image as defaultImage
+	      ,a.enter_end_time as enterEndTime,a.con_tel as conTel,a.num_limit as numLimit
+	      ,a.enter_num as enterNum,a.phone as phone,a.name as name,a.act_title as actTitle
+	      ,a.id_card as  idCard,a.remark as remark,a.sex as sex,a.create_time as createTime,a.create_id as createId
+	      ,a.create_name as createName,a.act_poster_url as actPosterUrl,a.dis_group_id as disGroupId
+	      ,(SELECT count(1) FROM AT_ENTER b WHERE a.id = b.act_id and b.enter_person_id = #{userId,jdbcType=VARCHAR}) as state
+	      ,(case when a.enter_end_time &lt;= #{now} then 0
+	             when a.enter_num &gt;= a.num_limit then 0
+	        else 1 end
+	       ) enterFlag
+	      ,case when a.create_id = #{userId,jdbcType=VARCHAR} then 1 else 0 end createFlag
+    from AT_ACTIVITY a
+    where 
+    (
+      a.create_id = #{userId,jdbcType=VARCHAR}
+      or 
+      exists 
+      (
+        select 1 from AT_PRIVILEGE p 
+        where p.act_id = a.id 
+        and 
+        (
+          (p.type='user' and  p.entity_id = #{userId,jdbcType=VARCHAR})
+          or 
+          (p.type='dept' and #{deptOrder,jdbcType=VARCHAR} like p.dept_order||'%')
+          or
+          (p.type='dept' and p.dept_order = '-1')
+        )
+      ) 
+    )
+    <!-- 往期活动 -->
+	<if test="actExpire == 1 ">
+		and a.act_end_time  &lt; #{now}
+	</if>
+	<if test="actExpire == 0 ">
+		and a.act_end_time  >= #{now}
+	</if>
+	<if test="timeFlag != null ">
+		and a.create_time  &lt; #{timeFlag}
+	</if>
+	<include refid="AtActivityWhere"/>
+	<if test="order != null">
+		<if test="order == 5"><!-- 我参与的也都是按创建时间 降序-->
+			and exists (select 1 from AT_ENTER d where d.act_id = a.id and enter_person_id = #{userId,jdbcType=VARCHAR})
+		</if>
+		<if test="order == 6"><!-- 我创建的也都是按创建时间 降序 -->
+			and a.create_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		order by 
+		<if test="order == 1"><!-- 综合排序”条件下的首页按创建时间 降序-->
+			a.create_time desc
+		</if>
+		<if test="order == 2"><!-- 即将开始的按活动开始时间 升序-->
+			a.act_start_time asc
+		</if>
+		<if test="order == 3"><!-- 最新发布是按照创建时间 降序 -->
+			a.create_time desc
+		</if>
+		<if test="order == 4"><!-- 人气最高就是参与人数 降序 参与度相同的时候按照创建时间降序排序 -->
+			a.enter_num desc,a.create_time desc
+		</if>
+		<if test="order == 5"><!-- 我参与的也都是按创建时间 降序-->
+			a.create_time desc
+		</if>
+		<if test="order == 6"><!-- 我创建的也都是按创建时间 降序 -->
+			a.create_time desc
+		</if>
+		<if test="order == 7"><!-- 置顶人气率 降序 -->
+			a.enter_num/a.num_limit desc,a.create_time desc
+		</if>
+	</if>
+	</select>
+  
+  <!-- 我参与的活动列表/查看往期活动列表  -->
+   <select id="getMyEnterActList" parameterType="java.util.Map" resultType="ActivityDetail">
+    select a.id as id,a.act_content as actContent,a.act_start_time as actStartTime
+    	  ,a.act_end_time as actEndTime,a.act_address as actAddress,a.default_image as defaultImage
+	      ,a.enter_end_time as enterEndTime,a.con_tel as conTel,a.num_limit as numLimit
+	      ,a.enter_num as enterNum,a.phone as phone,a.name as name,a.act_title as actTitle
+	      ,a.id_card as  idCard,a.remark as remark,a.sex as sex,a.create_time as createTime,a.create_id as createId
+	      ,a.create_name as createName,a.act_poster_url as actPosterUrl,a.dis_group_id as disGroupId
+	      ,(SELECT count(1) FROM AT_ENTER b WHERE a.id = b.act_id and b.enter_person_id = #{userId,jdbcType=VARCHAR}) as state
+	      ,(case when a.enter_end_time &lt;= #{now} then 0
+	             when a.enter_num &gt;= a.num_limit then 0
+	        else 1 end
+	       ) enterFlag
+	      ,case when a.create_id = #{userId,jdbcType=VARCHAR} then 1 else 0 end createFlag
+    from AT_ACTIVITY a
+    <!-- 
+   	 left join AT_PRIVILEGE p on a.id = p.act_id  -->
+   	 where  EXISTS (SELECT 1 FROM AT_ENTER   WHERE enter_person_id = #{enterPersonId,jdbcType=VARCHAR})
+   	 <!-- 往期活动 -->
+   	 <if test="actExpire == 1 ">
+	  and a.act_start_time  &lt; current_timestamp
+     </if>
+     <if test="actExpire == 0 ">
+	  and a.act_start_time  >= current_timestamp
+     </if>
+   	 <include refid="AtActivityWhere"/>
+   	 ORDER BY  a.act_start_time desc
+  </select>
+  
+   <!-- 我创建的活动列表/查看往期活动列表  -->
+   <select id="getMyCreateActList" parameterType="java.util.Map" resultType="ActivityDetail">
+    select a.id as id,a.act_content as actContent,a.act_start_time as actStartTime
+    	  ,a.act_end_time as actEndTime,a.act_address as actAddress,a.default_image as defaultImage
+	      ,a.enter_end_time as enterEndTime,a.con_tel as conTel,a.num_limit as numLimit
+	      ,a.enter_num as enterNum,a.phone as phone,a.name as name,a.act_title as actTitle
+	      ,a.id_card as  idCard,a.remark as remark,a.sex as sex,a.create_time as createTime,a.create_id as createId
+	      ,a.create_name as createName,a.act_poster_url as actPosterUrl,a.dis_group_id as disGroupId
+	      ,(SELECT count(1) FROM AT_ENTER b WHERE a.id = b.act_id and b.enter_person_id = #{userId,jdbcType=VARCHAR}) as state
+	      ,(case when a.enter_end_time &lt;= #{now} then 0
+	             when a.enter_num &gt;= a.num_limit then 0
+	        else 1 end
+	       ) enterFlag
+	      ,case when a.create_id = #{userId,jdbcType=VARCHAR} then 1 else 0 end createFlag
+    from AT_ACTIVITY a
+   	 where  a.create_id = #{createId,jdbcType=VARCHAR}
+   	 <!-- 往期活动 -->
+   	 <if test="actExpire == 1 ">
+	  and a.act_start_time  &lt; current_timestamp
+     </if>
+     <if test="actExpire == 0 ">
+	  and a.act_start_time  >= current_timestamp
+     </if>
+   	 <include refid="AtActivityWhere"/>
+   	 ORDER BY  a.act_start_time desc
+  </select>
+  
+  <!-- 活动详情  -->
+   <select id="getActivity" parameterType="java.util.Map" resultType="ActivityDetail">
+    select a.id as id,a.ecid,a.act_content as actContent,a.act_start_time as actStartTime
+    	  ,a.act_end_time as actEndTime,a.act_address as actAddress,a.default_image as defaultImage
+	      ,a.enter_end_time as enterEndTime,a.con_tel as conTel,a.num_limit as numLimit
+	      ,a.enter_num as enterNum,a.phone as phone,a.name as name,a.act_title as actTitle
+	      ,a.id_card as  idCard,a.remark as remark,a.sex as sex,a.create_time as createTime,a.create_id as createId
+	      ,a.create_name as createName,a.act_poster_url as actPosterUrl,a.dis_group_id as disGroupId
+	      ,(SELECT count(1) FROM AT_ENTER b WHERE a.id = b.act_id and b.enter_person_id = #{userId,jdbcType=VARCHAR}) as state
+	      ,(case when a.enter_end_time &lt;= #{now} then 0
+	             when a.enter_num &gt;= a.num_limit then 0
+	             
+	             when not exists 
+				      (
+				        select 1 from AT_PRIVILEGE p 
+				        where p.act_id = a.id 
+				        and 
+				        (
+				          (p.type='user' and  p.entity_id = #{userId,jdbcType=VARCHAR})
+				          or 
+				          (p.type='dept' and #{deptOrder,jdbcType=VARCHAR} like p.dept_order||'%')
+				          or
+				          (p.type='dept' and p.dept_order = '-1')
+				        )
+				      ) 
+				
+				then 0 
+	        else 1 end
+	       ) enterFlag
+	      ,case when a.create_id = #{userId,jdbcType=VARCHAR} then 1 else 0 end createFlag
+    from AT_ACTIVITY a
+   	 where  a.id = #{actId,jdbcType=VARCHAR}
+   	 <include refid="AtActivityWhere"/>
+  </select>
+  <!-- 报名后活动表报名人数加1 -->
+  <update id="updateActivityByAddEnter" parameterType="java.util.Map">
+  	update AT_ACTIVITY SET   enter_num = enter_num+1 
+  		where id = #{actId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

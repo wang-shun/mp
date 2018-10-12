@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.MtSigninServMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.MtSigninServ" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="meeting_id" property="meetingId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <delete id="deleteByMeetingId" parameterType="java.util.Map">
+    delete from mt_signin_serv where meeting_id = #{meetingId}
+  </delete>
+  
+  <select id="getByMeetingId" parameterType="java.util.Map" resultType="MtSigninServ">
+    select id,meeting_id meetingId,user_id userId,user_name userName from mt_signin_serv where meeting_id = #{meetingId,jdbcType=VARCHAR}
+  </select>
+</mapper>

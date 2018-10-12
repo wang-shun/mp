@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmDbAssignMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmDbAssign">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="db_id" jdbcType="VARCHAR" property="dbId" />
+    <id column="svc_id" jdbcType="VARCHAR" property="svcId" />
+    <result column="assign_id" jdbcType="VARCHAR" property="assignId" />
+    <result column="assign_time" jdbcType="DATE" property="assignTime" />
+  </resultMap>
+  
+  <select id="getDbAssignById" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select * from SM_DB_ASSIGN
+  	where assign_id=#{assignId,jdbcType=VARCHAR} 
+  </select>
+</mapper>

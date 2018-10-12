@@ -1,0 +1,24 @@
+<li class="SID-question-li" question_required="<%=data.required%>" question_selMax="<%=data.selMax%>" question_selMin="<%=data.selMin%>" data-type="<%=data.type%>">
+    <dl>
+    	<% var aa = "";if (data.required == 0) { aa = "display:none;" } %>
+        <dt>
+        <div class="floatL">
+        <span class="SID-required-flag" style="color: red;<%=aa%>">*</span><span class="SID-question-sequ sequ-span" data-sequ="<%=data.sequ%>">Q<%=data.sequ%>.</span>
+        </div>
+        <div contenteditable="true" data-maxlength="1000" class="SID-validate-div SID-question-title ckeditor-title">
+			<%=data.title%>
+		</div>
+        </dt>
+        
+        <%=data.optionHtml%>
+        <% if (data.showFlag != "1") { %>
+        <dd class="operating">
+            <a class="mll-left SID-add-option">新增</a>
+            <a class="right SID-del-question"><span class="fhicon-trash"></span><label>删除</label></a>
+            <a class="right SID-more-question"><span class="fhicon-rule"></span><label>更多</label></a>
+            <a class="right SID-copy-question"><span class="fhicon-meeting-jurisdiction"></span><label>复制</label></a>
+            <a class="right SID-draggable-question"><span class="questionnaire-drag"></span><label>拖拽</label></a>
+        </dd>
+        <% } %>
+    </dl>
+</li>

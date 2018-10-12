@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuAnswerMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuAnswer">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="question_id" jdbcType="VARCHAR" property="questionId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name_html" jdbcType="VARCHAR" property="nameHtml" />
+    <result column="answer_id" jdbcType="VARCHAR" property="answerId" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="sequ" jdbcType="NUMERIC" property="sequ" />
+  </resultMap>
+  
+  <insert id="addAnswer" parameterType="SuAnswer">
+  	insert into su_answer 
+  	(id,question_id,name,answer_id,answer,sequ)
+  	select #{id},#{questionId},sq.question,#{answerId},#{answer},coalesce(so.sequ,0)
+  	from su_question sq 
+    left join su_question_options so on sq.id=so.question_id 
+  	where sq.id = #{questionId} 
+  	and ((sq.type in ('1','2','3') and so.id=#{optionId}) or sq.type in ('4','5'))
+  </insert>
+  
+  <select id="getTextAnswerByQuestion" parameterType="java.lang.String" resultType="SuAnswer">
+  	select id,question_id questionId,name,name_html nameHtml,answer_id answerId,answer,sequ from su_answer where question_id = #{questionId} and answer_id = #{personId}
+  </select>
+  
+  <select id="getExportData" resultType="SuAnswer">
+	select a.question_id questionId,a.options answer from 
+	su_survey_question s left join 
+	( select s.question_id,s.sequ,s.answer_id,o.options from su_answer s ,su_question_options o 
+	  where s.question_id = o.question_id and s.sequ=o.sequ
+	 union 
+	 select a.question_id,a.sequ,a.answer_id,a.answer from   su_question q ,su_answer a where q.type in ('4','5') and q.id = a.question_id
+	) a on s.question_id = a.question_id
+	where s.survey_id = #{surveyId}
+	and a.answer_id = #{userId}
+	order by s.sequ,a.sequ
+  </select>
+  
+</mapper>

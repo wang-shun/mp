@@ -1,0 +1,4 @@
+INSERT INTO vt_vote_info (id, org_id, title, content, image, multiple, max_choose, anonymous, expire, read_count, creator, creator_name, create_time, state, is_expired) (select vote_info_id, org_id, title, content, image, case multiple when 't' then '1' else '0' end , max_choose, case anonymous when 't' then '1' else '0' end , expire, read_count, creator, creator_name, create_time, state, is_expired from t_vote_info)
+INSERT INTO vt_vote_item (id, vote_info_id, content, image, item_order) (select vote_item_id, vote_info_id, content, image, item_order from t_vote_item)
+INSERT INTO vt_vote_scope (vote_info_id, org_id, user_id) (select vote_info_id, org_id, user_id from t_vote_scope)                          
+INSERT INTO vt_vote_answer (id, org_id, vote_info_id, vote_item_id, creator, creator_name, create_time) (select vote_answer_id, org_id, vote_info_id, vote_item_id, creator, creator_name, create_time from t_vote_answer)

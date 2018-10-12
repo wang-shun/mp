@@ -1,0 +1,159 @@
+<header style="position: absolute;">
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">发布活动</h1>
+        <a class="titlebar-button titlebar-right" id="ID-Add-Submit">发布</a>
+    </div>
+</header>
+<article>
+    <form id="ID-Add-Form">
+        <div class="group color-placeholder" style="height: 100px;">
+            <div id="ID-Add-PosterNone" class="SID-mainImageBtn app-poster">
+                <i class="icon icon-add size40"></i>
+                <p>添加活动海报</p>
+            </div>
+            <div id="ID-Add-PosterExist" class="app-poster hide">
+                <span class="close SID-BtnDelMain app-delicon">
+                    <i class="icon icon-del-fill"></i>
+                </span>
+            </div>
+            <div id="ID-Add-PosterLoad" class="app-poster hide">
+                <div class="app-photoLoadBox">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="NID-mainImageId" id="ID-mainImageId"/>
+        <input type="hidden" name="NID-Add-actPosterUrl" id="ID-actPosterUrl"/>
+        <!--图片上传-->
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">活动标题<span class="app-required">*</span></p>
+            </div>
+            <div class="inputbox-right inputbox" style="padding: 0 4px;">
+                <input type="text" name="NID-Add-Title" maxlength="15" class="input-text" placeholder="在此输入活动标题，15字以内...">
+            </div>
+        </div>
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">活动详情<span class="app-required">*</span></p>
+            </div>
+            <div style="padding: 0 12px;">
+                <textarea class="input-textarea countvalue" data-maxlength="1500" maxlength="1500" name="NID-Add-Node" placeholder="请在此输入活动详情，1500字以内..." style="width: 100%;padding:0;"></textarea>
+                <div class="input-text color-placeholder text-right" style="padding: 0;width: 100%;text-align: right;">
+                    0/1500
+                </div>
+                <hr>
+            </div>
+            <div style="padding: 6px 12px;">
+                <ul class="grid app-grid-update" data-col="4" id="ID-Grid">
+                    <li>
+                        <a class="bordered default SID-BtnUpload">
+                            <i class="icon icon-add size32"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div style="padding: 6px 12px 12px 12px;text-align: right;">最多支持9张图片
+            </div>
+	        <input type="hidden" name="NID-contentImageId" id="ID-contentImageId"/>
+	        <input type="hidden" name="NID-Add-actPhotoUrl" id="ID-actPhotoUrl"/>
+        </div>
+        <!--时间地址-->
+        <div class="group">
+        	<div class="inputbox underline">
+        		<div class="l inputbox-left">开始时间<span class="app-required">*</span></div>
+                <div class="r inputbox-right inputbox SID-DivDateTime">
+                    <input type="text" name="NID-Add-StartTime" class="input-text SID-DateTimeStart" readonly placeholder="开始时间">
+                    <i class="icon list-icon icon-arrowright"></i>
+                </div>
+        	</div>
+        	<div class="inputbox underline">
+        		<div class="l inputbox-left">结束时间<span class="app-required">*</span></div>
+                <div class="r inputbox-right inputbox SID-DivDateTime">
+                    <input type="text" name="NID-Add-EndTime" class="input-text SID-DateTimeEnd" readonly placeholder="结束时间">
+                    <i class="icon list-icon icon-arrowright"></i>
+                </div>
+        	</div>
+            <div class="inputbox underline" id="ID-choose-address">
+                <div class="l inputbox-left">地址<span class="app-required">*</span></div>
+                <div class="r inputbox-right inputbox">
+                    <input type="text" name="NID-Add-Address" maxlength="50" id="ID-address" class="input-text" placeholder="请输入地址">
+                </div>
+                <input type="hidden" name="NID-latitude" id="ID-latitude" value="0">
+                <input type="hidden" name="NID-longitude" id="ID-longitude" value="0">
+            </div>
+        </div>
+
+        <!--时间地址-->
+        <div class="group">
+            <div class="inputbox underline">
+                <div class="l inputbox-left">报名截止<span class="app-required">*</span></div>
+                <div class="r inputbox-right inputbox SID-DivOffDateTime">
+                    <input type="text" name="NID-Add-OffTime" class="input-text SID-DateTimeOff" readonly placeholder="截止时间">
+                    <i class="icon list-icon icon-arrowright"></i>
+                </div>
+            </div>
+            <div class="inputbox underline">
+                <div class="l inputbox-left">活动咨询<span class="app-required">*</span></div>
+                <div class="inputbox-right inputbox">
+                    <input type="tel" name="NID-Add-Phone" id="ID-Add-Phone" class="input-text" maxlength="11" placeholder="请输入联系手机" oninput="if(!new RegExp('^[0-9]*[1-9][0-9]*$').test(value))value=value.substring(0,value.length-1)">
+                </div>
+            </div>
+            <div class="inputbox underline">
+                <div class="l inputbox-left">人数限制</div>
+                <div class="inputbox-right inputbox">
+                    <input type="tel" class="input-text" maxlength="4" name="NID-Add-Count" placeholder="不填视为无限制" oninput="if(!new RegExp('^[0-9]*[1-9][0-9]*$').test(value))value=value.substring(0,value.length-1)">
+                </div>
+            </div>
+            <div class="inputbox underline" id="ID-MeetAdd-Tree">
+                <div class="l inputbox-left">邀请人员</div>
+                <div class="r inputbox-right inputbox">
+                    <input type="text" name="NID-MeetAdd-PeopleName" id="ID-MeetAdd-People" class="input-text" readonly placeholder="不选视为选择全部人员">
+                    <input type="hidden" class="input-text" name="NID-MeetAdd-People" value=""/>
+                    <i class="icon list-icon icon-arrowright"></i>
+                </div>
+            </div>
+	        <!--推送开关-->
+	        <div class="inputbox underline" id="ID-MeetAdd-GroupCreate">
+	        	<div class="l inputbox-left">推送开关</div>
+	        	<div class="r inputbox-right inputbox">
+	        		<input type="text" class="input-text active" readonly placeholder="">
+	                <div class="switch reverse notext active" data-name="NID-IsCreateGroup" id="ID-MeetAdd-SwitchCreate">
+	                    <div class="switch-handle"></div>
+	                </div>
+	                <input type="hidden" class="input-text form-ignore" name="NID-IsCreateGroup" value="1">
+	            </div>
+	        </div>
+            <div style="padding: 12px;">
+                <div>用户报名必填项</div>
+                <ul class="grid app-gridOpts" data-col="4">
+                    <li>
+                        <a class="button SID-Add-Required">手机号</a>
+                        <input type="hidden" name="NID-Add-RePhone" value="0">
+                    </li>
+                    <li style="display:none;">
+                        <a class="button SID-Add-Required">姓名</a>
+                        <input type="hidden" name="NID-Add-ReName" value="1">
+                    </li>
+                    <li>
+                        <a class="button SID-Add-Required">身份证</a>
+                        <input type="hidden" name="NID-Add-ReCard" value="0">
+                    </li>
+                    <li>
+                        <a class="button SID-Add-Required">性别</a>
+                        <input type="hidden" name="NID-Add-ReSex" value="0">
+                    </li>
+                    <li>
+                        <a class="button SID-Add-Required">备注</a>
+                        <input type="hidden" name="NID-Add-ReMark" value="0">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</article>

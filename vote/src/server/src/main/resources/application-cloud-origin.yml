@@ -1,0 +1,177 @@
+servicemanager:
+  endpoint: http://sm.mapps.ip:8761
+  
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: ${servicemanager.endpoint}/eureka
+    healthcheck:
+      enabled: true
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+    metadataMap:
+      appName: 投票
+      logo: /logo.png
+      remarks: 描述
+      mgr-port: ${management.port}
+      mgr-context-path: ${management.context-path}
+      configProperties:
+      - key: mplus.sso.serviceUrl
+        name: mplus第三方接入地址
+        type: text
+        remark: mplus可供访问的第三方接入地址，一般为内网地址，支持https
+        size: 255
+        options: null
+        regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?
+        group: 通用设置
+        default: http://192.168.160.98:6001/thirdpartaccess
+      - key: mplus.sso.appKey
+        name: 第三方接入key
+        type: text
+        remark: mplus第三方接入的appKey
+        size: 50
+        options: null
+        regex: \w+
+        group: 通用设置
+        default: mr
+      - key: mplus.sso.secret
+        name: 第三方接入密钥
+        type: text
+        remark: mplus第三方接入的密钥
+        size: 50
+        options: null
+        regex: \w+
+        group: 通用设置
+        default: FHuma025
+      - key: mplus.login.serviceUrl
+        name: mplus登录接口地址
+        type: text
+        remark: mplus可供访问的客户端登录地址，一般为内网地址，支持https
+        size: 255
+        options: null
+        regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?
+        group: 通用设置
+        default: http://192.168.160.98:6001/clientaccess
+      - key: mplus.login.loginPage
+        name: 自服务门户登录页面
+        type: text
+        remark: mplus自服务门户的登录页面地址
+        size: 255
+        options: null
+        regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?
+        group: 通用设置
+        default: https://miap.cc:8209/PageRedirect?path=login.jsp
+      - key: mplus.mos.serviceUrl
+        name: mos接口地址
+        type: text
+        remark: mos接口地址
+        size: 255
+        options: null
+        regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?
+        group: 通用设置
+        default: http://192.168.160.154:7777/mos/api
+      dependencies:
+        services: mapps-fileservice
+        resources:
+          database: default
+
+jdbc-url:
+  oracle: jdbc:oracle:thin:@${resources.database.default.host:}:${resources.database.default.port:1521}:${resources.database.default.db:}
+  postgresql: jdbc:postgresql://${resources.database.default.host:}:${resources.database.default.port:5432}/${resources.database.default.db:}
+  mysql: jdbc:mysql://${resources.database.default.host:}:${resources.database.default.port:3306}/${resources.database.default.db:}?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+      
+spring: 
+  application:
+    name: mapps-vote     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${jdbc-url.${resources.database.default.type:postgresql}}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}
+
+server: 
+  port: 18004    
+  
+management:
+  context-path: /__mng__
+  port: 38004
+  
+endpoints:
+  restart:
+    enabled: true
+    
+sqllocaltion:
+  oracle: db/oracle
+  postgresql: db/migration
+  mysql: db/mysql
+  
+flywaydb:
+  locations: ${sqllocaltion.${resources.database.default.type:postgresql}} 
+  
+    
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.vote.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.vote.query.caninvolve
+      - mapps.vote.query.involve
+      - mapps.vote.query.created
+      - mapps.vote.delete.votebyid
+      - mapps.vote.query.votebyid
+      - mapps.vote.query.voteing
+      - mapps.vote.query.usersize
+      - mapps.vote.save.vote
+      - mapps.thirdpart.mobileark.getusers
+    user: 
+      - mapps.vote.query.caninvolve
+      - mapps.vote.query.involve
+      - mapps.vote.query.created
+      - mapps.vote.delete.votebyid
+      - mapps.vote.query.votebyid
+      - mapps.vote.query.voteing
+      - mapps.vote.query.usersize
+      - mapps.vote.save.vote
+      - mapps.thirdpart.mobileark.getusers
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: mapps-vote
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.154:7777/mos/api  
+    
+services:
+  fileservice:
+    serviceUrl: ${services.mapps-fileservice.serviceUrl:}/api
+    appKey: ${services.mapps-fileservice.appkey:}
+    appSecret: ${services.mapps-fileservice.secret:}
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+  
+client: 
+  appId: toupiao
+  appName: 投票
+  
+vote:
+  upgrade: 
+    migrate: false  
+    
+logging:
+  path: logs

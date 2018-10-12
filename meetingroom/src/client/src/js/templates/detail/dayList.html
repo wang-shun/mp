@@ -1,0 +1,16 @@
+<ul class="list">
+	<%for(var i=0,rowData;rowData=data.reservedDetailList[i++];){%>
+	<li class="list-li SID-BtnPlanDetail<%if(i!=data.reservedDetailList.length){%> underline<%}%>" id="<%=rowData.reservedId%>">
+		<div class="list-container events-none">
+            <div class="list-row color-primary events-none">
+                <%=rowData.starttime%>~<%=rowData.endtime%>
+                <%=rowData.reservedUserName%>
+            </div>
+            <div class="list-title events-none" style="font-size: 15px;padding: 2px 0;">
+                <%=rowData.meetingName%>
+            </div>
+        </div>
+        <i class="list-icon icon-arrowright events-none"></i>
+    </li>
+	<%}%>
+</ul>

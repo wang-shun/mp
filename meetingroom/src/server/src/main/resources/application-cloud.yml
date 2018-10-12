@@ -1,0 +1,155 @@
+servicemanager:
+  endpoint: http://sm.mapps.ip:8761
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: ${servicemanager.endpoint}/eureka
+    healthcheck:
+      enabled: true
+  instance:     
+    instanceId: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port} 
+    preferIpAddress: true
+    metadataMap:
+      appName: 会议室预订                                       # 应用名称
+      logo: /logo.png                                          # 应用logo
+      remarks: 描述                                            # 应用描述
+      portal: /websso                                          # 自服务门户集成入口
+      mgr-port: ${management.port}                             # 管理端口
+      mgr-context-path: ${management.context-path}             # 管理endpoint的context path
+      configProperties:
+        - key: meetingroom.privilege.whiteList
+          name: 权限控制模式
+          type: radio
+          remark: 非白名单模式，不设置权限为全体可见
+          size: 100
+          options: true:白名单模式,false:非白名单模式
+          regex: null
+          group: 通用设置
+          default: true
+      dependencies:                                           # 依赖声明
+        services: mapps-fileservice                           # 依赖的服务，id，逗号分隔
+        resources:                                            # 依赖的资源
+          database: default                                   # resId: resCode(资源id： 资源代码)    
+          mplus: default
+
+jdbc-url:
+  oracle: jdbc:oracle:thin:@${resources.database.default.host:}:${resources.database.default.port:1521}:${resources.database.default.db:}
+  postgresql: jdbc:postgresql://${resources.database.default.host:}:${resources.database.default.port:5432}/${resources.database.default.db:}
+  mysql: jdbc:mysql://${resources.database.default.host:}:${resources.database.default.port:3306}/${resources.database.default.db:}?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+
+spring:
+  application:
+    name: mapps-meetingroom
+  jmx:
+    enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${jdbc-url.${resources.database.default.type:postgresql}}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}
+    
+sqllocaltion:
+  oracle: db/oracle
+  postgresql: db/migration
+  mysql: db/mysql
+  
+flywaydb:
+  locations: ${sqllocaltion.${resources.database.default.type:postgresql}}
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.meetingroom.entity
+  
+server:
+  port: 18002
+  
+management:
+  context-path: /__mng__
+  port: 38002
+  
+endpoints:
+  restart:
+    enabled: true
+    
+api:
+  endpoint: /api
+  
+priv:
+  roles:
+    admin:
+    - mapps.meetingroom.room.query
+    - mapps.meetingroom.room.detail
+    - mapps.meetingroom.room.add
+    - mapps.meetingroom.room.edit
+    - mapps.meetingroom.room.delete
+    - mapps.meetingroom.room.favorite
+    - mapps.meetingroom.reserved.query
+    - mapps.meetingroom.reserved.add
+    - mapps.meetingroom.reserved.delete
+    - mapps.meetingroom.stat.query
+    - mapps.fileservice.file.upload
+    - mapps.meetingroom.privilege.query
+    - mapps.meetingroom.privilege.add
+    - mapps.thirdpart.mobileark.getdepartments
+    - mapps.thirdpart.mobileark.getusers
+    - mapps.meetingroom.oplog.query
+    - mapps.meetingroom.oplog.export
+    - mapps.meetingroom.stat.export
+    - mapps.meetingroom.room.queryweb
+    - mapps.meetingroom.privilege.addadmin
+    - mapps.meetingroom.privilege.queryadmin
+    - mapps.meetingroom.reserved.servicedetail
+    - mapps.meetingroom.reserved.query
+    - mapps.meetingroom.reserved.add
+    - mapps.meetingroom.reserved.delete
+    - mapps.meetingroom.reserved.detail
+    - mapps.meetingroom.reserved.queryapprove
+    - mapps.meetingroom.reserved.updateapprove
+    - mapps.meetingroom.reserved.detailone
+    user:
+    - mapps.meetingroom.room.query
+    - mapps.meetingroom.room.detail
+    - mapps.meetingroom.room.favorite
+    - mapps.meetingroom.reserved.query
+    - mapps.meetingroom.reserved.add
+    - mapps.meetingroom.reserved.delete
+    - mapps.meetingroom.reserved.detail
+    - mapps.meetingroom.reserved.queryapprove
+    - mapps.meetingroom.reserved.updateapprove
+    - mapps.meetingroom.reserved.detailone
+    
+mplus: 
+  sso:
+    serviceUrl: ${resources.mplus.default.mplus.sso.serviceUrl:}
+    appKey: ${resources.mplus.default.mplus.sso.appKey:}
+    secret: ${resources.mplus.default.mplus.sso.secret:}
+    appId: mapps-meetingroom
+    appType: 4
+  login:
+    serviceUrl: ${resources.mplus.default.mplus.login.serviceUrl:}
+    loginPage: ${resources.mplus.default.mplus.login.loginPage:}
+    
+services:
+  fileservice:
+    serviceUrl: ${services.mapps-fileservice.serviceUrl:}/api
+    appKey: ${services.mapps-fileservice.appkey:}
+    appSecret: ${services.mapps-fileservice.secret:}
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+    webRoot: http://192.168.100.102:7788/d/
+meetingroom:
+  privilege:
+    whiteList: true
+  routePath: mrtest
+  pushToPc: false
+client:
+  appId: meetingroom
+  appName: 会议室预定
+logging:
+  path: logs
+  
+    

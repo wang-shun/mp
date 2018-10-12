@@ -1,0 +1,86 @@
+package com.fiberhome.mapps.meetingroom.request;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.rop.AbstractRopRequest;
+
+public class StatisticalAnalysisRequest extends AbstractRopRequest
+{
+    @NotNull
+    @Pattern(regexp = "[0-9]{4}-[0-9]{2}-[0-9]{2}", message = "日期格式不合法")
+    private String statBeginTime;
+    @NotNull
+    @Pattern(regexp = "[0-9]{4}-[0-9]{2}-[0-9]{2}", message = "日期格式不合法")
+    private String statEndTime;
+    /** 分页标识 1 分页 2 不分页 */
+    @NotNull
+    @Pattern(regexp = "[1-2]{1}", message = "格式不合法")
+    private String pageFlag;
+
+    private int    offset;
+    private int    limit;
+
+    private String sort;
+
+    public String getSort()
+    {
+        return sort;
+    }
+
+    public void setSort(String sort)
+    {
+        this.sort = sort;
+    }
+
+    public String getStatBeginTime()
+    {
+        return statBeginTime;
+    }
+
+    public void setStatBeginTime(String statBeginTime)
+    {
+        this.statBeginTime = statBeginTime;
+    }
+
+    public String getStatEndTime()
+    {
+        return statEndTime;
+    }
+
+    public void setStatEndTime(String statEndTime)
+    {
+        this.statEndTime = statEndTime;
+    }
+
+    public String getPageFlag()
+    {
+        return pageFlag;
+    }
+
+    public void setPageFlag(String pageFlag)
+    {
+        this.pageFlag = pageFlag;
+    }
+
+    public int getOffset()
+    {
+        return offset;
+    }
+
+    public void setOffset(int offset)
+    {
+        this.offset = offset;
+    }
+
+    public int getLimit()
+    {
+        return limit;
+    }
+
+    public void setLimit(int limit)
+    {
+        this.limit = limit;
+    }
+
+}

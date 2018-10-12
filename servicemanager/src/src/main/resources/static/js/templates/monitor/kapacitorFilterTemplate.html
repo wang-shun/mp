@@ -1,0 +1,26 @@
+<% for(var i=0,filterList; filter=filterList[i++];) { 
+	var fieldkey = (filter.key.indexOf("(")>-1)?filter.key.split("(")[0]:filter.key;
+	%>
+	<div class="form-item" style="width: 100%">
+		<div class="form-item-editbox" style="width: 90%;padding: 0 10px;">
+			<a class="SID-toggleFilter"><span class="fhicon-arrow<%if(i==1){%>U<%}else{%>D<%}%>2" style="color: #1788fb;font-weight: bold;float: left;line-height: 30px"></span>
+			<!-- <label class="form-item-label" style="width: auto;"><%=filter.key %>:</label></a><input class="SID-filter-groupby form-item-text" style="width:15px;height: 15px;" type="checkbox" id="<%=filter.key %>groupby" data-tag="<%=filter.key %>"/><label style="margin:0 4px;color: #666" for="<%=filter.key %>groupby">按<%=filter.key %>分组</label> -->
+			<label class="form-item-label" style="width: auto;"><%=filter.key %>:</label></a><input class="SID-filter-groupby form-item-text" style="width:15px;height: 15px;" type="checkbox" id="<%=labelFor %><%=fieldkey %>groupby" data-tag="<%=fieldkey %>"/><label for="<%=labelFor %><%=fieldkey %>groupby" style="margin:0 4px;color: #666">按<%=fieldkey %>分组</label>
+		</div>
+		<div class="form-item-editbox tagvalueBox" style="width: 90%;padding: 0 10px 0 34px;display: <%if(i==1){%>block<%}else{%>none<%}%>;">
+			<%
+				var valueList = filter.value.split(",");
+				for(var j=0,valueList;value=valueList[j++];){
+				%>
+				<span style="display:inline-block">
+					<!-- <input class="SID-filter-tagvalue form-item-text" style="width:15px;height: 15px;" type="checkbox" id="<%=filter.key %>tag<%=value %>" data-tag="<%=filter.key %>" value="<%=value %>"/><label style="margin:0 4px;color: #666" for="<%=filter.key %>tag<%=value %>"><%=value %></label> -->
+					<input class="SID-filter-tagvalue form-item-text" style="width:15px;height: 15px;" type="checkbox" id="<%=labelFor %><%=fieldkey %>tag<%=value %>" data-tag="<%=fieldkey %>" value="<%=value %>"/>
+					<label for="<%=labelFor %><%=fieldkey %>tag<%=value %>" style="margin:0 4px;color: #666" ><%=value %></label>
+				</span>
+				<%
+				}
+			%>
+		</div>
+		<hr style="width: 100%"/>
+	</div>
+<%}%>

@@ -1,0 +1,84 @@
+<div class="pop-config-box SID-survey-page1">
+
+    <div class="pop-aside">
+        <ul class="pop-asidelist">
+            <li class="active SID-show-toQuestion"><a><span class="line"></span>问卷内容</a></li>
+            <li class="SID-show-toSet"><a><span class="line"></span>收集设置</a></li>
+        </ul>
+    </div>
+    <div class="pop-cons">
+        <div class="formBox">
+
+            <div class="crumb crumb-postion crumb-postion-left">
+                	问卷调研 &gt; <span>问卷查看</span>
+                <label class="chose-questionnaire">
+                	<% var statusStr="创建中"; if (data.status == "1") { statusStr = "发布中"; } else if (data.status == "2") { statusStr = "已完成"; } %>
+                    <span>当前状态：<span> <%=statusStr%></span>  问卷在线时长：<span><%=data.durationStr%></span>  已收集有效问卷：<span><%=data.answerPersons%>份</span></span>
+                </label>
+                <hr class="crumbLine">
+            </div>
+    
+			<div class="questionnaire-content">
+	        	<div class="mll-left questionnaire-right">
+		            <div class="questionnaire-list">
+		            	<ul class="SID-question-ul1">
+		                    <li data-type="0">
+                                <div contenteditable="true" data-maxlength="50" class="input-textNoLine SID-validate-div SID-survey-title ">
+									<%=data.titleHtml%>
+								</div>
+		                    </li>
+		                </ul>
+		                <ul class="SID-question-ul" id="ID-question-ul">
+		                </ul>
+		                <ul class="SID-question-ul2">
+		                	<li data-type="7">
+								<dl>
+						    		<dd>
+						        		<p style="text-align: right; padding-right: 10px;"><span class="SID-page-title">页码1/1</span></p>
+							        </dd>
+							    </dl>
+							</li>
+						</ul>
+		            </div>
+				</div>
+	    	</div>
+        </div>        
+    </div>
+</div>
+<div class="pop-config-box SID-survey-page2" style="top: 1px;bottom: 0px;display:none;">
+
+    <div class="pop-aside">
+        <ul class="pop-asidelist">
+            <li class="SID-show-toQuestion"><a><span class="line"></span>问卷内容</a></li>
+            <li class="active SID-show-toSet"><a><span class="line"></span>问卷设置</a></li>
+        </ul>
+    </div>
+    <div class="pop-cons">
+        <div class="formBox">
+
+			<div class="crumb crumb-postion crumb-postion-left">
+                	问卷调研 &gt; <span>问卷查看</span>
+                <hr class="crumbLine">
+            </div>
+            <div class="dunit-table">
+                <table cellspacing="0" cellpadding="0" class="dunit01">
+                    <tr>
+                        <td class="dunit01-inner01">目标收集量：</td>
+                        <td class="dunit01-inner02"><%=data.targetPersons%></td>
+                    </tr>
+                    <tr>
+                        <td class="dunit01-inner01">开始日期：</td>
+                        <td class="dunit01-inner02 SID-begin-label"></td>
+                    </tr>
+                    <tr>
+                        <td class="dunit01-inner01">截止日期：</td>
+                        <td class="dunit01-inner02 SID-end-label"></td>
+                    </tr>
+                </table>
+                <input type="hidden" class="SID-beginDate"/>
+                <input type="hidden" class="SID-endDate"/>
+            </div>
+
+        </div>        
+    </div>
+</div>

@@ -1,0 +1,161 @@
+<!-- 问卷页面 -->
+<div class="pop-config-box SID-survey-page1">
+
+    <div class="pop-cons pop-cons-fall">
+        <div class="formBox">
+        	<div class="remind SID-save-ok" style="display:none;"><p>已保存</p></div>
+
+            <div class="crumb crumb-postion">
+                问卷调查 &gt; 编辑问卷 &gt; <span><%=data.title%></span>
+
+                <label class="chose-questionnaire">
+                    <span class="active">1、设计问卷</span>
+                    <span href="">2、发布问卷</span>
+                </label>
+	            <hr class="crumbLine">
+            </div>
+    
+            <div class="mll-left type-problem SID-scrollbar">
+                <div class="type-problemChoose">
+                    <div class="title-questionnaire"><h3>题型选择</h3></div>
+                    <ul>
+                        <li class="SID-add-problem" data-type="1"><a><span class="questionnaire-radio"></span>单选题</a></li>
+                        <li class="SID-add-problem" data-type="2"><a><span class="fhicon-arrowD2"></span>下拉选择题</a></li>
+                        <li class="SID-add-problem" data-type="3"><a><span class="questionnaire-checkbox"></span>多选题</a></li>
+                        <li class="SID-add-problem" data-type="4"><a><span class="questionnaire-completionS"></span>单行填空题</a></li>
+                        <li class="SID-add-problem" data-type="5"><a><span class="questionnaire-completionM"></span>多行填空题</a></li>
+                        <li class="SID-add-problem" data-type="6"><a><span class="fhicon-namelist"></span>描述说明</a></li>
+                        <li class="SID-add-problem" data-type="7"><a><span class="fhicon-arrowR"></span>分页符</a></li>
+                    </ul>
+                </div>
+
+                <div class="type-problemChoose SID-commonQuestion-div">
+                    <div class="title-questionnaire"><h3>典型题型</h3></div>
+                </div>
+            </div>
+            <form id="formMsg" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+	            <input type="hidden" id="ID-survey-id" value="<%=data.id%>"/>
+	            <div class="questionnaire-content">
+	                <div class="mll-left questionnaire-right">
+	                    <div class="mll-left questionnaire-list">
+	                        <ul class="SID-question-ul1">
+	                            <li data-type="0">
+	                                
+							        <div contenteditable="true" data-maxlength="50" class="input-textNoLine SID-validate-div SID-survey-title ">
+										<%=data.titleHtml%>
+									</div>
+	                            </li>
+	                        </ul>
+	                        <ul class="SID-question-ul" id="ID-question-ul">
+	                        </ul>
+	                        <ul class="SID-question-ul2">
+	                            <li data-type="7">
+								    <dl>
+								        <dd>
+								           <p style="text-align: right; padding-right: 10px;"><span class="SID-page-title">页码1/1</span></p>
+								        </dd>
+								    </dl>
+								</li>
+							</ul>
+	                    </div>
+	
+	                    <div class="form-btns form-btns-middle" style="margin-bottom:80px;">
+	                        <a class="buttonblue SID-submit-view-btn">预览问卷</a><a class="buttonblue SID-next-btn">下一步</a>
+	                    </div>
+	
+	                </div>
+	            </div>
+			</form>
+        </div>        
+    </div>
+</div>
+<!-- 设置页面 -->
+<div class="pop-config-box SID-survey-page2" style="display:none;">
+<!--  
+    <div class="pop-aside">
+        <ul class="pop-asidelist">
+            <li class="active"><a><span class="line"></span>问卷设置</a></li>
+        </ul>
+    </div>
+     -->
+    <div class="pop-cons">
+        <div class="formBox">
+			<div class="crumb crumb-postion">
+                问卷调查 &gt; 编辑问卷 &gt; <span><%=data.title%></span>
+
+                <label class="chose-questionnaire">
+                    <span>1、设计问卷</span>
+                    <span class="active">2、发布问卷</span>
+                </label>
+	            <hr class="crumbLine">
+            </div>
+
+            <div class="datePush" style="left: 200px;">
+            
+	            <div class="right-center">
+				   <div class="formBox" style="width: 100%">
+				        <div class="form-item">
+				            <label class="form-item-label">组织架构：</label>
+				            <div class="form-item-editbox">
+				                <a class="buttondefault button-mask SID-add">添加</a><a class="buttondefault button-mask SID-depclear">清空</a>
+				                <div class="pop-rankbox marginTop10">
+				                    <ul class="rank-list SID-deplist">
+				                    </ul>
+				                </div>
+				            </div>
+				        </div>   
+				        <div class="form-item">
+				            <label class="form-item-label">用户：</label>
+				            <form id="subForm1" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+				            <div class="form-item-editbox">
+				                <div class="pop-searchbar">
+				                    <input type="text" placeholder="请输入姓名" name="userName" class="SID-search-user1 SID-suInput"/>
+				                    <a class="fhicon-search"></a>
+				                </div>
+				                <div class="pop-rankbox pop-rankbox-maskColor" style ="display:none">
+				                   <ul class="rank-userbox SID-userlist">
+				                   </ul>
+				                </div>
+				                <div class= "pop-rankbox">
+				                	<ul class="rank-list SID-userbox SID-visiblebox">
+				                	</ul>
+				                </div>
+				                <div class="form-item-btmtip">
+				                    <span class="fhicon-tip"></span>
+				                    <div class="tip-text">您可将本配置指定到相关的部门及人员上</div>
+				                </div>
+				            </div>
+				            </form>
+				        </div>
+				    </div>
+				</div>
+            
+                <hr class="crumbLine" style="margin-right: 90px;">
+                <ul>
+                    <li>
+                        <input type="checkbox" checked="checked" data-type="begin" class="SID-begin-checkbox"/>
+                        <label class="SID-begin-label">开始收集日期：</label>
+                        <input type="text" class="input-text SID-beginDate" readonly="readonly"/>
+                    </li>
+                    <li>
+                        <input type="checkbox" checked="checked" data-type="end" class="SID-end-checkbox"/>
+                        <label class="SID-end-label">截止收集日期：</label>
+                        <input type="text" class="input-text SID-endDate" readonly="readonly"/>
+                    </li>
+                    <li>
+                        <input type="checkbox" checked="checked" class="SID-pushTo"/>
+                        <label>推送给用户</label>
+                    </li>
+                </ul>
+                
+                <div class="form-btns form-btns-middle" style="margin-bottom: 80px;">
+                	<a class="buttonblue SID-prev-btn">上一步</a><a class="buttonblue SID-cancel-btn" style="display:none;">取消</a><a class="buttonblue SID-submit-btn">立即发布</a>
+            	</div>
+            </div>
+
+        </div>        
+    </div>
+</div>
+<script>
+windowResize();
+</script>

@@ -1,0 +1,30 @@
+<div class="add-main">
+	<a class="meet-add SID-addInfo-btn"><span class="fhicon-meeting-add"></span>添加资源信息</a>
+	<!-- <a class="meet-add SID-addInfo-btn"><span class="fhicon-meeting-add"></span><span style="float:left;font-size:14px">添加资源信息</span></a>
+	<a class="meet-add SID-addType-btn"><span class="fhicon-meeting-add"></span>添加资源类型</a> -->
+</div>
+<div class="tree-container tree-container-nobutton">
+    <div class="searchBlock">
+    	<form id = "subForm" onkeydown="if(event.keyCode==13)return false;">
+       <!--  变为展开查询的时候span标签调用样式fhicon-arrowD2,search-modle后增加hide -->
+        <div class="search-toggleBar">
+            <a class="search-toggle SI-search-toggle">
+                <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+            </a>
+        </div>
+        <div class="search-modle hide">
+            <div class="hold-meet-mod lef">
+                <div class="search-list search-button">
+                    <label class="search-label">搜索：<input type="text" class="choose-text SID-keyword" placeholder="搜索  资源名称/资源类型" style="width:60%" name = "keyword"/></label>
+                    <a class = "SID-search">查询</a><a class = "SID-clearSearch">清空</a>
+                </div>
+            </div>
+            <!-- <div class="search-button seb"><a class = "SID-search">查询</a><a class = "SID-clearSearch">清空</a></div> -->
+        </div>
+       </form>
+    </div>
+    <!-- 表格内容 -->
+    <div class="tableblock">
+        <table id = "meet-hold" width = "100%" class = "common-table"></table>
+    </div>
+</div>

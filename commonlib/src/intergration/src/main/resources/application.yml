@@ -1,0 +1,32 @@
+priv:
+  roles: 
+    admin: 
+      - mapps.meetingroom.query
+      - mapps.meetingroom.room.detail
+      - mapps.meetingroom.room.add
+      - mapps.meetingroom.room.edit
+      - mapps.meetingroom.room.delete
+      - mapps.meetingroom.room.favorite
+      - mapps.meetingroom.reserved.query
+      - mapps.meetingroom.reserved.add
+      - mapps.meetingroom.reserved.delete
+    user: 
+      - mapps.meetingroom.query
+      - mapps.meetingroom.room.detail
+      - mapps.meetingroom.room.add
+      - mapps.meetingroom.room.edit
+      - mapps.meetingroom.room.delete
+      - mapps.meetingroom.room.favorite
+      - mapps.meetingroom.reserved.query
+      - mapps.meetingroom.reserved.add
+      - mapps.meetingroom.reserved.delete      
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025  
+    appId: signmng
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess  

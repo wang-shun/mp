@@ -1,0 +1,161 @@
+netflix:
+  atlas:
+    uri: http://192.168.160.148:7101/api/v1/publish/
+
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: http://sm.mapps.ip:8761/eureka
+    healthcheck:
+      enabled: true    
+  instance:
+    hostname: sm.mapps.ip
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}  
+    metadataMap:
+      appName: 测试应用                         # 应用名称
+      logo: /logo.png                          # 应用logo 
+      remarks: 描述                             # 应用描述
+      portal: /websso                           # 自服务门户集成入口
+      mgr-port: ${management.port}                  # 管理端口
+      mgr-context-path: ${management.context-path}  # 管理endpoint的context path
+      configProperties:                         # 配置属性
+        - key: services.fileservice.webRoot      # 属性key
+          name: 文件服务接入地址                  #属性名称  
+          type: text                             #类型，text,radio,checkbox           
+          remark: 外网能够访问的入口，一般为nginx反向代理外网入口location        #说明
+          size: 255                              #值列长度 
+          options:                               #radio或者checkbox时的选项，可为空
+          regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?                  #校验正则表达式
+          group: 通用设置                         #通用设置
+          default:                               #缺省值
+        - key: meetingroom.privilege.whiteList  
+          name: 权限控制模式   
+          type: radio         
+          remark: 非白名单模式，不设置权限为全体可见
+          size: 100  
+          options: true:白名单模式,false:非白名单模式
+          regex: 
+          group: 通用设置
+          default: true
+        - key: meetingroom.routePath  
+          name: web端路由路径   
+          type: text         
+          remark: 网关或者反向代理中配置的接入路径
+          size: 100  
+          options: 
+          regex: 
+          group: 通用设置
+          default:   
+        - key: mplus.sso.serviceUrl  
+          name: mplus第三方接入地址   
+          type: text         
+          remark: mplus可供访问的第三方接入地址，一般为内网地址，支持https
+          size: 255  
+          options: 
+          regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?
+          group: 通用设置
+          default:    
+        - key: mplus.sso.appKey  
+          name: 第三方接入key   
+          type: text         
+          remark: mplus第三方接入的appKey
+          size: 50  
+          options: 
+          regex: \w+
+          group: 通用设置
+          default:  
+        - key: mplus.sso.secret  
+          name: 第三方接入密钥   
+          type: text         
+          remark: mplus第三方接入的密钥
+          size: 50  
+          options: 
+          regex: \w+
+          group: 通用设置
+          default:     
+        - key: mplus.login.serviceUrl  
+          name: mplus登录接口地址   
+          type: text         
+          remark: mplus可供访问的客户端登录地址，一般为内网地址，支持https
+          size: 255  
+          options: 
+          regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?
+          group: 通用设置
+          default:     
+        - key: mplus.login.loginPage  
+          name: 自服务门户登录页面   
+          type: text         
+          remark: mplus自服务门户的登录页面地址
+          size: 255  
+          options: 
+          regex: http(s)?://([\w-]+\.)+[\w-]+(:[0-9]+)?(/[\w- ./?%&=]*)?
+          group: 通用设置
+          default:    
+      dependencies:                             # 依赖声明
+        services: mapps-fileservice,baidu             # 依赖的服务，id，逗号分隔
+        resources:                              # 依赖的资源
+          database: default                     # resId: resCode(资源id： 资源代码)
+      
+spring:
+  application:
+    name: mapps-testapp    
+  jmx:
+    enabled: false   
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.103:5432/mr_test
+    username: mr
+    password: 123456 
+    
+mybatis:  
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.servicemanager.entity
+
+#flywaydb: 
+#  locations: db/migration
+  
+api:
+  endpoint: /api  
+
+fileservice:
+  store: file # 可选 file 和 fdfs，即文件存储和fastdfs的分布式存储
+  path: upload  # 如果使用的存储方式（fileservice.store）为“file", 需配置为文件存储路径.
+  webRoot: http://192.168.10.210:9081/mpimg/
+
+fdfs:
+  soTimeout: 1501
+  connectTimeout: 601
+  trackerList:            #TrackerList参数,支持多个
+    - 192.168.160.162:22122
+    
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.72:7777/mos/api  
+
+management:
+  context-path: /__mng__
+  port: 38066
+  
+servicemanager: 
+  endpoint: http://sm.mapps.ip:8761
+
+endpoints: 
+  restart: 
+    enabled: true 
+
+server:
+  port: 9099
+  
+logging:
+  path: logs

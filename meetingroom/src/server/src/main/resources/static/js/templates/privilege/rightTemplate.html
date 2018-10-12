@@ -1,0 +1,101 @@
+
+<ul class="tablist" style="height: 37px;margin-left: -64px;">
+    <li class="active"><a data-tab-id="0" class="SID-tab">可见范围</a></li>
+    <li><a data-tab-id="1" class="SID-tab">审核服务</a></li>
+</ul>
+<div class="SID-tab-container SID-visible" tab-content-id="0">
+    
+	<div class="right-center">
+	   <div class="formBox" style="width: 100%">
+	        <div class="form-item">
+	            <label class="form-item-label">组织架构：</label>
+	            <div class="form-item-editbox">
+	                <a class="buttondefault button-mask SID-add">添加</a><a class="buttondefault button-mask SID-depclear">清空</a>
+	                <div class="pop-rankbox marginTop10">
+	                    <ul class="rank-list SID-deplist">
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>   
+	        <div class="form-item">
+	            <label class="form-item-label">用户：</label>
+	            <form id="subForm1" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+	            <div class="form-item-editbox">
+	                <div class="pop-searchbar">
+	                    <input type="text" placeholder="请输入姓名" name="userName" class="SID-search-user1 SID-suInput"/>
+	                    <a class="fhicon-search"></a>
+	                </div>
+	                <div class="pop-rankbox pop-rankbox-maskColor" style ="display:none">
+	                   <ul class="rank-userbox SID-userlist">
+	                   </ul>
+	                </div>
+	                <div class= "pop-rankbox">
+	                	<ul class="rank-list SID-userbox SID-visiblebox">
+	                	</ul>
+	                </div>
+	                <div class="form-item-btmtip">
+	                    <span class="fhicon-tip"></span>
+	                    <div class="tip-text">您可将本配置指定到相关的部门及人员上</div>
+	                </div>
+	                <a class="buttonblue button-mask SID-priv-save">保存</a><a class="buttonblue button-mask SID-priv-cancel">取消</a>
+	            </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+
+</div>
+<div class="SID-tab-container SID-review hide" tab-content-id="1">
+	<div class="right-center">
+	   <div class="formBox" style="width: 100%">
+	        <div class="form-item">
+	            <label class="form-item-label">管理人员：</label>
+	            <form id="subForm2" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+	            <div class="form-item-editbox">
+	                <div class="pop-searchbar">
+	                    <input type="text" placeholder="请输入姓名" name="userName" class="SID-search-user2 SID-suInput"/>
+	                    <a class="fhicon-search"></a>
+	                </div>
+	                <div class="pop-rankbox pop-rankbox-maskColor" style ="display:none">
+	                   <ul class="rank-userbox SID-userlist">
+	                   </ul>
+	                </div>
+	                <div class= "pop-rankbox">
+	                	<ul class="rank-list SID-userbox SID-adminbox">
+	                	</ul>
+	                </div>
+	                <div class="form-item-btmtip">
+	                    <span class="fhicon-tip"></span>
+	                    <div class="tip-text">会议室管理员指定上限1人。</div>
+	                </div>
+	            </div>
+	            </form>
+	        </div>
+	        <div class="form-item">
+	            <label class="form-item-label">服务人员：</label>
+	            <form id="subForm3" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+	            <div class="form-item-editbox">
+	                <div class="pop-searchbar">
+	                    <input type="text" placeholder="请输入姓名" name="userName" class="SID-search-user3 SID-suInput"/>
+	                    <a class="fhicon-search"></a>
+	                </div>
+	                <div class="pop-rankbox pop-rankbox-maskColor" style ="display:none">
+	                   <ul class="rank-userbox SID-userlist">
+	                   </ul>
+	                </div>
+	                <div class= "pop-rankbox">
+	                	<ul class="rank-list SID-userbox SID-servicebox">
+	                	</ul>
+	                </div>
+	                <div class="form-item-btmtip">
+	                    <span class="fhicon-tip"></span>
+	                    <div class="tip-text">会议室服务员指定上限5人。</div>
+	                </div>
+	                <a class="buttonblue button-mask SID-adminpriv-save">保存</a><a class="buttonblue button-mask SID-adminpriv-cancel">取消</a>
+	            </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+</div>
+    

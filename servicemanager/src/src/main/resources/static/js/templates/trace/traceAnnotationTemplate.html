@@ -1,0 +1,79 @@
+ 			<hr style="margin-top: 10px"/>
+            
+            <table class="stable" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px">
+			    <tr>
+			        <td class="tabletit" width="30%">时间点</td>
+			        <td class="tabletit" width="30%">注解</td>
+			        <td class="tabletit" width="40%">地址</td>
+			    </tr>
+			    
+<%  var traceAnnotationList = traceInfo.annotations;
+	if(traceAnnotationList != undefined){
+		for(var i=0,traceAnnotationList; traceAnnotation=traceAnnotationList[i++];) { 
+		var curtempstamp = traceAnnotation.timestamp*1-zerotimepoint*1;
+		if(curtempstamp == 0){
+			curtempstamp = "";
+		}else{
+			if(curtempstamp > 999999){
+				curtempstamp = Math.round(curtempstamp/1000)/1000+"s";
+			}else if(curtempstamp > 999){
+				curtempstamp = curtempstamp/1000+"ms";
+			}else{
+				curtempstamp = curtempstamp+"μs"
+			}
+		}
+		var curtempvalue = traceAnnotation.value;
+		var finalvalue = curtempvalue;
+		switch(curtempvalue){
+			case "cs":
+				finalvalue = "Client Send";
+				break;
+			case "cr":
+				finalvalue = "Client Receive";
+				break;
+			case "ss":
+				finalvalue = "Server Send";
+				break;
+			case "sr":
+				finalvalue = "Server Receive";
+				break;
+		}
+		var even = "";
+	    if(i%2 == 0){
+	    	even = "even";
+	    }
+		%>
+		<tr class="<%=even %>">
+			<td class="" width="30%"><%=curtempstamp%></td>
+	        <td class="" width="30%"><%=finalvalue%></td>
+	        <td class="" width="40%"><%=traceAnnotation.endpoint.ipv4+':'+traceAnnotation.endpoint.port+"("+traceAnnotation.endpoint.serviceName+")"%></td>
+	    </tr>
+<%		}
+	}
+%>
+			</table>
+			
+			<hr style="margin-top: 10px"/>
+            
+            <table class="stable" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px">
+			    <tr>
+			        <td class="tabletit" width="30%">属性</td>
+			        <td class="tabletit" width="70%">值</td>
+			    </tr>
+			
+<%  var traceBinaryAnnotationList = traceInfo.binaryAnnotations;
+	if(traceBinaryAnnotationList != undefined){
+		for(var i=0,traceBinaryAnnotationList; traceBinaryAnnotation=traceBinaryAnnotationList[i++];) { 
+		var even = "";
+	    if(i%2 == 0){
+	    	even = "even";
+	    }
+		%>
+		<tr class="<%=even %>">
+			<td class="" width="30%"><%=traceBinaryAnnotation.key%></td>
+	        <td class="" width="70%"><%=traceBinaryAnnotation.value%></td>
+	    </tr>
+<%		}
+	}
+%>
+			</table>

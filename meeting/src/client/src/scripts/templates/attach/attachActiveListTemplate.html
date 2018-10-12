@@ -1,0 +1,34 @@
+<% for(var i=0,attachData; attachData=attach[i++];) { %>
+<div class="input-line underline SID-AttachActiveList-Li" data-id="<%=attachData.filePath%>" data-name="<%=attachData.fileName%>" data-type="<%=attachData.contentType%>" data-size="<%=attachData.size%>" data-uploadTime="<%=attachData.uploadTime%>" style="padding:10px 0;">
+    <% if(attachData.contentType=="png" || attachData.contentType=="jpg" || attachData.contentType=="gif"){ %> 
+    <img class="size50" src="<%=imgPath%>/icon-typepic.png">
+    <% }else if(attachData.contentType=="mp3"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typeaudio.png">
+    <% }else if(attachData.contentType=="mp4"){ %> 
+    <img class="size50" src="<%=imgPath%>/icon-typevideo.png">
+    <% }else if(attachData.contentType=="pdf"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typepdf.png">
+    <% }else if(attachData.contentType=="doc" || attachData.contentType=="docx"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typeword.png">
+    <% }else if(attachData.contentType=="xls" || attachData.contentType=="xlsx"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typeexcel.png">
+    <% }else if(attachData.contentType=="ppt"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typeppt.png">
+    <% }else if(attachData.contentType=="rar" || attachData.contentType=="zip"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typepack.png">
+    <% }else if(attachData.contentType=="md" || attachData.contentType=="txt"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typetxt.png">
+    <% }else if(attachData.contentType=="pdf"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typepdf.png">
+    <% }else if(attachData.contentType=="dps"){ %>
+    <img class="size50" src="<%=imgPath%>/icon-typedps.png">
+    <% }else{ %>
+    <img class="size50" src="<%=imgPath%>/icon-typeunknow.png">
+    <% } %>
+    <div class="input-line-font"><%=attachData.fileName%>.<%=attachData.contentType%></div>
+    <i class="icon-rdocancel-fill app-groupIconDel SID-IconDel"></i>
+    <div class="app-groupIconDelConfirm SID-IconDelConfirm">
+        <i class="icon icon-trash-fill"></i>
+    </div>
+</div>
+<% } %>

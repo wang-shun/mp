@@ -1,0 +1,57 @@
+<% for(var i=0,resources; resource=resources[i++];) { 
+		var resourceList = resMap[resource.resId];
+%>
+        <div class="form-item">
+            <label class="form-item-label"><%=resource.resName%>(<%=resource.resCode%>)：</label>
+            <div class="form-item-editbox">
+                <select class="form-item-text form-item-select paramchange" data-resId="<%=resource.resId%>" data-resCode="<%=resource.resCode%>" data-resName="<%=resource.resName%>">
+                <option value="">请选择</option>>
+                <% if(resource.resId == "database"){
+                	var databases = resourceList;
+	                for(var j=0,databases; database=databases[j++];) {
+	                	var opselected = "";
+	                	if(database.id == resource.assignedResourceId){
+	                		opselected = "selected";
+	                	}
+	                 %>
+	                	<option value="<%=database.id%>" <%=opselected%>>
+	                		<%=unescape(database.remarks).replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];})+":"+database.dbType+":"+database.host+":"+database.port+":"%>
+	                		<% if(database.dbType == 'oracle'){%>
+	                			<%=database.sid%>
+	                		<%}else if(database.dbType == 'postgresql' || database.dbType == 'mysql'){%>
+	                			<%=database.dbName%>
+	                		<%}%>
+	                	</option>
+	                <%
+	                }
+	            }else if(resource.resId == "redis"){
+	            	var redisList = resourceList;
+	                for(var j=0,redisList; redis=redisList[j++];) {
+	                	var opselected = "";
+	                	if(redis.id == resource.assignedResourceId){
+	                		opselected = "selected";
+	                	}
+	                 %>
+	                	<option value="<%=redis.id%>" <%=opselected%>>
+	                		<%=unescape(redis.remarks).replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];})+":"+redis.host+":"+redis.port+":"+redis.dbIndex%>
+	                	</option>
+	                <%
+	                }
+	            }else{
+	                for(var j=0,resourceList; rsc=resourceList[j++];) {
+	                	var opselected = "";
+	                	if(rsc.id == resource.assignedResourceId){
+	                		opselected = "selected";
+	                	}
+	                 %>
+	                	<option value="<%=rsc.id%>" <%=opselected%>>
+	                		<%=rsc.remarks+":"+rsc.name%>
+	                	</option>
+	                <%
+	                }
+	            }
+                %>
+                </select>
+            </div>
+        </div>
+<%}%>

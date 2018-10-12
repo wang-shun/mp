@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.sign.dao.SnSignMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.sign.entity.SnSign" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="sign_id" property="signId" jdbcType="VARCHAR" />
+    <result column="ecid" property="ecid" jdbcType="VARCHAR" />
+    <result column="sign_time" property="signTime" jdbcType="DATE" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="dep_id" property="depId" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="task_no" property="teakNo" jdbcType="VARCHAR" />
+    <result column="dep_order" property="deptOrder" jdbcType="VARCHAR" />
+    <result column="orgdep_id" property="orgDepId" jdbcType="VARCHAR" />
+    <result column="orgdep_order" property="orgDeptOrder" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="querySign" parameterType="java.util.Map" resultType="Sign" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+	  select s.ecid,s.sign_id signId,s.sign_time signTime,s.longitude,s.latitude,s.address,s.content,s.creator
+	  ,s.creator_name creatorName,s.create_time createTime,s.dep_id depId,s.state,s.city,s.task_no taskNo
+	  from SN_SIGN s
+	  where s.ecid = #{ecid,jdbcType=VARCHAR}
+	  <if test="signId != null">
+	  and s.sign_id = #{signId,jdbcType=VARCHAR}
+	  </if>
+	  <if test="creator != null">
+	  and s.creator = #{creator,jdbcType=VARCHAR}
+	  </if>
+	  <if test="signTimeBegin != null">
+	  and s.create_time &gt;= #{signTimeBegin,jdbcType=DATE}
+	  </if>
+	  <if test="signTimeEnd != null">
+	  and s.create_time &lt; #{signTimeEnd,jdbcType=DATE}
+	  </if>
+	  <!-- <orgdepfilter prefix="and" deporder="s.org_dept_order"/> -->
+	  order by s.sign_time asc
+  </select>
+  
+  <select id="queryRankSign" parameterType="java.util.Map" resultType="Sign" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  	<if test="databaseType == 'db/mysql'">
+	  SET @x=0;
+	  </if>
+	select creatorNum,creator,creator_name creatorName,sign_count signCount 
+	from 
+	(
+	  select 
+	  <choose>
+	    	<when test="databaseType == 'db/mysql'">
+	    		@x:=ifnull(@x,0)+1 
+	    	</when>
+	    	<otherwise>
+	    		row_number() over ( order by sign_count DESC) 
+	    	</otherwise>
+	    </choose>
+	  creatorNum
+	        ,creator,creator_name,sign_count
+	  from 
+	  (
+		select creator,creator_name,count(1) as sign_count 
+		from SN_SIGN 
+		where state = '1'
+		<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+		<if test="signTimeBegin != null">
+		  and create_time &gt;= #{signTimeBegin,jdbcType=DATE}
+		</if>
+		<if test="signTimeEnd != null">
+		  and create_time &lt; #{signTimeEnd,jdbcType=DATE}
+		</if>
+		<if test="cityLike != null">
+		  and city like '%'||#{cityLike,jdbcType=VARCHAR}||'%'
+		</if>
+		group by creator,creator_name
+		order by sign_count desc 
+	  ) f
+	) t
+	where 1 = 1
+	<if test="creatorNameLike != null">
+	  and creator_name like '%'||#{creatorNameLike,jdbcType=VARCHAR}||'%'
+	</if>
+	<if test="creator != null">
+	  and creator = #{creator,jdbcType=VARCHAR}
+	</if>
+  </select>
+  
+  <select id="querySignSum" parameterType="java.util.Map" resultType="Sign" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+	select creator,creator_name creatorName,max(sign_id) signId
+	from SN_SIGN 
+	where ecid = #{ecid,jdbcType=VARCHAR}
+	<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+	<if test="signTimeBegin != null">
+	  and create_time &gt;= #{signTimeBegin,jdbcType=DATE}
+	</if>
+	<if test="signTimeEnd != null">
+	  and create_time &lt; #{signTimeEnd,jdbcType=DATE}
+	</if>
+	<if test="userIds != null">
+	  and creator in ${userIds}
+	</if>
+	group by creator,creator_name
+  </select>
+  
+  <select id="querySignStat" parameterType="java.util.Map" resultType="Sign" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+	select s.*,sc.signCount from(
+		select a.sign_id signId,a.sign_time signTime,a.longitude,a.latitude,a.address,a.content,a.creator,a.creator_name creatorName,
+			  a.create_time createTime,a.ecid,a.dep_id depId,a.state,a.city,a.task_no taskNo
+	    from(
+			select sign_id,sign_time,longitude,latitude,address,content,creator,creator_name,
+			  create_time,ecid,dep_id,state,city,task_no
+			  <if test="databaseType != 'db/mysql'">
+			  ,row_number() over(partition by creator ORDER BY sign_time desc) as rn 
+			  </if>
+			from SN_SIGN
+			where ecid=#{ecid,jdbcType=VARCHAR}
+			<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+			<if test="signTimeBegin != null">
+			  and sign_time &gt;= #{signTimeBegin,jdbcType=DATE}
+			</if>
+			<if test="signTimeEnd != null">
+			  and sign_time &lt; #{signTimeEnd,jdbcType=DATE}
+			</if>
+			<if test="databaseType == 'db/mysql'">
+			  and sign_id = (
+			select sign_id from SN_SIGN ORDER BY sign_time DESC LIMIT 1
+			)
+			  </if>
+		) a 
+		<if test="databaseType != 'db/mysql'">
+		  where a.rn=1
+		  </if>
+		
+	) s
+	left join(
+		select creator,count(sign_id) as signCount 
+		from SN_SIGN 
+		where ecid=#{ecid,jdbcType=VARCHAR}
+		<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+		<if test="signTimeBegin != null">
+		  and sign_time &gt;= #{signTimeBegin,jdbcType=DATE}
+		</if>
+		<if test="signTimeEnd != null">
+		  and sign_time &lt; #{signTimeEnd,jdbcType=DATE}
+		</if>
+		GROUP BY creator
+	) sc 
+	on s.creator=sc.creator
+	where ecid = #{ecid,jdbcType=VARCHAR}
+	<if test="userIds != null">
+	  and s.creator in ${userIds}
+	</if>
+  </select>
+  
+  <select id="queryRecentSignTime" parameterType="java.util.Map" resultType="Date" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  	SELECT max(create_time) FROM SN_SIGN 
+	where creator=#{userId,jdbcType=VARCHAR} and ecid=#{ecid,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmDatabaseMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmDatabase">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="db_type" jdbcType="VARCHAR" property="dbType" />
+    <result column="host" jdbcType="VARCHAR" property="host" />
+    <result column="port" jdbcType="NUMERIC" property="port" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="db_name" jdbcType="VARCHAR" property="dbName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="enabled" jdbcType="VARCHAR" property="enabled" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  
+  <select id="getDatabaseDetailById" parameterType="java.util.Map" resultType="SmDatabase">
+    select id,db_type as dbType,host,port,sid,db_name as dbName,user_name as userName,password,create_time as createTime,creator,enabled,remarks   
+    from SM_DATABASE 
+	where id=#{databaseId,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="getDatabaseList" parameterType="java.util.Map" resultType="ClientDatabaseInfo">
+    select smdb.id,smdb.db_type as dbType,smdb.host,smdb.port,smdb.sid,smdb.db_name as dbName,smdb.user_name as userName,smdb.password,smdb.create_time as createTime,smdb.creator,smdb.enabled,smdb.remarks,
+    (select count(0) from SM_DB_ASSIGN smdba where smdba.db_id = smdb.id) as appnums 
+    from SM_DATABASE smdb
+    where 1=1
+    <if test="isenabled != null">
+    and enabled=#{isenabled,jdbcType=VARCHAR}
+    </if>
+    <if test="keyword != null">
+	and host like #{keyword,jdbcType=VARCHAR} or user_name like #{keyword,jdbcType=VARCHAR}
+	</if>
+    <choose>
+    	<when test="sort != null">
+    		order by ${sort}
+    	</when>
+    	<otherwise>
+    		order by smdb.id
+    	</otherwise>
+    </choose>
+  </select>
+  
+  <update id="stopDatabase" parameterType="java.util.Map">
+    update SM_DATABASE set enabled = '0'
+	where id=#{databaseId,jdbcType=VARCHAR} 
+  </update>
+  
+  <update id="startDatabase" parameterType="java.util.Map">
+    update SM_DATABASE set enabled = '1'
+	where id=#{databaseId,jdbcType=VARCHAR} 
+  </update>
+  
+</mapper>

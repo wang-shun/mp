@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.meeting.dao.OpLogMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.OpLog">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="object" jdbcType="VARCHAR" property="object" />
+    <result column="op" jdbcType="VARCHAR" property="op" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="op_time" jdbcType="TIMESTAMP" property="opTime" />
+  </resultMap>
+  
+  <select id="getOpLog" parameterType="java.util.Map" resultType="OpLog">
+    select id,module,object,op,content,result,ecid,user_name userName,user_id userId,op_time opTime ,dept_name deptName  
+	from op_log
+	where ecid = #{ecid} and op in ('预定','取消','结束')
+	  <if test="op != null">
+	  and op = #{op}
+      </if>
+	  <if test="userIds != null">
+	  and user_id in (${userIds})
+      </if>
+	  <if test="userName != null">
+	  and user_name like #{userName}
+      </if>
+	  <if test="depName != null">
+	  and dept_name like #{depName}
+      </if>
+      <if test="statBeginTime != null">
+	  and op_time > #{statBeginTime}
+      </if>
+      <if test="statEndTime != null">
+	  and op_time &lt;= #{statEndTime}
+      </if>
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+      <if test="order == null">
+	  order by op_time desc
+	  </if>
+  </select>
+</mapper>

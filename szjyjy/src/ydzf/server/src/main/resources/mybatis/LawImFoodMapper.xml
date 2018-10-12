@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.ydzf.dao.LawImFoodMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.ydzf.entity.LawFoodCosmetics" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="decl_no" property="declNo" jdbcType="VARCHAR" />
+    <result column="receiver_doc_name" property="receiverDocName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="inspector_name" property="inspectorName" jdbcType="VARCHAR" />
+    <result column="accept_appr_tm" property="acceptApprTm" jdbcType="TIMESTAMP" />
+    <result column="confmtime" property="confmTime" jdbcType="TIMESTAMP" />
+     <result column="decl_reg_name" property="declRegName" jdbcType="VARCHAR" />
+    <result column="mnufctr_reg_name" property="mnufctrRegName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="queryLawlList" parameterType="java.util.Map" resultMap="BaseResultMap">
+ SELECT
+			decl_no,
+			receiver_doc_name,
+			inspector_name,
+			accept_appr_tm,
+			confm_time as confmtime,
+			status,
+			decl_reg_name,
+			mnufctr_reg_name
+	FROM
+		v_task
+	where 1=1
+		<include refid="where"/>
+  </select>
+  
+  <sql id="where">
+  	<if test="userId != null">
+	  and userid =#{userId,jdbcType=VARCHAR}  and INSPECTOR_CODE IS NOT null
+    </if>
+  	<if test="inspectorCode != null">
+	  and inspector_code =  #{inspectorCode,jdbcType=VARCHAR}
+    </if>
+  	<if test="userIds != null">
+	  and userid in
+	   <foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">  
+  		#{item}  
+ 		</foreach>
+ 		and INSPECTOR_CODE IS NOT null
+    </if>
+    <if test="declNo != null">
+	  and decl_no like '%'|| #{declNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="name != null">
+	  and (receiver_doc_name like '%'||  #{name,jdbcType=VARCHAR}||'%' 
+	  	or inspector_name  like '%'||  #{name,jdbcType=VARCHAR}||'%' )
+    </if>
+    <if test="startTime != null">
+	  and confm_time  >= #{startTime,jdbcType=TIMESTAMP} 
+    </if>
+    <if test="endTime != null">
+	  and confm_time  &lt;  #{endTime,jdbcType=TIMESTAMP} 
+    </if>
+    <if test="sort != null">
+	  order by ${sort}
+    </if>
+  </sql>
+  
+  
+  <!-- 查询出口详情 -->
+  <select id="getLawOutDetail" parameterType="java.util.Map" resultType="LawExpFoodCosmetics">
+  	select decl_no as declNo,varieties_num as varietiesNum,mnufctr_reg_name as mnufctrRegName,
+  		   importing_country as importingCountry,inspection_and_quarantine as inspectionAndQuarantine,
+  		   health_status as healthStatus,other_mixed as otherMixed ,packing_trans as packingTrans,
+  		   sensory_test as sensoryTest,packing_whole as packingWhole,leakage_anomaly as leakageAnomaly,
+  		   label_check as labelCheck,isneed_smpl as isneedSmpl,remark ,receiver_doc_code as receiverDocCode,
+  		   receiver_doc_name as receiverDocName,inspector_code as inspectorCode,userid as userId,oper_time as operTime,
+  		   confm_time as confmTime, 
+  		   accept_appr_tm as acceptApprTm,
+  		   inspector_name as inspectorName
+  	from law_exp_foodcosmetics
+  	where 
+	  decl_no = #{declNo,jdbcType=VARCHAR}
+   
+  
+  </select>
+  
+   <!-- 查询取样 -->
+  <select id="getLawSamlpings" parameterType="java.util.Map" resultType="LawSampling">
+  	select sampling_id as samplingId,decl_no as declNo,sampling_time as samplingTime,sampling_addr as samplingAddr
+  		from law_sampling 
+  		
+  		where decl_no = #{declNo,jdbcType=VARCHAR}
+  </select>
+  
+   <!-- 查询取样List -->
+  <select id="getLawSamplingLists" parameterType="java.util.Map" resultType="LawSamplingList">
+  	select sampling_id as samplingId,decl_no as declNo,goods_item_name as goodsItemName, specification ,quantity,
+  		   prod_hs_code as prodHsCode,ori_city as oriCity,mark_number as markNumber
+  		   
+  	from law_sampling_list
+  	where 	decl_no = #{declNo,jdbcType=VARCHAR}
+  		and sampling_id= #{samplingId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getLawFile" parameterType="java.util.Map" resultType="LawFile">
+	select file_id as fileId,decl_no as declNo,file_name as fileName,file_path as filePath,file_type as fileType,m_file_path as mFilePath
+	  	from law_file
+  		where decl_no = #{declNo,jdbcType=VARCHAR}
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,181 @@
+<div  align=center>
+         <!-- 里面table内容根据需要替换 -->
+         <br/>
+         <table  width="700px"  class="table"  cellspacing="0px">
+         <tr>
+         	<td class="td" width="22%">查验日期:</td>
+         	<td  class="td" width="28%"><%=law.confmTimeStr%></td>
+         	<td class="td" width="22%">查验地点:	</td>
+         	<td class="td" width="28%"><%=law.checkPlace%></td>
+         </tr>
+         <tr>
+         	<td class="td">报检单号：</td>
+         	<td class="td"><%=law.declNo%></td>
+         	<td class="td">品种数：	</td>
+         	<td class="td"><%=law.varietiesNum%></td>
+         </tr>
+         <tr>
+         	<td class="td">生产商：	</td>
+         	<td class="td"><%=law.mnufctrRegName%></td>
+         	<td class="td">进口国/地区：	</td>
+         	<td class="td"><%=law.importingCountry%></td>
+         </tr>
+         <tr>
+         	<td class="td">第一查验人：	</td>
+         	<td class="td"><%=law.receiverDocName%></td>
+         	<td class="td">第二查验人：	</td>
+         	<td class="td"><%=law.inspectorName%></td>
+         </tr>
+         </table>
+         
+         <table class="table2" width="700"  cellspacing="5px">
+         <tr><td colspan="2" align="center" >查验结果</tr>
+          <tr>
+         	<td width="40%">1.检验检疫方式：</td>
+         	<td width="60%">
+         		<input type="checkbox" id="Inspection_and_quarantine0" disabled="disabled"   >&nbsp;监管放行&nbsp;
+         	 	<input type="checkbox" id="Inspection_and_quarantine1" disabled="disabled"  >&nbsp;检验放行
+         	 	<input type="checkbox" id="Inspection_and_quarantine2"  disabled="disabled"  >&nbsp;其它
+
+			</td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">2.现场卫生状况是否符合要求：</td>
+         	<td width="60%">
+         		<input type="checkbox" id="health_status1" disabled="disabled"  >&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;
+         	 	<input type="checkbox" id="health_status0" disabled="disabled"  >&nbsp;否</td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">3.是否与其他有毒有害物质混装:</td>
+         	<td width="60%"><input type="checkbox" disabled="disabled" id="other_mixed1"  >&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp; 
+         	 <input type="checkbox"  disabled="disabled" id="other_mixed0"  >&nbsp;否</td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">4.运输包装情况：</td>
+         	<td width="60%">
+         		<input type="checkbox" id="packing_trans0" disabled="disabled"   >&nbsp;正常&nbsp;
+         	 	<input type="checkbox" id="packing_trans1" disabled="disabled"  >&nbsp;破损/渗漏
+         	 	<input type="checkbox" id="packing_trans2"  disabled="disabled"  >&nbsp;霉变/水湿
+         	 	<input type="checkbox" id="packing_trans3"  disabled="disabled"  >&nbsp;虫害/鼠迹
+         	 	<input type="checkbox" id="packing_trans4"  disabled="disabled"  >&nbsp;其它
+
+			</td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">5.感官检验：	</td>
+         	<td width="60%">
+         		<input type="checkbox" id="sensory_test1" disabled="disabled"   >&nbsp;合格&nbsp; 
+         	 	<input type="checkbox" id="sensory_test0" disabled="disabled"  >&nbsp;不合格
+         	 </td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">6.产品包装是否完整：</td>
+         	<td width=""><input type="checkbox" disabled="disabled"  id="packing_whole1"  >&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;  
+         	 <input type="checkbox"  disabled="disabled" id="packing_whole0" >&nbsp;否</td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">7.有无渗漏等异常：</td>
+         	<td width="60%">
+         		<input type="checkbox" id="leakage_anomaly0" disabled="disabled"  >&nbsp;无&nbsp;&nbsp;&nbsp;&nbsp;        	 
+         		<input type="checkbox" id="leakage_anomaly1" disabled="disabled"  >&nbsp;有
+         	</td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">8.标签格式版面是否合格：</td>
+         	<td width="60%">
+         	<input type="checkbox" disabled="disabled"  id="label_check1" >&nbsp;合格&nbsp;
+         	 	<input type="checkbox"  disabled="disabled" id="label_check0" >&nbsp;不合格</td>
+         	
+         </tr>
+         <tr>
+         	<td width="40%">9.抽/采样:</td>
+         	<td width="60%">
+         		<input type="checkbox" disabled="disabled" id="sampling0"  >&nbsp;无&nbsp;&nbsp;&nbsp;&nbsp; 
+         	 	<input type="checkbox" disabled="disabled" id="sampling1" >&nbsp;有
+         	</td>
+         </tr>
+         </table>
+		 <div width="700px">
+		 <table width="700px" class="table"  cellspacing="0px"  >
+		 <tr hight="20">
+         	<td class="td"  width="25%"  align="center">备注:</td>
+         	<td class="td" width="75%" >
+				
+         	</td>
+         	
+         </tr>
+		 <tr>
+		 </table>
+		 </div>
+		 <br/>
+		 <div   class="div" > 取样信息</div>
+		<div width="700px" class="SID-samplingTable" >
+		 
+		 </div>
+		 <br/>
+		  <div   class="div" > 附件信息</div>
+		  <% if(lawFiles.length==0){%>
+			<br/>
+			<div>无附件信息</div>
+		
+		<% } %>
+		<div   class="divImage" >
+		 	<% for(var i=0,lawFile; lawFile=lawFiles[i++];) { %>
+		 		<div class="image"> 
+		 		<img class="imgCss" src="<%=lawFile.filePath%>"></img>
+		 		<div><a href="<%=lawFile.filePath%>">下载</a></div>
+		 		</div>
+		 	<% } %>	
+		  </div>
+		<br/>
+		<br/>
+</div>
+
+	
+<style >
+.td{border:solid #ccc; border-width:0px 1px 1px 0px; padding: 5px; font-family: "Microsoft YaHei", helvetica, arial;font-size: 14px;}
+.table{border:solid #ccc; border-width:1px 0px 0px 1px;font-size: 14px;}
+.table2{
+		font-family: "Microsoft YaHei", helvetica, arial;
+		border:solid #ccc; 
+		border-width:0px 1px 0px 1px;
+		font-size: 14px;
+		}
+.div{	background:#ccc;
+		height:30px;
+		width:700px;
+		margin:0 auto;
+		text-align:center;
+		line-height:30px;
+		font-size: 14px;
+		font-family: "Microsoft YaHei, helvetica, arial"
+	}
+.divImage{	
+		width:698px;
+		border-width:1px 1px 1px 1px;		
+	}
+.image{	
+		height:180px;
+		width:150px;	
+		border:solid #ccc;
+		border-width:1px 1px 1px 1px;
+		margin:20px 0px 0px 17.5px;
+		float:left;	
+		
+	}
+.imgCss{
+		height:85%;
+		
+		width:100%;	
+		
+}
+.tr{	background:#f0f0f0;
+	}
+</style>

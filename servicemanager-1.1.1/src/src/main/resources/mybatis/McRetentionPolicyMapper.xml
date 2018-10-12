@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.McRetentionPolicyMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.McRetentionPolicy" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
+    <result column="rp" property="rp" jdbcType="VARCHAR" />
+    <result column="rp_name" property="rpName" jdbcType="VARCHAR" />
+    <result column="retain_time" property="retainTime" jdbcType="VARCHAR" />
+    <result column="is_default" property="isDefault" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getQueryList" parameterType="java.util.Map" resultType="McRetentionPolicy">
+    select id,system_id as systemId,rp,rp_name as rpName,retain_time as retainTime,is_default as isDefault,enabled   
+    from MC_RETENTION_POLICY 
+    where 1=1
+    <if test="isenabled != null">
+    and enabled=#{isenabled,jdbcType=VARCHAR}
+    </if>
+    <if test="keyword != null">
+	and rp like #{keyword,jdbcType=VARCHAR}
+	</if>
+    <choose>
+    	<when test="sort != null">
+    		order by ${sort}
+    	</when>
+    	<otherwise>
+    		order by id
+    	</otherwise>
+    </choose>
+  </select>
+</mapper>

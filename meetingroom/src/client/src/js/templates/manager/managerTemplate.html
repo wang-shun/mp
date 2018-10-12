@@ -1,0 +1,83 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-managerBack" href="javascript:void(0)">
+        	<i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">我的管理</h1>
+    </div>
+    <div class="underline" style="background-color: white;">
+        <div style="padding:10px 0;<% if (adminFlag != 1) {%>display:none;<%}%>">
+        <ul id="ID-Tabbar" class="tabbar tabbar-rect" style="width:50%;">
+            <li class="SID-Tabbar tab active" id="ID-TabReserve">
+                <label class="tab-label">我的预定</label>
+            </li>
+            <li class="SID-Tabbar tab" id="ID-TabApprove">
+                <label class="tab-label">我的审批</label>
+            </li>
+        </ul>
+        </div>
+    </div>
+</header>
+<article style="top:106px;<% if (adminFlag != 1) {%>top:85px;<%}%>" class="SID-article">
+    <div class="slider-container" id="ID-Pages" style="height: 300px;">
+    <div class="slider-wrapper">
+    <div class="slider-slide">
+        <!--第一页:start-->
+        <div class="SID-managerList group" style="padding: 0 12px;margin-top:0;"></div>
+        <!--第一页:end-->
+    </div>
+    <div class="slider-slide">
+        <!--第二页:start-->
+        <div class="SID-DivApproval group" style="padding: 0 12px;margin-top:0;"></div>
+        <!--第二页:end-->
+    </div>
+    </div>
+    </div>
+    <div class="box box-middlecenter box-vertical SID-ManagerNodata" style="height:400px;display: none;">
+        <img src="<%= imgPath %>/nodata.png" style="width:200px;"/>
+        <p style="margin-top: 20px;">还没有内容</p>
+    </div>
+</article>
+<!--我的预定筛选框-->
+<div id="ID-DialogReserve" style="background-color:white;display:none;">
+    <div class="SID-statusUl list-select" style="padding: 0 8px;">
+        <div class="list-select-li underline active SID-statusLi" data-status="a">
+            <label>待审批</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+        <div class="list-select-li underline SID-statusLi" data-status="r">
+            <label>未批准</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+        <div class="list-select-li underline active SID-statusLi" data-status="1">
+            <label>准备中</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+        <div class="list-select-li underline active SID-statusLi" data-status="2">
+            <label>使用中</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+        <div class="list-select-li underline SID-statusLi" data-status="4">
+            <label>已取消</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+        <div class="list-select-li underline SID-statusLi" data-status="3">
+            <label>已结束</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+    </div>
+</div>
+
+<!--我的审批筛选框-->
+<div id="ID-DialogApproval" style="background-color:white;display:none;">
+    <div class="SID-statusUl list-select" style="padding: 0 8px;">
+        <div class="list-select-li underline active SID-statusLi" data-status="0">
+            <label>待审批</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+        <div class="list-select-li underline SID-statusLi" data-status="1">
+            <label>已审批</label>
+            <i class="icon icon-hook-fill size20 margin8"></i>
+        </div>
+    </div>
+</div>

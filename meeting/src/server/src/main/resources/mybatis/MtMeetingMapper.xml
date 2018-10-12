@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.MtMeetingMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.MtMeeting">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="has_group" jdbcType="VARCHAR" property="hasGroup" />
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
+    <result column="notice_type" jdbcType="VARCHAR" property="noticeType" />
+    <result column="notice_set" jdbcType="NUMERIC" property="noticeSet" />
+    <result column="notice_time" jdbcType="TIMESTAMP" property="noticeTime" />
+    <result column="sign_type" jdbcType="VARCHAR" property="signType" />
+  </resultMap>
+  
+  <select id="getMeeting" parameterType="java.util.Map" resultType="ClientMeetingInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status
+  from 
+  (
+	  select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status 
+	  from
+	  (
+	    select id meetingId,name meetingName,address,
+		<choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(begin_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(begin_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    beginTimeStr,
+	    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(end_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(end_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    endTimeStr
+	    	  ,status,case when sponsor = #{userId,jdbcType=VARCHAR} then 1 else 0 end isSelfCreate,begin_time
+	    	  ,case when status='30' then 1 when status='20' then 2 when status='40' then 4 when status='50' then 3 else 5 end orderstatus
+		from MT_MEETING r
+		where r.ecid = #{ecid,jdbcType=VARCHAR} and r.status in ('20','30')
+		  and (exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.visible = '1'))
+		  <!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+		  <if test="name != null">
+		  and name like #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="likeParam != null">
+		  and (name like #{likeParam,jdbcType=VARCHAR} or address like #{likeParam,jdbcType=VARCHAR})
+	      </if>
+	      <if test="status != null">
+		  and r.status in (${status})
+	      </if>
+		  <if test="selfCreate != null">
+		  and sponsor = #{userId,jdbcType=VARCHAR}
+	      </if>
+		  <if test="selfAttend != null">
+		  and 
+		  (exists (select 1 from MT_PARTICIPANTS mp 
+		           where r.id = mp.meeting_id 
+		             and mp.person_id = #{userId,jdbcType=VARCHAR} 
+		             and mp.person_type='inner'
+		             and mp.person_id &lt;&gt; r.sponsor))
+	      </if>
+		  <if test="selfService != null">
+		  and 
+		  (exists (select 1 from MT_SIGNIN_SERV ss where r.id = ss.meeting_id and ss.user_id = #{userId,jdbcType=VARCHAR} and ss.user_id &lt;&gt; r.sponsor))
+	      </if>
+		  <if test="time != null">
+		  and create_time &lt; #{time}
+	      </if>
+	    ) a
+		order by orderstatus asc,begin_time asc
+	) a
+	union all 
+	select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status
+	from 
+	(
+	  select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status 
+	  from
+	  (
+	    select id meetingId,name meetingName,address,
+	    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(begin_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(begin_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    beginTimeStr,
+	    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(end_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(end_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    endTimeStr
+	    	  ,status,case when sponsor = #{userId,jdbcType=VARCHAR} then 1 else 0 end isSelfCreate,begin_time
+	    	  ,case when status='30' then 1 when status='20' then 2 when status='40' then 4 when status='50' then 3 else 5 end orderstatus
+		from MT_MEETING r
+		where r.ecid = #{ecid,jdbcType=VARCHAR} and r.status in ('40','50')
+		  and (exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.visible = '1'))
+		  <!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+		  <if test="name != null">
+		  and name like #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="likeParam != null">
+		  and (name like #{likeParam,jdbcType=VARCHAR} or address like #{likeParam,jdbcType=VARCHAR})
+	      </if>
+	      <if test="status != null">
+		  and r.status in (${status})
+	      </if>
+		  <if test="selfCreate != null">
+		  and sponsor = #{userId,jdbcType=VARCHAR}
+	      </if>
+		  <if test="selfAttend != null">
+		  and 
+		  (exists (select 1 from MT_PARTICIPANTS mp 
+		           where r.id = mp.meeting_id 
+		             and mp.person_id = #{userId,jdbcType=VARCHAR} 
+		             and mp.person_type='inner'
+		             and mp.person_id &lt;&gt; r.sponsor))
+	      </if>
+		  <if test="selfService != null">
+		  and 
+		  (exists (select 1 from MT_SIGNIN_SERV ss where r.id = ss.meeting_id and ss.user_id = #{userId,jdbcType=VARCHAR} and ss.user_id &lt;&gt; r.sponsor))
+	      </if>
+		  <if test="time != null">
+		  and create_time &lt; #{time}
+	      </if>
+	    ) a
+		order by orderstatus asc,begin_time desc
+	) b
+  </select>
+  
+  <select id = "getMeetingForWeb" parameterType = "java.util.Map" resultType = "clientMeetingInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  	select meetingId,meetingName,address,holderName,beginTimeStr,endTimeStr,createTimeStr,isSelfCreate,status,begin_time,create_time,end_time
+  from
+  (
+    select id meetingId,name meetingName,address
+    	  ,(select person_name from MT_PARTICIPANTS p where p.meeting_id=r.id and p.person_id =r.sponsor  group by person_name) holderName
+    	  ,
+    	<choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(begin_time,'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(begin_time,'yyyy-MM-dd hh24:mi:ss') 
+		 	</otherwise>
+		</choose>
+    	  beginTimeStr,
+    	<choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(end_time,'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(end_time,'yyyy-MM-dd hh24:mi:ss') 
+		 	</otherwise>
+		</choose>
+    	  endTimeStr
+    	  ,
+    	<choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(create_time,'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(create_time,'yyyy-MM-dd hh24:mi:ss') 
+		 	</otherwise>
+		</choose>
+    	  createTimeStr,status,case when sponsor = #{userId,jdbcType=VARCHAR} then 1 else 0 end isSelfCreate,begin_time,create_time,end_time
+	      ,(select max(person_name) from MT_PARTICIPANTS p where p.meeting_id = r.id and p.person_id = r.sponsor) sponsorName
+	from MT_MEETING r
+	where 
+	  r.ecid = #{ecid,jdbcType=VARCHAR} and r.status in ('10','20','30','40','50')
+	  and (exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.visible = '1'))
+	  and (
+	  (exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR}))
+	  or
+	  (exists (select 1 from MT_SIGNIN_SERV ss where r.id = ss.meeting_id and ss.user_id = #{userId,jdbcType=VARCHAR}))
+	  or (sponsor = #{userId,jdbcType=VARCHAR})
+	  )
+	  <!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+	  <if test="meetingName != null">
+	  and name like #{meetingName,jdbcType=VARCHAR}
+      </if>
+      <if test="address != null">
+	  and address like #{address,jdbcType=VARCHAR}
+      </if>
+      <if test="meetingStatus != null and meetingStatus != 0">
+	  and r.status = #{meetingStatus,jdbcType=VARCHAR}
+      </if>
+	  <if test="beginTime != null">
+	  and begin_time > 
+	  <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{beginTime},'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{beginTime},'yyyy-MM-dd hh24:mi:ss')
+		 	</otherwise>
+      </choose>
+      </if>
+      <if test="endTime != null">
+	  and begin_time &lt; 
+	  <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{endTime},'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{endTime},'yyyy-MM-dd hh24:mi:ss')
+		 	</otherwise>
+      </choose>
+      </if>
+      <if test="create_beginTime != null">
+	  and begin_time > 
+	  <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{create_beginTime},'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{create_beginTime},'yyyy-MM-dd hh24:mi:ss')
+		 	</otherwise>
+      </choose>
+      </if>
+      <if test="create_endTime != null">
+	  and begin_time &lt; 
+	  <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{create_endTime},'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{create_endTime},'yyyy-MM-dd hh24:mi:ss')
+		 	</otherwise>
+      </choose>
+      </if>
+      <if test="meetingHolder != null and meetingHolder != ''">
+	  and sponsor = #{meetingHolder,jdbcType=VARCHAR}
+      </if>
+	  <if test="selfCreate != null">
+	  and sponsor = #{userId,jdbcType=VARCHAR}
+      </if>
+	  <if test="selfAttend != null">
+	  and 
+	  (exists (select 1 from MT_PARTICIPANTS mp 
+	           where r.id = mp.meeting_id 
+	             and mp.person_id = #{userId,jdbcType=VARCHAR} 
+	             and mp.person_type='inner'
+	             and mp.person_id &lt;&gt; r.sponsor))
+	  and r.status &lt;&gt; '10'
+      </if>
+	  <if test="selfService != null">
+	  and 
+	  (exists (select 1 from MT_SIGNIN_SERV ss where r.id = ss.meeting_id and ss.user_id = #{userId,jdbcType=VARCHAR} and ss.user_id &lt;&gt; r.sponsor))
+      </if>
+    ) a
+    where 1 = 1
+    <if test="sponsorName != null">
+    	and a.sponsorName like '%'||#{sponsorName,jdbcType=VARCHAR}||'%'
+    </if>
+    <choose>
+    	<when test = "sort != null">
+    		order by ${sort}
+    	</when>
+    	<when test = "order != null and order == 1">
+    		order by begin_time desc
+    	</when>
+    	<otherwise>
+    		order by create_time desc
+    	</otherwise>
+    </choose>
+  </select>
+  <select id="getMeetingInfo" parameterType="java.util.Map" resultType="ClientMeetingInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select id meetingId,name meetingName,address,
+        <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(begin_time,'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(begin_time,'yyyy-MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+    beginTimeStr,
+    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(end_time,'%Y-%m-%d %H:%i:%s') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(end_time,'yyyy-MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+    endTimeStr
+          ,has_group hasGroup,group_id groupId,sponsor,notice_type noticeType,notice_set noticeSet,sign_type signType 
+    	  ,status,case when sponsor = #{userId,jdbcType=VARCHAR} then 1 else 0 end isSelfCreate
+    	  ,case when exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.person_type in('inner','outer')) then 1 else 0 end isSelfJoin
+    	  ,case when exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.person_type in('service')) then 1 else 0 end isSelfService
+    	  ,case when exists (select 1 from MT_MEETING ms where r.id = ms.id and ms.sponsor = #{userId,jdbcType=VARCHAR}) then 1
+    	  else (case when exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.person_type in('inner','outer')) then 2 else 3 end) end selfOp
+    	  ,sign_type signType 
+	from MT_MEETING r
+	where r.id = #{meetingId,jdbcType=VARCHAR}
+	<!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+	<if test="ecid != null">
+	and r.ecid = #{ecid,jdbcType=VARCHAR} 
+	</if>
+  </select>
+  <update id="cancelMeetById" parameterType="java.util.Map" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  	update MT_MEETING set status=40 where id = #{meetingId,jdbcType=VARCHAR}
+  	<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+  </update>
+  <update id="applyMeetById" parameterType="java.util.Map" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  	update MT_MEETING set status=20 where id = #{meetingId,jdbcType=VARCHAR}
+  	<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+  </update>
+  <delete id="deleteByMeetingId" parameterType="java.util.Map" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    delete from MT_MEETING where id = #{meetingId}
+    <!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+  </delete>
+  
+  <update id="updateStatusSchedule" parameterType="java.util.Map" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    update MT_MEETING r set status = case when r.begin_time &lt;= #{now} and  #{now} &lt;= r.end_time then '30'
+                                           when #{now} &gt; r.end_time then '50' 
+                                           else '20' 
+                                      end
+    where r.status in ('20','30')
+    <!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+  </update>
+  
+  <select id="getMeetingCall" parameterType="java.util.Map" resultType="MtMeeting" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select id,ecid,name,address,begin_time beginTime,end_time endTime,sponsor,create_time createTime,status,notice_type noticeType,notice_set noticeSet 
+	from MT_MEETING r
+	where r.status='20' and r.notice_time >= #{stime} and r.notice_time &lt; #{etime}
+	<!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+  </select>
+  
+  
+  <!-- v20 start -->
+  <select id="getMeetingV20" parameterType="java.util.Map" resultType="ClientMeetingInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status,isSelfJoin,isSelfService 
+  from 
+  (
+	  select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status,isSelfJoin,isSelfService 
+	  from
+	  (
+	    select id meetingId,name meetingName,address,
+	    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(begin_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(begin_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    beginTimeStr,
+	    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(end_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(end_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    endTimeStr
+	    	  ,status,case when sponsor = #{userId,jdbcType=VARCHAR} then 1 else 0 end isSelfCreate,begin_time
+	    	  ,case when status='30' then 1 when status='20' then 2 when status='40' then 4 when status='50' then 3 else 5 end orderstatus
+	    	  ,coalesce((select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.person_type='inner'),0) isSelfJoin
+	    	  ,coalesce((select 1 from MT_SIGNIN_SERV ss where r.id = ss.meeting_id and ss.user_id = #{userId,jdbcType=VARCHAR}),0) isSelfService
+		from MT_MEETING r
+		where r.ecid = #{ecid,jdbcType=VARCHAR} and r.status in ('20','30')
+		  and (exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.visible = '1'))
+		  <!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+		  <if test="name != null">
+		  and name like #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="likeParam != null">
+		  and (name like #{likeParam,jdbcType=VARCHAR} or address like #{likeParam,jdbcType=VARCHAR})
+	      </if>
+	      <if test="status != null">
+		  and r.status in (${status})
+	      </if>
+		  <if test="time != null">
+		  and create_time &lt; #{time}
+	      </if>
+		  <if test="selectDate != null">
+		  and r.begin_time &lt; 
+		  <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{selectDate},'%Y-%m-%d')+1
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{selectDate},'yyyy-mm-dd')+1
+		 	</otherwise>
+	      </choose>
+		   and r.end_time >= 
+		   <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{selectDate},'%Y-%m-%d')
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{selectDate},'yyyy-mm-dd')
+		 	</otherwise>
+	      </choose>
+		   
+	      </if>
+	    ) a
+		order by orderstatus asc,begin_time asc
+	) a
+	union all 
+	select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status,isSelfJoin,isSelfService 
+	from 
+	(
+	  select meetingId,meetingName,address,beginTimeStr,endTimeStr,isSelfCreate,status,isSelfJoin,isSelfService 
+	  from
+	  (
+	    select id meetingId,name meetingName,address,
+	    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(begin_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(begin_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    beginTimeStr,
+	    <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		date_format(end_time,'%m-%d %H:%i') 
+		 	</when>
+		 	<otherwise>
+		 		to_char(end_time,'MM-dd hh24:mi') 
+		 	</otherwise>
+		</choose>
+	    endTimeStr
+	    	  ,status,case when sponsor = #{userId,jdbcType=VARCHAR} then 1 else 0 end isSelfCreate,begin_time
+	    	  ,case when status='30' then 1 when status='20' then 2 when status='40' then 4 when status='50' then 3 else 5 end orderstatus
+	    	  ,coalesce((select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.person_type='inner'),0) isSelfJoin
+	    	  ,coalesce((select 1 from MT_SIGNIN_SERV ss where r.id = ss.meeting_id and ss.user_id = #{userId,jdbcType=VARCHAR}),0) isSelfService
+		from MT_MEETING r
+		where r.ecid = #{ecid,jdbcType=VARCHAR} and r.status in ('40','50')
+		  and (exists (select 1 from MT_PARTICIPANTS mp where r.id = mp.meeting_id and mp.person_id = #{userId,jdbcType=VARCHAR} and mp.visible = '1'))
+		  <!-- <orgdepfilter prefix="and" deporder="r.org_dept_order"/> -->
+		  <if test="name != null">
+		  and name like #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="likeParam != null">
+		  and (name like #{likeParam,jdbcType=VARCHAR} or address like #{likeParam,jdbcType=VARCHAR})
+	      </if>
+	      <if test="status != null">
+		  and r.status in (${status})
+	      </if>
+		  <if test="selfCreate != null">
+		  and sponsor = #{userId,jdbcType=VARCHAR}
+	      </if>
+		  <if test="selfAttend != null">
+		  and 
+		  (exists (select 1 from MT_PARTICIPANTS mp 
+		           where r.id = mp.meeting_id 
+		             and mp.person_id = #{userId,jdbcType=VARCHAR} 
+		             and mp.person_type='inner'
+		             and mp.person_id &lt;&gt; r.sponsor))
+	      </if>
+		  <if test="selfService != null">
+		  and 
+		  (exists (select 1 from MT_SIGNIN_SERV ss where r.id = ss.meeting_id and ss.user_id = #{userId,jdbcType=VARCHAR} and ss.user_id &lt;&gt; r.sponsor))
+	      </if>
+		  <if test="time != null">
+		  and create_time &lt; #{time}
+	      </if>
+		  <if test="selectDate != null">
+		  and r.begin_time &lt;= 
+		  <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{selectDate},'%Y-%m-%d')
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{selectDate},'yyyy-mm-dd')
+		 	</otherwise>
+	      </choose>
+		   and r.end_time >= 
+		   <choose>
+		 	<when test="databaseType == 'db/mysql'">
+		 		str_to_date(#{selectDate},'%Y-%m-%d')
+		 	</when>
+		 	<otherwise>
+		 		to_date(#{selectDate},'yyyy-mm-dd')
+		 	</otherwise>
+	      </choose>
+		   
+	      </if>
+	    ) a
+		order by orderstatus asc,begin_time desc
+	) b
+  </select>
+  <!-- v20 end -->
+  
+  <!-- querysignstatus -->
+  <select id="getMeetingSignStatus" parameterType="java.util.Map" resultType="MtSignStatus" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select s1.signnum1 as totalnum,s2.signnum2 as signnum from
+    (select count(1) as signnum1
+	from MT_SIGNIN_RECORD msr
+	where msr.meeting_id=#{meetingId,jdbcType=VARCHAR} and person_id=#{userId,jdbcType=VARCHAR}
+	  and person_id &lt;&gt; (select sponsor from MT_MEETING where id = msr.meeting_id)) s1,
+	(select count(1) as signnum2
+	from MT_SIGNIN_RECORD msr
+	where msr.meeting_id=#{meetingId,jdbcType=VARCHAR} and person_id=#{userId,jdbcType=VARCHAR} and signed='Y'
+	  and person_id &lt;&gt; (select sponsor from MT_MEETING where id = msr.meeting_id)) s2
+  </select>
+</mapper>

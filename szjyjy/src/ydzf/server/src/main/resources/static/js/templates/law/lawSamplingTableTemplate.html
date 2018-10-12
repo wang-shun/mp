@@ -1,0 +1,37 @@
+<% if(lawSamplings.length==0){%>
+			<div>无抽样信息</div>
+			<br/>
+		
+<% } %>
+
+<% for(var i=0,lawSampling; lawSampling=lawSamplings[i++];) { %>
+			<table width="700px" class="table"  cellspacing="0px"  >	
+			    <tr class="tr">
+			        <td class="td">取样时间</td>
+			        <td class="td"><%=lawSampling.samplingTimeStr%></td>
+			        <td class="td">取样地点</td>
+			        <td class="td" colSpan="2"><%=lawSampling.samplingTimeAdder%></td>
+			    </tr>
+			    <tr class="tr">
+			        <td class="td" width="20%">品名</td>
+			        <td class="td" width="20%">HS编码</td>
+			        <td class="td" width="20%">产地国</td>
+			        <td class="td" width="17%">数量/规格</td>
+			        <td class="td" width="23%">标记号码及备注</td>
+			    </tr>
+			    
+			    <% for(var j=0,lawSampling; lawSamplingList=lawSampling.lawSamplingLists[j++];) { %>
+			    	<tr>
+			        	<td class="td" width="20%"><%=lawSamplingList.goodsItemName%></td>
+			        	<td class="td" width="20%"><%=lawSamplingList.prodHsCode%></td>
+			        	<td class="td" width="20%"><%=lawSamplingList.oriCity%></td>
+			        	<td class="td" width="17%"><%=lawSamplingList.quantity%></td>
+			        	<td class="td" width="23%"><%=lawSamplingList.markNumber%></td>
+			    	</tr>
+			    
+			    <% } %>
+			    
+			</table>
+			<br/>
+<% } %>
+

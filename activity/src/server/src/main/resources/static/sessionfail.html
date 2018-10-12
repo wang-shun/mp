@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript">
+		function htmlonload(){
+			if(window.location != top.location){
+				top.location.href = top.location.href;
+			}else{
+				document.getElementById("closeBox").style.display = "block";
+			}
+		}
+		
+		function htmlclose(){
+			window.location.href="about:blank";
+			window.close();
+		}
+		</script>
+	</head>
+	<body onload="htmlonload()">
+		<div id="closeBox" style="text-align: center;display: none;margin-top: 50px">
+			会话失效,点此<a href="javascript:htmlclose()">关闭</a>
+		</div>
+	</body>
+</html>

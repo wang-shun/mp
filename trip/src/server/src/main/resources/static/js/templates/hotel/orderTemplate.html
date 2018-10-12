@@ -1,0 +1,47 @@
+<div class="blockInside">
+    <div class="tree-container tree-container-nobutton" style="top: 50px;">
+        <div class="searchBlock">
+            <!--关闭查询的时候span标签调用样式fhicon-arrowU2,取消样式hide-->
+            <div class="search-toggleBar">
+                <a class="search-toggle SI-search-toggle">
+                    <span class="icon-set fhicon-arrowD2"></span><span>展开查询</span>
+                </a>
+            </div>
+            <div class="search-modle hide">
+                <div class="search-mod">
+                    <ul class="search-list" style="margin-top: -4px;">
+                        <li class="search-item"><label class="search-label">入住人/订单：</label><input type="text" class="SID-userName" /></li>
+                        
+                        <li class="search-item"><label class="search-label">订单状态：</label>
+                        	<select class="SID-orderState" >
+                        		<option value="0">全部</option>
+                        		<option value="1">待付款</option>
+                        		<option value="2">本地取消</option>
+                        		<option value="3">待酒店确认</option>
+                        		<option value="4">预定成功</option>
+                        		<option value="5">预定失败</option>
+                        		<option value="102">在住</option>
+                        		<option value="103">离店</option>
+                        		<option value="104">已评论</option>
+                        		
+                        	</select>
+                        </li>
+                        
+                        <li class="search-item" style="width: 444px;"><label class="search-label">时间段：</label>
+		                <input type="text" class="choose-date SID-beginDate" name="from" id="from" readonly="readonly"/>~<input type="text" class="choose-date SID-endDate" id="to" name="to" readonly="readonly"/>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+                <div class="search-button"><a class="SID-search">查询</a><a class="SID-clearSearch">清空</a></div>
+            </div>
+        </div>
+        <!-- 表格内容 -->
+        <div class="tableblock">
+             <div class="tableblock">
+            	<table id="grid-table" width="100%" class="common-table"></table>
+            </div>	
+        </div>
+    </div>    
+</div>

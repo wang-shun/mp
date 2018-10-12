@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.MtParticipantsMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.MtParticipants" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="meeting_id" property="meetingId" jdbcType="VARCHAR" />
+    <result column="person_type" property="personType" jdbcType="VARCHAR" />
+    <result column="person_id" property="personId" jdbcType="VARCHAR" />
+    <result column="person_name" property="personName" jdbcType="VARCHAR" />
+    <result column="qrcode" property="qrcode" jdbcType="VARCHAR" />
+    <result column="notice_status" property="noticeStatus" jdbcType="CHAR" />
+  </resultMap>
+  
+  <delete id="deleteByMeetingId" parameterType="java.util.Map">
+    delete from mt_participants where meeting_id = #{meetingId}
+  </delete>
+  
+  <select id="getByMeetingId" parameterType="java.util.Map" resultType="MtParticipants">
+    select id,meeting_id meetingId,person_type personType,person_id personId,person_name personName,qrcode,notice_status noticeStatus
+    from mt_participants where meeting_id = #{meetingId,jdbcType=VARCHAR} and visible = '1'
+    <if test="personType != null">
+	and person_type = #{personType,jdbcType=VARCHAR}
+    </if>
+    <if test="personId != null">
+	and person_id = #{personId,jdbcType=VARCHAR}
+    </if>
+    <if test="createUserId != null">
+	and person_id &lt;&gt; #{createUserId,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="getParticipant" parameterType="java.util.Map" resultType="MtParticipants">
+    select id,meeting_id meetingId,person_type personType,person_id personId,person_name personName,qrcode,notice_status noticeStatus
+    from mt_participants where meeting_id = #{meetingId,jdbcType=VARCHAR} and person_id = #{userId,jdbcType=VARCHAR} and person_type in ('inner','outer')
+  </select>
+  
+  <select id="getParticipantService" parameterType="java.util.Map" resultType="MtParticipants">
+    select id,meeting_id meetingId,person_type personType,person_id personId,person_name personName,qrcode,notice_status noticeStatus
+    from mt_participants where meeting_id = #{meetingId,jdbcType=VARCHAR} and person_id = #{userId,jdbcType=VARCHAR} and person_type = 'service'
+  </select>
+  
+  <select id="getParById" parameterType="java.util.Map" resultType="MtParticipants">
+    select id,meeting_id meetingId,person_type personType,person_id personId,person_name personName,qrcode,notice_status noticeStatus
+    from mt_participants where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getNoSendInnerByMeetingId" parameterType="java.util.Map" resultType="MtParticipants">
+    select person_id personId,person_type personType 
+    from mt_participants where meeting_id = #{meetingId,jdbcType=VARCHAR} and person_type in ('inner','service')
+    <if test="noticeStatus != null">
+	and notice_status = #{noticeStatus,jdbcType=VARCHAR}
+    </if>
+    group by person_id,person_type
+  </select>
+  
+  <select id="getNoSendOuterByMeetingId" parameterType="java.util.Map" resultType="MtParticipants">
+    select id,meeting_id meetingId,person_type personType,person_id personId,person_name personName,qrcode,notice_status noticeStatus
+    from mt_participants where meeting_id = #{meetingId,jdbcType=VARCHAR} and person_type = 'outer'
+    <if test="noticeStatus != null">
+	and notice_status = #{noticeStatus,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <update id="setMeetVisable" parameterType="java.util.Map">
+ 	 update mt_participants r set visible = '0'
+    	where r.meeting_id = #{meetingId,jdbcType=VARCHAR} and r.person_id =  #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateStatusToNoSend" parameterType="java.util.Map">
+    update mt_participants r set notice_status = '0'
+    	where r.meeting_id = #{meetingId,jdbcType=VARCHAR} and r.person_id =  #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateStatusToSend" parameterType="java.util.Map">
+    update mt_participants r set notice_status = '1'
+    	where r.meeting_id = #{meetingId,jdbcType=VARCHAR} 
+    	<if test="userId != null">
+    	and r.person_id =  #{userId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="personType != null">
+    	and r.person_type =  #{personType,jdbcType=VARCHAR}
+    	</if>
+  </update>
+  
+  <update id="updateStatusToSent" parameterType="java.util.Map">
+    update mt_participants r set notice_status = '2'
+    where r.id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getNoQrcode" resultType="MtParticipants">
+    select id from mt_participants where qrcode = '-1'
+  </select>
+  
+  <insert id="insertBatch" parameterType="java.util.List">  
+    insert into mt_participants (id,meeting_id,person_type,person_id,person_name,qrcode) 
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.id},#{item.meetingId},#{item.personType},#{item.personId},#{item.personName},#{item.qrcode})  
+    </foreach>
+  </insert>
+  
+</mapper>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>问卷调查</title>
+    <script type="text/javascript" src="makesurvey/scripts/lib/mplus/mplus.js"></script>
+    <link rel="stylesheet" href="makesurvey/scripts/lib/swiper/swiper.min.css">
+    <link rel="stylesheet" href="makesurvey/scripts/lib/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="makesurvey/styles/reset.css">
+    <link rel="stylesheet" href="makesurvey/styles/font.css"/>
+    <link rel="stylesheet" href="makesurvey/styles/main.css"/>
+    <link rel="stylesheet" href="makesurvey/styles/style.css"/>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <script type="text/javascript">
+  	//独立安装服务器地址配置
+    window.serviceUrl = "api";
+    //微服务模式开关  true 微服务  false 独立安装
+    window.serviceManagerFlag = false;
+    </script>
+</head>
+
+<body ontouchstart="">
+<div class="pages">
+    <!-- 会议 -->
+	<section id="ID-PageIndex-Section"></section>
+    <section id="ID-PageMeetDetail-Section" data-animation="slideLeft"></section>
+</div>
+    <!-- 加载遮罩 -->
+    <div class="loading" id="ID-Loading" style="display: block;">
+    	<header>
+			<div class="titlebar">
+		        <a class="titlebar-button titlebar-left SID-Back" href="javascript:mplus.closeWindow()">
+		            <i class="icon fhicon-back"></i>
+		        </a>
+		    </div>
+		</header>
+        <div class="loading-progress-box">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <script data-main="makesurvey/scripts/main.js" src="makesurvey/scripts/lib/require/require.js"></script>
+</body>
+</html>

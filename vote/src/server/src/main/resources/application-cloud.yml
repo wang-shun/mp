@@ -1,0 +1,122 @@
+servicemanager:
+  endpoint: http://sm.mapps.ip:8761
+  
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: ${servicemanager.endpoint}/eureka
+    healthcheck:
+      enabled: true
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+    metadataMap:
+      appName: 投票
+      logo: /logo.png
+      remarks: 描述
+      mgr-port: ${management.port}
+      mgr-context-path: ${management.context-path}
+      configProperties:
+      dependencies:
+        services: mapps-fileservice
+        resources:
+          database: default
+          mplus: default
+
+jdbc-url:
+  oracle: jdbc:oracle:thin:@${resources.database.default.host:}:${resources.database.default.port:1521}:${resources.database.default.db:}
+  postgresql: jdbc:postgresql://${resources.database.default.host:}:${resources.database.default.port:5432}/${resources.database.default.db:}
+  mysql: jdbc:mysql://${resources.database.default.host:}:${resources.database.default.port:3306}/${resources.database.default.db:}?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+      
+spring: 
+  application:
+    name: mapps-vote     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${jdbc-url.${resources.database.default.type:postgresql}}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}
+
+server: 
+  port: 18004    
+  
+management:
+  context-path: /__mng__
+  port: 38004
+  
+endpoints:
+  restart:
+    enabled: true
+    
+sqllocaltion:
+  oracle: db/oracle
+  postgresql: db/migration
+  mysql: db/mysql
+  
+flywaydb:
+  locations: ${sqllocaltion.${resources.database.default.type:postgresql}} 
+  
+    
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.vote.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.vote.query.caninvolve
+      - mapps.vote.query.involve
+      - mapps.vote.query.created
+      - mapps.vote.delete.votebyid
+      - mapps.vote.query.votebyid
+      - mapps.vote.query.voteing
+      - mapps.vote.query.usersize
+      - mapps.vote.save.vote
+      - mapps.thirdpart.mobileark.getusers
+    user: 
+      - mapps.vote.query.caninvolve
+      - mapps.vote.query.involve
+      - mapps.vote.query.created
+      - mapps.vote.delete.votebyid
+      - mapps.vote.query.votebyid
+      - mapps.vote.query.voteing
+      - mapps.vote.query.usersize
+      - mapps.vote.save.vote
+      - mapps.thirdpart.mobileark.getusers
+
+mplus: 
+  sso:
+    serviceUrl: ${resources.mplus.default.mplus.sso.serviceUrl:}
+    appKey: ${resources.mplus.default.mplus.sso.appKey:}
+    secret: ${resources.mplus.default.mplus.sso.secret:}
+    appId: mapps-vote
+    appType: 4
+  login:
+    serviceUrl: ${resources.mplus.default.mplus.login.serviceUrl:}
+    loginPage: ${resources.mplus.default.mplus.login.loginPage:} 
+    
+services:
+  fileservice:
+    serviceUrl: ${services.mapps-fileservice.serviceUrl:}/api
+    appKey: ${services.mapps-fileservice.appkey:}
+    appSecret: ${services.mapps-fileservice.secret:}
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+  
+client: 
+  appId: toupiao
+  appName: 投票
+  
+vote:
+  upgrade: 
+    migrate: false  
+    
+logging:
+  path: logs

@@ -1,0 +1,105 @@
+<% var data=data %>
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-BtnPlanDetailBack" href="javascript:void(0)">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center"><%=data.roomName%></h1>
+    </div>
+</header>
+<article>
+	<div class="group">
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">预定人</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.reservedUserName%>
+                </div>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">联系方式</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.phoneNum%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="group">
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">预定日期</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.reservedDate%>
+                </div>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">开始时间</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.starttime%>
+                </div>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">结束时间</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.endtime%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="group">
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">会议名称</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.meetingName%>
+                </div>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">会议人数</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.participantsNum%>
+                </div>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">会议备注</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.reservedRemark%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%if(data.isApprove){%>
+    <div class="box SID-btn-box" style="margin-top: 10px;">
+        <div style="width:50%">
+            <a class="block button cancel SID-approve-submit" data-type="0" style="margin:0 12px;border-radius: 4px;">不同意</a>
+        </div>
+        <div style="width: 50%">
+            <a class="block button submit SID-approve-submit" data-type="1" style="margin:0 12px;border-radius: 4px;">同意</a>
+        </div>
+    </div>
+    <%} else if(data.approveResult == "0"){%>
+    <div class="box" style="margin-top: 10px;">
+        <div style="width:100%">
+            <a class="block button cancel noClick1" style="margin:0 12px;border-radius: 4px;">已拒绝</a>
+        </div>
+    </div>
+    <%} else if(data.approveResult == "1"){%>
+    <div class="box" style="margin-top: 10px;">
+        <div style="width:100%">
+            <a class="block button submit noClick1" style="margin:0 12px;border-radius: 4px;">已同意</a>
+        </div>
+    </div>
+    <%}%>
+</article>

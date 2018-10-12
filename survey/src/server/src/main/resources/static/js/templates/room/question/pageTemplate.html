@@ -1,0 +1,13 @@
+<li class="SID-question-li" question_required="1" data-type="<%=data.type%>">
+    <dl>
+        <dd>
+           <p style="text-align: right; padding-right: 10px;"><span class="SID-page-title SID-question-title"></span></p>
+        </dd>
+        <% if (data.showFlag != "1") { %>
+        <dd class="operating" style="margin-top: 0;">
+            <a class="right SID-del-question"><span class="fhicon-trash"></span><label>删除</label></a>
+            <a class="right SID-draggable-question"><span class="questionnaire-drag"></span><label>拖拽</label></a>
+        </dd>
+        <% } %>
+    </dl>
+</li>

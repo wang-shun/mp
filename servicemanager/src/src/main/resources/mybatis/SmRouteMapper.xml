@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmRouteMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmRoute">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="service_id" jdbcType="VARCHAR" property="serviceId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="strip_prefix" jdbcType="VARCHAR" property="stripPrefix" />
+    <result column="retryable" jdbcType="VARCHAR" property="retryable" />
+    <result column="sensitive_headers" jdbcType="VARCHAR" property="sensitiveHeaders" />
+    <result column="custom_policy" jdbcType="VARCHAR" property="customPolicy" />
+    <result column="enabled" jdbcType="VARCHAR" property="enabled" />
+    <result column="need_auth" jdbcType="VARCHAR" property="needAuth" />
+    <result column="auth_resource" jdbcType="VARCHAR" property="authResource" />
+  </resultMap>
+  
+  <select id="getRouteDetailById" parameterType="java.util.Map" resultType="SmRoute">
+    select id,service_id as serviceId,url,service_name as serviceName,path,strip_prefix as stripPrefix,retryable,sensitive_headers as sensitiveHeaders,custom_policy as customPolicy,enabled,need_auth as needAuth,auth_resource as authResource  
+    from SM_ROUTE 
+	where id=#{routeId,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="getRouteList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from (select id,service_id as serviceId,url,service_name as serviceName,path,strip_prefix as stripPrefix,retryable,sensitive_headers as sensitiveHeaders,custom_policy as customPolicy,enabled,need_auth as needAuth,auth_resource as authResource 
+    from SM_ROUTE 
+    <if test="keyword != null">
+	where service_id like #{keyword,jdbcType=VARCHAR} or service_name like #{keyword,jdbcType=VARCHAR} or url like #{keyword,jdbcType=VARCHAR} or path like #{keyword,jdbcType=VARCHAR} 
+	</if>
+	<choose>
+    	<when test="sort != null">
+    		order by ${sort}
+    	</when>
+    	<otherwise>
+    		order by id
+    	</otherwise>
+    </choose>
+    ) a where a.serviceId &lt;&gt; 'mapps-gateway' 
+  </select>
+  
+  <select id="getAllRoute" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select id,service_id as serviceId,url,service_name as serviceName,path,strip_prefix as stripPrefix,retryable,sensitive_headers as sensitiveHeaders,custom_policy as customPolicy,enabled,need_auth as needAuth,auth_resource as authResource 
+    from SM_ROUTE order by id 
+  </select>
+  
+  <select id="getRouteListByServiceId" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from SM_ROUTE 
+    where service_id = #{serviceId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getRouteListByPath" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from SM_ROUTE 
+    where path like #{path,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="disableRouteById" parameterType="java.util.Map">
+    update SM_ROUTE set enabled = '0'
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="enableRouteById" parameterType="java.util.Map">
+    update SM_ROUTE set enabled = '1'
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

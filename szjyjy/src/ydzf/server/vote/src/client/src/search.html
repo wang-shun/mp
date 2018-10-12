@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+	<title>搜索</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+</head>
+<body>
+	<section id="page_search" class="active">
+		<header>
+			<div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">搜索</h1>
+            </div>
+
+            <form class="searchbar" id="searchbox">
+                <div class="input-box lricon border-radius20" data-input="clear">
+                    <i class="icon-search"></i>
+                    <input type="search" placeholder="搜索框" class="search" id="searcher" />
+                    <i class="icon-clear-fill"></i>
+                </div>
+            </form>
+		</header>
+		<article style="top:86px;">
+			<div class="box box-middlecenter" style="height:90%;" id="noData">
+				<img src="img/picture/nodata.png" style="width:250px;" />
+			</div>
+			<div id="hasData" style="display: none;">
+				<ul class="list" id="list-data">
+					<!-- <li>
+                        <div class="justify">
+                                                <div class="round" style="background-color:#59e461">
+                                                    <i class="icon-chatdot-fill"></i>
+                                                </div>
+                                            </div>
+                                            <div class="justify-content box box-middle">
+                                                <p>好吃的营养早餐</p>
+                                            </div>
+                    </li>
+                    <li>
+                        <div class="justify">
+                                                <div class="round" style="background-color:#59e461">
+                                                    <i class="icon-chatdot-fill"></i>
+                                                </div>
+                                            </div>
+                                            <div class="justify-content box box-middle">
+                                                <p>好吃的营养早餐</p>
+                                            </div>
+                    </li> -->
+				</ul>
+			</div>
+		</article>
+	</section>
+	<script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/poll-list.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script type="text/javascript">
+    	//表单控件初始化(主要是针对小眼睛和开关控件)
+        var URL = {
+            canInvolveVote:"/microapp/tss/vote/queryCanInvolveVote.action",
+        };
+        var pageMaxCount = 10;
+    	window.addEventListener("load",function(){
+    		var f=new Form("#searchbox");
+    		f.container.addEventListener("submit",function(e){
+	            e.preventDefault();
+	            $("#noData").css("display","none");
+	            $("#hasData").css("display","block");
+                searching();
+	        },false);
+    	},false);
+        function searching(){
+            var searcher = $("#searcher").val();
+            if(!searcher) return;
+            PollList.getInvolved({
+                "offset":1,
+                "limit":pageMaxCount,
+                "title":searcher
+            },function(){
+                if(data.code === "1"){
+                    PollList.renderInvolved(data,function(html){
+                        
+                    });
+                }else{
+                    new Toast("查询失败！").show();
+                }
+            })
+        }
+    </script>
+</body>
+</html>

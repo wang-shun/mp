@@ -1,0 +1,34 @@
+<div class="add-main">
+	<a class="meet-add SID-addEx-btn"><span class="fhicon-meeting-add"></span><span style="float:left;font-size:14px">添加外部路由</span></a>
+	<a class="meet-add SID-addReg-btn"><span class="fhicon-meeting-add"></span>添加注册路由</a>
+</div>
+<div class="add-main">
+     
+</div>
+<div class="tree-container tree-container-nobutton">
+    <div class="searchBlock">
+    <form id = "subForm" onkeydown="if(event.keyCode==13)return false;">
+        <!-- 变为展开查询的时候span标签调用样式fhicon-arrowD2,search-modle后增加hide -->
+        <div class="search-toggleBar">
+            <a class="search-toggle SI-search-toggle">
+                <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+            </a>
+        </div>
+        <div class="search-modle hide">
+        	<ul class="search-list">
+        		<li class="search-item" style="width: 80%">
+	        		<label class="search-label">搜索：</label>
+	        		<input type="text" class="choose-text SID-keyword" placeholder="搜索  服务名称/URL/路由路径" style="width: 60%" name = "keyword" onpaste="return false"/>
+        		</li>
+        	</ul>
+            <div class="search-button">
+                <a class = "SID-search">查询</a><a class = "SID-clearSearch">清空</a>
+            </div>
+        </div>
+       </form>
+    </div>
+    <!-- 表格内容 -->
+    <div class="tableblock">
+        <table id = "meet-hold" width = "100%" class = "common-table"></table>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<li class="SID-question-li" question_required="1" data-type="<%=data.type%>">
+    <dl>
+        <% if (data.showFlag != "1") { %>
+        <dd style="">
+        	
+        <div contenteditable="true" data-maxlength="1000" class="SID-validate-div SID-question-title ckeditor-text">
+			<%=data.title%>
+		</div>
+        </dd>
+        <dd class="operating">
+            <a class="right SID-del-question"><span class="fhicon-trash"></span><label>删除</label></a>
+            <a class="right SID-copy-question"><span class="fhicon-meeting-jurisdiction"></span><label>复制</label></a>
+            <a class="right SID-draggable-question"><span class="questionnaire-drag"></span><label>拖拽</label></a>
+        </dd>
+        <% } else { %>
+        <dd style="padding-bottom: 0;padding: 10px 20px 5px;">
+            <span><%=data.title%></span>
+        </dd>
+        <% } %>
+    </dl>
+</li>

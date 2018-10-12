@@ -1,0 +1,1 @@
+ALTER TABLE "mc_downsample" RENAME "measurement" TO "cq_name";

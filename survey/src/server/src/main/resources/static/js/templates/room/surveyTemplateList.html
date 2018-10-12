@@ -1,0 +1,65 @@
+<div class="pop-config-box">
+
+    <div class="pop-cons pop-cons-fall" style="margin: 0 10px 10px;">
+    
+        <div class="formBox">
+
+            <div class="crumb crumb-postion">
+                问卷调查 &gt; <span>问卷模版</span>
+
+                <label class="chose-questionnaire">
+                    <a  class="buttonblue SID-addTemplate" style="padding:5px 15px;display:unset">新建模版</a>
+                </label>
+				 <hr class="crumbLine">
+            </div>
+           
+    
+            <div class="questionnaire-content">
+
+            <ul class="tablist" style="margin-top:70px;">
+                <li class="active"><a>问卷模版</a></li>
+            </ul>
+
+
+                <div class="mll-left type-problem SID-scrollbar1" style="top: 180px; width:280px; ">
+                    <div class="type-problemChoose">
+                        <div class="title-questionnaire h3-active SID-commonTemplate"><h3>公共模板</h3></div>
+                        <%=data.groupHtml%>
+                    </div>
+                    <div class="type-problemChoose">
+                        <div class="title-questionnaire SID-myTemplate"><h3>我的模板</h3></div>
+                    </div>
+
+                </div>
+                <div class="mll-left questionnaire-right" style="width:auto;margin: 80px 10px 0 10px;">
+                    <div class="searchBlock">
+            			<!--关闭查询的时候span标签调用样式fhicon-arrowU2,取消样式hide-->
+            			<div class="search-toggleBar">
+               				<a class="search-toggle SI-search-toggle" style="top:0px">
+                    			<span class="icon-set fhicon-arrowD2"></span><span>展开查询</span>
+                			</a>
+            			</div>
+            			<div class="search-modle hide" style="min-width: 580px;">
+	                		<div class="search-mod">
+	                    		<ul class="search-list" style="margin-top: -4px;">
+	                        		<li class="search-item"><label class="search-label">标题：</label><input type="text" maxlength="50" class="SID-title" /></li>
+	                    		</ul>
+	               			</div>
+	                		<div class=""><a class="buttonblue SID-search">查询</a><a class="buttonblue SID-clearSearch">清空</a></div>
+            			</div>
+        			</div>
+        			<!-- 表格内容 -->
+        			<div class="tableblock">
+             			<div class="tableblock">
+            				<table id="grid-table" width="100%" class="common-table"></table>
+            			</div>	
+        			</div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<script>
+windowResize();
+</script>

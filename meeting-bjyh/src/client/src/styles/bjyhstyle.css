@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'bjyh';
+  src:
+    url('bjyhfonts/bjyh.ttf?9zjdxf') format('truetype'),
+    url('bjyhfonts/bjyh.woff?9zjdxf') format('woff'),
+    url('bjyhfonts/bjyh.svg?9zjdxf#bjyh') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="bjyh-icon-"], [class*=" bjyh-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'bjyh' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bjyh-icon-wdhy:before {
+  content: "\e901";
+}
+.bjyh-icon-hys:before {
+  content: "\e905";
+}
+.bjyh-icon-computer:before {
+  content: "\e900";
+}
+.bjyh-icon-time:before {
+  content: "\e902";
+}
+.bjyh-icon-user:before {
+  content: "\e903";
+}
+.bjyh-icon-wd:before {
+  content: "\e904";
+}
+.bjyh-icon-ydsp:before {
+  content: "\e906";
+}

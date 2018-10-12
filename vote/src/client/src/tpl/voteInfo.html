@@ -1,0 +1,68 @@
+{{#if data}}
+{{#with data}}
+<ul class="list noclick">
+<li class="between">
+	<div class="justify">
+        <div class="round" style="background-image:url(img/photo/tx1.jpg)"></div>
+    </div>
+	<div class="justify-content">
+		<p>{{creatorName}}</p>
+		<small class="top right">于{{timer expire}}截止</small>
+		<small>
+			创建:{{timer createTime}}
+			<div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                <span class="progress" style="width: {{percent voteCount scopeCount}}"></span>
+                <span class="text"><a class="timer" data-duration="1000" data-to="25">{{voteCount}}</a>/{{scopeCount}}</span>
+            </div>
+		</small>
+	</div>
+</li>
+<li class="nojustify noborder nopadding">
+    <div class="justify-content" style="padding:8px;">
+        <p>{{title}}</p>
+        <small class="nowrap">{{content}}</small>
+    </div>
+    <div class="justify">
+        <img src="img/content/poll-main-default.jpg" data-img="{{image}}" data-href="{{image}}" id="votepic" class="width-full">
+    </div>
+</li>
+<li class="noborder">
+	<div class="justify-content" style="height:30px;">
+		<small class="top left">{{ifName anonymous}}（{{chooseCount maxChoose}}）</small>
+		<small class="top right">{{voteCount}}人参与投票</small>
+    </div>
+</li>
+</ul>
+{{/with}}
+{{/if}}
+
+
+{{#if imgList}}
+<ul class="grid thumbnail" data-col="2" style="background-color:white;" id="selImg">
+    {{#each data.items}}
+    <li data-id="{{voteItemId}}" data-href="{{image}}">
+        <a style="background-image: url(img/placeholder/placeholder-main.png);" data-bg="{{image}}">
+            <span class="checkbox"></span>
+            <input type="checkbox" class="hide">
+            <div class="grid-title box box-middle">
+                {{content}}
+            </div>
+        </a>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<ul class="list" id="selFont">
+    {{#each data.items}}
+    <li data-id="{{voteItemId}}">
+        <div class="justify-content">
+            <p>{{content}}</p>
+        </div>
+        <div class="justify">
+            <span class="checkbox"></span>
+            <input type="checkbox" class="hide">
+        </div>
+    </li>
+    {{/each}}
+</ul>
+{{/if}}

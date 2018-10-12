@@ -1,0 +1,459 @@
+@font-face {
+  font-family: 'iconfont';
+  src:  url('fonts/iconfont.eot?u7ybx9');
+  src:  url('fonts/iconfont.eot?u7ybx9#iefix') format('embedded-opentype'),
+    url('fonts/iconfont.ttf?u7ybx9') format('truetype'),
+    url('fonts/iconfont.woff?u7ybx9') format('woff'),
+    url('fonts/iconfont.svg?u7ybx9#iconfont') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'iconfont' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-del-fill:before {
+  content: "\e92b";
+}
+.icon-fweixin-fill:before {
+  content: "\e929";
+}
+.icon-mail:before {
+  content: "\e92a";
+}
+.icon-add:before {
+  content: "\e928";
+}
+.icon-rdoinfo:before {
+  content: "\e927";
+}
+.icon-tel:before {
+  content: "\e926";
+}
+.icon-rdoadd-fill:before {
+  content: "\e925";
+}
+.icon-fav-fill:before {
+  content: "\e924";
+}
+.icon-file:before {
+  content: "\e91f";
+}
+.icon-manager:before {
+  content: "\e920";
+}
+.icon-rdorefuse:before {
+  content: "\e921";
+}
+.icon-rdook:before {
+  content: "\e922";
+}
+.icon-seal:before {
+  content: "\e923";
+}
+.icon-info:before {
+  content: "\e91e";
+}
+.icon-clear-fill:before {
+  content: "\e91d";
+}
+.icon-add-fill:before {
+  content: "\e91c";
+}
+.icon-cbo:before {
+  content: "\e918";
+}
+.icon-cbo-fill:before {
+  content: "\e919";
+}
+.icon-close-fill:before {
+  content: "\e91a";
+}
+.icon-rdohook:before {
+  content: "\e91b";
+}
+.icon-chatline:before {
+  content: "\e905";
+}
+.icon-label:before {
+  content: "\e90a";
+}
+.icon-person:before {
+  content: "\e90c";
+}
+.icon-rdocancel-fill:before {
+  content: "\e917";
+}
+.icon-back:before {
+  content: "\e915";
+}
+.icon-search:before {
+  content: "\e916";
+}
+.icon-hook-fill:before {
+  content: "\e900";
+}
+.icon-arrowdown:before {
+  content: "\e901";
+}
+.icon-arrowleft:before {
+  content: "\e902";
+}
+.icon-arrowright:before {
+  content: "\e903";
+}
+.icon-arrowup:before {
+  content: "\e904";
+}
+.icon-chats:before {
+  content: "\e906";
+}
+.icon-del:before {
+  content: "\e907";
+}
+.icon-edit-fill:before {
+  content: "\e908";
+}
+.icon-filter:before {
+  content: "\e909";
+}
+.icon-menudot:before {
+  content: "\e90b";
+}
+.icon-position:before {
+  content: "\e90d";
+}
+.icon-qrcodeline:before {
+  content: "\e90e";
+}
+.icon-rdoadd:before {
+  content: "\e90f";
+}
+.icon-rdocancel:before {
+  content: "\e910";
+}
+.icon-rdosent:before {
+  content: "\e911";
+}
+.icon-rdotobottom:before {
+  content: "\e912";
+}
+.icon-time:before {
+  content: "\e913";
+}
+.icon-trash-fill:before {
+  content: "\e914";
+}
+/*轮播插件*/
+.slider-slide{
+  background-position: center;
+}
+/*搜索栏*/
+.app-blockSearch {
+    background-color: #e0e0e0;
+    padding:6px 10px;
+}
+.app-blockSearch form{
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    border-color: #e6e6e6;
+}
+.app-blockSearch .icon {
+    margin: 0 8px;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #ccc;
+}
+.app-blockSearch input[type=search] {
+    display: block;
+    -webkit-box-flex: 1.0;
+    border-width: 0;
+    padding: 6px 8px 6px 0;
+    background-color: transparent;
+}
+/*暂无数据*/
+.app-nodata,.app-error{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+.app-error{
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #f8f8f8;
+}
+.app-error.active{
+  display: -webkit-box;
+}
+/*======覆盖SeedsUI======*/
+.tagline{
+  color: #9e82fc;
+  background-color: white;
+  box-shadow:2px 2px 5px 2px rgba(0, 0, 0, 0.2);
+}
+.card{
+  border-radius: 4px;
+  overflow: hidden;
+}
+.card small{
+  display: block;
+}
+.card-title{
+  font-size: 16px;
+}
+.card-photo{
+  position: relative;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.slider-container .slider-slide{
+  height: 200px;
+}
+/*======状态筛选栏======*/
+/*栏*/
+.app-stateFilterBar{
+  position: relative;
+    display: -webkit-box;
+    -webkit-box-align:center;
+    color: #A590DA;
+    background-color: white;
+}
+
+.app-stateFilterBar-font{
+    -webkit-box-flex:1;
+    display: -webkit-box;
+    -webkit-box-align:center;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+.app-stateFilterBar-font span{
+    height: 20px;
+    line-height: 22px;
+}
+.app-stateFilterBar-icon{
+    display: block;
+    margin-right:20px;
+    font-size: 14px;
+    pointer-events: none;
+}
+ .app-stateFilterBar .app-stateFilterBar-icon:nth-of-type(2){
+    display: none;
+}
+.app-stateFilterBar.active .app-stateFilterBar-icon:nth-of-type(1){
+    display: none;
+}
+.app-stateFilterBar.active .app-stateFilterBar-icon:nth-of-type(2){
+    display: block;
+} 
+/*弹出栏*/
+.app-popListSelect{
+    padding: 0 12px;
+}
+.app-popListSelect li {
+    position: relative;
+    display: -webkit-box;
+    box-sizing: border-box;
+    padding: 13px 8px;
+}
+.app-popListSelect li div{
+    pointer-events: none;
+    -webkit-box-flex:1;
+    height: 20px;
+    line-height: 22px;
+}
+.app-popListSelect li .icon {
+    pointer-events: none;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+    display: none;
+}
+.app-popListSelect li.active .icon {
+    display: block;
+}
+.app-popListSelect li.active {
+    color: #A590DA;
+}
+.app-popListSelect li.underline {
+    border-color: #f0f0f0;
+}
+
+/*======关键字======*/
+.keyword{
+  color: #9783DB;
+  margin-top: -4px;
+}
+/*======左右结构======*/
+.l{
+  padding: 10px 0 10px 12px;
+}
+.r{
+  padding: 0 12px 0 0;
+}
+/*======grid控件======*/
+.app-grid-update.grid li{
+    padding: 6px;
+}
+.app-grid-update.grid a {
+    height: 70px;
+    border-radius: 8px;
+}
+.app-grid-update.grid .close{
+    position: absolute;
+    top:-4px;right:-4px;
+}
+.app-grid-update.grid .icon{
+    pointer-events:none;
+}
+.app-grid-update.grid .default{
+    color: #ddd;
+    background-color: #f9f9f9;
+}
+.app-gridOpts{
+  margin-top: 10px;
+}
+.app-gridOpts .button{
+  height: 30px;
+  width: 80px;
+  border-radius: 20px;
+}
+.app-gridOpts .button.active {
+    color: white;
+    background-color: #9783DB;
+    border-color: #9783DB;
+}
+
+/*======右上角弹出框======*/
+    .app-popover{
+      width:140px;
+      padding: 1px 0;
+      border-radius: 6px;
+      background-color: white;
+      z-index: 10;
+  }
+  .app-popover:after {
+      content: '';
+      position: absolute;
+      top:-12px;
+      right:8px;
+      width: 0;
+      height: 0;
+      border-width: 6px;
+      border-style: solid;
+      border-color: transparent;
+
+      border-bottom-color: white;
+  }
+  .app-popover li{
+      position: relative;
+      display: -webkit-box;
+      -webkit-box-align: center;
+      -webkit-box-pack: center;
+      height: 46px;
+  }
+  .app-popover li:last-child:after{
+      height: 0;
+  }
+  .app-popover li:not(.app-rmenu-disabled):active{
+      background-color: #f8f8f8;
+  }
+  .app-popover li:last-child{
+      border-width: 0;
+  }
+  .app-popover li i{
+      pointer-events: none;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+  }
+  .app-popover li label{
+      pointer-events: none;
+      -webkit-box-flex:1;
+      margin: 0 8px 0 8px;
+      height: 22px;
+      line-height: 24px;
+  }
+  .app-popover li:nth-of-type(1) .icon{
+      color: #32a6f8;
+  }
+  .app-popover li:nth-of-type(2) .icon{
+      color: #19cbc1;
+  }
+  .app-popover li:nth-of-type(3) .icon{
+      color: #fe721e;
+  }
+  .app-popover li:nth-of-type(4) .icon{
+      color: #a46ef6;
+  }
+  .app-popover li:nth-of-type(5) .icon{
+      color: #ff5656;
+  }
+
+  .app-delicon{
+    color: white;position: absolute;top:0;right: 0;display: -webkit-box;-webkit-box-align:center;-webkit-box-pack:center;
+  }
+
+.input-radio:before {
+  content: "\e918";
+}
+.input-radio:checked:before{
+  content: "\e919";
+}
+/*活动内容*/
+.app-activity-content{
+	word-break:break-all;margin:0 12px;color:#aaa;
+}
+/*loading*/
+.loading{
+  position: absolute;
+  background-color: white;
+}
+/*图片转圈*/
+.app-photoLoadBox{
+  background-color:white;width:35px;height:35px;
+}
+.app-photoLoadBox .loading-progress{
+  width:35px;height:35px;
+  box-shadow: inset 0 0 0 3px #9783DB;
+}
+.app-grid-update.grid .close{
+  z-index: 1;
+}
+/*封面*/
+.app-poster{
+  height:100px;display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;-webkit-box-orient:vertical;
+  background-repeat: no-repeat;background-size: cover;background-position: center;
+}
+
+.hide{
+  display: none;
+}
+.app-required{
+  color: red;
+  margin:0 0 0 2px;
+}

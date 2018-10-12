@@ -1,0 +1,197 @@
+<div class="outmain-cons">
+<form id="formMsg">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+
+            <!--<div class="form-item">-->
+                <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+                    <!--<input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="databassType" value="" />-->
+
+			<div>
+				<div class="form-item" style="width:50%;float: left;">
+	                <label class="form-item-label" style="width: 24%"><span>*</span>规则名称：</label>
+	                <div class="form-item-editbox" style="width: 65%">
+	                    <input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="name" value=""/>
+	                </div>
+	                <div class="form-item-tip" style="width: 70%;float: right;"><div class="wrong-text"></div></div>
+	            </div>
+	            
+	             <div class="form-item"  style="width:50%;float: left;">
+	                <label class="form-item-label" style="width: 40%"><span>*</span>时间范围(过去的)：</label>
+	                <div class="form-item-editbox" style="width: 50%">
+	                    <select class="SID-pastTime form-item-text form-item-select" name = "pastTime">
+							<option value="1m">1分钟</option>
+							<option value="5m">5分钟</option>
+							<option value="15m">15分钟</option>
+							<option value="1h">1小时</option>
+							<option value="6h">6小时</option>
+							<option value="12h">12小时</option>
+							<option value="1d">24小时</option>
+							<option value="2d">2天</option>
+							<option value="7d">7天</option>
+							<option value="30d">30天</option>
+						</select>
+	                </div>
+	                <div class="form-item-tip" style="width: 60%;float: right;"><div class="wrong-text"></div></div>
+	            </div>
+			</div>
+            
+            <div>
+            	<div class="form-item" style="width:30%;float: left;">
+	                <label class="form-item-label" style="width: 40%"><span>*</span>保留策略：</label>
+	                <div class="form-item-editbox" style="width: 55%">
+	                    <select class="SID-rp form-item-text form-item-select " name = "rp">
+						</select>
+	                </div>
+	                <div class="form-item-tip" style="width: 70%;float: right;"><div class="wrong-text"></div></div>
+	            </div>
+            
+	            <div class="form-item" style="width:30%;float: left;">
+	                <label class="form-item-label" style="width: 30%"><span>*</span>指标：</label>
+	                <div class="form-item-editbox" style="width: 65%">
+	                    <select class="SID-measurement form-item-text form-item-select {required: true}" name = "measurement">
+						</select>
+	                </div>
+	                <div class="form-item-tip" style="width: 70%;float: right;"><div class="wrong-text"></div></div>
+	            </div>
+	            
+	            <div class="form-item" style="width:40%;float: left;">
+	                <label class="form-item-label" style="width: 25%"><span>*</span>值域：</label>
+	                <div class="form-item-editbox" style="width: 65%">
+	                	<select class="SID-valueField form-item-text form-item-select {required: true}" name = "valueField" style="width:60%">
+						</select>
+						<label class="form-item-label" style="float: none;padding: 0;width: 20px">的</label>
+						<select class="SID-func form-item-text form-item-select" name = "func" style="width:calc(38% - 20px);padding: 0">
+							<option value=""></option>
+							<option value="mean">平均值</option>
+							<option value="min">最小值</option>
+							<option value="max">最大值</option>
+							<option value="count">计数</option>
+							<option value="sum">求和</option>
+							<option value="stddev">标准差</option>
+						</select>
+	                </div>
+	                <div class="form-item-tip" style="width: 60%;float: right;"><div class="wrong-text"></div></div>
+	            </div>
+            </div>
+            
+            <div style="width:100%">
+	            <div class="form-item" style="width: 100%;padding-bottom: 0">
+	                <label class="form-item-label" style="width: 12%">过滤：</label>
+	                <div id="kapacitorFilterBox" class="form-item-editbox" style="width: 88%">
+	                	<!-- <textarea class="SID-kapacitorFilter form-item-textarea" placeholder="点击选择" name="kapacitorFilter" readonly style=""></textarea> -->
+	                	<input class="SID-kapacitorFilter form-item-text"  placeholder="点击选择" type="text" name="kapacitorFilter" readonly value=""/>
+	                </div>
+	            </div>
+	            <div id="bigbox" style="margin-left: 10%;width: 88%;position: absolute;background-color: #FFF; border: 1px solid #CCCCCC;  -webkit-box-shadow: 10px 10px 25px #ccc;-moz-box-shadow: 10px 10px 25px #ccc;box-shadow: 10px 10px 25px #ccc;display: none;z-index: 1000">
+	            	<a href="#"><span class="SID-closeFilter fhicon-close3" style="color: #1788fb;font-weight: bold;top: 5px;right: 5px;font-size: 20px;float: right;"></span></a>
+		            <div id="box" class="scrollbar" style="height: 300px;  overflow: auto;">
+						<div class="SID-filterBox">
+							
+						</div>
+					</div>
+	            </div>
+	        </div>
+	        
+	       
+	        
+            <div class="form-item" style="width: 97%;margin: 10px 0;">
+            	<ul class="tablist SID-smallmenu">
+			        <li class="active SID-smalltab" data-name="1"><a>阈值</a></li>
+			        <li class="SID-smalltab" data-name="2"><a>相对变化</a></li>
+			        <li class="SID-smalltab" data-name="3"><a>无数据</a></li>
+			    </ul>
+			    <div class="form-item" style="border-bottom: #e8e8e8 1px solid;border-left: #e8e8e8 1px solid;border-right: #e8e8e8 1px solid;width:100%;height:240px;text-align: center;overflow: auto;display:block;">
+			    	<div class="conditionList1" style="text-align: left;padding-left: 20px">
+			    	</div>
+			    	<div class="conditionList2" style="text-align: left;padding-left: 20px">
+			    	</div>
+			    	<div class="conditionList3" style="text-align: left;padding-left: 20px">
+			    	</div>
+			    	<div class="add-main" style="width: 120px;display: inline-block;">
+					     <a class="meet-add SID-addcondition-btn"><span class="fhicon-meeting-add" style=""></span>添加告警条件</a>
+					</div>
+			    </div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width: 15%">告警方式：</label>
+                <div class="form-item-editbox" style="width: 85%">
+                	<input class="SID-checkmail form-item-text checkBoxMark" style="width:15px;height: 15px;" type="checkbox" name="alertmethod" value="mail" id="mail"/><label style="margin:0 4px;" for="mail">邮件</label>
+                    <input class="SID-mail form-item-text checkInputMark" style="width: calc(80% - 15px);" maxlength="100" type="text" name="mail" value="" autocomplete="off"/>
+                </div>
+                <div class="form-item-tip" style="width: 85%;float: right;"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width: 15%"></label>
+                <div class="form-item-editbox" style="width: 85%;float: right;">
+                    <input class="SID-checkmsg form-item-text checkBoxMark" style="width:15px;height: 15px;" type="checkbox" name="alertmethod" value="msg" id="msg"/><label style="margin:0 4px;" for="msg">短信</label>
+                    <input class="SID-msg form-item-text checkInputMark" style="width: calc(80% - 15px);" maxlength="100" type="text" name="msg" value="" autocomplete="off"/>
+                </div>
+                <div class="form-item-tip" style="width: 85%;float: right;"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width: 15%">消息：</label>
+                <div class="form-item-editbox" style="width: 84%">
+                    <textarea id="SID-message" class="SID-message form-item-textarea checkInputMark {required: true}" style="height: 160px" maxlength="999" name="message"></textarea>
+                </div>
+                <div class="form-item-tip" style="width: 85%;float: right;"><div class="wrong-text"></div></div>
+        	</div>
+        	
+        	<div class="form-item">
+                <label class="form-item-label" style="width: 15%">模板：</label>
+                <div class="form-item-editbox SID-LabelsBoxStatic" style="width: 84%;display: none;">
+                    <a class="meet-add SID-insertword" style="padding: 0 10px">{{.ID}}</a>
+                    <a class="meet-add SID-insertword" style="padding: 0 10px">{{.Name}}</a>
+                    <!-- <a class="meet-add SID-insertword" style="padding: 0 10px">{{.Groups}}</a> -->
+                    <!-- <a class="meet-add SID-insertword" style="padding: 0 10px">{{ index .Tags "tagname" }}</a> -->
+                    <a class="meet-add SID-insertword" style="padding: 0 10px">{{.Level}}</a>
+                    <a class="meet-add SID-insertword SID-field-value-tag" style="padding: 0 10px">{{index .Fields "value"}}</a>
+                    <!-- <a class="meet-add SID-insertword" style="padding: 0 10px">{{.Time}}</a> -->
+                </div>
+                <div class="form-item-editbox SID-LabelsBox" style="width: 84%">
+                </div>
+            </div>
+            
+	        <div style="width:80%;text-align: center;padding-top: 20px;">
+				<a class="meet-add configaddbtn SID-rulesave-btn">保存</a>
+		    	<a class="meet-add configaddbtn SID-cancel-btn">取消</a>
+			</div>
+	    </div>
+	</div>
+</form>
+<div style="width:100%;text-align: center;">
+	
+</div>
+</div>
+
+<style>
+.configaddbtn{
+	border:1px solid #1788fb;
+	border-radius:4px;
+	padding:4px 40px;
+	margin:0 20px;
+}
+.configaddbtn:active{
+	background-color:#1788fb;
+	color:white;
+}
+.scrollbar::-webkit-scrollbar{
+	width: 8px;
+    background-color: transparent;
+}
+.scrollbar::-webkit-scrollbar-thumb{
+	height: 20px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #A9A9A9;
+}
+</style>
+<link rel="stylesheet" href="js/lib/editableselect/jquery-editable-select.css"/>
+<script type="text/javascript">
+
+</script>

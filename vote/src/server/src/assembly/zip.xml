@@ -1,0 +1,62 @@
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	<id>build${svn.revision}</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>  
+        <fileSet>  
+            <directory>${project.basedir}/target/shell/bin</directory>  
+            <outputDirectory>${project.build.finalName}</outputDirectory>  
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </fileSet> 
+        <fileSet>  
+            <directory>${project.basedir}/target/shell/bin</directory>  
+            <outputDirectory>${project.build.finalName}</outputDirectory>  
+            <excludes>  
+                <exclude>*.sh</exclude>  
+                <exclude>*.conf</exclude>  
+            </excludes>
+        </fileSet> 
+    </fileSets>
+	<files>	    
+		<file>
+			<source>${project.basedir}/target/classes/logback.xml</source>
+			<outputDirectory>${project.build.finalName}/config</outputDirectory>
+		</file>
+		<file>
+			<source>${project.basedir}/target/shell/bin/app.conf</source>
+			<outputDirectory>${project.build.finalName}</outputDirectory>
+			<filtered>true</filtered>
+			<destName>${project.build.finalName}.conf</destName>
+		</file>
+		
+		
+		<file>
+			<source>${project.basedir}/target/${project.build.finalName}.jar</source>
+			<outputDirectory>${project.build.finalName}</outputDirectory>
+			<fileMode>755</fileMode>
+		</file>
+		<file>
+			<source>${project.basedir}/target/classes/application.yml</source>
+			<outputDirectory>${project.build.finalName}/config</outputDirectory>
+		</file>
+		<file>
+			<source>${project.basedir}/target/classes/application.yml</source>
+			<outputDirectory>${project.build.finalName}</outputDirectory>
+			<destName>application-standalone.yml</destName>
+		</file>
+		<file>
+			<source>${project.basedir}/target/classes/application-cloud.yml</source>
+			<outputDirectory>${project.build.finalName}</outputDirectory>
+		</file>
+	</files>
+
+</assembly>

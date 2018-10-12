@@ -1,0 +1,48 @@
+<% for(var i=0,attachList; attachData=folder[i++];) { %>
+<label class="list-li underline SID-AttachList-Folder" data-folderid="<%=attachData.folderId%>" data-foldername="<%=attachData.folderName%>">
+    <img class="icon size50" src="<%=imgPath%>/folder.png"/>
+    <span class="list-container" style="margin-left: 10px;">
+        <p class="nowrap"><%=attachData.folderName%></p>
+        <small><%=attachData.createTime%></small>
+    </span>
+</label>
+<% } %>
+<% for(var i=0,attachList; attachData=attach[i++];) { %>
+<label class="list-li underline SID-meetingDetail">
+    <% if(attachData.fileType=="png" || attachData.fileType=="jpg" || attachData.fileType=="gif"){ %> 
+    <img class="icon size50" src="<%=imgPath%>/icon-typepic.png">
+    <% }else if(attachData.fileType=="mp3"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typeaudio.png">
+    <% }else if(attachData.fileType=="mp4"){ %> 
+    <img class="icon size50" src="<%=imgPath%>/icon-typevideo.png">
+    <% }else if(attachData.fileType=="pdf"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typepdf.png">
+    <% }else if(attachData.fileType=="doc" || attachData.fileType=="docx"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typeword.png">
+    <% }else if(attachData.fileType=="xls" || attachData.fileType=="xlsx"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typeexcel.png">
+    <% }else if(attachData.fileType=="ppt"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typeppt.png">
+    <% }else if(attachData.fileType=="rar" || attachData.fileType=="zip"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typepack.png">
+    <% }else if(attachData.fileType=="md" || attachData.fileType=="txt"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typetxt.png">
+    <% }else if(attachData.fileType=="pdf"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typepdf.png">
+    <% }else if(attachData.fileType=="dps"){ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typedps.png">
+    <% }else{ %>
+    <img class="icon size50" src="<%=imgPath%>/icon-typeunknow.png">
+    <% } %>
+    <span class="list-container" style="margin-left: 10px;">
+        <p class="nowrap"><%=attachData.fileName%>.<%=attachData.fileType%></p>
+        <small><%=attachData.uploadTime%></small>
+    </span>
+    <span>
+        <input type="checkbox" class="SID-AttachList-Cbo input-checkbox" data-path="<%=attachData.fileId%>"
+         data-uploadTime="<%=attachData.uploadTime%>"
+         data-type="<%=attachData.fileType%>" data-name="<%=attachData.fileName%>" data-size="<%=attachData.fileSize%>"
+         data-iconclass="icon-typepic" data-filename="<%=attachData.fileName%>.<%=attachData.fileType%>">
+    </span>
+</label>
+<% } %>

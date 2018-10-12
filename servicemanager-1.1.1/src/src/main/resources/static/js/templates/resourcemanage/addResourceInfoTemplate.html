@@ -1,0 +1,39 @@
+<div class="outmain-cons">
+<form id="formMsg" onkeydown="if(event.keyCode==13)return false;">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+        	
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>资源名称：</label>
+                <div class="form-item-editbox">
+                	<input class="SID-name form-item-text {required: true}" maxlength="20" type = "text" name = "name" value = ""/>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>选择资源类型：</label>
+                <div class="form-item-editbox">
+                        <select class="SID-resources form-item-text form-item-select" name = "resources">
+                        </select>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="SID-resourceParamsBox" style="margin:14px 0 0 0;"></div>
+            
+        </div>
+
+    </div>
+</form>
+</div>
+
+<style>
+
+</style>
+
+<script type="text/javascript">
+
+</script>

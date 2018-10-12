@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轻应用－投票－投票列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div id="loading" style="display: none">
+        <div class="popup-mask" style="display: block; opacity: 1;"></div>
+        <div class="loading-box box box-middlecenter">
+            <div class="loading"></div>
+        </div>
+    </div>
+    <section id="pageAddPoll" class="active">
+        <header>
+           <div class="titlebar">
+                <a href="javascript:back();">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">新建投票</h1>
+            </div>
+        </header>
+        <article style="top:44px;bottom:0px;">
+            <form id="pollForm" class="poll-form">
+                <div class="content" style="border-top:0;">
+                    <div class="poll-title box box-middle">
+                        <img src="img/icon/icon-tag.png" class="list-icon">
+                        <input type="text" class="box-flex-1" id="pollTitle" name="voteInfo.title" placeholder="投票标题" data-rule-field="投票标题" data-rule="required maxlength:25" data-maxlength="25">
+                    </div>
+                    <div class="poll-content clearfix">
+                        <textarea placeholder="填写投票描述，250字以内" id="pollMainContent" name="voteInfo.content" data-maxlength="250" data-rule-field="投票描述" data-rule="required maxlength:250"></textarea>
+                        <span class="count"><span id="text-num">0</span>/250</span>
+                        <a class="icon icon-pic add-pic" id="addMainPic"></a>
+                        <a class="icon icon-trash delete-pic" style="display:none;" id="deleteMainPic"></a>
+                        <div class="main-pic" id="mainPicContainer">
+                            <!-- <img src="img/content/poll-main1.jpg"> -->
+                        </div>
+                        <!-- <input type="file" style="display:none;" id="mainImgFile" name="voteInfo.image"> -->
+                        <input type="hidden" id="mainImgFile" name="voteInfo.image" value="">
+                    </div>
+                    <div class="multi-select">
+                        <div class="listitem-switch">
+                            支持多选
+                            <div class="switch reverse notext" data-on="是" data-on-value="1" data-off="否" data-off-value="0" id="multiSelectSwitch"><div class="switch-handle"></div></div>
+                            <input type="checkbox" class="hide" id="multiSelect" name="voteInfo.multiple">
+                        </div>
+                        <div class="selection-num listitem-select">
+                            最多投几项
+                            <select name="voteInfo.maxChoose" id="maxSelectLimit">
+                                <option value="">无限制</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </div>
+                    <ul class="selection-list" id="itemList">
+                        <li class="selection box">
+                            <span class="dot"></span><input class="box-flex-1" type="text" data-name="voteItems.content" placeholder="输入选项内容" name="voteItems.content" data-rule-field="投票选项" data-rule="maxlength:25" data-maxlength="25">
+                            <div class="img-container hide"></div>
+                            <a class="icon icon-pic"></a>
+                            <a class="icon icon-rdocancel-fill"></a>
+                            <a class="icon icon-trash red hide"></a>
+                            <input type="hidden" class="img-input" data-name="voteItems.image"/>
+                        </li>
+                        <li class="selection box">
+                            <span class="dot"></span><input class="box-flex-1" type="text" data-name="voteItems.content" placeholder="输入选项内容" name="voteItems.content" data-rule-field="投票选项" data-rule="maxlength:25" data-maxlength="25">
+                            <div class="img-container hide"></div>
+                            <a class="icon icon-pic"></a>
+                            <a class="icon icon-rdocancel-fill"></a>
+                            <a class="icon icon-trash red hide"></a>
+                            <input type="hidden" class="img-input" data-name="voteItems.image"/>
+                        </li>
+                        <li class="selection box">
+                            <span class="dot"></span><input class="box-flex-1" type="text" data-name="voteItems.content" placeholder="输入选项内容" name="voteItems.content" data-rule-field="投票选项" data-rule="maxlength:25" data-maxlength="25">
+                            <div class="img-container hide"></div>
+                            <a class="icon icon-pic"></a>
+                            <a class="icon icon-rdocancel-fill"></a>
+                            <a class="icon icon-trash red hide"></a>
+                            <input type="hidden" class="img-input" data-name="voteItems.image"/>
+                        </li>
+                    </ul>
+                    <a class="add-selection">＋添加投票选项</a>
+                </div>
+                <div class="content">
+                    <div class="listitem-select">
+                        截止日期
+                        <input type="date" id="expireDate" value="" name="voteInfo.expireStr">
+                        <i class="icon-arrowright"></i>
+                    </div>
+                    <div class="listitem-switch" style="border-bottom:none;">
+                        匿名投票
+                        <div class="switch reverse notext" data-on="是" data-on-value="1" data-off="否" data-off-value="0" id="secretPollSwitch"><div class="switch-handle"></div></div>
+                        <input type="checkbox" class="hide" id="secretPoll" name="voteInfo.anonymous">
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="listitem-select" id="selectPeople" href="#choosePeoplePage" data-target="section">
+                        选人
+                        <span class="group-info" id="selectPeopleText">请选择投票人员</span>
+                        <i class="icon-arrowright"></i>
+                        <input type="text" style="display:none;" id="selectPeopleInput" name="depIds" value="">
+                    </div>
+                </div>
+                <div class="block margin8">
+                    <button class="button block">发布</button>
+                </div>
+                <a class="button block outline margin8" id="previewBtn" href="#previewPage" data-target="section">预览</a>
+            </form>
+        </article>
+    </section>
+    <!--选人页面-->
+    <section id="choosePeoplePage">
+        <header>
+           <div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">选择人员</h1>
+                <a class="right" id="closeSelectPage">
+                    <span>确定</span>
+                </a>
+            </div>
+            <!-- <div class="tab-container">
+                <ul class="rectbar" id="tabbar">
+                    <li class="tab active">
+                        <label class="tab-label">组织架构</label>
+                    </li>
+                    <li class="tab">
+                        <label class="tab-label">群组</label>
+                    </li>
+                </ul>
+            </div> -->
+            <div class="selected-display"></div>
+            <div class="selection-box" id="selection-box"></div>
+        </header>
+        <article style="top:44px;bottom:0px;">
+            
+            <!-- tree -->
+            <div class="tree-box">
+                <div id="tree">
+                   
+                </div>
+            </div>
+            <!-- /tree -->
+        </article>
+    </section>
+    <!-- 预览页面 -->
+    <section id="previewPage">
+        <header>
+            <div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">投票</h1>
+            </div>
+        </header>
+        <article>
+            <div class="card overflow-hide">
+            <ul class="list noclick">
+                <li class="between">
+                    <div class="justify">
+                        <div class="round" style="font-size: 25px;" id="roundName"></div>
+                    </div>
+                    <div class="justify-content">
+                        <p id="lastName"></p>
+                        <small class="top right">于<span id="previewExpDate">2016-02-28</span>截止</small>
+                        <small>
+                            创建:<span id="today">2016-01-01</span>
+                            <div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                                <span class="progress" style="width:0"></span>
+                                <span class="text"><a class="timer" data-duration="1000" data-to="0">0</a>/<a id="voteNum">0</a></span>
+                            </div>
+                        </small>
+                    </div>
+                </li>
+                <li class="nojustify noborder nopadding">
+                    <div class="justify-content" style="padding:8px;">
+                        <p id="previewPageTitle"></p>
+                        <!-- <small id="previewPollContent"></small> -->
+                        <pre id="previewPollContent" style="font-size: 80%;color: #aaa;line-height: 1.5em;"></pre>
+                    </div>
+                    <!-- <div class="justify nopadding" style="min-height: 40px;max-height: 150px;overflow: hidden;"> -->
+                    <div class="justify nopadding">
+                        <img src="img/content/poll-main-default.jpg" class="width-full" id="previewMainPic">
+                    </div>
+                </li>
+                <li class="noborder">
+                    <div class="justify-content" style="height:30px;">
+                        <small class="top left" id="previewMaxSelect"><!-- 最多选<b>2</b>项 --></small>
+                        <small class="top right">0人参与投票</small>
+                    </div>
+                </li>
+            </ul>
+            <ul class="grid thumbnail hide" id="previewImgSelect" data-col="2" style="background-color:white;">
+                <!-- <li>
+                    <a style="background-image: url(img/picture/login.png);">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                        <div class="grid-title box box-middle">
+                            内容内容
+                        </div>
+                    </a>
+                </li> -->
+            </ul>
+            <ul class="list hide" id="previewSelect">
+                <!-- <li>
+                    <div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+                </li> -->
+            </ul>
+            <a class="button block margin8">投票</a>
+            </div>
+        </article>
+    </section>
+    <div id="popDelete" class="popup-delete">
+        <div class="content">
+            <span class="text">放弃编辑此页面？</span>
+            <img class="warning-face" src="img/icon/icon-face-suprised.png">
+        </div>
+        <div class="popup-handler"><a class="confirm-btn">确定</a><a class="cancel-btn">取消</a></div>
+    </div>
+    <script id="treeTemplate" type="text/x-handlebars-template">
+    <ul class="tree" style="display: block">
+        {{#each nodes}}
+        <li>
+            <div class="treetitle" data-level="" data-groupid="{{id}}" data-type="dept" data-groupname="{{name}}" id="{{id}}"> 
+            <i class="treeicon"></i>
+                <span class="icon icon-persons"></span>
+                <a>{{name}}</a>
+                <a class="icon-rdoadd"></a>
+            </div>
+            
+        </li>
+        {{/each}}
+		{{#each memberNodes}}
+        <li>
+            <div class="treetitle" data-level="" data-groupid="{{loginId}}" data-type="user" data-groupname="{{name}}" id="{{loginId}}"> 
+            <i class="treeicon"></i>
+                <span class="icon icon-persons"></span>
+                <a>{{name}}</a>
+                <a class="icon-rdoadd"></a>
+            </div>
+            
+        </li>
+        {{/each}}
+    </ul>
+    </script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/add-poll.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script>
+    var addImg,
+    Template = {
+        tree:$("#treeTemplate").html()
+    };
+    //count function
+    function maxWordCount(){
+        var target = $("#pollMainContent"),
+        maxLimit = target.data("maxlength");
+        target.on({
+            input: function(){
+                var val = target.val(),
+                count = val.length;
+                if(count>=maxLimit){
+                    $("#text-num").css("color","#fc4349");
+                    $("#text-num").html(maxLimit);
+                    return;
+                }else{
+                    $("#text-num").css("color","#aaa");
+                }
+                $("#text-num").html(target.val().length);
+            }
+        });
+    }
+    //show 选择多选数量下啦
+    function showMultiSelect(){
+        var selectSwitch = $("#multiSelectSwitch");
+        selectSwitch.click(function(){
+            $(".selection-num").slideToggle();
+            $("#multiSelect").trigger('click'); 
+        });
+    }
+    
+   function bindEvents(){
+        $("#mainPicContainer").click(function(){
+            var $this = $(this),
+                imgDOM = $this.children("img");
+            previewImage($this,imgDOM,true);
+        });
+        $(".selection-list").on("click",".img-container",function(){
+            var $this = $(this),
+                $list = $this.parents(".selection-list");
+            previewImage($list,$this,true);
+        });
+        $("#addMainPic").click(function(){
+            Mplus.chooseImage(['album', 'camera'],1,function(imgURL){
+                var image = new Image();
+                image.src = imgURL;
+                image.onload = function(){
+                    image.setAttribute("data-href",imgURL);
+                    document.getElementById("mainPicContainer").appendChild(image);
+                    $("#mainImgFile").val(imgURL);
+                    $("#addMainPic").hide();
+                    $("#deleteMainPic").show();
+                }
+            });
+        });
+        $("#deleteMainPic").click(function(){
+            $(".main-pic").html('');
+            $("#addMainPic").show();
+            $("#deleteMainPic").hide();
+            //删除隐藏域值
+            $("#mainImgFile").val("");
+        });
+        //添加选项
+       $(".add-selection").click(function(){
+            var list = $(".selection-list"),
+            listItem = list.find("li"),
+            listLen = listItem.length;
+            list.append('<li class="selection box animated fadeIn"><span class="dot"></span><input class="box-flex-1" type="text" data-name="voteItems.content" placeholder="输入选项内容" name="voteItems.content" data-rule-field="投票选项" data-rule="maxlength:25" data-maxlength="25"><div class="img-container hide"></div><a class="icon icon-pic"></a> <a class="icon icon-rdocancel-fill"></a><a class="icon icon-trash red hide"></a><input type="hidden" class="img-input" data-name="voteItems.image" /></li>');
+            operateSelection();
+        });
+   }
+    //删除选项+选项添加图片
+    function operateSelection(){
+        [].slice.call(document.querySelectorAll('.selection')).forEach(function(selection){
+            var deleteBtn = selection.querySelector('.icon-rdocancel-fill'),
+            confirmDeleteBtn = selection.querySelector('.icon-trash.red'),
+            selectionInput = selection.querySelector('input'),
+            addImgBtn = selection.querySelector('.icon-pic'),
+            imgContainer = selection.querySelector('.img-container'),
+            imgInput = selection.querySelector('.img-input'),
+            showConfrimBtn = function(){
+                //console.log(confirmDeleteBtn);
+                deleteBtn.classList.add('hidden');
+                confirmDeleteBtn.classList.add('animated','fadeInRight');
+                confirmDeleteBtn.classList.remove('hide');
+            },
+            deleteSelection = function(){
+                selection.remove();
+            },
+            cancelDelete = function(){
+                confirmDeleteBtn.classList.remove('fadeInRight');
+                confirmDeleteBtn.classList.add('hide');
+                deleteBtn.classList.remove('hidden');
+            },
+            openAddImg = function(e){
+                var btn = $(addImgBtn);
+                if(btn.hasClass("icon-pic")){//上传
+                    Mplus.chooseImage(['album', 'camera'],1,function(imgURL){
+                    // var imgURL = "http://a.hiphotos.baidu.com/news/q%3D100/sign=c4a6aaef1a950a7b73354ac43ad3625c/6159252dd42a2834bc35c7d25cb5c9ea14cebf5c.jpg"
+                        var image = new Image();
+                        image.src = imgURL;
+                        image.onload = function(){
+                            $(addImgBtn).removeClass("icon-pic").addClass("icon-trash");
+                            // $(addImgBtn).remove();
+                            $(imgInput).val(imgURL);
+                            imgContainer.setAttribute("data-href",imgURL);
+                            imgContainer.style.backgroundImage = 'url('+imgURL+')';
+                            imgContainer.classList.remove('hide');
+                            imgContainer.classList.add('animated','fadeIn');
+                        }
+                    });
+                }else{//删除
+                    $(addImgBtn).removeClass("icon-trash").addClass("icon-pic");
+                    $(imgInput).val("");
+                    imgContainer.removeAttribute("data-href");
+                    imgContainer.style.backgroundImage = '';
+                    imgContainer.classList.add('hide');
+                    imgContainer.classList.remove('animated','fadeIn');
+                }
+                
+                
+                cancelDelete();
+            },
+            removeImg = function(){
+                // alert()
+            };
+            // $(addImgBtn).off("click").on("click",openAddImg);
+            $(deleteBtn).off("click").on("click",showConfrimBtn);
+            $(confirmDeleteBtn).off("click").on("click",deleteSelection);
+            $(selectionInput).off("click").on("click",cancelDelete);
+            $(addImgBtn).off("click").on("click",openAddImg);
+        });
+    }
+    //set date
+    function setDate(){
+        var dateToast = new Toast("截止时间不能比今天日期早哦！"),
+        dateInput = document.getElementById('expireDate'),
+        now = new Date(),
+        today = new Date(now.getFullYear(),now.getMonth(),now.getDate(),8,00,00);
+        // dateInput.valueAsDate = yesterday.setDate(today.getDate()+1)
+        dateInput.valueAsDate = new Date();
+        $(dateInput).change(function(){
+            var inputDate = dateInput.valueAsDate;
+            // alert(inputDate+","+today)
+            if(!inputDate){
+                dateInput.valueAsDate = today;
+                return;
+            }
+            if (inputDate < today){
+                dateToast.show();
+                dateInput.valueAsDate = today;
+            }
+        }); 
+        $(dateInput).blur(function() {
+            $(this).trigger("change");
+        }) 
+    }
+    
+    //匿名操作
+    $("#secretPollSwitch").click(function(){
+        $("#secretPoll").trigger('click'); 
+    });
+    //开选人页面
+    function toggleSelectPage() {
+        $("#pageAddPoll").toggleClass("active animated fadeInUp");
+        $("#choosePeoplePage").toggleClass("active animated fadeInUp");
+    }
+    function choosePerson(){
+        $("#closeSelectPage").click(function(){
+            var selectedGroups = $(".selection-box").find(".selected-group");
+
+            var groupInputValue = [];
+            var memberInputValue = [];
+            var groupInputName = [];
+            $("#selectPeopleText").html("");
+            $("#selectPeopleInput").val("")
+            if(selectedGroups.length == 0){
+                history.go(-1);
+                return;
+            }
+            for(var i=0,orgGroup; orgGroup=selectedGroups[i++];) {
+            //selectedGroups.each(function(i){
+                var groupName = $(orgGroup).data("groupname"),
+                groupID = $(orgGroup).data("groupid");
+                type = $(orgGroup).data("type");
+                // $("#selectPeopleText").append("&nbsp;"+groupName+",");
+                if(groupID == -1){//如果是根节点，获取所有子节点的groupid
+                    Mplus.getOrgGroups(groupID,function(orgGroupArr){
+                        for(var i=0; i<orgGroupArr.length; i++){
+                            groupInputValue.push(orgGroupArr[i].id);
+                        }
+                        groupInputName.push(groupName);
+                        $("#selectPeopleInput").val(groupInputValue.join(","));
+                        $("#selectPeopleText").html(groupInputName.join(","));
+                        history.go(-1);
+                    });
+                	return;
+                }else{
+                	if (type == "user") {
+                		memberInputValue.push(groupID);
+                	} else {
+                    	groupInputValue.push(groupID);
+                	}
+                    groupInputName.push(groupName);
+
+                }
+            //});
+            }
+            $("#selectPeopleInput").val(groupInputValue.join(",")+"|"+memberInputValue.join(","));
+            $("#selectPeopleText").html(groupInputName.join(","));
+            history.go(-1);
+            return;
+            /*$("#selectPeopleInput").val(groupInputValue.join(","));
+            $("#selectPeopleText").append(groupInputName.join(","));
+            history.go(-1);*/
+        });
+    }
+    
+    //tree function 
+    var elLI,elUL,elIcon,selection,
+    deleteSelection = function(){
+        $(".delete-selection").click(function(){
+            var selectionTop = $(this).parent(),
+            selectionID = $(this).parent().data("treeid");
+            // alert(selectionID);
+            selection = $("#"+selectionID)[0];
+            
+            selectionTop.fadeOut(500,function(){
+                selectionTop.remove();
+                if($("#selection-box").is(':empty')){
+                    $("#selection-box").slideUp();
+                    $(".tree-box").animate({
+                        "padding-top":"0px"
+                    });
+                }
+            });
+            removeCurrent(selection);
+            toggleChildren();
+        });
+    },
+    selectCurrent =  function (){
+        $(selection).addClass('active').addClass('addTop');
+        $(selection).addClass('active');
+        $(selection).find(".icon-rdoadd").fadeOut();
+        toggleChildren();
+        // changeParent();
+        // elIcon = selection.querySelector('.treeicon');
+        // elUL = selection.parentNode.querySelector('ul');
+    },
+    removeCurrent = function(){
+        $(selection).removeClass('active').removeClass('addTop');
+        $(selection).removeClass('active');
+        $(selection).find(".icon-rdoadd").fadeIn();
+        toggleChildren();
+    },
+    toggleChildren = function(){
+        var selectedChildren = $(selection).next().find('.treetitle.active'),
+        allChildren = $(selection).next().find('.treetitle'),
+        allChildrenAddIcon = $(selection).next().find(".icon-rdoadd");
+        if ($(selection).hasClass('active')==true){
+            allChildren.addClass('active');
+            allChildrenAddIcon.fadeOut();
+        }else{
+            allChildren.removeClass('active');
+            allChildrenAddIcon.fadeIn();
+        }
+        if (selectedChildren.length > 0) {
+            selectedChildren.each(function(index, value){
+                var childrenID = value.id;
+                $("#select"+childrenID).fadeOut(500,function(){
+                    $("#"+childrenID).removeClass('addTop');
+                    $("#select"+childrenID).remove();
+                });
+            });
+        }
+    };
+
+    function onTapTree(){
+        EventUtil.addHandler(tree,"tap",function(e){
+            var addToDisplayDiv = function(){
+                var treeID = $(selection).attr("id"),
+                groupName = $(selection).data("groupname"),
+                groupID = $(selection).data("groupid");
+                type = $(selection).data("type");
+
+                //看selection-box是否为空
+                if($("#selection-box").is(':empty')){
+                    $("#selection-box").slideDown();
+                    $(".tree-box").animate({
+                        "padding-top":"46px"
+                    });
+                }
+                $(".selection-box").append('<span class="selected-group" data-groupid="'+groupID+'" data-type="'+type+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
+                deleteSelection();
+            };
+            if(e.target.tagName.toLowerCase()=="ul"){
+                return;
+            }
+            if(e.target.className.indexOf("icon-rdoadd")>= 0){
+                //当点击有a标签时
+                //elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+                if($(selection).hasClass("addTop")){
+                    return;
+                } 
+                selectCurrent();
+                addToDisplayDiv();
+                return;
+            }
+            // else if(e.target.tagName.toLowerCase()=="input"){
+            //     //当点击有a标签时
+            //     //elLI=e.target.parentNode.parentNode;
+            //     selection = e.target.parentNode;
+            //     selectCurrent();
+            //     return;
+            // }
+            if(e.target.className.indexOf("treetitle")>=0){
+                //当点击标题标签时
+                selection = e.target;
+                elLI=e.target.parentNode;
+                //selectCurrent();
+            } else if(e.target.tagName.toLowerCase()=="i"){
+                //当点击i标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+                //console.log("opennow!");
+            } else if(e.target.tagName.toLowerCase()=="a"){
+                //当点击有a标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            } else if(e.target.className.indexOf("icon-persons")>=0){
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            }
+            // else if(e.target.tagName.toLowerCase()=="li"){
+            //     //当点击有a标签时
+            //     elLI=e.target.parentNode.parentNode;
+            // } 
+            
+            elUL=elLI.querySelector("ul");
+            elIcon=elLI.querySelector(".treeicon");
+			
+            if(!elUL){//展开没有子节点（获取数据）
+                //获取下级子部门
+                var groupId = $(elLI).find(".treetitle").data("groupid")
+                getNodes(groupId,function(html){
+                    /*alert($(selection).html());
+                    alert($(selection).hasClass('loaded'));*/
+                    if(!$(selection).hasClass('loaded')){//不是此节点数据加载
+                        return;
+                    }
+                    
+                    $(selection).after(html);
+                    $(elIcon).addClass('active');
+                    if($(html).find("li").length === 0){
+                        $(selection).find(".treeicon").remove();
+                        new Toast("已到最底层了", {delay:1000}).show();
+                        return;
+                    }
+                    if($(selection).hasClass("active")){//父节点已被选中
+                        $(elLI).find(".treetitle").addClass("active");
+                        $(elIcon).addClass('active');
+                        $(elLI).find(".icon-rdoadd").hide();
+                        $(elUL).show();
+                    }
+                });
+            }else if($(elUL).find("li").length>0){
+                // alert(elUL.style.display)
+                //已加载过子节点（有数据）
+                if(elUL.style.display == "block"){//收缩节点
+                    elIcon.className="treeicon";
+                    elUL.style.display="none";
+                }else{//展开节点
+                    elIcon.className="treeicon active";
+                elUL.style.display="block";
+                }
+            }else{
+                 //已加载过子节点（没数据）
+                $(selection).find(".treeicon").remove();
+                var treeToast2 = new Toast("已到最底层了", {delay:2000});
+                treeToast2.show(); 
+                return;
+            }
+            
+        });
+    }
+    function getNodes(groupId,callback){
+        var nodeDOM = $("#"+groupId);
+        if(!nodeDOM || nodeDOM.hasClass("loadingNode")){
+            return;
+        } 
+        nodeDOM.addClass("loadingNode");
+        (function(node){
+            Mplus.getOrgGroupsAndMembers(groupId,function(orgGroupArr,orgMemberArr){
+                var html = Handlebars.compile(Template.tree)({
+                    "nodes":orgGroupArr,
+                    "memberNodes":orgMemberArr
+                });
+                node.removeClass("loadingNode").addClass("loaded");
+                /*alert(JSON.stringify(orgGroupArr));
+                alert(JSON.stringify(orgMemberArr));*/
+                callback && callback(html);
+            })
+        })(nodeDOM)
+    }
+    //
+    // 预览function
+    function previewPage(){
+        var pollTitle = $("#pollTitle").val(),
+        pollContent = $("#pollMainContent").val(),
+        pollMainPic,
+        maxCount = $("#maxSelectLimit").val(),
+        multiSelect = $("#multiSelect").prop("checked"),
+        secretPoll = $("#secretPoll").prop("checked"),
+        today = new Date(),
+        day = today.getDate(),
+        month = today.getMonth()+1,
+        year = today.getFullYear(),
+        expDate = $("#expireDate").val(),
+        pictureSel=false,
+        selectionArray = $(".selection"),
+        selectionText = "未填写";
+        if (pollTitle==""){
+            $("#previewPageTitle").html("您还没有填写一个标题");
+        }else {
+            $("#previewPageTitle").html(pollTitle);
+        }
+        if ($("#mainPicContainer").html()==""){
+            $("#previewMainPic").attr("src","img/content/poll-main-default.jpg");
+        }else{
+            pollMainPic=$("#mainPicContainer img").attr("src");
+            $("#previewMainPic").attr("src",pollMainPic);
+        }
+        if (pollContent==""){
+            $("#previewPollContent").html("您还没有填写任何描述");
+        }else{
+            $("#previewPollContent").html(pollContent);
+        }
+        if(secretPoll == true){
+            $("#previewMaxSelect").html("不记名投票");
+        }else{
+            $("#previewMaxSelect").html("记名投票");
+        }
+        if (multiSelect == true){
+            if(maxCount){
+                $("#previewMaxSelect").append("(最多选"+maxCount+"项)");
+            }else{
+                $("#previewMaxSelect").append("(投票项数无限制)");
+            }
+        }else{
+            $("#previewMaxSelect").append("(最多选1项)");
+        }
+        setUserName();
+        getVoteNum();
+        $("#today").html(year+"-"+(month-10<=0?"0"+month:month)+"-"+(day-10<=0?"0"+day:day));
+        $("#previewExpDate").html(expDate);
+        selectionArray.each(function(i,el){
+            var imgContainer = $(el).find(".img-container");
+            if(imgContainer.hasClass("hide")!=true){
+                pictureSel=true;
+            }
+        });
+        if (pictureSel==true){
+            $("#previewImgSelect").html("");
+            $("#previewImgSelect").removeClass("hide");
+            $("#previewSelect").addClass("hide");
+            selectionArray.each(function(i,el){
+                var imgContainer = $(el).find(".img-container"),
+                backgroundImg = "url(img/placeholder/placeholder-noimg.png)";
+                var selectionText = $(el).find("input[type=text]").val() || "暂未填写";
+                if(imgContainer.hasClass("hide")!=true){
+                    backgroundImg = $(el).find(".img-container").css("background-image");
+                }
+                $("#previewImgSelect").append('<li><a style="background-image:'+backgroundImg.replace(/\"/g,"")+'; background-position:center;"><span class="checkbox"></span><input type="checkbox" class="hide"><div class="grid-title box box-middle">'+selectionText+'</div></a></li>');
+            });
+        }else{
+            $("#previewImgSelect").addClass("hide");
+            $("#previewSelect").removeClass("hide");
+            $("#previewSelect").html("");
+            selectionArray.each(function(i,el){
+                var selectionText = $(el).find("input[type=text]").val() || "暂未填写";
+                $("#previewSelect").append('<li><div class="justify-content"><p>'+selectionText+'</p></div><div class="justify"><span class="checkbox"></span><input type="checkbox" class="hide"></div></li>');
+            });
+        }
+        // if (selectionImgArray.length > 0){
+        //     selectionImgArray.each(function(i,el){
+        //         console.log(i+" - "+el);
+        //     });
+        // }
+    }
+    $("#previewBtn").click(function(){
+        previewPage();
+    });
+    function setUserName(){
+        Mplus.getUserName(function(userName){
+            if(userName){
+                $("#roundName").css("background-color",userName.toPinyin().substring(0,1).toColor())
+                            .html(userName.substring(userName.length-1));
+                $("#lastName").html(userName);
+            }
+        })
+    }
+    function getVoteNum(){
+        var deps = $("#selectPeopleInput").val();
+        //var deps = "|liyanwei";
+        $("#voteNum").html("0");
+        if(deps){
+            PollAdd.getVoteNum({
+                "depIds":deps
+            },function(res){
+                if(res.code=="1"){
+                    $("#voteNum").html(res.data);
+                }
+            })
+        }
+    }
+    function getFormData(){
+        var pollForm = $("#pollForm")
+        var formdata = pollForm.serializeArray();
+        var data = {
+            "voteInfo.multiple":0,
+            "voteInfo.anonymous":1
+        };
+        var items = pollForm.find("#itemList li");
+        var itemIndex = 0;
+        var hasImage = false;
+        items.each(function(i,el){
+            var content = $(el).find("input[data-name='voteItems.content']").val();//内容
+            var image = $(el).find("input[data-name='voteItems.image']").val();//图片
+            
+            if(content || image){
+                data["voteItems["+itemIndex+"].content"] = content;
+                data["voteItems["+itemIndex+"].image"] = image;
+                itemIndex++;
+            }/*else{
+                new Toast("请将内容填写完整！").show();
+            }*/
+            if(image){
+                hasImage = true;
+            }
+        });
+        if(itemIndex == 0){
+            new Toast("请填写投票选项！").show();
+            return;
+        }
+        var multiSelect = $("#multiSelect").prop("checked");
+        var maxChoose = Number($("#maxSelectLimit").val()) || 0
+        if(itemIndex < maxChoose && multiSelect==true){
+            new Toast("投票选项个数不能小于"+maxChoose+"，请增加选项或填写完整").show();
+            return;
+        }
+        if(hasImage){
+            for(var i=0; i<itemIndex; i++){
+                var content = data["voteItems["+i+"].content"];
+                var image = data["voteItems["+i+"].image"];
+                /*if(!content){
+                    new Toast("请将内容填写完整！").show();
+                    return;
+                }*/
+                if(!image){
+                    new Toast("请上传投票选项图片，否则全不上传！").show();
+                    return;
+                }
+            }
+        }
+        // alert(JSON.stringify(formdata));
+        for(var i=0; i<formdata.length; i++){
+            var name = formdata[i].name,
+                value = formdata[i].value;
+            if(name === "voteInfo.multiple"){
+                value = (value == "on"?1:0);
+            }
+            if(name === "voteInfo.anonymous"){
+                value = (value == "on"?0:1);//记名true,匿名false
+            }
+            data[name] = value;
+        }
+
+        if(!data["depIds"] || data["depIds"] == -1){
+            new Toast("请选择投票人员！").show();
+            return;   
+        }
+        return data;
+    }
+    //初始化function
+    window.addEventListener("load",function(){
+        
+        var f=new Form("#pollForm");
+        f.container.addEventListener("submit",function(e){
+            e.preventDefault();
+            if(!f.validate()) return false;
+            var data = getFormData();
+            if(!data) return false;
+            $("#loading").show();
+            PollAdd.submitForm(data,function(res){
+                if(res.code === "1"){
+                    new Toast("创建投票成功！").show();
+                    history.go(-1);
+                }else{
+                    new Toast("创建投票失败！").show();
+                    
+                }
+            }).always(function(){
+                $("#loading").hide();
+            });
+            
+            return false;
+        },false);
+        setDate();
+        maxWordCount();
+        showMultiSelect();
+        operateSelection();
+        choosePerson();
+        onTapTree();
+        deleteSelection();
+        Section.init({
+            "onSectionOpenStart":function(e){
+                //console.log("页面加载前"+e.sectionId);
+            },
+            "onSectionOpenEnd":function(e){
+                
+                //console.log("页面加载完成"+e.sectionId);
+            },
+            "onSectionCloseStart":function(e){
+                //console.log("页面关闭前"+e.sectionId);
+            },
+            "onSectionCloseEnd":function(e){
+                //console.log("页面关闭完成"+e.sectionId);
+            }
+        });
+        /*页面刚加载进来时不能调用mplus ,暂时这么写*/
+        /*setTimeout(function(){
+            getRoot();
+        },2000)*/
+        bindEvents();
+    },false);
+    document.addEventListener("plusready",plusreadyFun, false);
+    function plusreadyFun(){
+        document.removeEventListener("plusready",plusreadyFun);
+        getRoot();
+    }
+    function getRoot(){
+    	/*PollAdd.renderTree([{
+            id:"-1",
+            name:"asd"
+        }],function(html){
+            $("#tree").html(html);
+        });
+    	return;*/
+        mplus.getOrgName({
+            success:function(res){
+                // alert(JSON.stringify(res));
+                var orgName = res.orgName;
+                PollAdd.renderTree([{
+                    id:"-1",
+                    name:orgName
+                }],function(html){
+                    $("#tree").html(html);
+                });
+            },
+            fail:function(res){
+                new Toast(res.errMsg).show();
+            }
+        })
+    }
+
+    var popup = $("#popDelete");
+    //删除 card function   
+    popup.find(".cancel-btn").on("click",function(){
+        //取消关闭窗口
+        popup.hideDialog();
+    });
+    popup.find(".confirm-btn").on("click",function(){
+        popup.hideDialog();
+    	history.go(-1);
+    });
+    //定义exmobi返回
+    function back(){
+    	popup.dialog();
+    }
+    </script>
+</body>
+</html>

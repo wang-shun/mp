@@ -1,0 +1,22 @@
+<div style="background-color: white;padding: 0 10px;border-width:1px 0;border-color:#dddddd;border-style: solid;">
+    <% for(var i=0,agendaData; agendaData=agendasInfo[i++];) { %>
+    <div style="padding:8px 0;border-bottom:1px solid #ededed;">
+        <div class="app-timeline-title">
+            <i class="list-icon icon-time color-primary"></i>
+        	<label class="app-timeline-title-font"><%=agendaData.beginTimeStr%> ~ <%=agendaData.endTimeStr%></label>
+        </div>
+        <%if(agendaData.address){%>
+        <div class="app-timeline-content">
+            <i class="list-icon icon-position color-primary"></i>
+            <label class="app-timeline-content-font">
+            	<%=agendaData.address%>
+            </label>
+        </div>
+        <%}%>
+        <div class="app-timeline-content">
+            <i class="list-icon icon-label color-primary"></i>
+            <label class="app-timeline-content-font"><%=agendaData.remarks%></label>
+        </div>
+    </div>
+    <% } %>
+</div>

@@ -1,0 +1,101 @@
+<% for(var i=0,alertConditionList; alertCondition=alertConditionList[i++];){
+	if(conditionShow == "1" && alertCondition.ruleType == "threshold") { %>
+	<div class="conditionBox">
+		<div class="form-item-editbox" style="width:100%;margin-top: 10px;">
+			<label class="form-item-label" style="width:12%;padding: 0;float: none;">当value的值</label>
+			<select style="width:20%;margin:0 2px;padding: 0;" class="SID-conditionrange form-item-text form-item-select" name = "conditionrange">
+				<option value=">" <%if(alertCondition.setting1 == ">"){%>selected<%}%>>大于</option>
+				<option value=">=" <%if(alertCondition.setting1 == ">="){%>selected<%}%>>大于等于</option>
+				<option value="<" <%if(alertCondition.setting1 == "<"){%>selected<%}%>>小于</option>
+				<option value="<=" <%if(alertCondition.setting1 == "<="){%>selected<%}%>>小于等于</option>
+				<option value="==" <%if(alertCondition.setting1 == "=="){%>selected<%}%>>等于</option>
+				<option value="!=" <%if(alertCondition.setting1 == "!="){%>selected<%}%>>不等于</option>
+				<option value="in" <%if(alertCondition.setting1 == "in"){%>selected<%}%>>在范围内(a,b)</option>
+				<option value="out" <%if(alertCondition.setting1 == "out"){%>selected<%}%>>超过范围(a,b)</option>
+			</select>
+			<input style="width:20%;margin:0 2px" class="SID-conditionvalue form-item-text checkInputMark" maxlength="30" type="text" name="conditionvalue" value="<%=alertCondition.setting2 %>" autocomplete="off"/>
+			<label class="form-item-label" style="width:6%;float: none;padding: 0;">发送</label>
+			<select style="width:20%;margin:0 2px;padding: 0;" class="SID-conditionmethod form-item-text form-item-select" name = "conditionmethod">
+				<option value="info" <%if(alertCondition.alertLevel == "info"){%>selected<%}%>>提示</option>
+				<option value="warn" <%if(alertCondition.alertLevel == "warn"){%>selected<%}%>>警告</option>
+				<option value="warnReset" <%if(alertCondition.alertLevel == "warnReset"){%>selected<%}%>>警告取消</option>
+				<option value="crit" <%if(alertCondition.alertLevel == "crit"){%>selected<%}%>>紧急</option>
+				<option value="critReset" <%if(alertCondition.alertLevel == "critReset"){%>selected<%}%>>紧急告警取消</option>
+			</select>
+			<a href="#"><span class="SID-closeCondition fhicon-delete" style="color: #1788fb;font-weight: bold;font-size: 18px;float: right;margin: 5px 5px 0 0;"></span></a>
+		</div>
+		<div class="form-item-tip" style="width: 100%;display: none;"><div class="wrong-text"></div></div>
+	</div>
+	<%}else if(conditionShow == "2" && alertCondition.ruleType == "relative") { %>
+	<div class="conditionBox">	
+		<div class="form-item-editbox" style="width:100%;margin-top: 10px;">
+			<label class="form-item-label" style="width:10%;float: none;padding: 0;">当相对于</label>
+			<select style="width:12%;margin:0 1px;padding: 0;" class="SID-conditiontime form-item-text form-item-select" name = "conditiontime">
+				<option value="1m" <%if(alertCondition.setting1 == "1m"){%>selected<%}%>>1分钟</option>
+				<option value="5m" <%if(alertCondition.setting1 == "5m"){%>selected<%}%>>5分钟</option>
+				<option value="15m" <%if(alertCondition.setting1 == "15m"){%>selected<%}%>>15分钟</option>
+				<option value="1h" <%if(alertCondition.setting1 == "1h"){%>selected<%}%>>1小时</option>
+				<option value="6h" <%if(alertCondition.setting1 == "6h"){%>selected<%}%>>6小时</option>
+				<option value="12h" <%if(alertCondition.setting1 == "12h"){%>selected<%}%>>12小时</option>
+				<option value="1d" <%if(alertCondition.setting1 == "1d"){%>selected<%}%>>24小时</option>
+				<option value="2d" <%if(alertCondition.setting1 == "2d"){%>selected<%}%>>2天</option>
+				<option value="7d" <%if(alertCondition.setting1 == "7d"){%>selected<%}%>>7天</option>
+				<option value="30d" <%if(alertCondition.setting1 == "30d"){%>selected<%}%>>30天</option>
+			</select>
+			<label class="form-item-label" style="width:6%;float: none;padding: 0;">前的</label>
+			<select style="width:12%;margin:0 1px;padding: 0;" class="SID-conditionrate form-item-text form-item-select" name = "conditionrate">
+				<option value="ratio" <%if(alertCondition.setting2 == "ratio"){%>selected<%}%>>变化</option>
+				<option value="percent" <%if(alertCondition.setting2 == "percent"){%>selected<%}%>>变化%</option>
+			</select>
+			<select style="width:18%;margin:0 2px;padding: 0;" class="SID-conditionrange form-item-text form-item-select" name = "conditionrange">
+				<option value=">" <%if(alertCondition.setting3 == ">"){%>selected<%}%>>大于</option>
+				<option value=">=" <%if(alertCondition.setting3 == ">="){%>selected<%}%>>大于等于</option>
+				<option value="<" <%if(alertCondition.setting3 == "<"){%>selected<%}%>>小于</option>
+				<option value="<=" <%if(alertCondition.setting3 == "<="){%>selected<%}%>>小于等于</option>
+				<option value="==" <%if(alertCondition.setting3 == "=="){%>selected<%}%>>等于</option>
+				<option value="!=" <%if(alertCondition.setting3 == "!="){%>selected<%}%>>不等于</option>
+				<option value="in" <%if(alertCondition.setting3 == "in"){%>selected<%}%>>在范围内(a,b)</option>
+				<option value="out" <%if(alertCondition.setting3 == "out"){%>selected<%}%>>超过范围(a,b)</option>
+			</select>
+			<input style="width:15%;margin:0 1px" class="SID-conditionvalue form-item-text smdigit checkInputMark" maxlength="30" type="text" name="conditionvalue" value="<%=alertCondition.setting4 %>" autocomplete="off"/>
+			<label class="form-item-label" style="width:6%;float: none;padding: 0;">发送</label>
+			<select style="width:15%;margin:0 2px;padding: 0;" class="SID-conditionmethod form-item-text form-item-select" name = "conditionmethod">
+				<option value="info" <%if(alertCondition.alertLevel == "info"){%>selected<%}%>>提示</option>
+				<option value="warn" <%if(alertCondition.alertLevel == "warn"){%>selected<%}%>>警告</option>
+				<option value="warnReset" <%if(alertCondition.alertLevel == "warnReset"){%>selected<%}%>>警告取消</option>
+				<option value="crit" <%if(alertCondition.alertLevel == "crit"){%>selected<%}%>>紧急</option>
+				<option value="critReset" <%if(alertCondition.alertLevel == "critReset"){%>selected<%}%>>紧急告警取消</option>
+			</select>
+			<a href="#"><span class="SID-closeCondition fhicon-delete" style="color: #1788fb;font-weight: bold;font-size: 18px;float: right;margin: 5px 5px 0 0;"></span></a>
+		</div>
+		<div class="form-item-tip" style="width: 100%;display: none;"><div class="wrong-text"></div></div>
+	</div>
+	<%}else if(conditionShow == "3" && alertCondition.ruleType == "deadman") { %>
+	<div class="conditionBox">	
+		<div class="form-item-editbox" style="width:100%;margin-top: 10px;">
+			<label class="form-item-label" style="width:15%;float: none;padding: 0;">当超过</label>
+			<select style="width:30%;margin:0 1px;padding: 0;" class="SID-conditiontime form-item-text form-item-select" name = "conditiontime">
+				<option value="1m" <%if(alertCondition.setting1 == "1m"){%>selected<%}%>>1分钟</option>
+				<option value="5m" <%if(alertCondition.setting1 == "5m"){%>selected<%}%>>5分钟</option>
+				<option value="15m" <%if(alertCondition.setting1 == "15m"){%>selected<%}%>>15分钟</option>
+				<option value="1h" <%if(alertCondition.setting1 == "1h"){%>selected<%}%>>1小时</option>
+				<option value="6h" <%if(alertCondition.setting1 == "6h"){%>selected<%}%>>6小时</option>
+				<option value="12h" <%if(alertCondition.setting1 == "12h"){%>selected<%}%>>12小时</option>
+				<option value="1d" <%if(alertCondition.setting1 == "1d"){%>selected<%}%>>24小时</option>
+				<option value="2d" <%if(alertCondition.setting1 == "2d"){%>selected<%}%>>2天</option>
+				<option value="7d" <%if(alertCondition.setting1 == "7d"){%>selected<%}%>>7天</option>
+				<option value="30d" <%if(alertCondition.setting1 == "30d"){%>selected<%}%>>30天</option>
+			</select>
+			<label class="form-item-label" style="width:25%;float: none;padding: 0;">没有数据提交,发送</label>
+			<select style="width:30%;margin:0 2px;padding: 0;" class="SID-conditionmethod form-item-text form-item-select" name = "conditionmethod">
+				<option value="info" <%if(alertCondition.alertLevel == "info"){%>selected<%}%>>提示</option>
+				<option value="warn" <%if(alertCondition.alertLevel == "warn"){%>selected<%}%>>警告</option>
+				<option value="warnReset" <%if(alertCondition.alertLevel == "warnReset"){%>selected<%}%>>警告取消</option>
+					<option value="crit" <%if(alertCondition.alertLevel == "crit"){%>selected<%}%>>紧急</option>
+					<option value="critReset" <%if(alertCondition.alertLevel == "critReset"){%>selected<%}%>>紧急告警取消</option>
+			</select>
+			<a href="#"><span class="SID-closeCondition fhicon-delete" style="color: #1788fb;font-weight: bold;font-size: 18px;float: right;margin: 5px 5px 0 0;"></span></a>
+		</div>
+	</div>
+<%	}
+}%>

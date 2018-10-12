@@ -1,0 +1,121 @@
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
+      
+spring: 
+  application:
+    name: mapps-survey     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.87:5432/mr_test
+    username: mr
+    password: 123456 
+  redis:
+    database: 5 # Redis数据库索引（默认为0）
+    host: 192.168.160.45
+    port: 6379
+    password:   # Redis服务器连接密码（默认为空）
+    pool:
+      max-active: 1 # 连接池最大连接数（使用负值表示没有限制）
+      max-waite: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 10 # 连接池中的最大空闲连接
+      min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 5000 # 连接超时时间（毫秒）
+  zipkin:
+    enabled: false
+    locator:
+      discovery:
+        enabled: true
+
+flywaydb: 
+  locations: db/migration
+
+server: 
+  port: 18006
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.survey.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.survey.webget
+      - mapps.survey.add
+      - mapps.survey.update
+      - mapps.surveyTemplate.webget
+      - mapps.survey.groupSave
+      - mapps.survey.groupDel
+      - mapps.surveyTemplate.delete
+      - mapps.survey.delete
+      - mapps.survey.preview
+    user: 
+      - mapps.survey.clientquery
+      - mapps.survey.clientdetail
+      - mapps.survey.clientsubmit
+      - mapps.survey.webget
+      - mapps.survey.add
+      - mapps.survey.update
+      - mapps.survey.preview
+      - mapps.survey.copy
+      - mapps.survey.delete
+      - mapps.survey.close
+      - mapps.survey.dataAnalysis
+      - mapps.survey.sessionforever
+      - mapps.surveyTemplate.webget
+      - mapps.surveyTemplate.delete
+      - mapps.surveyTemplate.groupSave
+      - mapps.surveyTemplate.groupDel
+      - mapps.surveyTemplate.groupGet
+      - mapps.surveyTemplate.copy
+      - mapps.surveyTemplate.update
+      - mapps.surveyTemplate.add
+      - mapps.surveyTemplate.preview
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.survey.answerPeople
+      - mapps.survey.webdetail
+      - mapps.surveyTemplate.useTimes
+      - mapps.survey.mysurvey
+      
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: surveymng
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.72:7777/mos/api  
+  
+
+services: 
+  fileservice:
+    serviceUrl: http://192.168.100.102:9081/api
+    appKey: meetingroom
+    appSecret: FHuma025
+    format: json
+    v: 2.0
+    method: mapps.fileservice.file.upload
+
+survey: 
+  scheduled: 
+    on-off: true # 定时推送问卷开关
+    hour: 7 # 定时推送问卷时间点设置，只支持小时，24小时制，默认为早上7点
+
+client: 
+  appId: survey
+  appName: 问卷调查
+  
+logging:
+  path: logs

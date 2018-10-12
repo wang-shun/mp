@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'questionnaire';
+  src:  url('fonts/questionnaire.eot?gturzu');
+  src:  url('fonts/questionnaire.eot?gturzu#iefix') format('embedded-opentype'),
+    url('fonts/questionnaire.ttf?gturzu') format('truetype'),
+    url('fonts/questionnaire.woff?gturzu') format('woff'),
+    url('fonts/questionnaire.svg?gturzu#questionnaire') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="questionnaire-"], [class*=" questionnaire-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'questionnaire' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.questionnaire-wenjuan:before {
+  content: "\e90d";
+}
+.questionnaire-del:before {
+  content: "\e90c";
+}
+.questionnaire-menu:before {
+  content: "\e909";
+}
+.questionnaire-narrowDown:before {
+  content: "\e90a";
+}
+.questionnaire-narrowUp:before {
+  content: "\e90b";
+}
+.questionnaire-checkbox:before {
+  content: "\e900";
+}
+.questionnaire-completionM:before {
+  content: "\e901";
+}
+.questionnaire-completionS:before {
+  content: "\e902";
+}
+.questionnaire-drag:before {
+  content: "\e903";
+}
+.questionnaire-edit:before {
+  content: "\e904";
+}
+.questionnaire-imgS:before {
+  content: "\e905";
+}
+.questionnaire-radio:before {
+  content: "\e906";
+}
+.questionnaire-see:before {
+  content: "\e907";
+}
+.questionnaire-user:before {
+  content: "\e908";
+}

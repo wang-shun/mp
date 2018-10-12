@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuParticipantsMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuParticipants">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="object_id" jdbcType="VARCHAR" property="objectId" />
+    <result column="object_name" jdbcType="VARCHAR" property="objectName" />
+    <result column="entity_type" jdbcType="VARCHAR" property="entityType" />
+    <result column="entity_id" jdbcType="VARCHAR" property="entityId" />
+    <result column="entity_name" jdbcType="VARCHAR" property="entityName" />
+    <result column="dept_order" jdbcType="VARCHAR" property="deptOrder" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.McMeasurementMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.McMeasurement">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="system_id" jdbcType="VARCHAR" property="systemId" />
+    <result column="measurement" jdbcType="VARCHAR" property="measurement" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="retain_time" jdbcType="VARCHAR" property="retainTime" />
+    <result column="retain_policy" jdbcType="VARCHAR" property="retainPolicy" />
+  </resultMap>
+  
+  <select id="getMeasurementList" parameterType="java.util.Map" resultType="McMeasurement">
+    select mmm.id,mmm.system_id as systemId,mmm.measurement,mmm.name,mmm.retain_time as retainTime   
+    from MC_MEASUREMENT mmm
+    where 1=1 and mmm.system_id=#{system_id,jdbcType=VARCHAR}
+    <if test="isenabled != null">
+    and enabled=#{isenabled,jdbcType=VARCHAR}
+    </if>
+    <if test="keyword != null">
+	and measurement like #{keyword,jdbcType=VARCHAR} or name like #{keyword,jdbcType=VARCHAR}
+	</if>
+    <choose>
+    	<when test="sort != null">
+    		order by ${sort}
+    	</when>
+    	<otherwise>
+    		order by mmm.id
+    	</otherwise>
+    </choose>
+  </select>
+</mapper>

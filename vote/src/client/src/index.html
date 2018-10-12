@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－投票－投票列表</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <!-- <div id="loading">
+        <div class="popup-mask" style="display: block; opacity: 1;"></div>
+        <div class="loading-box box box-middlecenter">
+            <div class="loading"></div>
+        </div>
+    </div> -->
+	<section id="pagePolllist" class="active">
+		<header>
+           <div class="titlebar">
+                <a href="javascript:mplus.closeWindow();">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">投票</h1>
+                <a href="add-poll.html" class="right">
+                    <i class="icon-add"></i>
+                </a>
+                <a href="search.html" class="right" id="search-toggle" style="display: none">
+                    <i class="icon-search"></i>
+                </a>
+            </div>
+            <ul class="tabbar animate-oneline" id="tabbar">
+                <li class="tab active" data-hash="voted">
+                    <label class="tab-label">我的参与</label>
+                </li>
+                <li class="tab" data-hash="created">
+                    <label class="tab-label">我的创建</label>
+                </li>
+            </ul>
+        </header>
+        <article style="top:84px;bottom:0px;">
+            <div class="slider-container" id="carouselPage" style="height:100%;">
+                <div class="slider-wrapper">
+                    <div class="slider-slide" id="page1">
+                        <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
+                            <div class="nodata-content ">
+                                <img src="img/icon/no-data.png">
+                                <br>
+                                暂无投票，快去创建一个吧！
+                            </div> 
+                        </div>
+                        <div id="page1-content">
+                            
+                        </div>
+                        <div class="load-more"><div class="loading"></div>正在加载更多...</div>
+                    </div>
+                    <!--page2-->
+                    <div class="slider-slide" id="page2">
+                        <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
+                            <div class="nodata-content ">
+                                <img src="img/icon/no-data.png">
+                                <br>
+                                暂无投票，快去创建一个吧！
+                            </div> 
+                        </div>
+                        <div id="page2-content">
+                            
+                        </div>
+                        <div class="load-more"><div class="loading"></div>正在加载更多...</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+	</section>
+    <div id="popDelete" class="popup-delete">
+        <div class="content">
+            <span class="warning color-cancel">该投票将永远消失！</span>
+            <span class="text">您确定这么做？！</span>
+            <img class="warning-face" src="img/icon/icon-face-suprised.png">
+        </div>
+        <div class="popup-handler"><a class="confirm-btn">确定</a><a class="cancel-btn">取消</a></div>
+    </div>
+<script id="involvedList" type="text/x-handlebars-template">
+{{#equal total 0}}
+<div class="no-data box box-middlecenter"><!--暂无数据-->
+    <div class="nodata-content ">
+        <img src="img/icon/no-data.png">
+        <br>
+        暂无投票，快去创建一个吧！
+    </div> 
+</div>
+
+{{else}}
+{{#each vote}}
+<div class="card vote" id="{{id}}" data-involved="{{involved}}" data-isexpired="{{expired}}">
+    <!-- <img src="{{image}}" data-src="img/content/poll-main-default.jpg" onerror="this.src='img/content/poll-main-default.jpg'" class="img-main"> -->
+    <div class="img-main" style="background-image: url(img/content/poll-main-default.jpg);" data-bg="{{image}}"></div>
+    <div class="poll-info">
+        <h1 class="title"><i class="dot"></i>{{title}}</h1>
+        <div class="info-right">
+            <span class="end-date {{timerClass expired}}">{{timer expireStr}}</span>
+            <span class="status {{stateCss involved expired}}">{{pollState involved}}</span>
+        </div>
+        <div class="progress-bar radiusround">
+            <span class="progress" style="width: {{percent voteCount scopeCount}}"></span>
+            <span class="text"><a class="timer" data-duration="1000" data-to="25">{{voteCount}}</a>/{{scopeCount}}</span>
+        </div>
+        
+        
+    </div>
+</div>
+{{/each}}
+{{/equal}}
+</script>
+
+<script id="createdVoteList" type="text/x-handlebars-template">
+{{#equal total 0}}
+<div class="no-data box box-middlecenter"><!--暂无数据-->
+    <div class="nodata-content ">
+        <img src="img/icon/no-data.png">
+        <br>
+        暂无投票，快去创建一个吧！
+    </div> 
+</div>
+
+{{else}}
+{{#each vote}}
+<div class="card create" id="{{id}}">
+   <a class="btn-delete"><i class="icon-close"></i></a>
+   <!-- <img src="{{image}}" data-src="img/content/poll-main-default.jpg" onerror="this.src='img/content/poll-main-default.jpg'" class="img-main"> -->
+   <div class="img-main" style="background-image: url(img/content/poll-main-default.jpg);" data-bg="{{image}}"></div>
+   <div class="poll-info">
+       <h1 class="title"><i class="dot"></i>{{title}}</h1>
+       <div class="info-right">
+            <span class="end-date {{timerClass expired}}">{{timer expireStr}}</span>
+        </div>
+       <div class="progress-bar radiusround">
+           <span class="progress" style="width: {{percent voteCount scopeCount}}"></span>
+           <span class="text"><a class="timer" data-duration="1000" data-to="25">{{voteCount}}</a>/{{scopeCount}}</span>
+       </div>
+   </div>
+</div>
+{{/each}}
+{{/equal}}
+
+</script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/poll-list.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script src="config.js"></script>
+    <script>
+    //tab 有关操作
+    var tabbar=document.getElementById("tabbar");
+    var tab=tabbar.querySelectorAll(".tab");
+    var carouselPage;
+    var currentPage;
+    function initSlider(){
+        carouselPage=new Slider("#carouselPage",{
+            "onSlideChangeEnd":function(e){
+                tabActive(e.index);
+                compatibleIosScroll(e);
+            }
+        });
+    }
+    var slides=document.querySelectorAll(".slider-slide");
+    [].slice.call(slides).forEach(function(n,i,a){
+        n.addEventListener("scroll",function(e){
+            compatibleIosScroll(e);
+        },false);
+    });
+    function compatibleIosScroll(e){
+        var container=e.target;
+        var clientHeight=container.clientHeight; 
+        var scrollTop=container.scrollTop; 
+        var scrollHeight=container.scrollHeight;
+        if(scrollTop==0){
+            container.scrollTop=1;
+        }
+        // console.log(clientHeight+" - "+scrollTop+" - "+scrollHeight);
+        if (clientHeight+scrollTop>=scrollHeight){
+            container.scrollTop=container.scrollTop-1;
+            // console.log(carouselPage)
+        }
+    }
+
+
+    //选中tab
+    function tabActive(index){
+        for(var i=0,t;t=tab[i++];){
+            t.classList.remove("active");
+        }
+        tab[index].classList.add("active");
+        window.location.hash = $(tab[index]).data("hash");
+    }
+    //绑定tab点击事件
+    function tabBindClick(){
+        for(var i=0,t;t=tab[i++];){
+            (function(i){
+                t.addEventListener("click",function(){
+                    carouselPage.slideTo(i-1);
+                    tabActive(i-1);
+                },false);
+            })(i);
+        }
+    }
+
+    //clear input function
+    function clearInput(){
+        [].slice.call(document.querySelectorAll('.clear-input')).forEach(function(clearBtn){
+            var input = clearBtn.previousElementSibling;
+            clearCurrent = function(ev) {
+                ev.preventDefault();
+                input.value="";
+            };
+            clearBtn.addEventListener('click',clearCurrent);
+        });
+    }
+
+
+    //滚动到底部加载 function
+    function loadMore(container, callback) {
+        var wrapper = document.getElementById(container);
+        wrapper.onscroll=function(e){
+        	if (container == "page1" && !more1) {
+        		return;
+        	}
+        	if (container == "page2" && !more2) {
+        		return;
+        	}
+            var contentHeight=wrapper.scrollHeight;
+            var wrapperHeight=wrapper.clientHeight;
+            var scrollAmount = wrapper.scrollTop;
+            //console.log(contentHeight+" - "+wrapperHeight+" - "+scrollAmount);
+            if (scrollAmount+wrapperHeight+1 == contentHeight){
+                // alert("loadMore")
+                var loadDiv = wrapper.querySelector(".load-more");
+                //loadDiv.style.visibility = "visible";
+                callback();
+            }
+        }
+    }
+    //我参与的
+    var pageNo1 = 1;
+    var more1 = false;
+    var loadFlag1 = false;
+    function loadPage1(isRefresh){
+    	if (loadFlag1) {
+    		return;
+    	}
+    	loadFlag1 = true;
+        var doing;
+        if(isRefresh){
+            pageNo1 = 1;
+            doing = function(html){
+                $("#page1").find("#page1-content").html(html);
+                $(".slider-slide")[0].scrollTop = 1;
+            }
+        }else{
+            doing = function(html){
+                $("#page1").find("#page1-content").append(html)
+            }
+        }
+        // alert(pageNo1)
+        PollList.getInvolved({
+            "offset":pageNo1++,
+            "limit":pageMaxCount
+        }, function(data){
+            if(data.code === "1"){
+                // $("#loading").hide();
+                var total = data.total,
+                    pages = Math.ceil(total/pageMaxCount);
+                PollList.renderInvolved(data,function(html){
+                    // $("#page1").find("#page1-content").html(html);
+                    // new Toast("加载完成！").show();
+                    doing(html);
+                    lazyloadImg();
+                    if(pages < pageNo1){
+                        $("#page1").find(".load-more").hide();
+                        more1 = false;
+                    } else {
+                    	more1 = true;
+                    }
+                    /*pageNo1++;
+                    alert("pageNo1++"+pageNo1);*/
+                    loadFlag1 = false;
+                });
+                
+            }else{
+                new Toast("加载失败！").show();
+                loadFlag1 = false;
+            }
+        });
+    }
+    
+    //我创建的
+    var pageNo2 = 1;
+    var more2 = false;
+    var loadFlag2 = false;
+    function loadPage2(isRefresh){
+    	if (loadFlag2) {
+    		return;
+    	}
+    	loadFlag2 = true;
+        var doing;
+        if(isRefresh){
+            pageNo2 = 1;
+            doing = function(html){
+                $("#page2").find("#page2-content").html(html);
+                $(".slider-slide")[1].scrollTop = 1;
+            }
+        }else{
+            doing = function(html){
+                $("#page2").find("#page2-content").append(html)
+            }
+        }
+        // alert(isRefresh)
+        PollList.getCreatedVote({
+            "offset":pageNo2++,
+            "limit":pageMaxCount
+        }, function(data){
+            if(data.code === "1"){
+                var total = data.total,
+                    pages = Math.ceil(total/pageMaxCount);
+                PollList.renderCreatedVote(data,function(html){
+                    // $("#page2").find("#page2-content").append(html);
+                    doing(html);
+                    deleteCard();
+                    lazyloadImg();
+                    // setTimeout(function(){
+                        // bindEvents();
+                    // },2000)
+                    if(pages < pageNo2){
+                        $("#page2").find(".load-more").hide();
+                        more2 = false;
+                    } else {
+                    	more2 = true;
+                    }
+                    // pageNo2++;
+                    loadFlag2 = false;
+                });
+            }else{
+                new Toast("加载失败！").show();
+                loadFlag2 = false;
+            }
+        });
+    }
+    
+    //card 有关操作
+    var delcardid;
+    var popup = $("#popDelete");
+    var pageMaxCount = 4;
+    function hideLoadDiv(containerID){
+        var container =$("#"+containerID)
+        var cardLength=container.find(".card").length;
+        //这里去服务器获取数据再加一条进来
+        if (cardLength <= pageMaxCount && cardLength > 0) {
+            container.find(".load-more").hide();
+            loadPage2(true);//加载下一页
+        } else if (cardLength == 0){
+            container.find(".no-data").removeClass("hidden");
+        }
+    }
+    //删除 card function   
+    popup.find(".cancel-btn").on("click",function(){
+        //取消关闭窗口
+        popup.hideDialog();
+    });
+    popup.find(".confirm-btn").on("click",function(){
+        //确认删除card
+        var card = $("#"+delcardid);
+        card.addClass("animated zoomOut");
+        $(card).bind("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend",function(){
+            PollList.deleteCard({
+                id:delcardid
+            },function(data){
+                if(data.code == "1"){
+                	new Toast("删除成功！").show();
+                    card.slideUp(300, function(){
+                        card.remove();
+                        hideLoadDiv("page2");
+                    });    
+                }else{
+                    new Toast("删除失败！").show();
+                }
+                
+            });
+        })
+        popup.hideDialog();
+    });
+    
+    function deleteCard(){    
+        $(".card .btn-delete").off("click").on("click",function(e){
+            e.stopPropagation()
+            delcardid = $(this).parent(".card").attr("id");
+            popup.dialog();
+        })
+    }
+    function bindEvents(){
+        $("#carouselPage").on("click",".card",function(){
+            var $this = $(this),hrefPage,cardId = $this.attr("id");
+            if($this.hasClass("create")){
+                //查看投票结果
+                hrefPage = "result.html";
+            }else{
+                //已投,已过期：查看投票结果，未投：投票界面
+                if($this.data("involved") || $this.data("isexpired")){
+                    hrefPage = "result.html";
+                }else{
+                    hrefPage = "poll2.html";
+                }
+            }
+            window.location.href=hrefPage+"?id="+cardId;
+        })
+    }
+    
+    function getParameter(argName){
+        var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
+        return param ? param[1] : param;
+    }
+    //初始化function
+    window.addEventListener("load",function(){
+        // new Toast("load").show();
+        /*var tip = (Date.now().toString()).substring(10)
+        $(".titlebar .text-center").html("load"+tip);
+        alert("load"+tip);*/
+        var drag=new Dragrefresh("#page1",{
+            "onRefresh":function(e){
+                setTimeout(function(){
+                    e.refreshComplete();
+                }, 1000);
+                
+            },
+            "onRefreshComplete":function(e){
+                //完成刷新逻辑
+                loadPage1(true);
+            },
+            "onRefreshOvertime":function(e){
+                 //超时刷新逻辑
+            }
+        });
+        var drag2=new Dragrefresh("#page2",{
+            "onRefresh":function(e){
+                setTimeout(function(){
+                    e.refreshComplete();
+                }, 1000);
+                
+            },
+            "onRefreshComplete":function(e){
+                //完成刷新逻辑
+                loadPage2(true);
+            },
+            "onRefreshOvertime":function(e){
+                //超时刷新逻辑
+            }
+        });
+        //search clear
+        clearInput();
+        initSlider();
+        setTimeout(function(){
+            carouselPage.container.style.height = "100%"
+            carouselPage.updateContainerSize();
+        },1000);
+        tabBindClick();
+        Animate.counter();
+        bindEvents();
+        /* loadPage1();
+        loadPage2();
+        loadMore('page1', loadPage1);
+        loadMore('page2', loadPage2); */
+        
+
+        var hash = window.location.hash.split("#");
+        if(hash.indexOf("voted") === 1){//我参与的
+            // $("#tabbar tab").eq(0).trigger("click");
+            carouselPage.slideTo(0);
+            tabActive(0);
+            currentPage="voted";
+        }else if(hash.indexOf("created") === 1){
+            // $("#tabbar tab").eq(1).trigger("click");
+            carouselPage.slideTo(1);
+            tabActive(1);
+            currentPage="created";
+        }else{
+            currentPage="voted";
+
+        }
+        window.location.hash = currentPage;
+
+    },false);
+
+	document.addEventListener("plusready",plusreadyFun, false);
+
+	
+	
+	function plusreadyFun(){
+		mplus.getServiceAddress({
+    	    success: function (res) {
+    	        var serviceAddress = res.serviceAddress; //应用服务网关地址
+    	        var serviceFinalUrl = serviceAddress+"/mapps-vote/api";
+    	        window.localStorage.setItem("serviceUrl",serviceFinalUrl);
+    	        window.serviceUrl = serviceFinalUrl;
+    	        webViewAfterReady();
+    		},
+    		fail: function (res) {
+    			window.localStorage.setItem("serviceUrl","");
+    			webViewAfterReady();
+    		}
+    	});
+    }
+	
+	function webViewAfterReady(){
+		document.removeEventListener("plusready",plusreadyFun);
+        if (NativeObj) {
+        	window.token = NativeObj.getToken();
+        }
+        Mplus.config(window.accessId);
+        window.localStorage.setItem("sessionId",escape(window.token));
+        loadPage1(true);
+        loadPage2(true);
+        loadMore('page1', loadPage1);
+        loadMore('page2', loadPage2);
+    }
+	
+	//定义exmobi返回
+	function back(){history.go(-1);}
+	</script>
+</body>
+</html>
+
+
+
+

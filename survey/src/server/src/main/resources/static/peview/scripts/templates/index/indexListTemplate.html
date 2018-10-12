@@ -1,0 +1,68 @@
+    <% for(var i=0,roomData; roomData=data[i++];) { %>
+    <% 
+    	var complete = "";if(roomData.status == '2' || roomData.answered != "0") { complete=" complete"; } 
+    	var endTimeStr = "不限"; if(typeof(roomData.endTimeStr) != "undefined" && roomData.endTimeStr != '') { endTimeStr = roomData.endTimeStr; }
+    %>
+    
+    <li class="SID-Index-Li" data-meetingId="<%=roomData.id %>" data-title="<%=roomData.title %>" data-status="<%=roomData.status %>" data-answered="<%=roomData.answered %>">
+        <table cellspacing="0" cellpadding="0" class="dunit01">
+	        <tr>
+	            <td class="dunint-inner <%=complete %>" valign="top"><span class="fhicon-label"></span></td>
+	            <td class="dunit01-inner01 <%=complete %>" >
+	                <h2><%=roomData.title %></h2>
+	            </td>
+	            <td rowspan="2">
+	                <div class="sur-right">
+	                    <ul class="grid" data-col="4" >
+			            	<% if(roomData.status == '1') { %>
+			                <!--进行中-->
+			                <li style="padding: 0.11rem 0;">
+			                    <div class="doughtut orange rotate315" style="margin:0 auto;">
+			                        <div class="doughtut-wrapper left">
+			                            <div class="doughtut-circle left"></div>
+			                        </div>
+			                        <div class="doughtut-wrapper right">
+			                            <div class="doughtut-circle right"></div>
+			                        </div>
+			                        <div class="doughtut-label">发布中</div>
+			                    </div>
+			                </li>
+			                <% } else if(roomData.status == '2') { %>
+			                <li style="padding: 0.11rem 0;">
+			                    <div class="doughtut blue rotate315" style="margin:0 auto;">
+			                        <div class="doughtut-wrapper left">
+			                            <div class="doughtut-circle left"></div>
+			                        </div>
+			                        <div class="doughtut-wrapper right">
+			                            <div class="doughtut-circle right"></div>
+			                        </div>
+			                        <div class="doughtut-label">已完成</div>
+			                    </div>
+			                </li>
+			                <% } %>
+	                    </ul>
+	                </div>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td class=" <%=complete %>"><span class="fhicon-time"></span></td>
+	            <td class="dunit01-inner01 <%=complete %>" >
+	                <p><%=endTimeStr %></p>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td colspan="2">
+	                <div class="progressbox-content <%=complete %>">
+	                    <div class="progress" style="border-radius:2rem;">
+	                        <span class="progress-bar theme-1" style="width: <%=roomData.answerPersons/roomData.targetPersons*100%>%;border-radius: 2rem;"></span>
+	                    </div>
+	                </div>
+	            </td>
+	            <td>
+	                <div class="sUmber"><%=roomData.answerPersons %>/<%=roomData.targetPersons %></div>
+	            </td>
+	        </tr>
+	    </table>  
+        
+    </li>
+    <% } %>

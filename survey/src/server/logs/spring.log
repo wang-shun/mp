@@ -1,0 +1,1345 @@
+2017-08-31 10:30:43.365  INFO 12860 --- [main] c.f.mapps.survey.SurveyApplication       : No active profile set, falling back to default profiles: default
+2017-08-31 10:30:43.423  INFO 12860 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7e6602: startup date [Thu Aug 31 10:30:43 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@163542c
+2017-08-31 10:30:44.398  INFO 12860 --- [main] o.s.b.f.xml.XmlBeanDefinitionReader      : Loading XML bean definitions from class path resource [applicationContext-openapi.xml]
+2017-08-31 10:30:44.702  INFO 12860 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的FormattingConversionService:conversionService
+2017-08-31 10:30:44.703  INFO 12860 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的SessionManager:sessionManager
+2017-08-31 10:30:44.703  INFO 12860 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的密钥管理器:appSecretManager
+2017-08-31 10:30:44.703  INFO 12860 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的服务访问控制器:asc
+2017-08-31 10:30:44.703  INFO 12860 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : 使用默认的服务调用次数/频度控制器:com.rop.security.DefaultInvokeTimesController
+2017-08-31 10:30:45.068  INFO 12860 --- [main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'errorAttributes' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration; factoryMethodName=errorAttributes; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=errorPageConfig; factoryMethodName=errorAttributes; initMethodName=null; destroyMethodName=(inferred); defined in com.fiberhome.mapps.intergration.error.ErrorPageConfig]
+2017-08-31 10:30:45.075  WARN 12860 --- [main] o.s.c.a.ConfigurationClassPostProcessor  : Cannot enhance @Configuration bean definition 'refreshScope' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-08-31 10:30:45.275  INFO 12860 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=c8c99ee8-4189-3f87-b4b4-21113246b817
+2017-08-31 10:30:45.289  INFO 12860 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-08-31 10:30:45.307  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'conversionService' of type [class org.springframework.format.support.FormattingConversionServiceFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.307  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'conversionService' of type [class org.springframework.format.support.DefaultFormattingConversionService] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.449  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.datasource.CONFIGURATION_PROPERTIES' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.453  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$NonEmbeddedConfiguration' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$NonEmbeddedConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.563  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'dataSource' of type [class com.zaxxer.hikari.HikariDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.567  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$DataSourceInitializerConfiguration' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$DataSourceInitializerConfiguration$$EnhancerBySpringCGLIB$$a30b6d8c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.577  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'dataSourceInitializer' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.581  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'myBatisConfig' of type [class com.fiberhome.mapps.intergration.mybatis.MyBatisConfig$$EnhancerBySpringCGLIB$$bd1a45a3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.592  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'annotationDrivenTransactionManager' of type [class org.springframework.jdbc.datasource.DataSourceTransactionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.593  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ef552365] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.682  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$b6f2662] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:45.689  INFO 12860 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.RefreshEndpointAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.RefreshEndpointAutoConfiguration$$EnhancerBySpringCGLIB$$b4ce2858] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 10:30:46.045  INFO 12860 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 18017 (http)
+2017-08-31 10:30:46.060  INFO 12860 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-08-31 10:30:46.062  INFO 12860 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2017-08-31 10:30:46.222  INFO 12860 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-08-31 10:30:46.223  INFO 12860 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2800 ms
+2017-08-31 10:30:46.713  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'metricFilter' to: [/*]
+2017-08-31 10:30:46.714  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-31 10:30:46.714  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-31 10:30:46.714  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-31 10:30:46.714  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-31 10:30:46.715  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'userAgentFakeFilter' to urls: [/index.html]
+2017-08-31 10:30:46.715  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'ssoFilter' to urls: [/api/*, /index.html, /websso]
+2017-08-31 10:30:46.715  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'ropSessionFilter' to urls: [/api/*, /index.html, /websso]
+2017-08-31 10:30:46.715  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'webRequestLoggingFilter' to: [/*]
+2017-08-31 10:30:46.715  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'optionsDealFilter' to: [/*]
+2017-08-31 10:30:46.715  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'sessionCacheFilter' to: [/*]
+2017-08-31 10:30:46.715  INFO 12860 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'applicationContextIdFilter' to: [/*]
+2017-08-31 10:30:46.716  INFO 12860 --- [localhost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'ropServlet' to [/api/*]
+2017-08-31 10:30:46.717  INFO 12860 --- [localhost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-31 10:30:47.351  INFO 12860 --- [main] o.f.core.internal.util.VersionPrinter    : Flyway 3.2.1 by Boxfuse
+2017-08-31 10:30:47.352  INFO 12860 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Started.
+2017-08-31 10:30:47.467  INFO 12860 --- [main] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (这个 org.postgresql.jdbc4.Jdbc4Connection.getNetworkTimeout() 方法尚未被实作。)
+2017-08-31 10:30:47.522  INFO 12860 --- [main] o.f.c.i.dbsupport.DbSupportFactory       : Database: jdbc:postgresql://192.168.160.87:5432/mr (PostgreSQL 9.1)
+2017-08-31 10:30:47.527 DEBUG 12860 --- [main] org.flywaydb.core.Flyway                 : DDL Transactions Supported: true
+2017-08-31 10:30:47.536 DEBUG 12860 --- [main] org.flywaydb.core.Flyway                 : Schema: public
+2017-08-31 10:30:47.540 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classpath resources at 'db/migration' (Prefix: '', Suffix: '.sql')
+2017-08-31 10:30:47.541 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 10:30:47.541 DEBUG 12860 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 10:30:47.544 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 10:30:47.544 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 10:30:47.545 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Found resource: db/migration/V1.0.0__init.sql
+2017-08-31 10:30:47.550 DEBUG 12860 --- [main] o.f.core.internal.util.FeatureDetector   : Spring Jdbc available: true
+2017-08-31 10:30:47.553 DEBUG 12860 --- [main] o.f.core.internal.command.DbValidate     : Validating migrations ...
+2017-08-31 10:30:47.555 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classpath resources at 'db/migration' (Prefix: 'V', Suffix: '.sql')
+2017-08-31 10:30:47.555 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 10:30:47.556 DEBUG 12860 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 10:30:47.556 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 10:30:47.556 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 10:30:47.557 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Found resource: db/migration/V1.0.0__init.sql
+2017-08-31 10:30:47.560 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classes at 'db/migration' (Implementing: 'org.flywaydb.core.api.migration.jdbc.JdbcMigration')
+2017-08-31 10:30:47.561 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 10:30:47.561 DEBUG 12860 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 10:30:47.561 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 10:30:47.561 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 10:30:47.561 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Filtering out resource: db/migration/V1.0.0__init.sql (filename: V1.0.0__init.sql)
+2017-08-31 10:30:47.562 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classes at 'db/migration' (Implementing: 'org.flywaydb.core.api.migration.spring.SpringJdbcMigration')
+2017-08-31 10:30:47.562 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 10:30:47.563 DEBUG 12860 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 10:30:47.563 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 10:30:47.563 DEBUG 12860 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 10:30:47.563 DEBUG 12860 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Filtering out resource: db/migration/V1.0.0__init.sql (filename: V1.0.0__init.sql)
+2017-08-31 10:30:47.619  INFO 12860 --- [main] o.f.core.internal.command.DbValidate     : Validated 1 migration (execution time 00:00.066s)
+2017-08-31 10:30:47.639 DEBUG 12860 --- [main] o.f.core.internal.command.DbSchemas      : Schema "public" already exists. Skipping schema creation.
+2017-08-31 10:30:47.701  INFO 12860 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : Creating Metadata table: "public"."_survey_schema_version"
+2017-08-31 10:30:47.717 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 17: CREATE TABLE "public"."_survey_schema_version" (
+    "version_rank" INT NOT NULL,
+    "installed_rank" INT NOT NULL,
+    "version" VARCHAR(50) NOT NULL,
+    "description" VARCHAR(200) NOT NULL,
+    "type" VARCHAR(20) NOT NULL,
+    "script" VARCHAR(1000) NOT NULL,
+    "checksum" INTEGER,
+    "installed_by" VARCHAR(100) NOT NULL,
+    "installed_on" TIMESTAMP NOT NULL DEFAULT now(),
+    "execution_time" INTEGER NOT NULL,
+    "success" BOOLEAN NOT NULL
+) WITH (
+  OIDS=FALSE
+)
+2017-08-31 10:30:47.718 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 32: ALTER TABLE "public"."_survey_schema_version" ADD CONSTRAINT "_survey_schema_version_pk" PRIMARY KEY ("version")
+2017-08-31 10:30:47.718 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 34: CREATE INDEX "_survey_schema_version_vr_idx" ON "public"."_survey_schema_version" ("version_rank")
+2017-08-31 10:30:47.718 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 35: CREATE INDEX "_survey_schema_version_ir_idx" ON "public"."_survey_schema_version" ("installed_rank")
+2017-08-31 10:30:47.718 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 36: CREATE INDEX "_survey_schema_version_s_idx" ON "public"."_survey_schema_version" ("success")
+2017-08-31 10:30:47.718 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE TABLE "public"."_survey_schema_version" (
+    "version_rank" INT NOT NULL,
+    "installed_rank" INT NOT NULL,
+    "version" VARCHAR(50) NOT NULL,
+    "description" VARCHAR(200) NOT NULL,
+    "type" VARCHAR(20) NOT NULL,
+    "script" VARCHAR(1000) NOT NULL,
+    "checksum" INTEGER,
+    "installed_by" VARCHAR(100) NOT NULL,
+    "installed_on" TIMESTAMP NOT NULL DEFAULT now(),
+    "execution_time" INTEGER NOT NULL,
+    "success" BOOLEAN NOT NULL
+) WITH (
+  OIDS=FALSE
+)
+2017-08-31 10:30:47.881 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: ALTER TABLE "public"."_survey_schema_version" ADD CONSTRAINT "_survey_schema_version_pk" PRIMARY KEY ("version")
+2017-08-31 10:30:48.024  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: ALTER TABLE / ADD PRIMARY KEY will create implicit index "_survey_schema_version_pk" for table "_survey_schema_version"
+2017-08-31 10:30:48.024 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE INDEX "_survey_schema_version_vr_idx" ON "public"."_survey_schema_version" ("version_rank")
+2017-08-31 10:30:48.026 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE INDEX "_survey_schema_version_ir_idx" ON "public"."_survey_schema_version" ("installed_rank")
+2017-08-31 10:30:48.027 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE INDEX "_survey_schema_version_s_idx" ON "public"."_survey_schema_version" ("success")
+2017-08-31 10:30:48.029 DEBUG 12860 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : Metadata table "public"."_survey_schema_version" created.
+2017-08-31 10:30:48.069 DEBUG 12860 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : MetaData table "public"."_survey_schema_version" successfully updated to reflect changes
+2017-08-31 10:30:48.071  INFO 12860 --- [main] o.f.core.internal.command.DbBaseline     : Schema baselined with version: 0.0.1
+2017-08-31 10:30:48.079 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.Table        : Locking table "public"."_survey_schema_version"...
+2017-08-31 10:30:48.081 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.Table        : Lock acquired for table "public"."_survey_schema_version"
+2017-08-31 10:30:48.088  INFO 12860 --- [main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0.0.1
+2017-08-31 10:30:48.089  INFO 12860 --- [main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version 1.0.0 - init
+2017-08-31 10:30:48.092 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 10: create table SU_ANSWER (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         not null,
+   ANSWER_ID            VARCHAR(40)          not null,
+   ANSWER               VARCHAR(512)         not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER primary key (ID)
+)
+2017-08-31 10:30:48.094 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 23: create table SU_ANSWER_PEOPLE (
+   ID                   VARCHAR(40)          not null,
+   SURVEY_ID            VARCHAR(40)          not null,
+   PERSON_NAME          VARCHAR(255)         not null,
+   ANSWERED             VARCHAR(5)           not null default '0'
+      constraint CKC_ANSWERED_SU_ANSWE check (ANSWERED in ('1','0')),
+   PERSON_ID            VARCHAR(40)          not null,
+   NOTICE_STATUS        CHAR(1)              null default '0',
+   PERSON_TYPE          VARCHAR(64)          not null,
+   BEGIN_TIME           TIMESTAMP            null,
+   SUBMIT_TIME          TIMESTAMP            null,
+   DURATION             NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER_PEOPLE primary key (ID)
+)
+2017-08-31 10:30:48.110 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 38: comment on column SU_ANSWER_PEOPLE.PERSON_ID is
+'内容人员为用户id，外部人员为手机号'
+2017-08-31 10:30:48.111 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 41: comment on column SU_ANSWER_PEOPLE.NOTICE_STATUS is
+'0：未通知 1：已发送 2：已送达'
+2017-08-31 10:30:48.111 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 44: comment on column SU_ANSWER_PEOPLE.PERSON_TYPE is
+'inner：内部人员 outer：外部人员'
+2017-08-31 10:30:48.111 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 47: comment on column SU_ANSWER_PEOPLE.DURATION is
+'单位，秒'
+2017-08-31 10:30:48.112 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 53: create table SU_PARTICIPANTS (
+   ID                   VARCHAR(40)          not null,
+   TYPE                 VARCHAR(64)          not null,
+   OBJECT_ID            VARCHAR(40)          not null,
+   OBJECT_NAME          VARCHAR(255)         not null,
+   ENTITY_TYPE          VARCHAR(64)          not null,
+   ENTITY_ID            VARCHAR(40)          not null,
+   ENTITY_NAME          VARCHAR(255)         not null,
+   DEPT_ORDER           VARCHAR(1000)        null,
+   constraint PK_MD_PARTICIPANTS primary key (ID)
+)
+2017-08-31 10:30:48.112 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 65: comment on table SU_PARTICIPANTS is
+'通用型人员设置信息'
+2017-08-31 10:30:48.112 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 68: comment on column SU_PARTICIPANTS.TYPE is
+'参加对象类型'
+2017-08-31 10:30:48.112 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 71: comment on column SU_PARTICIPANTS.OBJECT_ID is
+'参与人员说参加的对象ID'
+2017-08-31 10:30:48.112 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 74: comment on column SU_PARTICIPANTS.OBJECT_NAME is
+'参与人员说参加的对象名称'
+2017-08-31 10:30:48.112 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 77: comment on column SU_PARTICIPANTS.ENTITY_TYPE is
+'user：用户 dept：部门'
+2017-08-31 10:30:48.113 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 80: comment on column SU_PARTICIPANTS.DEPT_ORDER is
+'说选择部门的order或者人员所在部门的order'
+2017-08-31 10:30:48.113 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 86: create table SU_QUESTION (
+   ID                   VARCHAR(40)          not null,
+   CODE                 VARCHAR(64)          not null,
+   QUESTION             VARCHAR(512)         not null,
+   TYPE                 CHAR(1)              not null,
+   SEL_MAX              NUMERIC(10)          not null default 0,
+   SEL_MIN              NUMERIC(10)          not null default 0,
+   USABLE               VARCHAR(5)           not null default '0'
+      constraint CKC_USABLE_SU_QUEST check (USABLE in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          TIMESTAMP            null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        TIMESTAMP            null,
+   constraint PK_SU_QUESTION primary key (ID)
+)
+2017-08-31 10:30:48.114 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 102: comment on column SU_QUESTION.TYPE is
+'1 单选 2 多选 3 下拉 4 文本'
+2017-08-31 10:30:48.114 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 105: comment on column SU_QUESTION.SEL_MIN is
+'缺省为1'
+2017-08-31 10:30:48.114 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 108: comment on column SU_QUESTION.USABLE is
+'1 启用 0 停用'
+2017-08-31 10:30:48.115 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 114: create table SU_QUESTION_OPTIONS (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   OPTION               VARCHAR(512)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          TIMESTAMP            null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        TIMESTAMP            null,
+   constraint PK_SU_QUESTION_OPTIONS primary key (ID)
+)
+2017-08-31 10:30:48.116 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 129: create table SU_SURVEY (
+   ID                   VARCHAR(40)          not null,
+   TITLE                VARCHAR(40)          not null,
+   STATUS               VARCHAR(64)          not null,
+   EFFECTIVE_TIME       VARCHAR(255)         not null,
+   END_TIME             VARCHAR(40)          not null,
+   TARGET_PERSONS       NUMERIC(10)          not null default 0,
+   ANSWER_PERSONS       NUMERIC(10)          not null default 0,
+   PUSH_TO              VARCHAR(5)           not null default '1'
+      constraint CKC_PUSH_TO_SU_SURVE check (PUSH_TO in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          TIMESTAMP            null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        TIMESTAMP            null,
+   constraint PK_SU_SURVEY primary key (ID)
+)
+2017-08-31 10:30:48.116 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 146: comment on column SU_SURVEY.STATUS is
+'0  创建中 1 发布 2 已完成'
+2017-08-31 10:30:48.116 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 152: create table SU_SURVEY_GROUP (
+   ID                   VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_GROUP primary key (ID)
+)
+2017-08-31 10:30:48.117 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 162: create table SU_SURVEY_QUESTION (
+   SURVEY_ID            VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_QUESTION primary key (SURVEY_ID, QUESTION_ID)
+)
+2017-08-31 10:30:48.117 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 173: create table SU_SURVEY_TEMPLATE (
+   ID                   VARCHAR(40)          not null,
+   TITLE                VARCHAR(255)         null,
+   GROUP_ID             VARCHAR(40)          not null,
+   TYPE                 CHAR(1)              null default '1',
+   OWNER                VARCHAR(40)          not null,
+   STATUS               CHAR(1)              null,
+   USE_TIMES            NUMERIC(10)          not null default 0,
+   QUESTIONS            NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_TEMPLATE primary key (ID)
+)
+2017-08-31 10:30:48.117 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 185: comment on column SU_SURVEY_TEMPLATE.GROUP_ID is
+'个人模板没有分组'
+2017-08-31 10:30:48.117 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 188: comment on column SU_SURVEY_TEMPLATE.TYPE is
+'1 公共模板 2 个人模板'
+2017-08-31 10:30:48.117 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 191: comment on column SU_SURVEY_TEMPLATE.OWNER is
+'空是公共模板，非空为对应用户id的模板'
+2017-08-31 10:30:48.118 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 197: create table SU_TEMPLATE_QUESTION (
+   TEMPLATE_ID          VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_TEMPLATE_QUESTION primary key (TEMPLATE_ID, QUESTION_ID)
+)
+2017-08-31 10:30:48.118 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_ANSWER (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         not null,
+   ANSWER_ID            VARCHAR(40)          not null,
+   ANSWER               VARCHAR(512)         not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER primary key (ID)
+)
+2017-08-31 10:30:48.152  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_answer" for table "su_answer"
+2017-08-31 10:30:48.152 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_ANSWER_PEOPLE (
+   ID                   VARCHAR(40)          not null,
+   SURVEY_ID            VARCHAR(40)          not null,
+   PERSON_NAME          VARCHAR(255)         not null,
+   ANSWERED             VARCHAR(5)           not null default '0'
+      constraint CKC_ANSWERED_SU_ANSWE check (ANSWERED in ('1','0')),
+   PERSON_ID            VARCHAR(40)          not null,
+   NOTICE_STATUS        CHAR(1)              null default '0',
+   PERSON_TYPE          VARCHAR(64)          not null,
+   BEGIN_TIME           TIMESTAMP            null,
+   SUBMIT_TIME          TIMESTAMP            null,
+   DURATION             NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER_PEOPLE primary key (ID)
+)
+2017-08-31 10:30:48.172  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_answer_people" for table "su_answer_people"
+2017-08-31 10:30:48.172 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.PERSON_ID is
+'内容人员为用户id，外部人员为手机号'
+2017-08-31 10:30:48.180 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.NOTICE_STATUS is
+'0：未通知 1：已发送 2：已送达'
+2017-08-31 10:30:48.181 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.PERSON_TYPE is
+'inner：内部人员 outer：外部人员'
+2017-08-31 10:30:48.182 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.DURATION is
+'单位，秒'
+2017-08-31 10:30:48.183 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_PARTICIPANTS (
+   ID                   VARCHAR(40)          not null,
+   TYPE                 VARCHAR(64)          not null,
+   OBJECT_ID            VARCHAR(40)          not null,
+   OBJECT_NAME          VARCHAR(255)         not null,
+   ENTITY_TYPE          VARCHAR(64)          not null,
+   ENTITY_ID            VARCHAR(40)          not null,
+   ENTITY_NAME          VARCHAR(255)         not null,
+   DEPT_ORDER           VARCHAR(1000)        null,
+   constraint PK_MD_PARTICIPANTS primary key (ID)
+)
+2017-08-31 10:30:48.190  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_md_participants" for table "su_participants"
+2017-08-31 10:30:48.190 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on table SU_PARTICIPANTS is
+'通用型人员设置信息'
+2017-08-31 10:30:48.191 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.TYPE is
+'参加对象类型'
+2017-08-31 10:30:48.193 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.OBJECT_ID is
+'参与人员说参加的对象ID'
+2017-08-31 10:30:48.193 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.OBJECT_NAME is
+'参与人员说参加的对象名称'
+2017-08-31 10:30:48.194 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.ENTITY_TYPE is
+'user：用户 dept：部门'
+2017-08-31 10:30:48.195 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.DEPT_ORDER is
+'说选择部门的order或者人员所在部门的order'
+2017-08-31 10:30:48.196 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_QUESTION (
+   ID                   VARCHAR(40)          not null,
+   CODE                 VARCHAR(64)          not null,
+   QUESTION             VARCHAR(512)         not null,
+   TYPE                 CHAR(1)              not null,
+   SEL_MAX              NUMERIC(10)          not null default 0,
+   SEL_MIN              NUMERIC(10)          not null default 0,
+   USABLE               VARCHAR(5)           not null default '0'
+      constraint CKC_USABLE_SU_QUEST check (USABLE in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          TIMESTAMP            null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        TIMESTAMP            null,
+   constraint PK_SU_QUESTION primary key (ID)
+)
+2017-08-31 10:30:48.204  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_question" for table "su_question"
+2017-08-31 10:30:48.204 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_QUESTION.TYPE is
+'1 单选 2 多选 3 下拉 4 文本'
+2017-08-31 10:30:48.206 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_QUESTION.SEL_MIN is
+'缺省为1'
+2017-08-31 10:30:48.207 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_QUESTION.USABLE is
+'1 启用 0 停用'
+2017-08-31 10:30:48.207 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_QUESTION_OPTIONS (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   OPTION               VARCHAR(512)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          TIMESTAMP            null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        TIMESTAMP            null,
+   constraint PK_SU_QUESTION_OPTIONS primary key (ID)
+)
+2017-08-31 10:30:48.214  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_question_options" for table "su_question_options"
+2017-08-31 10:30:48.214 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY (
+   ID                   VARCHAR(40)          not null,
+   TITLE                VARCHAR(40)          not null,
+   STATUS               VARCHAR(64)          not null,
+   EFFECTIVE_TIME       VARCHAR(255)         not null,
+   END_TIME             VARCHAR(40)          not null,
+   TARGET_PERSONS       NUMERIC(10)          not null default 0,
+   ANSWER_PERSONS       NUMERIC(10)          not null default 0,
+   PUSH_TO              VARCHAR(5)           not null default '1'
+      constraint CKC_PUSH_TO_SU_SURVE check (PUSH_TO in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          TIMESTAMP            null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        TIMESTAMP            null,
+   constraint PK_SU_SURVEY primary key (ID)
+)
+2017-08-31 10:30:48.222  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey" for table "su_survey"
+2017-08-31 10:30:48.223 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY.STATUS is
+'0  创建中 1 发布 2 已完成'
+2017-08-31 10:30:48.223 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY_GROUP (
+   ID                   VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_GROUP primary key (ID)
+)
+2017-08-31 10:30:48.227  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey_group" for table "su_survey_group"
+2017-08-31 10:30:48.228 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY_QUESTION (
+   SURVEY_ID            VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_QUESTION primary key (SURVEY_ID, QUESTION_ID)
+)
+2017-08-31 10:30:48.235  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey_question" for table "su_survey_question"
+2017-08-31 10:30:48.235 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY_TEMPLATE (
+   ID                   VARCHAR(40)          not null,
+   TITLE                VARCHAR(255)         null,
+   GROUP_ID             VARCHAR(40)          not null,
+   TYPE                 CHAR(1)              null default '1',
+   OWNER                VARCHAR(40)          not null,
+   STATUS               CHAR(1)              null,
+   USE_TIMES            NUMERIC(10)          not null default 0,
+   QUESTIONS            NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_TEMPLATE primary key (ID)
+)
+2017-08-31 10:30:48.243  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey_template" for table "su_survey_template"
+2017-08-31 10:30:48.243 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY_TEMPLATE.GROUP_ID is
+'个人模板没有分组'
+2017-08-31 10:30:48.244 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY_TEMPLATE.TYPE is
+'1 公共模板 2 个人模板'
+2017-08-31 10:30:48.245 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY_TEMPLATE.OWNER is
+'空是公共模板，非空为对应用户id的模板'
+2017-08-31 10:30:48.245 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_TEMPLATE_QUESTION (
+   TEMPLATE_ID          VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_TEMPLATE_QUESTION primary key (TEMPLATE_ID, QUESTION_ID)
+)
+2017-08-31 10:30:48.250  INFO 12860 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_template_question" for table "su_template_question"
+2017-08-31 10:30:48.253 DEBUG 12860 --- [main] o.f.core.internal.command.DbMigrate      : Successfully completed and committed migration of schema "public" to version 1.0.0
+2017-08-31 10:30:48.261 DEBUG 12860 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : MetaData table "public"."_survey_schema_version" successfully updated to reflect changes
+2017-08-31 10:30:48.265 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.Table        : Locking table "public"."_survey_schema_version"...
+2017-08-31 10:30:48.267 DEBUG 12860 --- [main] o.f.core.internal.dbsupport.Table        : Lock acquired for table "public"."_survey_schema_version"
+2017-08-31 10:30:48.274  INFO 12860 --- [main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public" (execution time 00:00.199s).
+2017-08-31 10:30:48.330  INFO 12860 --- [main] o.s.s.c.ThreadPoolExecutorFactoryBean    : Initializing ExecutorService  'org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean#0'
+2017-08-31 10:30:48.355  INFO 12860 --- [main] c.r.impl.AnnotationServletServiceRouter  : 关闭签名验证功能
+2017-08-31 10:30:48.362  INFO 12860 --- [main] nnotationServletServiceRouterFactoryBean : 共注册了1拦截器.
+2017-08-31 10:30:48.372  INFO 12860 --- [main] nnotationServletServiceRouterFactoryBean : 共注册了3事件监听器.
+2017-08-31 10:30:48.372  INFO 12860 --- [main] c.r.impl.AnnotationServletServiceRouter  : 开始启动Rop框架...
+2017-08-31 10:30:48.858  INFO 12860 --- [main] com.rop.impl.DefaultRopContext           : 共注册了9个服务方法
+2017-08-31 10:30:48.858  INFO 12860 --- [main] com.rop.impl.DefaultRopContext           : 共注册了9个服务方法
+2017-08-31 10:30:48.860  INFO 12860 --- [main] c.r.impl.AnnotationServletServiceRouter  : 加载错误码国际化资源：i18n/rop/error,i18n/rop/ropError
+2017-08-31 10:30:48.866  INFO 12860 --- [main] c.r.impl.AnnotationServletServiceRouter  : Rop框架启动成功！
+2017-08-31 10:30:49.129  INFO 12860 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7e6602: startup date [Thu Aug 31 10:30:43 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@163542c
+2017-08-31 10:30:49.220  INFO 12860 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/login]}" onto public org.springframework.web.servlet.ModelAndView com.fiberhome.mapps.survey.LoginController.clientLogin(java.util.Map)
+2017-08-31 10:30:49.221  INFO 12860 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/websso]}" onto public org.springframework.web.servlet.ModelAndView com.fiberhome.mapps.survey.LoginController.webSso(java.lang.String,java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-31 10:30:49.221  INFO 12860 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/version]}" onto public java.lang.String com.fiberhome.mapps.survey.LoginController.version() throws java.io.IOException
+2017-08-31 10:30:49.223  INFO 12860 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-31 10:30:49.223  INFO 12860 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-31 10:30:49.233  INFO 12860 --- [main] o.s.w.s.c.a.WebMvcConfigurerAdapter      : Adding welcome page: class path resource [static/index.html]
+2017-08-31 10:30:49.242  INFO 12860 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-08-31 10:30:49.253  INFO 12860 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-31 10:30:49.253  INFO 12860 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-31 10:30:49.303  INFO 12860 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-31 10:30:49.863  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/refresh || /refresh.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-08-31 10:30:49.865  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)
+2017-08-31 10:30:49.865  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.865  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/dump || /dump.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.866  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/resume || /resume.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-08-31 10:30:49.866  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/archaius || /archaius.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.867  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)
+2017-08-31 10:30:49.867  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env || /env.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.867  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/info || /info.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.867  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/health || /health.json],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)
+2017-08-31 10:30:49.868  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/trace || /trace.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.868  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/logfile || /logfile.json],methods=[GET || HEAD]}" onto public void org.springframework.boot.actuate.endpoint.mvc.LogFileMvcEndpoint.invoke(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws javax.servlet.ServletException,java.io.IOException
+2017-08-31 10:30:49.868  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.869  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/beans || /beans.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.869  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/flyway || /flyway.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.869  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/pause || /pause.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-08-31 10:30:49.869  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.870  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/restart || /restart.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.restart.RestartMvcEndpoint.invoke()
+2017-08-31 10:30:49.870  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 10:30:49.871  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.value(java.util.Map<java.lang.String, java.lang.String>)
+2017-08-31 10:30:49.871  INFO 12860 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env/reset],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.reset()
+2017-08-31 10:30:49.988  WARN 12860 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2017-08-31 10:30:49.988  INFO 12860 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-08-31 10:30:49.995  WARN 12860 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2017-08-31 10:30:49.995  INFO 12860 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-08-31 10:30:50.068  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-08-31 10:30:50.070  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-08-31 10:30:50.081  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshScope' has been autodetected for JMX exposure
+2017-08-31 10:30:50.081  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'environmentManager' has been autodetected for JMX exposure
+2017-08-31 10:30:50.083  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2017-08-31 10:30:50.083  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshEndpoint' has been autodetected for JMX exposure
+2017-08-31 10:30:50.084  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'restartEndpoint' has been autodetected for JMX exposure
+2017-08-31 10:30:50.087  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2017-08-31 10:30:50.102  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2017-08-31 10:30:50.108  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2017-08-31 10:30:50.109  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'restartEndpoint': registering with JMX server as MBean [org.springframework.cloud.context.restart:name=restartEndpoint,type=RestartEndpoint]
+2017-08-31 10:30:50.118  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshEndpoint': registering with JMX server as MBean [org.springframework.cloud.endpoint:name=refreshEndpoint,type=RefreshEndpoint]
+2017-08-31 10:30:50.122  INFO 12860 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=7e6602,type=ConfigurationPropertiesRebinder]
+2017-08-31 10:30:50.273  INFO 12860 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 0
+2017-08-31 10:30:50.332  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:30:50.466  INFO 12860 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 18017 (http)
+2017-08-31 10:30:50.469  INFO 12860 --- [main] c.f.mapps.survey.SurveyApplication       : Started SurveyApplication in 8.933 seconds (JVM running for 10.967)
+2017-08-31 10:31:00.333  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:31:10.334  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:31:20.335  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:31:30.335  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:31:40.336  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:31:50.337  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:32:00.337  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:32:10.338  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:32:20.339  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:32:30.339  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:32:40.340  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:32:50.341  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:33:00.341  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:33:10.342  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:33:20.343  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:33:30.343  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:33:40.344  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:33:50.345  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:34:00.345  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:34:10.346  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:34:20.346  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:34:30.347  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:34:40.348  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:34:50.348  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:35:00.349  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:35:10.350  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:35:20.350  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:35:30.351  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:35:40.352  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:35:50.352  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:36:00.353  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:36:10.354  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:36:20.354  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:36:30.355  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:36:40.356  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:36:50.356  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:37:00.357  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:37:10.358  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:37:20.358  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:37:30.359  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:37:40.360  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:37:50.360  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:38:00.361  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:38:10.361  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:38:20.362  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:38:30.363  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:38:40.363  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:38:50.364  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:39:00.365  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:39:10.365  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:39:20.366  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:39:30.367  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:39:40.367  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:39:50.368  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:40:00.369  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:40:10.369  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:40:20.370  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:40:30.371  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:40:40.371  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:40:50.372  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:41:00.373  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:41:10.373  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:41:20.374  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:41:30.374  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:41:40.375  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:41:50.376  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:42:00.377  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:42:10.377  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:42:20.378  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:42:30.379  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:42:40.379  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:42:50.380  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:43:00.380  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:43:10.381  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:43:20.382  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:43:30.382  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:43:40.383  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:43:50.384  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:44:00.384  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:44:10.385  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:44:20.386  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:44:30.386  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:44:40.387  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:44:50.388  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:45:00.388  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:45:10.389  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:45:20.390  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:45:30.390  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:45:40.391  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:45:50.392  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:46:00.392  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:46:10.393  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:46:20.394  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:46:30.394  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:46:40.395  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:46:50.395  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:47:00.396  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:47:10.397  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:47:20.398  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:47:30.398  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:47:40.399  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:47:50.400  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:48:00.400  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:48:10.401  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:48:20.401  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:48:30.402  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:48:40.403  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:48:50.403  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:49:00.404  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:49:10.405  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:49:20.405  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:49:30.406  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:49:40.407  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:49:50.408  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:50:00.408  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:50:10.409  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:50:20.409  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:50:30.410  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:50:40.411  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:50:50.411  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:51:00.412  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:51:10.413  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:51:20.413  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:51:30.414  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:51:40.415  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:51:50.415  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:52:00.416  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:52:10.417  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:52:20.417  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:52:30.418  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:52:40.419  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:52:50.419  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:53:00.420  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:53:10.420  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:53:20.421  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:53:30.422  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:53:40.422  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:53:50.423  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:54:00.424  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:54:10.424  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:54:20.425  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:54:30.426  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:54:40.427  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:54:50.427  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:55:00.428  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:55:10.429  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:55:20.429  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:55:30.430  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:55:40.430  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:55:50.431  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:56:00.432  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:56:10.432  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:56:20.433  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:56:30.433  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:56:40.434  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:56:50.435  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:57:00.436  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:57:10.436  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:57:20.437  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:57:30.438  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:57:40.438  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:57:50.439  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:58:00.440  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:58:10.440  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:58:20.441  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:58:30.442  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:58:40.442  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:58:50.443  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:59:00.444  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:59:10.444  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:59:20.445  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:59:30.445  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:59:40.446  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 10:59:50.447  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:00:00.448  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:00:10.448  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:00:20.449  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:00:30.450  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:00:40.450  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:00:50.451  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:01:00.452  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:01:10.452  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:01:20.453  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:01:30.453  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:01:40.454  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:01:50.455  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:02:00.455  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:02:10.456  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:02:20.457  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:02:30.457  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:02:40.458  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:02:50.459  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:03:00.459  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:03:10.460  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:03:20.460  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:03:30.461  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:03:40.462  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:03:50.463  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:04:00.463  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:04:10.464  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:04:20.465  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:04:30.465  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:04:40.466  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:04:50.466  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:05:00.467  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:05:10.468  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:05:20.468  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:05:30.469  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:05:40.470  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:05:50.471  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:06:00.471  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:06:10.472  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:06:20.473  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:06:30.473  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:06:40.474  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:06:50.474  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:07:00.475  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:07:10.476  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:07:20.476  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:07:30.477  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:07:40.477  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:07:50.478  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:08:00.479  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:08:10.480  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:08:20.480  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:08:30.481  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:08:40.482  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:08:50.482  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:09:00.483  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:09:10.484  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:09:20.484  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:09:30.485  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:09:40.485  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:09:50.486  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:10:00.487  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:10:10.487  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:10:20.488  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:10:30.489  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:10:40.490  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:10:50.490  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:11:00.491  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:11:10.492  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:11:20.492  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:11:30.493  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:11:40.493  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:11:50.494  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:12:00.495  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:12:10.495  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:12:20.496  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:12:30.496  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:12:40.497  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:12:50.498  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:13:00.499  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:13:10.499  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:13:20.500  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:13:30.501  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:13:40.501  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:13:50.502  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:14:00.503  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:14:10.503  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:14:20.504  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:14:30.504  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:14:40.505  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:14:50.506  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:15:00.507  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:15:10.507  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:15:20.508  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:15:30.508  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:15:40.509  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:15:50.510  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:16:00.511  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:16:10.511  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:16:20.512  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:16:30.513  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:16:40.513  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:16:50.514  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:17:00.514  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:17:10.515  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:17:20.516  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:17:30.516  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:17:40.517  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:17:50.518  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:18:00.518  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:18:10.519  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:18:20.520  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:18:30.520  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:18:40.521  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:18:50.522  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:19:00.522  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:19:10.523  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:19:20.524  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:19:30.524  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:19:40.525  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:19:50.526  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:20:00.526  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:20:10.527  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:20:20.528  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:20:30.528  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:20:40.529  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:20:50.530  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:21:00.530  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:21:10.531  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:21:20.532  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:21:30.532  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:21:40.533  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:21:50.534  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:22:00.534  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:22:10.535  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:22:20.535  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:22:30.536  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:22:40.537  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:22:50.537  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:23:00.538  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:23:10.539  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:23:20.539  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:23:30.540  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:23:40.541  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:23:50.541  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:24:00.542  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:24:10.543  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:24:20.543  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:24:30.544  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:24:40.545  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:24:50.545  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:25:00.546  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:25:10.547  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:25:20.547  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:25:30.548  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:25:40.548  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:25:50.549  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:26:00.550  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:26:10.550  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:26:20.551  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:26:30.552  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:26:40.552  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:26:50.553  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:27:00.554  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:27:10.555  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:27:20.555  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:27:30.556  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:27:40.557  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:27:50.557  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:28:00.558  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:28:10.558  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:28:20.559  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:28:30.560  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:28:40.560  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:28:50.561  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:29:00.562  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:29:10.562  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:29:20.563  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:29:30.564  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:29:40.564  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:29:50.565  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:30:00.566  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:30:10.566  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:30:20.567  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 11:30:30.568  INFO 12860 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:14:37.123  INFO 9092 --- [main] c.f.mapps.survey.SurveyApplication       : No active profile set, falling back to default profiles: default
+2017-08-31 13:14:37.149  INFO 9092 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@160fa5b: startup date [Thu Aug 31 13:14:37 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@1ec0883
+2017-08-31 13:14:37.817  INFO 9092 --- [main] o.s.b.f.xml.XmlBeanDefinitionReader      : Loading XML bean definitions from class path resource [applicationContext-openapi.xml]
+2017-08-31 13:14:38.054  INFO 9092 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的FormattingConversionService:conversionService
+2017-08-31 13:14:38.055  INFO 9092 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的SessionManager:sessionManager
+2017-08-31 13:14:38.055  INFO 9092 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的密钥管理器:appSecretManager
+2017-08-31 13:14:38.055  INFO 9092 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : Rop装配一个自定义的服务访问控制器:asc
+2017-08-31 13:14:38.055  INFO 9092 --- [main] r.c.AnnotationDrivenBeanDefinitionParser : 使用默认的服务调用次数/频度控制器:com.rop.security.DefaultInvokeTimesController
+2017-08-31 13:14:38.278  INFO 9092 --- [main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'errorAttributes' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration; factoryMethodName=errorAttributes; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=errorPageConfig; factoryMethodName=errorAttributes; initMethodName=null; destroyMethodName=(inferred); defined in com.fiberhome.mapps.intergration.error.ErrorPageConfig]
+2017-08-31 13:14:38.285  WARN 9092 --- [main] o.s.c.a.ConfigurationClassPostProcessor  : Cannot enhance @Configuration bean definition 'refreshScope' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-08-31 13:14:38.425  INFO 9092 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=417c29fa-f02e-331e-97f1-4d33e7477323
+2017-08-31 13:14:38.438  INFO 9092 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-08-31 13:14:38.451  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'conversionService' of type [class org.springframework.format.support.FormattingConversionServiceFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.451  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'conversionService' of type [class org.springframework.format.support.DefaultFormattingConversionService] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.554  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.datasource.CONFIGURATION_PROPERTIES' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.557  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$NonEmbeddedConfiguration' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$NonEmbeddedConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.669  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'dataSource' of type [class com.zaxxer.hikari.HikariDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.673  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$DataSourceInitializerConfiguration' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$DataSourceInitializerConfiguration$$EnhancerBySpringCGLIB$$9b5c94d9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.683  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'dataSourceInitializer' of type [class org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.686  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'myBatisConfig' of type [class com.fiberhome.mapps.intergration.mybatis.MyBatisConfig$$EnhancerBySpringCGLIB$$b56b6cf0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.696  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'annotationDrivenTransactionManager' of type [class org.springframework.jdbc.datasource.DataSourceTransactionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.698  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$e7a64ab2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.796  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$3c04daf] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:38.804  INFO 9092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.RefreshEndpointAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.RefreshEndpointAutoConfiguration$$EnhancerBySpringCGLIB$$ad1f4fa5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-08-31 13:14:39.085  INFO 9092 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 18017 (http)
+2017-08-31 13:14:39.095  INFO 9092 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-08-31 13:14:39.097  INFO 9092 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2017-08-31 13:14:39.227  INFO 9092 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-08-31 13:14:39.228  INFO 9092 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2079 ms
+2017-08-31 13:14:39.664  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'metricFilter' to: [/*]
+2017-08-31 13:14:39.665  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-31 13:14:39.665  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'userAgentFakeFilter' to urls: [/index.html]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'ssoFilter' to urls: [/api/*, /index.html, /websso]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'ropSessionFilter' to urls: [/api/*, /index.html, /websso]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'webRequestLoggingFilter' to: [/*]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'optionsDealFilter' to: [/*]
+2017-08-31 13:14:39.666  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'sessionCacheFilter' to: [/*]
+2017-08-31 13:14:39.670  INFO 9092 --- [localhost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'applicationContextIdFilter' to: [/*]
+2017-08-31 13:14:39.670  INFO 9092 --- [localhost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'ropServlet' to [/api/*]
+2017-08-31 13:14:39.671  INFO 9092 --- [localhost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-31 13:14:39.770  INFO 9092 --- [main] o.f.core.internal.util.VersionPrinter    : Flyway 3.2.1 by Boxfuse
+2017-08-31 13:14:39.771  INFO 9092 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Started.
+2017-08-31 13:14:39.862  INFO 9092 --- [main] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (这个 org.postgresql.jdbc4.Jdbc4Connection.getNetworkTimeout() 方法尚未被实作。)
+2017-08-31 13:14:39.912  INFO 9092 --- [main] o.f.c.i.dbsupport.DbSupportFactory       : Database: jdbc:postgresql://192.168.160.87:5432/mr (PostgreSQL 9.1)
+2017-08-31 13:14:39.919 DEBUG 9092 --- [main] org.flywaydb.core.Flyway                 : DDL Transactions Supported: true
+2017-08-31 13:14:39.928 DEBUG 9092 --- [main] org.flywaydb.core.Flyway                 : Schema: public
+2017-08-31 13:14:39.931 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classpath resources at 'db/migration' (Prefix: '', Suffix: '.sql')
+2017-08-31 13:14:39.931 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 13:14:39.931 DEBUG 9092 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 13:14:39.932 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 13:14:39.932 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 13:14:39.933 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Found resource: db/migration/V1.0.0__init.sql
+2017-08-31 13:14:39.936 DEBUG 9092 --- [main] o.f.core.internal.util.FeatureDetector   : Spring Jdbc available: true
+2017-08-31 13:14:39.937 DEBUG 9092 --- [main] o.f.core.internal.command.DbValidate     : Validating migrations ...
+2017-08-31 13:14:39.939 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classpath resources at 'db/migration' (Prefix: 'V', Suffix: '.sql')
+2017-08-31 13:14:39.939 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 13:14:39.939 DEBUG 9092 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 13:14:39.939 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 13:14:39.939 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 13:14:39.940 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Found resource: db/migration/V1.0.0__init.sql
+2017-08-31 13:14:40.016 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classes at 'db/migration' (Implementing: 'org.flywaydb.core.api.migration.jdbc.JdbcMigration')
+2017-08-31 13:14:40.017 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 13:14:40.017 DEBUG 9092 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 13:14:40.017 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 13:14:40.017 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 13:14:40.017 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Filtering out resource: db/migration/V1.0.0__init.sql (filename: V1.0.0__init.sql)
+2017-08-31 13:14:40.018 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning for classes at 'db/migration' (Implementing: 'org.flywaydb.core.api.migration.spring.SpringJdbcMigration')
+2017-08-31 13:14:40.018 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Scanning URL: file:/F:/workspace/mp/survey/src/server/target/classes/db/migration
+2017-08-31 13:14:40.019 DEBUG 9092 --- [main] o.f.core.internal.util.FeatureDetector   : JBoss VFS v2 available: false
+2017-08-31 13:14:40.019 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: F:\workspace\mp\survey\src\server\target\classes\
+2017-08-31 13:14:40.019 DEBUG 9092 --- [main] u.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: F:\workspace\mp\survey\src\server\target\classes\db\migration (db/migration)
+2017-08-31 13:14:40.019 DEBUG 9092 --- [main] o.f.c.i.u.s.classpath.ClassPathScanner   : Filtering out resource: db/migration/V1.0.0__init.sql (filename: V1.0.0__init.sql)
+2017-08-31 13:14:40.027  INFO 9092 --- [main] o.f.core.internal.command.DbValidate     : Validated 1 migration (execution time 00:00.088s)
+2017-08-31 13:14:40.031 DEBUG 9092 --- [main] o.f.core.internal.command.DbSchemas      : Schema "public" already exists. Skipping schema creation.
+2017-08-31 13:14:40.048  INFO 9092 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : Creating Metadata table: "public"."_survey_schema_version"
+2017-08-31 13:14:40.054 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 17: CREATE TABLE "public"."_survey_schema_version" (
+    "version_rank" INT NOT NULL,
+    "installed_rank" INT NOT NULL,
+    "version" VARCHAR(50) NOT NULL,
+    "description" VARCHAR(200) NOT NULL,
+    "type" VARCHAR(20) NOT NULL,
+    "script" VARCHAR(1000) NOT NULL,
+    "checksum" INTEGER,
+    "installed_by" VARCHAR(100) NOT NULL,
+    "installed_on" TIMESTAMP NOT NULL DEFAULT now(),
+    "execution_time" INTEGER NOT NULL,
+    "success" BOOLEAN NOT NULL
+) WITH (
+  OIDS=FALSE
+)
+2017-08-31 13:14:40.054 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 32: ALTER TABLE "public"."_survey_schema_version" ADD CONSTRAINT "_survey_schema_version_pk" PRIMARY KEY ("version")
+2017-08-31 13:14:40.055 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 34: CREATE INDEX "_survey_schema_version_vr_idx" ON "public"."_survey_schema_version" ("version_rank")
+2017-08-31 13:14:40.055 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 35: CREATE INDEX "_survey_schema_version_ir_idx" ON "public"."_survey_schema_version" ("installed_rank")
+2017-08-31 13:14:40.055 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 36: CREATE INDEX "_survey_schema_version_s_idx" ON "public"."_survey_schema_version" ("success")
+2017-08-31 13:14:40.055 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE TABLE "public"."_survey_schema_version" (
+    "version_rank" INT NOT NULL,
+    "installed_rank" INT NOT NULL,
+    "version" VARCHAR(50) NOT NULL,
+    "description" VARCHAR(200) NOT NULL,
+    "type" VARCHAR(20) NOT NULL,
+    "script" VARCHAR(1000) NOT NULL,
+    "checksum" INTEGER,
+    "installed_by" VARCHAR(100) NOT NULL,
+    "installed_on" TIMESTAMP NOT NULL DEFAULT now(),
+    "execution_time" INTEGER NOT NULL,
+    "success" BOOLEAN NOT NULL
+) WITH (
+  OIDS=FALSE
+)
+2017-08-31 13:14:40.067 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: ALTER TABLE "public"."_survey_schema_version" ADD CONSTRAINT "_survey_schema_version_pk" PRIMARY KEY ("version")
+2017-08-31 13:14:40.070  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: ALTER TABLE / ADD PRIMARY KEY will create implicit index "_survey_schema_version_pk" for table "_survey_schema_version"
+2017-08-31 13:14:40.070 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE INDEX "_survey_schema_version_vr_idx" ON "public"."_survey_schema_version" ("version_rank")
+2017-08-31 13:14:40.072 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE INDEX "_survey_schema_version_ir_idx" ON "public"."_survey_schema_version" ("installed_rank")
+2017-08-31 13:14:40.073 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: CREATE INDEX "_survey_schema_version_s_idx" ON "public"."_survey_schema_version" ("success")
+2017-08-31 13:14:40.075 DEBUG 9092 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : Metadata table "public"."_survey_schema_version" created.
+2017-08-31 13:14:40.078 DEBUG 9092 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : MetaData table "public"."_survey_schema_version" successfully updated to reflect changes
+2017-08-31 13:14:40.079  INFO 9092 --- [main] o.f.core.internal.command.DbBaseline     : Schema baselined with version: 0.0.1
+2017-08-31 13:14:40.084 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.Table        : Locking table "public"."_survey_schema_version"...
+2017-08-31 13:14:40.085 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.Table        : Lock acquired for table "public"."_survey_schema_version"
+2017-08-31 13:14:40.090  INFO 9092 --- [main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0.0.1
+2017-08-31 13:14:40.090  INFO 9092 --- [main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version 1.0.0 - init
+2017-08-31 13:14:40.093 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 10: create table SU_ANSWER (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         not null,
+   ANSWER_ID            VARCHAR(40)          not null,
+   ANSWER               VARCHAR(512)         not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER primary key (ID)
+)
+2017-08-31 13:14:40.094 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 23: create table SU_ANSWER_PEOPLE (
+   ID                   VARCHAR(40)          not null,
+   SURVEY_ID            VARCHAR(40)          not null,
+   PERSON_NAME          VARCHAR(255)         not null,
+   ANSWERED             VARCHAR(5)           not null default '0'
+      constraint CKC_ANSWERED_SU_ANSWE check (ANSWERED in ('1','0')),
+   PERSON_ID            VARCHAR(40)          not null,
+   NOTICE_STATUS        CHAR(1)              null default '0',
+   PERSON_TYPE          VARCHAR(64)          not null,
+   BEGIN_TIME           DATE                 null,
+   SUBMIT_TIME          DATE                 null,
+   DURATION             NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER_PEOPLE primary key (ID)
+)
+2017-08-31 13:14:40.095 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 38: comment on column SU_ANSWER_PEOPLE.PERSON_ID is
+'内容人员为用户id，外部人员为手机号'
+2017-08-31 13:14:40.096 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 41: comment on column SU_ANSWER_PEOPLE.NOTICE_STATUS is
+'0：未通知 1：已发送 2：已送达'
+2017-08-31 13:14:40.096 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 44: comment on column SU_ANSWER_PEOPLE.PERSON_TYPE is
+'inner：内部人员 outer：外部人员'
+2017-08-31 13:14:40.096 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 47: comment on column SU_ANSWER_PEOPLE.DURATION is
+'单位，秒'
+2017-08-31 13:14:40.097 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 53: create table SU_PARTICIPANTS (
+   ID                   VARCHAR(40)          not null,
+   TYPE                 VARCHAR(64)          not null,
+   OBJECT_ID            VARCHAR(40)          not null,
+   OBJECT_NAME          VARCHAR(255)         not null,
+   ENTITY_TYPE          VARCHAR(64)          not null,
+   ENTITY_ID            VARCHAR(40)          not null,
+   ENTITY_NAME          VARCHAR(255)         not null,
+   DEPT_ORDER           VARCHAR(1000)        null,
+   constraint PK_MD_PARTICIPANTS primary key (ID)
+)
+2017-08-31 13:14:40.097 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 65: comment on table SU_PARTICIPANTS is
+'通用型人员设置信息'
+2017-08-31 13:14:40.097 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 68: comment on column SU_PARTICIPANTS.TYPE is
+'参加对象类型'
+2017-08-31 13:14:40.097 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 71: comment on column SU_PARTICIPANTS.OBJECT_ID is
+'参与人员说参加的对象ID'
+2017-08-31 13:14:40.097 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 74: comment on column SU_PARTICIPANTS.OBJECT_NAME is
+'参与人员说参加的对象名称'
+2017-08-31 13:14:40.097 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 77: comment on column SU_PARTICIPANTS.ENTITY_TYPE is
+'user：用户 dept：部门'
+2017-08-31 13:14:40.097 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 80: comment on column SU_PARTICIPANTS.DEPT_ORDER is
+'说选择部门的order或者人员所在部门的order'
+2017-08-31 13:14:40.098 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 86: create table SU_QUESTION (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   CODE                 VARCHAR(64)          not null,
+   QUESTION             VARCHAR(512)         not null,
+   TYPE                 CHAR(1)              not null,
+   SEL_MAX              NUMERIC(10)          not null default 0,
+   SEL_MIN              NUMERIC(10)          not null default 0,
+   USABLE               VARCHAR(5)           not null default '0'
+      constraint CKC_USABLE_SU_QUEST check (USABLE in ('1','0')),
+   COMMON_QUESTION      VARCHAR(5)           not null default '0'
+      constraint CKC_COMMON_QUESTION_SU_QUEST check (COMMON_QUESTION in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          DATE                 null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        DATE                 null,
+   constraint PK_SU_QUESTION primary key (ID)
+)
+2017-08-31 13:14:40.098 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 105: comment on column SU_QUESTION.TYPE is
+'1 单选 2 多选 3 下拉 4 文本'
+2017-08-31 13:14:40.098 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 108: comment on column SU_QUESTION.SEL_MIN is
+'缺省为1'
+2017-08-31 13:14:40.098 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 111: comment on column SU_QUESTION.USABLE is
+'1 启用 0 停用'
+2017-08-31 13:14:40.099 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 117: create table SU_QUESTION_OPTIONS (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   OPTION               VARCHAR(512)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          DATE                 null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        DATE                 null,
+   constraint PK_SU_QUESTION_OPTIONS primary key (ID)
+)
+2017-08-31 13:14:40.100 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 132: create table SU_SURVEY (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   TITLE                VARCHAR(40)          not null,
+   STATUS               VARCHAR(64)          not null,
+   EFFECTIVE_TIME       VARCHAR(255)         not null,
+   END_TIME             VARCHAR(40)          not null,
+   TARGET_PERSONS       NUMERIC(10)          not null default 0,
+   ANSWER_PERSONS       NUMERIC(10)          not null default 0,
+   PUSH_TO              VARCHAR(5)           not null default '1'
+      constraint CKC_PUSH_TO_SU_SURVE check (PUSH_TO in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          DATE                 null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        DATE                 null,
+   constraint PK_SU_SURVEY primary key (ID)
+)
+2017-08-31 13:14:40.101 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 150: comment on column SU_SURVEY.STATUS is
+'0  创建中 1 发布 2 已完成'
+2017-08-31 13:14:40.101 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 156: create table SU_SURVEY_GROUP (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_GROUP primary key (ID)
+)
+2017-08-31 13:14:40.102 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 167: create table SU_SURVEY_QUESTION (
+   SURVEY_ID            VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_QUESTION primary key (SURVEY_ID, QUESTION_ID)
+)
+2017-08-31 13:14:40.102 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 178: create table SU_SURVEY_TEMPLATE (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   TITLE                VARCHAR(255)         null,
+   GROUP_ID             VARCHAR(40)          not null,
+   TYPE                 CHAR(1)              null default '1',
+   OWNER                VARCHAR(40)          not null,
+   STATUS               CHAR(1)              null,
+   USE_TIMES            NUMERIC(10)          not null default 0,
+   QUESTIONS            NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_TEMPLATE primary key (ID)
+)
+2017-08-31 13:14:40.102 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 191: comment on column SU_SURVEY_TEMPLATE.GROUP_ID is
+'个人模板没有分组'
+2017-08-31 13:14:40.102 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 194: comment on column SU_SURVEY_TEMPLATE.TYPE is
+'1 公共模板 2 个人模板'
+2017-08-31 13:14:40.102 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 197: comment on column SU_SURVEY_TEMPLATE.OWNER is
+'空是公共模板，非空为对应用户id的模板'
+2017-08-31 13:14:40.103 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Found statement at line 203: create table SU_TEMPLATE_QUESTION (
+   TEMPLATE_ID          VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_TEMPLATE_QUESTION primary key (TEMPLATE_ID, QUESTION_ID)
+)
+2017-08-31 13:14:40.103 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_ANSWER (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         not null,
+   ANSWER_ID            VARCHAR(40)          not null,
+   ANSWER               VARCHAR(512)         not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER primary key (ID)
+)
+2017-08-31 13:14:40.116  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_answer" for table "su_answer"
+2017-08-31 13:14:40.117 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_ANSWER_PEOPLE (
+   ID                   VARCHAR(40)          not null,
+   SURVEY_ID            VARCHAR(40)          not null,
+   PERSON_NAME          VARCHAR(255)         not null,
+   ANSWERED             VARCHAR(5)           not null default '0'
+      constraint CKC_ANSWERED_SU_ANSWE check (ANSWERED in ('1','0')),
+   PERSON_ID            VARCHAR(40)          not null,
+   NOTICE_STATUS        CHAR(1)              null default '0',
+   PERSON_TYPE          VARCHAR(64)          not null,
+   BEGIN_TIME           DATE                 null,
+   SUBMIT_TIME          DATE                 null,
+   DURATION             NUMERIC(10)          not null default 0,
+   constraint PK_SU_ANSWER_PEOPLE primary key (ID)
+)
+2017-08-31 13:14:40.136  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_answer_people" for table "su_answer_people"
+2017-08-31 13:14:40.136 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.PERSON_ID is
+'内容人员为用户id，外部人员为手机号'
+2017-08-31 13:14:40.137 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.NOTICE_STATUS is
+'0：未通知 1：已发送 2：已送达'
+2017-08-31 13:14:40.139 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.PERSON_TYPE is
+'inner：内部人员 outer：外部人员'
+2017-08-31 13:14:40.140 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_ANSWER_PEOPLE.DURATION is
+'单位，秒'
+2017-08-31 13:14:40.141 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_PARTICIPANTS (
+   ID                   VARCHAR(40)          not null,
+   TYPE                 VARCHAR(64)          not null,
+   OBJECT_ID            VARCHAR(40)          not null,
+   OBJECT_NAME          VARCHAR(255)         not null,
+   ENTITY_TYPE          VARCHAR(64)          not null,
+   ENTITY_ID            VARCHAR(40)          not null,
+   ENTITY_NAME          VARCHAR(255)         not null,
+   DEPT_ORDER           VARCHAR(1000)        null,
+   constraint PK_MD_PARTICIPANTS primary key (ID)
+)
+2017-08-31 13:14:40.219  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_md_participants" for table "su_participants"
+2017-08-31 13:14:40.220 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on table SU_PARTICIPANTS is
+'通用型人员设置信息'
+2017-08-31 13:14:40.220 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.TYPE is
+'参加对象类型'
+2017-08-31 13:14:40.221 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.OBJECT_ID is
+'参与人员说参加的对象ID'
+2017-08-31 13:14:40.222 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.OBJECT_NAME is
+'参与人员说参加的对象名称'
+2017-08-31 13:14:40.222 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.ENTITY_TYPE is
+'user：用户 dept：部门'
+2017-08-31 13:14:40.223 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_PARTICIPANTS.DEPT_ORDER is
+'说选择部门的order或者人员所在部门的order'
+2017-08-31 13:14:40.224 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_QUESTION (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   CODE                 VARCHAR(64)          not null,
+   QUESTION             VARCHAR(512)         not null,
+   TYPE                 CHAR(1)              not null,
+   SEL_MAX              NUMERIC(10)          not null default 0,
+   SEL_MIN              NUMERIC(10)          not null default 0,
+   USABLE               VARCHAR(5)           not null default '0'
+      constraint CKC_USABLE_SU_QUEST check (USABLE in ('1','0')),
+   COMMON_QUESTION      VARCHAR(5)           not null default '0'
+      constraint CKC_COMMON_QUESTION_SU_QUEST check (COMMON_QUESTION in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          DATE                 null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        DATE                 null,
+   constraint PK_SU_QUESTION primary key (ID)
+)
+2017-08-31 13:14:40.247  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_question" for table "su_question"
+2017-08-31 13:14:40.247 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_QUESTION.TYPE is
+'1 单选 2 多选 3 下拉 4 文本'
+2017-08-31 13:14:40.247 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_QUESTION.SEL_MIN is
+'缺省为1'
+2017-08-31 13:14:40.248 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_QUESTION.USABLE is
+'1 启用 0 停用'
+2017-08-31 13:14:40.248 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_QUESTION_OPTIONS (
+   ID                   VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   OPTION               VARCHAR(512)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          DATE                 null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        DATE                 null,
+   constraint PK_SU_QUESTION_OPTIONS primary key (ID)
+)
+2017-08-31 13:14:40.252  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_question_options" for table "su_question_options"
+2017-08-31 13:14:40.252 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   TITLE                VARCHAR(40)          not null,
+   STATUS               VARCHAR(64)          not null,
+   EFFECTIVE_TIME       VARCHAR(255)         not null,
+   END_TIME             VARCHAR(40)          not null,
+   TARGET_PERSONS       NUMERIC(10)          not null default 0,
+   ANSWER_PERSONS       NUMERIC(10)          not null default 0,
+   PUSH_TO              VARCHAR(5)           not null default '1'
+      constraint CKC_PUSH_TO_SU_SURVE check (PUSH_TO in ('1','0')),
+   CREATOR              VARCHAR(40)          not null,
+   CREATE_TIME          DATE                 null,
+   MODIFIER             VARCHAR(40)          not null,
+   MODIFIED_TIME        DATE                 null,
+   constraint PK_SU_SURVEY primary key (ID)
+)
+2017-08-31 13:14:40.256  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey" for table "su_survey"
+2017-08-31 13:14:40.256 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY.STATUS is
+'0  创建中 1 发布 2 已完成'
+2017-08-31 13:14:40.256 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY_GROUP (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   NAME                 VARCHAR(255)         null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_GROUP primary key (ID)
+)
+2017-08-31 13:14:40.258  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey_group" for table "su_survey_group"
+2017-08-31 13:14:40.259 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY_QUESTION (
+   SURVEY_ID            VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_QUESTION primary key (SURVEY_ID, QUESTION_ID)
+)
+2017-08-31 13:14:40.261  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey_question" for table "su_survey_question"
+2017-08-31 13:14:40.261 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_SURVEY_TEMPLATE (
+   ID                   VARCHAR(40)          not null,
+   ECID                 VARCHAR(40)          not null,
+   TITLE                VARCHAR(255)         null,
+   GROUP_ID             VARCHAR(40)          not null,
+   TYPE                 CHAR(1)              null default '1',
+   OWNER                VARCHAR(40)          not null,
+   STATUS               CHAR(1)              null,
+   USE_TIMES            NUMERIC(10)          not null default 0,
+   QUESTIONS            NUMERIC(10)          not null default 0,
+   constraint PK_SU_SURVEY_TEMPLATE primary key (ID)
+)
+2017-08-31 13:14:40.263  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_survey_template" for table "su_survey_template"
+2017-08-31 13:14:40.263 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY_TEMPLATE.GROUP_ID is
+'个人模板没有分组'
+2017-08-31 13:14:40.264 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY_TEMPLATE.TYPE is
+'1 公共模板 2 个人模板'
+2017-08-31 13:14:40.264 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: comment on column SU_SURVEY_TEMPLATE.OWNER is
+'空是公共模板，非空为对应用户id的模板'
+2017-08-31 13:14:40.265 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.SqlScript    : Executing SQL: create table SU_TEMPLATE_QUESTION (
+   TEMPLATE_ID          VARCHAR(40)          not null,
+   QUESTION_ID          VARCHAR(40)          not null,
+   ID                   VARCHAR(40)          not null,
+   SEQU                 NUMERIC(10)          not null default 0,
+   constraint PK_SU_TEMPLATE_QUESTION primary key (TEMPLATE_ID, QUESTION_ID)
+)
+2017-08-31 13:14:40.267  INFO 9092 --- [main] o.f.c.internal.dbsupport.JdbcTemplate    : DB: CREATE TABLE / PRIMARY KEY will create implicit index "pk_su_template_question" for table "su_template_question"
+2017-08-31 13:14:40.268 DEBUG 9092 --- [main] o.f.core.internal.command.DbMigrate      : Successfully completed and committed migration of schema "public" to version 1.0.0
+2017-08-31 13:14:40.274 DEBUG 9092 --- [main] o.f.c.i.metadatatable.MetaDataTableImpl  : MetaData table "public"."_survey_schema_version" successfully updated to reflect changes
+2017-08-31 13:14:40.276 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.Table        : Locking table "public"."_survey_schema_version"...
+2017-08-31 13:14:40.277 DEBUG 9092 --- [main] o.f.core.internal.dbsupport.Table        : Lock acquired for table "public"."_survey_schema_version"
+2017-08-31 13:14:40.281  INFO 9092 --- [main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public" (execution time 00:00.200s).
+2017-08-31 13:14:40.314  INFO 9092 --- [main] o.s.s.c.ThreadPoolExecutorFactoryBean    : Initializing ExecutorService  'org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean#0'
+2017-08-31 13:14:40.328  INFO 9092 --- [main] c.r.impl.AnnotationServletServiceRouter  : 关闭签名验证功能
+2017-08-31 13:14:40.332  INFO 9092 --- [main] nnotationServletServiceRouterFactoryBean : 共注册了1拦截器.
+2017-08-31 13:14:40.340  INFO 9092 --- [main] nnotationServletServiceRouterFactoryBean : 共注册了3事件监听器.
+2017-08-31 13:14:40.340  INFO 9092 --- [main] c.r.impl.AnnotationServletServiceRouter  : 开始启动Rop框架...
+2017-08-31 13:14:40.576  INFO 9092 --- [main] com.rop.impl.DefaultRopContext           : 共注册了2个服务方法
+2017-08-31 13:14:40.576  INFO 9092 --- [main] com.rop.impl.DefaultRopContext           : 共注册了2个服务方法
+2017-08-31 13:14:40.577  INFO 9092 --- [main] c.r.impl.AnnotationServletServiceRouter  : 加载错误码国际化资源：i18n/rop/error,i18n/rop/ropError
+2017-08-31 13:14:40.582  INFO 9092 --- [main] c.r.impl.AnnotationServletServiceRouter  : Rop框架启动成功！
+2017-08-31 13:14:41.565  INFO 9092 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@160fa5b: startup date [Thu Aug 31 13:14:37 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@1ec0883
+2017-08-31 13:14:41.634  INFO 9092 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/login]}" onto public org.springframework.web.servlet.ModelAndView com.fiberhome.mapps.survey.LoginController.clientLogin(java.util.Map)
+2017-08-31 13:14:41.635  INFO 9092 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/websso]}" onto public org.springframework.web.servlet.ModelAndView com.fiberhome.mapps.survey.LoginController.webSso(java.lang.String,java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-31 13:14:41.635  INFO 9092 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/version]}" onto public java.lang.String com.fiberhome.mapps.survey.LoginController.version() throws java.io.IOException
+2017-08-31 13:14:41.636  INFO 9092 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-31 13:14:41.637  INFO 9092 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-31 13:14:41.644  INFO 9092 --- [main] o.s.w.s.c.a.WebMvcConfigurerAdapter      : Adding welcome page: class path resource [static/index.html]
+2017-08-31 13:14:41.653  INFO 9092 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-08-31 13:14:41.664  INFO 9092 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-31 13:14:41.664  INFO 9092 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-31 13:14:41.710  INFO 9092 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-31 13:14:42.220  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.221  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/health || /health.json],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)
+2017-08-31 13:14:42.223  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)
+2017-08-31 13:14:42.223  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env || /env.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.223  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/trace || /trace.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.224  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/beans || /beans.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.224  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/resume || /resume.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-08-31 13:14:42.224  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/info || /info.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.225  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/restart || /restart.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.restart.RestartMvcEndpoint.invoke()
+2017-08-31 13:14:42.225  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/logfile || /logfile.json],methods=[GET || HEAD]}" onto public void org.springframework.boot.actuate.endpoint.mvc.LogFileMvcEndpoint.invoke(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws javax.servlet.ServletException,java.io.IOException
+2017-08-31 13:14:42.225  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)
+2017-08-31 13:14:42.226  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.226  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/refresh || /refresh.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-08-31 13:14:42.226  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/flyway || /flyway.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.227  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/pause || /pause.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-08-31 13:14:42.227  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.value(java.util.Map<java.lang.String, java.lang.String>)
+2017-08-31 13:14:42.227  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/env/reset],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.reset()
+2017-08-31 13:14:42.227  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.228  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/archaius || /archaius.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.228  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/dump || /dump.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.228  INFO 9092 --- [main] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped "{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-08-31 13:14:42.338  WARN 9092 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2017-08-31 13:14:42.338  INFO 9092 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-08-31 13:14:42.343  WARN 9092 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2017-08-31 13:14:42.343  INFO 9092 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-08-31 13:14:42.417  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-08-31 13:14:42.419  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-08-31 13:14:42.426  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshScope' has been autodetected for JMX exposure
+2017-08-31 13:14:42.426  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'environmentManager' has been autodetected for JMX exposure
+2017-08-31 13:14:42.428  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2017-08-31 13:14:42.428  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshEndpoint' has been autodetected for JMX exposure
+2017-08-31 13:14:42.428  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'restartEndpoint' has been autodetected for JMX exposure
+2017-08-31 13:14:42.431  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2017-08-31 13:14:42.440  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2017-08-31 13:14:42.445  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2017-08-31 13:14:42.447  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'restartEndpoint': registering with JMX server as MBean [org.springframework.cloud.context.restart:name=restartEndpoint,type=RestartEndpoint]
+2017-08-31 13:14:42.460  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshEndpoint': registering with JMX server as MBean [org.springframework.cloud.endpoint:name=refreshEndpoint,type=RefreshEndpoint]
+2017-08-31 13:14:42.464  INFO 9092 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=160fa5b,type=ConfigurationPropertiesRebinder]
+2017-08-31 13:14:42.589  INFO 9092 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 0
+2017-08-31 13:14:42.636  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:14:42.682  INFO 9092 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 18017 (http)
+2017-08-31 13:14:42.686  INFO 9092 --- [main] c.f.mapps.survey.SurveyApplication       : Started SurveyApplication in 6.775 seconds (JVM running for 7.659)
+2017-08-31 13:14:52.637  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:15:02.638  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:15:12.639  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:15:22.639  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:15:32.640  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:15:42.641  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:15:52.641  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:16:02.642  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......
+2017-08-31 13:16:12.643  INFO 9092 --- [pool-1-thread-1] c.f.m.i.session.SessionCacheFilter       : Session 清理任务启动......

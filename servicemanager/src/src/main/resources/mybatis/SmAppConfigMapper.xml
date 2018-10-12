@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmAppConfigMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmAppConfig">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="param_key" jdbcType="VARCHAR" property="paramKey" />
+    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
+    <result column="config_ver" jdbcType="NUMERIC" property="configVer" />
+    <result column="actived" jdbcType="VARCHAR" property="actived" />
+    <result column="setup_user" jdbcType="VARCHAR" property="setupUser" />
+    <result column="setup_time" jdbcType="DATE" property="setupTime" />
+  </resultMap>
+  
+  <select id="getConfigVersion" parameterType="java.util.Map" resultType="Long">
+    SELECT case when max(config_ver) is null then 0 else max(config_ver) end  as curversion FROM SM_APP_CONFIG 
+    where app_id=#{appId,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="inactiveConfig" parameterType="java.util.Map" >
+    UPDATE SM_APP_CONFIG set actived='0'   
+    where app_id=#{appId,jdbcType=VARCHAR} and config_ver=#{configVersion,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getConfigInfo" parameterType="java.util.Map" resultType="RsParamKeyValue">
+    SELECT param_key as paramKey,param_value as paramValue FROM SM_APP_CONFIG 
+    where app_id=#{appId,jdbcType=VARCHAR} and actived='1'
+  </select>
+</mapper>

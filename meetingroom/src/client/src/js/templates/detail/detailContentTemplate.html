@@ -1,0 +1,59 @@
+<% var roomData=roomDetailData %>
+<% console.log(roomData) %>
+<div class="list-li">
+    <div class="list-thumbnail">
+        <img src="<% if(roomData.imagePath!="" && roomData.imagePath!=null){%><%=roomData.imagePath%>_264x168<% } %>" onerror="javascript:this.src='<%= imgPath %>/list-default.png';">
+        <div class="sticker sticker-icon top left" style="display:none;">
+            <span class="size12 icon-fav-fill"></span>
+        </div>
+    </div>
+    <div class="list-container">
+        <div class="list-title" id="forMeetname"><%=roomData.roomName%></div>
+        <% if(roomData.needApprove=="1"){%>
+        <span class="mark-success outline" style="margin-top: 10px;">需审批</span>
+        <% }else{ %>
+        <span class="mark-disable outline" style="margin-top: 10px;">无需审批</span>
+        <% } %>
+    </div>
+</div>
+<div class="app-row underline">
+    <div class="app-rowLeft">会场地址</div>
+    <div class="app-rowRight"><%=roomData.address%></div>
+</div>
+<div class="app-row underline">
+    <div class="app-rowLeft">会场容量</div>
+    <div class="app-rowRight"><%=roomData.capacity%>人</div>
+</div>
+<div class="app-row underline">
+    <div class="app-rowLeft">会场面积</div>
+    <div class="app-rowRight"><%=roomData.area%>㎡</div>
+</div>
+<% var str="" %>
+<% if(roomData.stereo==1){str+="音响,";} %>
+<% if(roomData.display==1){str+="显示器,";} %>
+<% if(roomData.projector==1){str+="投影,";} %>
+<% if(roomData.wifi==1){str+="无线网,";} %>
+<% if(roomData.microphone==1){str+="麦克风,";} %>
+<% str = str.substr(0,str.length-1) %>
+<% if(str){ %>
+<div class="app-row underline">
+    <div class="app-rowLeft">会场设备</div>
+    <div class="app-rowRight"><%=str%></div>
+</div>
+<% } %>
+
+<div class="app-row underline">
+    <div class="app-rowLeft">管理员</div>
+    <div class="app-rowRight"><%=roomData.adminName%></div>
+</div>
+<div class="app-row underline">
+    <div class="app-rowLeft">服务员</div>
+    <div class="app-rowRight"><%=roomData.serviceName%></div>
+</div>
+
+<% if(roomData.remarks && roomData.remarks.length>0){ %>
+<div class="app-row underline">
+    <div class="app-rowLeft">详情介绍</div>
+    <div class="app-rowRight"><%=roomData.remarks%></div>
+</div>
+<% } %>

@@ -1,0 +1,62 @@
+<%
+if(isIframe){
+%>
+<link rel="stylesheet" href="<%=iframePrefix %>js/lib/editableselect/jquery-editable-select.css" />
+<%}%>
+<div class="outmain-cons">
+<form id="formMsg">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+
+            <!--<div class="form-item">-->
+                <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+                    <!--<input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="databassType" value="" />-->
+
+			<div class="form-item">
+                <label class="form-item-label"><span>*</span>指标：</label>
+                <div class="form-item-editbox">
+                        <select class="SID-measurement form-item-text form-item-select {required: true}" name = "measurement">
+                        	
+                        </select>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>名称：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="name" value=""/>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item" style="display: none;">
+                <label class="form-item-label">保留策略：</label>
+                <div class="form-item-editbox">
+                        <select class="SID-retentionpolicy form-item-text form-item-select {required: true}" name = "retentionpolicy">
+                        	
+                        </select>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item" style="display: none;">
+                <label class="form-item-label">保留时间：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-retainTime form-item-text smdigit" style="text-align: right;width: 25%" maxlength="30" type="text" name="retainTime" value=""/>
+                    <input class="form-item-text {required: true} retainTimeUnit" style="width:15px;height: 15px;position: relative" group="retainTimeUnit" type="radio" name="retainTimeUnit" value="h" id="retainTimeUnit-h" checked/><label style="margin:0 4px;" for="retainTimeUnit-h">时</label>
+                    <input class="form-item-text {required: true} retainTimeUnit" style="width:15px;height: 15px;position: relative" group="retainTimeUnit" type="radio" name="retainTimeUnit" value="d" id="retainTimeUnit-d"/><label style="margin:0 4px;" for="retainTimeUnit-d">天</label>
+                    <input class="form-item-text {required: true} retainTimeUnit" style="width:15px;height: 15px;position: relative" group="retainTimeUnit" type="radio" name="retainTimeUnit" value="w" id="retainTimeUnit-w"/><label style="margin:0 4px;" for="retainTimeUnit-w">周</label>
+                    <!-- <input class="form-item-text {required: true} retainTimeUnit" style="width:15px;height: 15px;position: relative" group="retainTimeUnit" type="radio" name="retainTimeUnit" value="m" id="retainTimeUnit-m"/><label style="margin:0 4px;" for="retainTimeUnit-m">月</label> -->
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <input class="SID-enabled" type="hidden" name="enabled" value=""/>
+        </div>
+
+    </div>
+</form>
+</div>

@@ -1,0 +1,21 @@
+<div id="<%=widgetid %>" class="SID-WidgetBox">
+	<div class="grid-stack-item-content" style="overflow: hidden;border-radius: 4px;">
+		<div style="width: 100%;height: 36px;<%if(opt){%>cursor: move;<%}%>">
+			<span class="widgetName" style="float: left;padding: 5px;width: 60%;text-align: left;font-size: 20px;"><%=name %></span>
+			<%
+			if(opt){
+			%>
+			<div class="tb-opt-box blurhide" style="float: right;">
+				<a class="table-operation widget-operation" style="vertical-align: -webkit-baseline-middle;margin-right: 10px;"><img style="width: 16px;" src="images/icon/more.png"/></a>
+				<div class="tb-opt-main">
+					<a href="javascript:void(0)" class="SID-editWidget" data-widgetid="<%=widgetid %>" style="color: #1788fb;"><span class="fhicon-pencil"></span>编辑</a>
+					<a href="javascript:void(0)" class="SID-renameWidget" data-widgetid="<%=widgetid %>" style="color: #1788fb;"><span class="fhicon-eye"></span>重命名</a>
+					<a href="javascript:void(0)" class="SID-deleteWidget" data-widgetid="<%=widgetid %>" style="color: #1788fb;"><span class="fhicon-delete"></span>删除</a>
+				</div>
+			</div>
+			<%}%>
+		</div>
+		<div id="<%=widgetid %>Content" style="width: calc(100% - 8px);height: calc(100% - 36px);float:left;border-top: #C3C3C3 1px solid;padding:0 4px">
+		</div>
+	</div>
+<div/>

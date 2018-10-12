@@ -1,0 +1,13 @@
+<!-- 会议备注模块开始 -->
+<div class="formBox meeting-remark hide SID-remarks-div SID-module-div">
+    <div class="form-item">
+        <label class="form-item-label">备注说明：</label>
+        <div class="form-item-editbox">
+            <textarea name="remark<%=sequName%>" maxlength="50" class="form-item-textarea SID-remarks-remarks {required: true}"><%= remark.remarks%></textarea>
+        </div>
+        <div class="form-item-tip"><div class="wrong-text"></div></div>
+    </div>
+    <div class="info-button">
+        <a class="buttonblue button-mask SID-module-del">删除</a>
+    </div>
+</div>

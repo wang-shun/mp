@@ -1,0 +1,221 @@
+<div class="swiper-wrapper">
+<div class="swiper-slide" id="ID-MeetDetail-PageBase">
+    <!--基本信息:start-->
+    <div class="qrcodePanel-top"></div>
+    <div class="qrcodePanel">
+        <div class="qrcodePanel-title"><%=data.meeting.meetingName %></div>
+        <!--滑动二维码-->
+        <!--正向签到-->
+        <%
+        if(data.signinSequList.length>0 && ((data.meeting.isSelfCreate=="1" || data.meeting.isSelfService=="1") && data.meeting.signType=="0")){ %>
+        <div class="swiper-container" style="margin: 10px 0 0 0;height:193px;" id="ID-MeetDetail-Qrcodes">
+            <div class="swiper-wrapper">
+            	<% for(var i=0,signinData; signinData=data.signinSequList[i++];) { %>
+                <div class="swiper-slide">
+                    <div class="app-qrcode-box">
+                        <img src="<%=signinData.qrcode %>" onerror="javascript:this.src='<%= imgPath %>/noqqrcode.png'" class="app-qrcode SID-MeetDetail-ImgQrcode" />
+                        <p>扫描二维码签到</p>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+            <!-- 添加分页 -->
+            <div class="swiper-pagination">1/<%=data.signinSequList.length %></div>
+            <!-- 左右箭头 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <!--反向签到-->
+        <% }else if(data.signinSequList.length>0 && data.meeting.isSelfJoin=="1" && data.meeting.signType=="1"){ %>
+        <div class="swiper-container" style="margin: 10px 0 0 0;height:193px;" id="ID-MeetDetail-Qrcodes">
+            <div class="swiper-wrapper">
+                <% for(var i=0,signinData; signinData=data.qrcodeList[i++];) { %>
+                <div class="swiper-slide">
+                    <div class="app-qrcode-box">
+                        <img src="<%=signinData %>" onerror="javascript:this.src='<%= imgPath %>/noqqrcode.png'" class="app-qrcode SID-MeetDetail-ImgQrcode" />
+                        <p>扫描二维码签到</p>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+            <!-- 添加分页 -->
+            <div class="swiper-pagination">1/<%=data.signinSequList.length %></div>
+            <!-- 左右箭头 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <% }else{ %>
+        <div style="height:203px;display: -webkit-box;-webkit-box-align:center;-webkit-box-pack:center;">
+            <img src="<%= imgPath %>/noqqrcode.png" style="width:210px;"/>
+        </div>
+        <%}%>
+        <img src="<%= imgPath %>/panelBtm.png" class="qrcodePanel-bottom"/>
+    </div>
+
+    <div class="group" style="margin-top: 12px;">
+        <div class="app-row underline">
+            <div class="app-rowLeft">地点</div>
+            <div class="app-rowRight"><%=data.meeting.address %></div>
+        </div>
+        <div class="app-row underline">
+            <div class="app-rowLeft">开始时间</div>
+            <div class="app-rowRight"><%=data.meeting.beginTimeStr %></div>
+        </div>
+        <div class="app-row underline">
+            <div class="app-rowLeft">结束时间</div>
+            <div class="app-rowRight"><%=data.meeting.endTimeStr %></div>
+        </div>
+        <div class="app-row underline">
+            <div class="app-rowLeft">召开人</div>
+            <div class="app-rowRight"><%=data.meeting.person %><a id="ID-MeetDetail-BtnCreatorChat" class="icon icon-chatline" style="margin-left: 4px;"></a></div>
+        </div>
+        <div class="app-row">
+            <div class="app-rowLeft">电话</div>
+            <div class="app-rowRight color-primary SID-phone" data-phone="<%=data.meeting.tel %>"><%=data.meeting.tel %></div>
+        </div>
+    </div>
+    <%if(data.signinSequList.length > 0){ %>
+    <div class="group">
+        <div class="sliver underline" style="padding: 0;margin:0 12px;color:#333;">
+            <p class="sliver-title">会议签到</p>
+        </div>
+        <% for(var i=0,signinData; signinData=data.signinSequList[i++];) { %>
+        <div class="input-line underline">
+            <input type="text" style="width: 75px;border: 0;padding:12px 0;" class="input-text" value="第<%=signinData.sequStr%>次签到" readonly="">
+            <div class="box-flex-1 leftline inputbox" style="width: 50%;text-align: right;">
+                <textarea class="input-pre" readonly="" style="margin: 12px 8px 12px 8px;" name="NID-SignDes"><%=signinData.remarks%></textarea>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <% } %>
+    <%if(data.remarksList.length > 0){ %>
+    <div class="group">
+        <p class="app-remarkTitle underline">会议备注</p>
+        <% for(var i=0,remarksData; remarksData=data.remarksList[i++];) { %>
+	        <%if(i == 0){ %>
+	        <p class="app-row app-remark underline"><%=remarksData.remarks%></p>
+	        <% } else {%>
+	        <p class="app-row app-remark"><%=remarksData.remarks%></p>
+			<% } %>
+        <% } %>
+    </div>
+    <% } %>
+    <!--基本信息:end-->
+</div>
+<div class="swiper-slide" id="ID-MeetDetail-PageAgenda">
+    <!--会议议程:start-->
+    <%if(data.agendasInfo.length>0){%>
+    <div class="list">
+        <% for(var i=0,agendaData; agendaData=data.agendasInfo[i++];) { %>
+        <div class="list-li underline SID-Index-Li" style="display: block;">
+            <div class="list-row">
+                <i class="list-icon icon-time color-primary"></i>
+                <p class="list-font color-primary">
+                   <%=agendaData.beginTimeStr%> ~ <%=agendaData.endTimeStr%>
+                </p>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-position color-primary"></i>
+                <p class="list-font">
+                    <%=agendaData.address%>
+                </p>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-label color-primary"></i>
+                <p class="list-font" style="color:#333;">
+                   <%=agendaData.remarks%>
+                </p>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <%}else{%>
+    <%=nodataHTML%>
+    <%}%>
+    <!--会议议程:end-->
+</div>
+<div class="swiper-slide" id="ID-MeetDetail-PageAgenda">
+    <!--附件资料:start-->
+    <%if(data.attachmentList.length>0){%>
+    <div class="list">
+        <% for(var i=0,attachData; attachData=data.attachmentList[i++];) { %>
+        <div class="input-line underline SID-AttachActiveList-Li" data-id="<%=attachData.filePath%>" data-name="<%=attachData.fileName%>" data-type="<%=attachData.contentType%>" data-size="<%=attachData.size%>" data-uploadTime="<%=attachData.uploadTime%>" style="padding:10px 0;">
+            <% if(attachData.contentType=="png" || attachData.contentType=="jpg" || attachData.contentType=="gif"){ %> 
+            <img class="size50" src="<%=imgPath%>/icon-typepic.png">
+            <% }else if(attachData.contentType=="mp3"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typeaudio.png">
+            <% }else if(attachData.contentType=="mp4"){ %> 
+            <img class="size50" src="<%=imgPath%>/icon-typevideo.png">
+            <% }else if(attachData.contentType=="pdf"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typepdf.png">
+            <% }else if(attachData.contentType=="doc" || attachData.contentType=="docx"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typeword.png">
+            <% }else if(attachData.contentType=="xls" || attachData.contentType=="xlsx"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typeexcel.png">
+            <% }else if(attachData.contentType=="ppt"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typeppt.png">
+            <% }else if(attachData.contentType=="rar" || attachData.contentType=="zip"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typepack.png">
+            <% }else if(attachData.contentType=="md" || attachData.contentType=="txt"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typetxt.png">
+            <% }else if(attachData.contentType=="pdf"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typepdf.png">
+            <% }else if(attachData.contentType=="dps"){ %>
+            <img class="size50" src="<%=imgPath%>/icon-typedps.png">
+            <% }else{ %>
+            <img class="size50" src="<%=imgPath%>/icon-typeunknow.png">
+            <% } %>
+            <div class="input-line-font"><%=attachData.fileName%>.<%=attachData.contentType%></div>
+            <div class="SID-MeetDetail-Download" data-id="<%=attachData.filePath%>" data-value="0" style="text-align: center;margin-right: 10px;">
+                <i class="icon-rdotobottom size30 color-primary"></i>
+                <p class="color-placeholder text-center" style="font-size: 12px;">下载</p>
+            </div>
+        </div>
+        <%}%>
+    </div>
+    <%}else{%>
+    <%=nodataHTML%>
+    <%}%>
+    <!--附件资料:end-->
+</div>
+<div class="swiper-slide" id="ID-MeetDetail-PagePeople">
+    <!--参会人员:start-->
+    <%
+    if((data.meeting.isSelfCreate == "1" || data.meeting.isSelfService == "1") && data.signinSequList.length>0){%>
+            <% for(var i=0,signinData; signinData=data.signinSequList[i++];) { %>
+            <div class="group SID-MeetDetail-SignList">
+                <div class="progressbox-title underline">
+                    <span>第<%=signinData.sequStr%>次签到</span>
+                    <a class="float-right SID-MeetDetail-SignLi" data-signId="<%=signinData.id%>">详情</a>
+                </div>
+                
+                <div class="progressbox-content">
+                    <div class="progress">
+                        <span class="progress-bar radius40 app-bg-1" style="width: <%=signinData.signedNum/signinData.totalNum*100%>%"></span>
+                    </div>
+                    <label><%=signinData.signedNum%>/<%=signinData.totalNum%></label>
+                </div>
+                <div class="progressbox-subcontent">
+                    <i class="icon-info size16 color-warn"></i>
+                    <p style="line-height: 18px;"><%=signinData.remarks%></p>
+                </div>
+            </div>
+            <% } %>
+    <%}else{%>
+        <div class="group" style="padding:10px 5px;margin-top: 0">
+            <ul class="grid" data-col="4">
+            <% for(var i=0,signinData; signinData=data.signinPersonList[i++];) { 
+            	if(signinData.personType != "service"){
+            %>
+                <li>
+                    <div class="app-gridButton" data-groupForSign="1" data-loginId="<%=signinData.personId%>"><%=signinData.personName%></div>
+                </li>
+            <% }
+            } %>
+            </ul>
+        </div>
+    <%}%>
+    <!--参会人员:end-->
+</div>
+</div>

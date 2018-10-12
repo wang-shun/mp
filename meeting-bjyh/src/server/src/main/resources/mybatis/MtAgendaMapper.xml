@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.MtAgendaMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.MtAgenda" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="meeting_id" property="meetingId" jdbcType="VARCHAR" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <delete id="deleteByMeetingId" parameterType="java.util.Map">
+    delete from mt_agenda where meeting_id = #{meetingId}
+  </delete>
+  
+  <select id="getByMeetingId" parameterType="java.util.Map" resultType="MtAgenda">
+    select id,meeting_id meetingId,to_char(begin_time,'MM-dd hh24:mi') beginTimeStr,to_char(end_time,'MM-dd hh24:mi') endTimeStr,address,remarks,to_char(begin_time,'MM-dd') dayStr 
+          ,begin_time beginTime,end_time endTime
+    from mt_agenda where meeting_id = #{meetingId,jdbcType=VARCHAR}
+    order by begin_time asc
+  </select>
+  
+  <select id="getDayByMeetingId" parameterType="java.util.Map" resultType="java.lang.String">
+    select to_char(begin_time,'MM-dd') dayStr  
+    from mt_agenda where meeting_id = #{meetingId,jdbcType=VARCHAR}
+    group by to_char(begin_time,'MM-dd') order by to_char(begin_time,'MM-dd') asc
+  </select>
+</mapper>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－签到</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+    <style type="text/css">
+    /* .calenderBtn{
+        width: 80px !important;
+        position: absolute;
+        right: 46px;
+        top: 14px;
+        opacity: 0.5;
+    }
+    .calenderBtn.active{
+        opacity: 1;
+    } */
+    .calenderBtn{
+        font-size: 20px;
+        color: #4587f7;
+        vertical-align: text-bottom;
+    }
+    .calenderBtn .icon-arrowup{
+        display: none;
+    }
+    .calenderBtn .icon-arrowdown{
+        display: inline-block;
+    }
+    .calenderBtn.active .icon-arrowup{
+        display: inline-block;
+    }
+    .calenderBtn.active .icon-arrowdown{
+        display: none;
+    }
+
+    </style>
+</head>
+<body>
+	<section id="pageSignList" class="active">
+		<header>
+           <div class="titlebar" style="z-index:99;">
+                <a class="left" href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">签到记录</h1>
+                <a class="right">
+                    <i class="icon-text"></i>
+                </a>
+            </div>
+            <div class="calendar animated fadeInDown" id="calender_select_container" style="background:#fff;">
+                <ul class="list noborder nobg">
+                    <li style="">
+                        <div class="justify arrowleft">
+                            <i class="icon-arrowleft"></i>
+                        </div>
+                        <div class="justify-content" style="text-align:center;">
+                        <!-- <button class="calenderBtn">考勤月</button> -->
+                        <span class="calendar-title"></span>
+                        <span class="calenderBtn">
+                            <i class="icon-arrowup"></i>
+                            <i class="icon-arrowdown"></i>
+                        </span>
+                        </div>
+                        <div class="justify arrowright">
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </li>
+                </ul>
+                <div class="calender_container">
+                    <div class='day'>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                    </div>
+                    <div class='date_container'>
+                        <div class="month_container">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <article style="top:165px;bottom:0px;background:#fff;border:1px solid #e8e8e8;">
+        <div class="sign-count"><i class="icon-cbook"></i><a class="count" style="color:#fff"><!-- 共签到5次 --></a>
+            <a class="rank" style="color:#fff;float: right;position: relative;top: 4px;"></a>
+        </div>
+            <div class="no-data box box-middlecenter hidden" style="z-index: 10;"><!--暂无数据-->
+                <div class="nodata-content " style="padding-bottom: 0">
+                    <!-- <img src="img/icon/no-data.png">
+                    <br> -->
+                    暂无签到记录！
+                </div> 
+            </div>
+            <div class="list-count"></div>
+            <ul class="sign-list animated fadeInUp" id="signList" style="position: absolute;top: 40px;bottom: 0;left: 0;right: 0;overflow-y: scroll;">
+                <!-- <li class="sign-info">
+                    <div class="clock" data-clock="8:30">
+                        <div class="hour"></div>
+                        <div class="minute"></div>
+                        <div class="origin"></div>
+                    </div>
+                    <span class="time">8:30</span>
+                    <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
+                    <div class="title">我来上班了！！快看我地点!!!! 我来上班了！！快看我地点快看我地点快看我地点快看我地点</div>
+                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <hr> 
+                </li> -->
+            </ul>
+        </article>
+	</section>
+<script id="mySignInfo-tpl" type="text/x-handlebars-template">
+{{#each signList}}
+<li class="sign-info" data-sign-id="{{signId}}" data-sign-time="{{signTimeStr}}">
+    <div class="clock" data-clock="{{timer signTimeStr}}">
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="origin"></div>
+    </div>
+    <span class="time">{{timer signTimeStr}}&nbsp;&nbsp;&nbsp;{{taskNo}}</span>
+    <span class="location"><i class="icon-position"></i>{{address}}</span>
+    <div class="title"><pre>{{content}}</pre></div>
+    {{#each images}}
+    <a class="img-location" style="background-image:url(img/placeholder/placeholder-small.png);" data-bg="{{this}}" data-href="{{this}}"></a>
+    {{/each}}
+    <hr> 
+</li>
+{{/each}} 
+</script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script>
+    var URL = {
+        queryMySign:"&method=mapps.sign.query&format=json&v=1.0&appKey=",
+        queryMySignCount:"&method=mapps.sign.queryadmin&format=json&v=1.0&appKey="
+    },
+    Template = {
+        "mySignInfo":$("#mySignInfo-tpl").html()
+    },
+    DateStr = "";
+    //日历
+    var tempWeekSelectObject = new DateSelect({
+            activeDate: new Date()
+        }),
+        tempDivId = "calender_select_container";
+    var tempCalenderObject = new Calender({
+        dateSelectObject: tempWeekSelectObject,
+        containerDivId: tempDivId,
+        /*mode: "month",
+        calenderType: "OACalender",*/
+        onChange: function(date) {
+            queryMySign(date);
+
+        }
+    });
+    function calendarCollapse(){
+        tempCalenderObject.switchToWeek();
+    }
+    function calendarExpand(){
+        tempCalenderObject.switchToMonth();
+    }
+    function today(){
+        tempCalenderObject.jumpToDate(new Date());
+    }
+    //无数据
+    function noData(){
+        var listLength = $("#signList").find(".sign-info").length;
+        if (listLength == 0){
+            container.find(".no-data").removeClass("hidden");
+        }
+    }
+    //初始化function
+    window.addEventListener("load",function(){
+        bindEvents();
+        queryMySign(new Date());
+        // queryMySignCount(new Date());
+        
+    },false);
+    document.addEventListener("plusready",function(){
+        Mplus.closeBackListener();
+    }, false);
+
+    function queryMySign(date){
+        var signDate = getDateStr(date);
+        DateStr = signDate;
+        ajaxModel.getData(URL.queryMySign,{
+            "signDate":signDate//"2016-03-22"
+        }).then(function(res){
+            if(res.code === "1"){
+                var data = res.data;
+                if(data.length == 0){
+                    $(".no-data").removeClass("hidden");
+                    $("#signList").html("");
+                    // $(".sign-count").hide();
+                    
+                    $(".sign-count a.count").html(date.getDate()+"号无签到")
+                }else{
+                    $(".no-data").addClass("hidden");
+                    var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
+                    $("#signList").html(html);
+                    // $(".sign-count").show();
+                    $(".sign-count a.count").html(date.getDate()+"号签到"+data.length+"次")
+                    DataClock();
+                    lazyloadImg();
+                }
+                queryMySignCount(date);
+            }else{
+                new Toast("请求失败").show();
+            }
+        })
+    }
+    function queryMySignCount(date){
+        var signDateBegin,signDateEnd;
+        if(tempCalenderObject.mode === "week"){
+            var weekDate = tempWeekSelectObject.getWeekDate();
+            signDateBegin = weekDate[0];
+            signDateEnd = weekDate[weekDate.length-1];
+        }else if(tempCalenderObject.mode === "month"){
+            var monthDate = tempWeekSelectObject.getMonthCalenderDate("OACalender");
+            for(var i=0,len=monthDate.length;i<len;i++){
+                if(!signDateBegin && monthDate[i].getDate()===21){
+                    signDateBegin = monthDate[i];
+                }
+                if(!signDateEnd && signDateBegin && monthDate[i].getDate()===20){
+                    signDateEnd = monthDate[i];
+                }
+                if(signDateBegin && signDateEnd){
+                    break;
+                }
+            }
+        }else{
+            return;
+        }
+        $(".rank").html("");
+        ajaxModel.getData(URL.queryMySignCount,{
+            "signDateBegin":getDateStr(signDateBegin),
+            "signDateEnd":getDateStr(signDateEnd)
+        }).then(function(res){
+            if(res.code === "1"){
+                $(".sign-count").show();
+                var creatorNum = res.data.creatorNum,
+                    signCount = res.data.signCount;
+                if(tempCalenderObject.mode === "week"){
+                    $(".rank").html("本周"+signCount+"次，排名第"+creatorNum);
+                }else if(tempCalenderObject.mode === "month"){
+                    $(".rank").html("本月"+signCount+"次，排名第"+creatorNum);
+                }
+            }else if (res.code === "100001"){
+                new Toast("请求失败").show();
+            }
+        })
+    }
+    function getDateStr(date){
+        // var date = new Date();
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
+        if (mm < 10) {
+        	mm = "0" + mm;
+        }
+        if (dd < 10) {
+        	dd = "0" + dd;
+        }
+        return yyyy+"-"+mm+"-"+dd;
+    }
+    function previewImage(container,clickDom){
+        var $container = $(container),
+            $clickDom = $(clickDom);
+        var urls = [];
+        var current = window.photoDownload + $clickDom.data("href");
+        $container.find("[data-href]").each(function(){
+            (function(s){
+                var url = window.photoDownload + $(s).data("href");
+                urls.push(url);
+            })(this);  
+        })
+        Mplus.previewImage(current,urls);
+    }
+    function lazyloadImg(container){
+        $("[data-bg],[data-img]").each(function(){
+            (function(s){
+                var img = new Image();
+                var data = $(s).data();
+                if($(s).data("img")){
+                    img.src = window.photoDownload_m + $(s).data('img');
+                    // img.src = $(s).data('img');
+                    img.onload=function(){
+                        $(s).attr('src', img.src);
+                    }
+                }else{
+                    // img.src = $(s).data('bg');
+                    img.src = window.photoDownload_m + $(s).data('bg');
+                    img.onload=function(){
+                        $(s).css("background-image","url(" + img.src + ")");
+                    }
+                }
+                
+            })(this);
+        });
+    }
+    function bindEvents(){
+        $(document).on("click","#signList .img-location",function(){
+            var $this = $(this)
+            previewImage($this.parents(".sign-info"),$this);
+        }); 
+        $(".titlebar .icon-text").click(function(){
+            // alert("mySignmap.html?date="+DateStr);return;
+            window.location.href = "mySignmap.html?date="+DateStr;
+        });
+        $("#signList").on("click",".location",function(){
+            var signLi = $(this).parents(".sign-info");
+            var signId = signLi.data("signId"),
+                signTime = signLi.data("signTime").split(/[\s]/)[0];
+            window.location.href="map.html?signId="+signId+"&date="+signTime;
+        });
+        $(".calenderBtn").on("click",function(){
+            var article_top = $("article").css("top").replace('px',"")-0;
+            if($(this).hasClass("active")){//普通月
+                $("article").css("top",article_top-170+"px");
+                tempCalenderObject.mode = "week";
+                tempCalenderObject.switchToCalender();
+            }else{
+                tempCalenderObject.switchToOACalender();
+                $("article").css("top",article_top+170+"px");
+            }
+            $(this).toggleClass("active");
+            queryMySignCount(tempCalenderObject.getActiveDate());
+        })
+    }
+
+    /*Handlebars*/
+    Handlebars.registerHelper("timer",function(value){
+        return value.split(/[\s]/)[1].substring(0,5);
+    })
+	//定义exmobi返回
+	function back(){history.go(-1);}
+	</script>
+</body>
+</html>

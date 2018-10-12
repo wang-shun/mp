@@ -1,0 +1,75 @@
+<% var data=data %>
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-BtnAddPlanBack">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center"><%=data.roomName%></h1>
+    </div>
+</header>
+<article>
+    <form id="ID-FormAddPlan">
+    <div class="group">
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">预定人</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.name%>
+                </div>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">联系方式</label>
+            <div class="inputbox-right inputbox">
+                <div class="input-text text-right color-placeholder" style="padding:15px 12px;">
+                    <%=data.phoneNum%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="group">
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">预定日期</label>
+            <div class="inputbox-right inputbox">
+                <input type="text" readonly class="SID-InputDate input-text text-right color-placeholder" style="padding:15px 12px;" value="<%=data.date%>"/>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">开始时间</label>
+            <div class="inputbox-right inputbox">
+                <input type="text" readonly name="inputStartTime" class="SID-InputStartTime input-text text-right color-placeholder" style="padding:15px 12px;" value="<%=data.starttime%>"/>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">结束时间</label>
+            <div class="inputbox-right inputbox">
+                <input type="text" readonly name="inputEndTime" class="SID-InputEndTime input-text text-right color-placeholder" style="padding:15px 12px;" value="<%=data.endtime%>"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="group">
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">会议名称</label>
+            <div class="inputbox-right inputbox">
+                <input type="text" name="inputMeetName" class="SID-InputMeetName input-text text-right" style="padding:15px 12px;" placeholder="请输入会议名称" maxlength="20"/>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">会议人数</label>
+            <div class="inputbox-right inputbox">
+                <input type="tel" name="NID-AddPlan-PeopleCount" id="ID-AddPlan-PeopleCount" class="input-text text-right" style="padding:15px 12px;" placeholder="请输入会议人数" maxlength="4" oninput="if(!/^[1-9]{1,}[0-9]*$/.test(value))value=value.substring(0,value.length-1)"/>
+            </div>
+        </div>
+        <div class="inputbox underline">
+            <label class="inputbox-left" style="padding: 10px 0 10px 12px;">预定备注</label>
+            <div class="inputbox-right inputbox">
+                <input type="text" name="inputMeetRemark" class="SID-InputMeetRemark input-text text-right" style="padding:15px 12px;" placeholder="请输入所需物品及其他需求" maxlength="50"/>
+            </div>
+        </div>
+    </div>
+    </form>
+    <a class="radius4 button primary block SID-BtnAddPlanSubmit" style="margin: 25px auto 15px auto;width: 250px;">立即预定</a>
+    <!--<a class="radius4 button blue block SID-BtnAddPlanSuccess" style="margin: 0px auto;width: 250px;display: none;">预定并召开会议</a>-->
+</article>

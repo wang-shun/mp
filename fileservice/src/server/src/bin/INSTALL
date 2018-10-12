@@ -1,0 +1,121 @@
+﻿--------------安装nginx(图片缩略服务)-------------
+
+安装gd库
+yum install -y gd*  
+其他库若也没有请安装:pcre openssl  zlib
+yum install -y pcre* 
+yum install -y openssl* 
+yum install -y zlib* 
+
+
+检查是否装过nginx
+rpm -qa|grep nginx
+如果已经安装,则删除
+rpm -qa|grep nginx|xargs rpm -e --nodeps
+rm -rf (ngxin路径)
+
+新建nginx安装目录
+mkdir /usr/local/nginx/
+解压资源包到目录
+cd {fileservice根目录}
+unzip nginx1.9.zip
+解压nginx文件
+tar -zxvf nginx-1.9.0.tar.gz -C /usr/local/nginx/
+
+安装nginx
+cd /usr/local/nginx/
+编译（不带fdfs功能，添加image filter）
+./configure --prefix=/usr/local/nginx --sbin-path=/usr/local/nginx/nginx --conf-path=/usr/local/nginx/nginx.conf --pid-path=/usr/local/nginx/nginx.pid --with-http_ssl_module  --with-http_stub_status_module --with-http_image_filter_module
+注:以上为一行命令
+make
+make install
+
+创建缓存路径
+mkdir  /usr/local/nginx/cache
+
+替换nginx目录中的配置文件
+cd {fileservice根目录}
+mv nginx.conf /usr/local/nginx/   
+
+若fileservice与nginx不在一台机器上,则需要修改nginx.conf
+cd /usr/local/nginx/
+vi nginx.conf 
+修改其中两项ip端口配置(重要),将第二个server里面的两个127.0.0.1:9081改成对应的ip和端口
+
+放入自启动服务脚本
+移动nginx1.9.zip中的nginx文件(无后缀文件)至/etc/init.d/
+(注：请勿移动/usr/local/nginx/中的nginx文件)
+cd {fileservice根目录}
+mv nginx /etc/init.d/
+授予nginx文件运行权限
+cd /etc/init.d/
+chmod 755 nginx
+
+启动服务
+service nginx start（stop/restart）
+
+检查端口
+netstat -anpl|grep 9081
+
+
+检查日志
+tail -fn 200 /opt/mapps/(fileservice路径)/logs/spring.log 
+
+
+
+﻿--------------安装ffmpeg(视频转换服务,圈子用,可选)-------------
+配置环境变量
+/etc/profile中添加
+PATH=$PATH:/usr/local/yasm/bin
+export PATH
+
+FFMPEG=/usr/local/ffmpeg/bin
+export FFMPEG
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/x264/lib:/usr/local/ffmpeg/lib
+export LD_LIBRARY_PATH
+
+解压yasm1.3
+cd {fileservice根目录}
+tar zxf yasm-1.3.0.tar.gz --directory=/opt
+
+安装yasm1.3
+cd /opt/yasm-1.3.0
+./configure --prefix=/usr/local/yasm && make && make install
+注:以上为一行命令
+
+解压x264
+cd {fileservice根目录}
+tar jxf last_stable_x264.tar.bz2 --directory=/opt
+
+安装x264
+cd /opt/x264-snapshot-20170601-2245-stable
+./configure --prefix=/usr/local/x264 --enable-shared --enable-static && make && make install
+注:以上为一行命令
+
+解压ffmpeg
+cd {fileservice根目录}
+tar jxf ffmpeg-3.2.5.tar.bz2 --directory=/opt
+
+安装ffmpeg
+cd /opt/ffmpeg-3.2.5
+./configure --prefix=/usr/local/ffmpeg --enable-shared --enable-yasm --enable-libx264 --enable-gpl --enable-pthreads --extra-cflags=-I/usr/local/x264/include --extra-ldflags=-L/usr/local/x264/lib && make && make install
+注:以上为一行命令
+
+
+
+﻿--------------升级后fileservice服务模式说明-------------
+若未安装过fileservice文件服务,建议使用本地存储模式,servicemanager上面的配置管理请选择文件系统(本地存储)
+若已安装过fileservice并且使用的旧版本(1.0.0或选择了FastDFS模式),请进行以下操作:
+cd {fileservice根目录}
+vi config/application.yml
+在application.yml中添加以下内容:
+fdfs:
+  webRoot: http://192.168.7.200/
+  soTimeout: 1501
+  connectTimeout: 601
+  trackerList:            #TrackerList参数,支持多个
+    - 192.168.7.200:22122
+注:其中webRoot为配置好的fastdfs的访问ip和端口,trackerList为服务节点
+若为独立服务模式(stand-alone)请将fileservice:store: 中的值改为fdfs
+若为(micro-service)则不改动该字段,但需要将servicemanager服务管理中的配置管理相对应的存储类型改为FastDFS,存储访问节点改为上面的webRoot的值

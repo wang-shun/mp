@@ -1,0 +1,58 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">搜索</h1>
+    </div>
+    <div class="app-blockSearch">
+        <form id="ID-MeetSearch-SearchForm" method="post" class="inputbox inputbox-search" data-input="clear">
+            <input type="search" name="NID-MeetSearch-Search" maxlength="50" class="search input-text" style="padding: 6px 12px;">
+            <i class="color-placeholder icon icon-clear-fill hide size20"></i>
+            <div class="inputbox-search-placeholder">
+                <i class="inputbox-search-icon icon-search"></i>
+                <span class="inputbox-search-font">请输入活动名称</span>
+            </div>
+        </form>
+    </div>
+    <div class="app-stateFilterBar underline" id="ID-Search-BtnFilter">
+        <div class="app-stateFilterBar-font">
+            <i class="icon-filter size20"></i>
+            <span>综合排序</span>
+        </div>
+        <i class="app-stateFilterBar-icon icon-arrowdown"></i>
+        <i class="app-stateFilterBar-icon icon-arrowup"></i>
+    </div>
+</header>
+<article style="top:127px;">
+    <div id="ID-Search-List"></div>
+</article>
+<!--状态筛选-->
+<div id="ID-Search-DialogFilter" style="background-color:white;display:none;">
+    <ul class="app-popListSelect">
+        <li class="SID-Search-State active underline" data-status="1">
+            <div>综合排序</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Search-State underline" data-status="2">
+            <div>即将开始</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Search-State underline" data-status="3">
+            <div>最新发布</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Search-State underline" data-status="4">
+            <div>人气最高</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Search-State underline" data-status="5">
+            <div>我参与的</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Search-State" data-status="6">
+            <div>我创建的</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+    </ul>
+</div>

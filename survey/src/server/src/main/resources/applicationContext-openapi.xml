@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rop="http://www.bookegou.com/schema/rop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.bookegou.com/schema/rop http://www.bookegou.com/schema/rop/rop-1.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+    
+    <!-- 上传拦截，如最大上传值及最小上传值 -->  
+    <bean id="multipartResolver"  
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- one of the properties available; the maximum file size in bytes -->  
+        <property name="maxUploadSize" value="100000000" />  
+    </bean>
+
+    <!--① 扫描Spring Bean-->
+    <context:component-scan base-package="com.fiberhome" >
+    	<context:exclude-filter type="regex" expression="com.fiberhome.mapps.mssdk.*"/>
+    </context:component-scan>
+    
+    <bean id="appSecretManager"  class="com.fiberhome.mapps.intergration.rop.DefaultAppSecretManager" />
+    <!-- 启动Rop框架 -->
+    <rop:annotation-driven   
+            session-manager="sessionManager"
+            formatting-conversion-service="conversionService"
+            app-secret-manager="appSecretManager"
+            thread-ferry-class="com.fiberhome.mapps.intergration.session.DefaultThreadFerry"
+            service-access-controller="asc"
+            sign-enable="false"
+            core-pool-size="40"
+            max-pool-size="200"
+            keep-alive-seconds="60"/>
+    <bean id="asc" class="com.fiberhome.mapps.intergration.security.priv.RopServiceAccessController"></bean>
+    <!--自定义method,appKey等这些系统级参数的参数名-->            
+    <rop:sysparams appkey-param-name="appKey" format-param-name="format"/>            
+    
+    <bean id="sessionManager"
+          class="com.fiberhome.mapps.intergration.session.DefaultSessionManager"
+         >
+       <!-- 
+        p:sessionManagerFile="classpath:rop.sessionTimeManager.properties"
+        <property name="signCodeManagerImpl">
+            <ref bean="signCodeManagerImpl" />
+        </property> 
+       -->
+    </bean>
+
+    <!--设置自定义的类型转换服务，注册自定义的类型转换器-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    </bean>
+
+    <!--注册拦截器，可配置多个-->
+    <rop:interceptors>
+        <bean class="com.fiberhome.mapps.intergration.rop.ReservedUserNameInterceptor"/>
+         
+        
+    </rop:interceptors>
+
+    <!--注册监听器，可配置多具-->
+    <rop:listeners>
+        <bean class="com.fiberhome.mapps.intergration.rop.DefaultPostInitializeEventListener"/>
+        <bean class="com.fiberhome.mapps.intergration.rop.DefaultPreDoServiceEventListener"/>
+        <bean class="com.fiberhome.mapps.intergration.rop.DefaultAfterDoServiceEventListener"/>
+    </rop:listeners>
+    
+</beans>

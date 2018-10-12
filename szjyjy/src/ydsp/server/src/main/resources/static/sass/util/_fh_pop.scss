@@ -1,0 +1,27 @@
+/**pop框**/
+.lhgdialog_default .lhgdg_leftTop_default,.lhgdialog_default .lhgdg_rightTop_default,.lhgdialog_default .lhgdg_leftBottom_default,.lhgdialog_default .lhgdg_rightBottom_default,.lhgdialog_default .lhgdg_left_default,.lhgdialog_default .lhgdg_right_default,.lhgdialog_default .lhgdg_icon_default,.lhgdialog_default a.lhgdg_xbtn_default,.lhgdialog_default a.lhgdg_maxbtn_default,.lhgdialog_default a.lhgdg_rebtn_default,.lhgdialog_default a.lhgdg_minbtn_default,.lhgdialog_default a.lhgdg_button_default,.lhgdialog_default a.lhgdg_button_default em{}
+.lhgdg_top_default .lhgdg_title_icon_default{background:#f2f2f2;color:#333;height:37px;line-height:37px;padding:0px 5px;}
+.lhgdg_title_icon_default .lhgdg_title_default{font-size:14px;margin-top:0px;}
+.lhgdg_top_default .lhgdg_icon_default{display:none;}
+.lhgdialog_default .lhgdg_btnBar_default{padding: 12px 0;}
+.lhgdg_btnBar_default a.lhgdg_button_default{ border:#e8e8e8 1px solid; border-radius:20px; height:28px; line-height:28px; padding:0 25px;display:inline-block;}
+.lhgdg_btnBar_default a.lhgdg_button_default em{color:#333;display:inline-block; font-size:14px;}
+.lhgdg_btnBar_default a.lhgdg_button_default:hover{border:#1788fb 1px solid;}
+.lhgdg_btnBar_default a.lhgdg_button_default:hover em{color:#1788fb;}
+.lhgdialog_default .lhgdg_bottom_default{background:#e8e8e8}
+.lhgdialog_default .lhgdg_leftBottom_default{height:1px;width:1px;background:#e8e8e8;}
+.lhgdialog_default .lhgdg_rightBottom_default{height:1px;width:1px;background:#e8e8e8;}
+.lhgdialog_default .lhgdg_left_default{width:1px;background:#e8e8e8;}
+.lhgdialog_default .lhgdg_right_default{width:1px;background:#e8e8e8;}
+.lhgdialog_default .lhgdg_top_default{border-bottom:1px solid #e8e8e8;border-top:1px solid #e8e8e8}
+.lhgdialog_default .lhgdg_leftTop_default{background:#e8e8e8;width:1px;border-bottom:1px solid #e8e8e8}
+.lhgdialog_default .lhgdg_rightTop_default{background:#e8e8e8;width:1px;border-bottom:1px solid #e8e8e8}
+.lhgdialog_default a.lhgdg_xbtn_default{background: url(#{$path}/images/main/close.png) no-repeat 0 0;}
+.lhgdialog_default a.lhgdg_xbtn_default:hover{background: url(../images/main/close_on.png) no-repeat 0 0 }
+.lhgdg_btnBar_default a.lhgdg_button_default{margin-right:15px;}
+#lhgdgCover{background:#000 !important;opacity:0.3 !important;filter:alpha(opacity=30) !important;}
+.lhgdialog_default #info_con{background:#fff}
+.alert-icon{text-align:right}
+.alert-icon .alert_info,.alert-icon .confirm_info{background: url(#{$path}/images/main/alert_icon.png) no-repeat center center;display:inline-block}
+
+.ema_td_round_topleft,.ema_td_round_topright,.ema_td_round_middleleft,.ema_td_round_middleright,.ema_td_round_bottomleft,.ema_td_round_bottomcenter,.ema_td_round_bottomright{display:none}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.meetingroom.dao.MrReservedResMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meetingroom.entity.MrReservedRes">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="reserved_id" jdbcType="VARCHAR" property="reservedId" />
+    <result column="res_id" jdbcType="VARCHAR" property="resId" />
+  </resultMap>
+  
+</mapper>

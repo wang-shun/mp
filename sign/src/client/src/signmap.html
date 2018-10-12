@@ -1,0 +1,677 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name = "format-detection" content = "telephone=no">
+	<title>local-map</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<style type="text/css">
+		/*隐藏样式*/
+		.hide{
+			display: none!important;
+		}
+		#allmap{
+			height:100%;
+		}
+		.shrinkcase{
+			padding:10px 0;
+		}
+		/*地图标记*/
+		.pin-label{
+			position: absolute;
+			width:28px;
+			height:28px;
+			text-align:center;
+			line-height:28px;
+			left:2px;
+			top:2px;
+			border-radius: 100%;
+			-webkit-transform:rotate(45deg);
+			-webkit-transform-origin:center; 
+
+			color: white;
+		}
+		/*人员*/
+		#signPeople{
+			padding: 15px 0;
+		}
+		#signPeople li>a{
+			width:50px;
+			height: 50px;
+			box-sizing:border-box;
+			border-style:solid;
+			border-width:2px;
+			opacity:0.5;
+		}
+		#signPeople li>a.active{
+			/* background-color:white!important;
+			color:#333; */
+			opacity:1;
+		}
+		/*悬浮日期框*/
+		.signDate{
+			padding-left: 10px;
+			position: absolute;top:10px;left:10px;z-index: 99999;
+			background-color: #4587F7;
+			text-align: center;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 1px 2px 2px 0 rgba(0,0,0,.4);
+		}
+		.signDate input[type=date]{
+			min-width: 110px;
+			width:auto;
+			/*width:110px;*/
+			text-align: center;
+			color:white;
+			border-width:0;
+			background-color: transparent;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.map-data-wrap {
+			position: relative;
+		}
+		.no-map-data {
+			top:0;
+			left: 0;
+			position: absolute;
+			line-height: 112px;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+		}
+		.rightIcon{
+			width: 20px;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform:translate(0,-50%);
+		}
+		.icon-calendar.rightIcon{
+			z-index: 1;
+		}
+		input[type="date"].rightIcon{
+			z-index: 2;
+			width: 40px;
+			opacity: 0;
+		}
+		
+		.calenderBtn{
+	        font-size: 20px;
+	        color: #4587f7;
+	        vertical-align: text-bottom;
+	    }
+	    .calenderBtn .icon-arrowup{
+	        display: none;
+	    }
+	    .calenderBtn .icon-arrowdown{
+	        display: inline-block;
+	    }
+	    .calenderBtn.active .icon-arrowup{
+	        display: inline-block;
+	    }
+	    .calenderBtn.active .icon-arrowdown{
+	        display: none;
+	    }
+	    .app-calendarTitle a,.app-calendarTitle i,.app-calendarTitle input[type=date]{
+	    	pointer-events:none;
+	    }
+	</style>
+</head>
+
+<body>
+	<div id="loadingPage" style="display: none">
+        <div class="popup-mask" style="display: block; opacity: 1;"></div>
+        <div class="loading-box box box-middlecenter" style="text-align: center">
+            <!-- <div class="loading"></div> -->
+            <img src="img/icon/loading.gif" style="width:50px">
+        </div>
+    </div>
+	<section id="page_local_db" class="active">
+		<header>
+		    <div class="titlebar">
+                <!-- <a href="javascript:history.go(-1)"> -->
+                <a class="left" id="back">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <!-- <h1 class="text-center">统计</h1> -->
+                <h1 class="text-center app-calendarTitle" style="display: none;" onclick="toggleCalender()">
+                	<span class="text"></span>
+                	<a style="width: 40px;height: 100%;vertical-align: bottom;margin-top: 0;">
+	                    <i class="icon-calendar rightIcon"></i>
+	                    <input type="date" id="expireDate" value="" class="rightIcon" disabled="disabled"/>
+	                </a>
+                </h1>
+                <a class="right">
+                    <i class="icon-persons"></i>
+                </a>
+            </div>
+            <div class="calendar animated fadeInDown" id="calender_select_container" style="background:#fff;z-index: 2;visibility: hidden">
+                <ul class="list noborder nobg">
+                    <li style="">
+                        <div class="justify arrowleft">
+                            <i class="icon-arrowleft"></i>
+                        </div>
+                        <div class="justify-content" style="text-align:center;">
+                        <!-- <button class="calenderBtn">考勤月</button> -->
+                        <span class="calendar-title"></span>
+                        <span class="calenderBtn">
+                            <!-- <i class="icon-arrowup"></i>
+                            <i class="icon-arrowdown"></i>
+                            <input type="button" value="确定" onclick="chooseDate()"/> -->
+                        </span>
+                        </div>
+                        <div class="justify arrowright">
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </li>
+                </ul>
+                <div class="calender_container">
+                    <div class='day'>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                    </div>
+                    <div class='date_container'>
+                        <div class="month_container">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</header>
+		<article style="bottom: 150px;">
+			<!-- <div class="signDate">
+				<input type="date" id="expireDate"/>
+			</div> -->
+			<div id="allmap"></div>
+		</article>
+		<footer style="height: 150px;background-color:white;">
+			<ul class="list noclick"></ul>
+			<div class="map-data-wrap overflow-x" style="height: 112px;white-space:nowrap;">
+				<ul id="signPeople" class="grid app radiusround" data-col="4"></ul>
+				<div class="no-map-data hidden" style="z-index=-1">当天无签到信息</div>
+			</div>
+		</footer>
+	</section>
+	<!-- 加载遮罩 -->
+	<div class="popup-mask hide" style="opacity: 1;display: block;"></div>
+	<div class="loading-box box box-middlecenter hide">
+		<div class="loading"></div>
+	</div>
+	<script id="querySignStat-tpl" type="text/x-handlebars-template">
+	<li>
+		<div class="justify-content">最新签到<b>{{signedCount}}</b>人（已签<b>{{signedCount}}</b>人，未签<b>{{noSignedCount}}</b>人，请假<b>{{leavesCount}}</b>人）</div>
+		<a data-depids="{{depIds}}" data-userids="{{userIds}}" data-virtualgroupids="{{virtualGroupIds}}" data-signdate="{{signDate}}" class="justify">
+			详细 >
+		</a>
+	</li>
+	</script>
+	<script id="querySignStatDetail-tpl" type="text/x-handlebars-template">
+	{{#each list}}
+	<li>
+		<a class="icon-name" data-creator="{{creator}}" style="background-color: {{getColor creatorName}};background-size: cover;" data-icon-name="{{creator}}">
+			{{lastChar creatorName}}
+		</a>
+		<label class="grid-label">{{creatorName}}</label>
+	</li>
+	{{/each}} 
+	<li class="sign-info bottom-space"></li>          
+	</script>
+	<script src="plugin/jquery/jquery.min.js"></script>
+	<script src="plugin/seedsui/seedsui.min.js"></script>
+	<script src="plugin/handlebars/handlebars.js"></script>
+	<script src="js/ajaxModel.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/Mplus.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8830f84901336e9afd2c6d7033d2ebe5"></script>
+	<script src="js/inobounce.min.js"></script>
+	<script>
+		function chooseDate(){
+			initSignDate(selectCalenderDate);
+			document.getElementById('calender_select_container').style.visibility = "hidden";
+		}
+		function toggleCalender(){
+			if(document.getElementById('calender_select_container').style.visibility == "hidden"){
+				document.getElementById('calender_select_container').style.visibility = "visible";
+				document.getElementById('calender_select_container').style.display = "block";
+			}else{
+				document.getElementById('calender_select_container').style.visibility = "hidden";
+				document.getElementById('calender_select_container').style.display = "none";
+			}
+		}
+		var selectCalenderDate = new Date();
+		//日历
+	    var tempWeekSelectObject = new DateSelect({
+	            activeDate: new Date()
+	        }),
+	        tempDivId = "calender_select_container";
+	    var tempCalenderObject = new Calender({
+	        dateSelectObject: tempWeekSelectObject,
+	        containerDivId: tempDivId,
+	        mode: "month",
+	        calenderType: "OACalender",
+	        onChange: function(date) {
+	        	initSignDate(getDateFormat(date));
+				//document.getElementById('calender_select_container').style.visibility = "hidden";
+	
+	        }
+	    });
+	    document.getElementById('calender_select_container').style.display = "none";
+	    function calendarCollapse(){
+	        tempCalenderObject.switchToWeek();
+	    }
+	    function calendarExpand(){
+	        tempCalenderObject.switchToMonth();
+	    }
+	    function today(){
+	        tempCalenderObject.jumpToDate(new Date());
+	    }
+	
+	
+	
+	// ?depIds=ad5e8a29-2744-4780-96e8-449e40563dff&userIds=3cd30a14-322d-483f-a3eb-ed83805267c7,f3aea080-c6e8-444f-8a09-d990956f1097
+		var markerPeopleObj = {};
+
+		var allMarkers = [];
+
+		var sp = document.getElementById("signPeople");
+
+		var depIds = getParams("depIds");
+    	var userIds = getParams("userIds");
+    	var virtualGroupIds = getParams("virtualGroupIds");
+
+		URL = {
+			querySignStat : "&method=mapps.sign.queryStat&format=json&v=1.0&appKey=",
+			querySignPage : "&method=mapps.sign.lastSign.query&format=json&v=1.0&appKey=",
+			queryMySign:"&method=mapps.sign.query&format=json&v=1.0&appKey="
+		}
+
+		Template = {
+			querySignStat : $("#querySignStat-tpl").html(),
+			querySignStatDetail : $("#querySignStatDetail-tpl").html()
+		}
+		$('#loadingPage').show();
+		//初始化地图
+		var b=new BaiduMap("allmap");
+		// b.show();
+
+		//初始化日期
+	    function initSignDate(date){
+	        var dateToast = new Toast("查看签到数据不得晚于当前日期！"),
+	        dateInput = document.getElementById('expireDate'),
+	        today = new Date();
+	        dateInput.valueAsDate = today;
+	        dateInput.defaultValue = getDateFormat(today);
+	        if(date){
+	        	var newD = date.split("-");
+	        	var t = new Date(newD[0],newD[1]-1,newD[2],12,00,00);
+	        	dateInput.valueAsDate = t;
+	        	dateInput.defaultValue = getDateFormat(t);
+	        }
+	        $(".text-center").show();
+	        $(".text-center .text").html(dateInput.defaultValue);
+	        //$(dateInput).change(function(){
+	        if(selectCalenderDate != date){
+	            var inputDate = dateInput.valueAsDate;
+	            if(!inputDate){
+	            	dateInput.valueAsDate = today;
+	            }
+	            if (inputDate > today){
+	                dateToast.show();
+	                return;
+	            }
+	            $(".text-center .text").html(getDateFormat(dateInput.valueAsDate));
+	            querySignStat();
+	    		pagin = new Pagin(4);
+	    		selectCalenderDate = date;
+	        }
+	        //});  
+	        $(dateInput).blur(function() {
+	        	// alert("blur");
+	        	$(this).trigger("change");
+	        });
+	    }
+
+		//一个人与群组切换
+		var signPeople=document.getElementById("signPeople").getElementsByTagName("a");
+		function toogleMarker(target){
+			var markerPerson;
+			if(target.classList.contains("active")){
+				target.classList.remove("active");
+				b.show(allMarkers);
+				zoomToBounds(allMarkers);
+				return;
+			}
+			[].slice.call(signPeople).forEach(function(n,i,a){
+				n.classList.remove("active");
+			})
+			target.classList.add("active");
+			// markerPerson = markerPeopleObj[target.attributes.getNamedItem("data-creator").value];
+			// 获取当天所有签到
+			queryMySign(target.attributes.getNamedItem("data-creator").value)
+			/*if(markerPerson) {
+				b.show([markerPerson]);
+			} else {
+				new Toast("还没有签到").show();
+			}*/
+		}
+		function queryMySign(creator){
+			var markerPerson = []; 
+	        ajaxModel.getData(URL.queryMySign,{
+	        	"creator":creator,
+	            "signDate":getDate()//"2016-03-22"
+	        }).then(function(res){
+	            if(res.code === "1"){
+	                var data = res.data;
+	                if(data.length == 0){
+	                    new Toast("暂无签到").show();
+	                    b.show();
+	                }else{
+	                	for(var i=0; i<data.length; i++){
+	                		var sign = data[i];
+	                		var pointInfo = [sign.longitude,sign.latitude];
+	                		pointInfo.push("<span class='color-1 bold'>"+sign.creatorName+"</span>&nbsp;"+sign.signTimeStr.split(/[\s]/)[1].substring(0,5)+"<br>签到地址："+sign.address);
+	                		pointInfo.push("<label class='pin-label'>"+(i+1)+"</label>");
+	                		pointInfo.push(sign.creatorName.toPinyin().substring(0,1).toColor());
+	                		markerPerson.push(pointInfo);
+	                	}
+	                	b.show(markerPerson); 
+	                }
+	                // console.log(JSON.stringify(markerPerson));
+	            }else{
+	                new Toast("请求失败").show();
+	            }
+	        })
+	    }
+
+		//点击签名的人
+		document.getElementById("signPeople").addEventListener("click",function(e){
+			var target=e.target;
+			if(target.tagName.toLowerCase()=="a"){
+				toogleMarker(target);
+			}
+		},false)
+
+	    //Entry
+	    window.addEventListener("load",function(){
+			$('#loadingPage').show();
+	    	initSignDate();
+	    	querySignStat();
+	    	pagin = new Pagin(4);
+	    	bindEvents();
+	    },false)
+	    document.addEventListener("plusready",function(){
+            Mplus.openBackListener();
+        }, false)
+        document.addEventListener("backpressed",function(){
+            back();
+        }, false)
+        function back(){
+        	Mplus.closeBackListener();
+            location.href="index.html";
+        }
+
+	    //数据处理
+	    Handlebars.registerHelper("lastChar",lastChar);
+	    Handlebars.registerHelper("getColor",getColor);
+
+	    function lastChar(value) {
+	    	return value.slice(-1);
+	    }
+
+	    function getColor(value) {
+	    	var c=value.toPinyin().substring(0,1).toColor();
+	        return c;
+	    }
+
+		function querySignStat() {
+			var date = getDate(),
+				params = {
+					signDate : date,
+					depIds : depIds,
+					userIds : userIds,
+					virtualGroupIds : virtualGroupIds
+				}
+
+			ajaxModel.getData(URL.querySignStat,params).then(function(res){
+				if(res.code==="1") {
+					// $(".titlebar .icon-persons").show();
+					renderSignStat(res.data,date);
+				}else {
+					new Toast("失败").show();
+				}
+				$('#loadingPage').hide();
+			},function(){
+				$('#loadingPage').hide();
+			})
+		}
+
+		function renderSignStat(data,date) {
+			var html = Handlebars.compile(Template.querySignStat)({
+				signedCount : data.signedCount,
+				noSignedCount : data.noSignedCount,
+				leavesCount : data.leavesCount,
+				depIds : depIds,
+				userIds : userIds,
+				virtualGroupIds : virtualGroupIds,
+				signDate : date
+			});
+			$("footer .list").html(html);
+		}
+
+		function querySignPage(currentPage,pageSize,callback) {
+			var params = {
+					signDate : getDate(),
+					depIds : depIds,
+					userIds : userIds,
+					virtualGroupIds : virtualGroupIds,
+					"offset" : currentPage,
+					"limit" : pageSize
+				}
+
+			ajaxModel.getData(URL.querySignPage,params).then(function(res){
+				if(res.code==="1") {
+					var total = res.total,data;
+					total && pagin.setTotal(total);
+					if(res.rows.length>0){
+						data = res.rows;
+						pagin.setTotal(total);
+						renderSignPage(data);
+						renderMarkers(data);
+						$(".no-map-data").addClass("hidden");
+					}else{
+						if(total===0) {
+							b.show();
+							$(".no-map-data").removeClass("hidden");
+							// new Toast("当天无签到信息").show();
+						} else {
+							pagin.currentPage--;
+							new Toast("已经是最后了").show();
+						}
+					}
+					
+				} else {
+					new Toast("失败").show();
+				}
+				callback && callback();
+			})
+		}
+
+		function renderSignPage(data) {
+			var html = Handlebars.compile(Template.querySignStatDetail)({
+				list : data
+			});
+			$("#signPeople").html(html);
+			var a = $(".icon-name").getUserIcon();
+			console.log(a.addClass("a"));
+		}
+
+		function renderMarkers(data) {
+			allMarkers = [];
+			markerPeopleObj = {};
+			data.map(function(obj,index){
+				var marker = [],
+					creatorName = obj.creatorName,
+					color = getColor(creatorName),
+					lastNameChar = lastChar(creatorName),
+					time = obj.signTimeStr.split(/[\s]/)[1].substring(0,5);
+
+				marker[0] = obj.longitude;
+				marker[1] = obj.latitude;
+				marker[2] = "<span class='color-1 bold'>"+creatorName+"</span>&nbsp;"+time+"<br>签到地址："+obj.address;
+				marker[3] = "<label class='pin-label'>"+lastNameChar+"</label>";
+				marker[4] = color;
+				allMarkers.push(marker);
+				markerPeopleObj[obj.creator] = marker;
+			})
+			b.show(allMarkers);
+			zoomToBounds(allMarkers);
+		}
+
+		function getDate() {
+			return document.getElementById('expireDate').value;
+		}
+
+		function Pagin(pageSize) {
+			this.currentPage = 1,
+			this.pageSize = pageSize,
+			this.total = 0;
+			$("#signPeople").empty();
+			querySignPage(1,pageSize);
+		}
+		Pagin.prototype = {
+			nextPage : function(callback) {
+				this.currentPage++;
+				querySignPage(this.currentPage,this.pageSize,callback);
+			},
+
+			prevPage : function(callback) {
+				if(this.currentPage===1) {
+					new Toast("已经是第一页了").show();
+					hideLoading();
+					return;
+				}
+				this.currentPage--;
+				querySignPage(this.currentPage,this.pageSize,callback);
+			},
+
+			setTotal : function(total) {
+				this.total = total;
+			}
+		}
+
+		//滑动
+		var loadingMask=document.querySelector(".popup-mask"),loadingBox=document.querySelector(".loading-box");
+		function showLoading(){
+			loadingMask.classList.remove("hide");
+			loadingBox.classList.remove("hide");
+		}
+		function hideLoading(){
+			loadingMask.classList.add("hide");
+			loadingBox.classList.add("hide");
+		}
+		// //点击
+		// EventUtil.addHandler(sp,"tap",function(e){
+		// 	toogleMarker(e.target);
+		// })
+		//翻页
+		EventUtil.addHandler(sp,"swipeleft",function(){
+			//下一页
+			showLoading();//显示遮罩
+			//重新绘制人员：signPeople.innerHTML=xxx;
+			//重新绘制地图：生成markerPeople，并在重新绘点b.show(markerPeople)
+			pagin.nextPage(hideLoading);
+			//hideLoading();//隐藏遮罩
+		})
+		EventUtil.addHandler(sp,"swiperight",function(){
+			//上一页
+			showLoading();//显示遮罩
+			//重新绘制人员：signPeople.innerHTML=xxx;
+			//重新绘制地图：生成markerPeople，并在重新绘点b.show(markerPeople)
+			pagin.prevPage(hideLoading);
+			//hideLoading();//隐藏遮罩
+		})
+		function bindEvents(){
+			$(document).on("click","footer .justify",function(){
+				var depIds = $(this).data("depids"),
+					userIds = $(this).data("userids"),
+					virtualGroupIds = $(this).data("virtualgroupids"),
+					signDate = $(this).data("signdate");
+				if((depIds || userIds || virtualGroupIds) && signDate){
+					// alert("statistics-list.html?depIds="+depIds+"&userIds="+userIds+"&signDate="+signDate)
+					Mplus.closeBackListener();
+					window.location.href="statistics-list.html?depIds="+depIds+"&userIds="+userIds+"&virtualGroupIds="+virtualGroupIds+"&signDate="+signDate;
+				}else{
+					new Toast("请选择组织机构或虚拟组进行统计").show();
+				}
+				
+			});
+			$(".titlebar .icon-persons").click(function(){
+				// $("footer .justify").trigger("click");
+				Mplus.closeBackListener();
+				history.go(-1);
+			});
+			$("#back").on("click",function(){
+                back();
+            })
+		}
+		function getParams(name) {
+	        var reg = new RegExp("(^|\\?|&)"+ name +"=([^&]*)(\\s|&|$)", "i");
+	        if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " "));
+	        return "";
+	    };
+
+	    function zoomToBounds(pointArr) {
+	    	var pointObjArr = [],
+	    		temp = null;
+	    	pointArr.map(function(obj) {
+	    		temp = new BMap.Point(obj[0],obj[1]);
+	    		pointObjArr.push(temp);
+	    	});
+	    	b.map.setViewport(pointObjArr);
+	    }
+
+	    function getDateFormat(date) {
+	        var year = date.getFullYear(),
+	            month = date.getMonth()+1,
+	            month = month>=10?month:"0"+month,
+	            date = date.getDate(),
+	            date = date>=10?date:"0"+date;
+	        return year+"-"+month+"-"+date;
+	    }
+
+	</script>
+</body>
+</html>

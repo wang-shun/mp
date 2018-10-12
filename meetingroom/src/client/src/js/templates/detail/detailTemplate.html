@@ -1,0 +1,44 @@
+<% var imgPath=imgPath %>
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-detailback" href="javascript:void()">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center" id="ID-Detail-BtnDetail">
+            <span class="titlebar-title-oneline" id="ID-Title-RoomName"></span>
+            <i class="icon icon-info size16 color-primary"></i>
+        </h1>
+        <a class="titlebar-button titlebar-right SID-Favorite" style="display: none;" data-collection="">
+            收藏
+        </a>
+    </div>
+</header>
+<article style="bottom: 60px;">
+    <div class="group" style="margin: -1px 0 8px 0;padding-top: 5px;">
+        <div class="calendar" id="ID-DetailCalendar"></div>
+        <div class="timepart" style="background-color: white;" id="ID-Timepart"></div>
+        <small style="padding: 10px 12px;display: block;">
+            <i class="icon icon-info size12"></i>
+            <span>点击分别选择开始和结束时间</span>
+        </small>
+    </div>
+
+    <div class="group" id="ID-DivDayList"></div>
+</article>
+<footer style="background-color: #f6f6f6;" class="topline">
+    <a class="radius4 button primary block SID-BtnDetailSubmit" style="margin: 10px auto;width: 200px;">预定</a>
+</footer>
+<!--是否可选弹出框-->
+<div id="ID-MeetDetatil-Pop" style="background-color: white;">
+    <div class="app-popError" id="ID-MeetDetatil-PopOk">
+        <img src="<%= imgPath %>/calendar.png">
+        <span>该时间段已预定</span>
+    </div>
+    <div class="app-popError" id="ID-MeetDetatil-PopCancel">
+        <img src="<%= imgPath %>/clock.png">
+        <span>该时间段已过，无法预定...</span>
+    </div>
+    <div id="ID-MeetDetatil-PopContent">
+        
+    </div>
+</div>

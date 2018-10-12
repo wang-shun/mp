@@ -1,0 +1,16 @@
+{{#each signList}}
+<li class="sign-info">
+    <div class="clock" data-clock="{{timer signTime}}">
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="origin"></div>
+    </div>
+    <span class="time">{{timer signTime}}</span>
+    <span class="location"><i class="icon-position"></i>{{address}}</span>
+    <div class="title">{{content}}</div>
+    {{#each images}}
+    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);" data-bg="{{this}}" data-href="{{this}}"></a>
+    {{/each}}
+    <hr> 
+</li>
+{{/each}}      

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.vote.dao.VtVoteInfoMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.vote.entity.VtVoteInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="org_id" jdbcType="VARCHAR" property="orgId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="multiple" jdbcType="VARCHAR" property="multiple" />
+    <result column="max_choose" jdbcType="NUMERIC" property="maxChoose" />
+    <result column="anonymous" jdbcType="VARCHAR" property="anonymous" />
+    <result column="expire" jdbcType="TIMESTAMP" property="expire" />
+    <result column="read_count" jdbcType="NUMERIC" property="readCount" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="creator_name" jdbcType="VARCHAR" property="creatorName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="state" jdbcType="CHAR" property="state" />
+    <result column="is_expired" jdbcType="VARCHAR" property="isExpired" />
+  </resultMap>
+  
+  <select id="selectCanInvolveVote" parameterType="java.util.Map" resultType="VoteInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+		select v.id,v.org_id orgId,v.title,v.content,v.image,v.multiple,v.max_choose maxChoose,v.anonymous,v.expire,v.read_count readCount
+			  ,v.creator,v.creator_name creatorName,v.create_time createTime,v.state,v.is_expired isExpired,
+			  <choose>
+		    	<when test="databaseType == 'db/mysql'">
+		    		date_format(v.expire,'%Y-%m-%d %H:%i:%s') 
+		    	</when>
+		    	<otherwise>
+		    		to_char(v.expire,'yyyy-MM-dd hh24:mi:ss') 
+		    	</otherwise>
+		    </choose>
+			  expireStr
+			  ,COALESCE(c.vote_count, 0) as voteCount
+			  ,case when r.vote_info_id is null then 0 else 1 end as involved,COALESCE(s2.scope_count, 0) as scopeCount
+		from VT_VOTE_INFO v
+		left join (
+			select vote_info_id,count(1) as vote_count
+			from (
+			select vote_info_id,org_id,creator
+			from VT_VOTE_ANSWER
+			group by vote_info_id,org_id,creator
+			) a group by vote_info_id
+		) c on v.id=c.vote_info_id
+		left join (
+			select vote_info_id from VT_VOTE_SCOPE
+			where org_id=#{orgId,jdbcType=VARCHAR} and ( user_id=#{userId,jdbcType=VARCHAR} or user_id=#{userIdLowerCase,jdbcType=VARCHAR} )
+		) s on v.id = s.vote_info_id
+		left join (
+			select distinct(vote_info_id) from VT_VOTE_ANSWER a 
+			where a.org_id=#{orgId,jdbcType=VARCHAR} and ( a.creator=#{userId,jdbcType=VARCHAR} or a.creator=#{userIdLowerCase,jdbcType=VARCHAR} )
+		) r on v.id = r.vote_info_id
+		left join (
+			select vote_info_id,count(vote_info_id) as scope_count from VT_VOTE_SCOPE
+			group by vote_info_id
+		) s2 on v.id = s2.vote_info_id
+		where ( s.vote_info_id is not null)
+		<!-- <orgdepfilter prefix="and" deporder="v.org_dept_order"/> -->
+		<if test="title != null">
+		  and v.title like #{title,jdbcType=VARCHAR}
+		</if>
+		order by v.is_expired,involved,v.create_time desc
+	</select>
+	
+	<select id="selectInvolvedVote" parameterType="java.util.Map" resultType="VoteInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+		select v.id,v.org_id orgId,v.title,v.content,v.image,v.multiple,v.max_choose maxChoose,v.anonymous,v.expire,v.read_count readCount
+			  ,v.creator,v.creator_name creatorName,v.create_time createTime,v.state,v.is_expired isExpired,
+			  <choose>
+		    	<when test="databaseType == 'db/mysql'">
+		    		date_format(v.expire,'%Y-%m-%d %H:%i:%s') 
+		    	</when>
+		    	<otherwise>
+		    		to_char(v.expire,'yyyy-MM-dd hh24:mi:ss') 
+		    	</otherwise>
+		    </choose>
+			  expireStr
+			  ,0 as voteCount,1 as involved, COALESCE(s.scope_count, 0) as scopeCount
+		from VT_VOTE_INFO v
+		join (
+			select distinct(vote_info_id) from VT_VOTE_ANSWER a 
+			where a.org_id=#{orgId,jdbcType=VARCHAR} and a.creator=#{userId,jdbcType=VARCHAR}
+		) r on v.id = r.vote_info_id
+		left join (
+			select vote_info_id,count(vote_info_id) as scope_count from VT_VOTE_SCOPE
+			group by vote_info_id
+		) s on v.id = s.vote_info_id
+		where 1=1
+		<!-- <orgdepfilter prefix="and" deporder="v.org_dept_order"/> -->
+		<if test="title != null">
+			and v.title like #{title,jdbcType=VARCHAR}
+		</if>
+		order by v.create_time desc
+	</select>
+	
+	<select id="selectCreatedVote" parameterType="java.util.Map" resultType="VoteInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+		select v.id,v.org_id orgId,v.title,v.content,v.image,v.multiple,v.max_choose maxChoose,v.anonymous,v.expire,v.read_count readCount
+			  ,v.creator,v.creator_name creatorName,v.create_time createTime,v.state,v.is_expired isExpired,
+			  <choose>
+		    	<when test="databaseType == 'db/mysql'">
+		    		date_format(v.expire,'%Y-%m-%d %H:%i:%s') 
+		    	</when>
+		    	<otherwise>
+		    		to_char(v.expire,'yyyy-MM-dd hh24:mi:ss') 
+		    	</otherwise>
+		    </choose>
+			  expireStr
+			  ,COALESCE(c.vote_count, 0) as voteCount,
+		  case when r.vote_info_id is null then 0 else 1 end as involved, 
+		  COALESCE(s.scope_count, 0) as scopeCount
+		from VT_VOTE_INFO v 
+		left join (
+			select vote_info_id,count(1) as vote_count
+			from (
+			select vote_info_id,org_id,creator
+			from VT_VOTE_ANSWER
+			group by vote_info_id,org_id,creator
+			) a group by vote_info_id
+		) c on v.id=c.vote_info_id
+		left join (
+			select distinct(vote_info_id) from VT_VOTE_ANSWER a 
+			where a.org_id=#{orgId,jdbcType=VARCHAR} and a.creator=#{userId,jdbcType=VARCHAR}
+		) r on v.id = r.vote_info_id
+		left join (
+			select vote_info_id,count(vote_info_id) as scope_count from VT_VOTE_SCOPE
+			group by vote_info_id
+		) s on v.id = s.vote_info_id
+		where 1=1
+		<!-- <orgdepfilter prefix="and" deporder="v.org_dept_order"/> -->
+		<if test="orgId != null">
+			and v.org_id=#{orgId,jdbcType=VARCHAR}
+		</if>
+		<if test="userId != null">
+			and v.creator=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="title != null">
+			and v.title like #{title,jdbcType=VARCHAR}
+		</if>
+		order by v.create_time desc
+	</select>
+	
+	<select id="selectVoteById" parameterType="java.util.Map" resultType="VoteInfo" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+		select v.id,v.org_id orgId,v.title,v.content,v.image,v.multiple,v.max_choose maxChoose,v.anonymous,v.expire,v.read_count readCount
+			  ,v.creator,v.creator_name creatorName,v.create_time createTime,v.state,v.is_expired isExpired,
+			  <choose>
+		    	<when test="databaseType == 'db/mysql'">
+		    		date_format(v.expire,'%Y-%m-%d %H:%i:%s') 
+		    	</when>
+		    	<otherwise>
+		    		to_char(v.expire,'yyyy-MM-dd hh24:mi:ss') 
+		    	</otherwise>
+		    </choose>
+			  expireStr,
+			  <choose>
+		    	<when test="databaseType == 'db/mysql'">
+		    		date_format(v.expire,'%Y-%m-%d %H:%i:%s') 
+		    	</when>
+		    	<otherwise>
+		    		to_char(v.create_time,'yyyy-MM-dd hh24:mi:ss') 
+		    	</otherwise>
+		    </choose>
+			  createTimeStr
+			  ,COALESCE(c.vote_count, 0) as voteCount,
+			case when j.vote_info_id is null then 0 else 1 end as involved,
+			COALESCE(s.scope_count, 0) as scopeCount
+		from VT_VOTE_INFO v 
+		left join (
+			select vote_info_id,count(1) as vote_count
+			from (
+			select vote_info_id,org_id,creator
+			from VT_VOTE_ANSWER 
+			where vote_info_id=#{voteInfoId,jdbcType=VARCHAR}
+			group by vote_info_id,org_id,creator
+			) a group by vote_info_id
+		) c on v.id=c.vote_info_id
+		left join (
+			select distinct(vote_info_id) from VT_VOTE_ANSWER 
+			where org_id=#{orgId,jdbcType=VARCHAR} and creator=#{userId,jdbcType=VARCHAR} and vote_info_id=#{voteInfoId,jdbcType=VARCHAR}
+		) j on v.id = j.vote_info_id
+		left join (
+			select vote_info_id,count(vote_info_id) as scope_count from VT_VOTE_SCOPE
+			where vote_info_id=#{voteInfoId,jdbcType=VARCHAR} group by vote_info_id
+		) s on v.id = s.vote_info_id
+		where v.id=#{voteInfoId,jdbcType=VARCHAR}
+		<!-- <orgdepfilter prefix="and" deporder="v.org_dept_order"/> -->
+	</select>
+	<select id="selectVoteItems" parameterType="java.util.Map" resultType="VoteItemInfo">
+		select i.id,i.vote_info_id voteInfoId,i.content,i.image,i.item_order itemOrder
+			  ,COALESCE(c.item_count, 0) as itemCount 
+		from VT_VOTE_ITEM i
+		left join (
+			select vote_item_id, count(*) as item_count
+			from VT_VOTE_ANSWER where vote_info_id=#{voteInfoId,jdbcType=VARCHAR} group by vote_item_id
+		) c on i.id=c.vote_item_id
+		where i.vote_info_id=#{voteInfoId,jdbcType=VARCHAR}
+		order by i.item_order
+	</select>
+	<select id="selectVoteAnswer" parameterType="java.util.Map" resultType="VtVoteAnswer">
+		select id,org_id orgId,vote_info_id voteInfoId,vote_item_id voteItemId,creator,creator_name creatorName,create_time createTime 
+		from VT_VOTE_ANSWER
+		where 1=1
+		<if test="orgId != null">
+			and org_id=#{orgId,jdbcType=VARCHAR}
+		</if>
+		<if test="userId != null">
+			and creator=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="voteInfoId != null">
+			and vote_info_id=#{voteInfoId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<update id="incReadCount" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+		update VT_VOTE_INFO set read_count=read_count+1 where id=#{voteInfoId,jdbcType=VARCHAR}
+		<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+	</update>
+	<update id="scanExpired" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+		update VT_VOTE_INFO set is_expired='1' where is_expired='0' and expire&lt;#{time}
+		<!-- <orgdepfilter prefix="and" deporder="org_dept_order"/> -->
+	</update>
+</mapper>

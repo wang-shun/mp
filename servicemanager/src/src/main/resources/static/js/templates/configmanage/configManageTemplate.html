@@ -1,0 +1,208 @@
+<div style="width:14%;float:left;border-right:1px solid #e8e8e8;height:100%;">
+	<div class="config-column">
+        <span class="name">在线服务:</span> 
+	</div>
+	<div class="SID-blockBox"></div>
+	<div class="config-column">
+        <span class="name">离线服务:</span> 
+	</div>
+	<div class="SID-offLineBlockBox"></div>
+</div>
+<div class="SID-detailBox" style="width:85%;display:none;float:right;">
+	<div class="add-main formBox base-info" style="width:100%;">
+        <a class="SID-detailSave-btn configaddbtndisable" title="保存并重启">应用</a>
+        <!-- <a class="meet-add configaddbtn SID-detailBack-btn"></span>返回</a> -->
+        <a class="meet-add SID-detailSave-restart-btn configaddbtn">重启</a>
+        <a class="SID-blockDelete-btn configdeletebtn" style="display: none;line-height: 28px;">删除</a>
+
+
+        <!--表单内容在这里开始-->
+        <div class="config-border">
+        	<div class="SID-toggleBox" data-box="SID-baseInfoBox">
+        		<span class="config-title">基本信息</span>
+	            <hr class="hrline"/>
+	            <span class="icon-set fhicon-arrowU2"></span>
+        	</div>
+            <div class="SID-baseInfoBox margintop">
+	        	<div class="form-item">
+            		<label class="form-item-label">应用id</label>
+            		<label class="form-item-label SID-serviceId-label" style="width:45%"></label>
+	        	</div>
+        	</div>
+        </div>
+        
+        <div class="config-border">
+        	<div class="SID-toggleBox" data-box="SID-paramsBox">
+        		<span class="config-title">参数配置</span>
+	            <hr class="hrline"/>
+	            <span class="icon-set fhicon-arrowU2"></span>
+        	</div>
+            <div class="SID-paramsBox margintop">
+	        	
+        	</div>
+        </div>
+
+        <div class="config-border">
+        	<div class="SID-toggleBox" data-box="SID-servicesBox">
+	        	<span class="config-title">服务绑定</span>
+	            <hr class="hrline"/>
+	            <span class="icon-set fhicon-arrowU2"></span>
+        	</div>
+            <div class="SID-servicesBox margintop">
+	        
+        	</div>
+        </div>
+
+        <div class="config-border">
+        	<div class="SID-toggleBox" data-box="SID-resourcesBox">
+        		<span class="config-title">资源分配</span>
+	            <hr class="hrline"/>
+	            <span class="icon-set fhicon-arrowU2"></span>
+        	</div>
+			<div class="SID-resourcesBox margintop">
+	        
+        	</div>
+        </div>
+        <!--表单内容在这里结束-->
+
+    </div>
+</div>
+<style>
+.config-column{
+	margin:0 auto;
+	width:90%;
+	padding:8px 2px;
+}
+.config-block{
+	/* margin-top: 10px; 
+	width:300px;
+	height:100px;
+	background: url(images/configblock/block.png) no-repeat;
+	background-size:100% 100%;
+	margin:10px 10px;
+	padding:20px 20px 28px 20px;
+	display: inline-block; */
+	margin:0 auto;
+	width:100%;
+	padding:8px 2px;
+}
+.config-block:hover{ 
+	background-color:#87c3ff;
+	color:white;
+}
+.config-block-active{ 
+	background-color:#1788fb;
+	color:white;
+}
+.config-block .logo{
+	width:20px;
+	height:20px;
+	float:left;
+}
+.config-block .name{
+	/* width:180px;
+	height:70px;
+	float:left;
+	font-size: 28px;
+	margin:0 0 0 10px;
+	line-height: 30px; */
+	margin:0 0 0 10px;
+}
+.config-block .content{
+	width:180px;
+	height:30px;
+	float: left;
+	padding:0 0 0 10px;
+}
+.config-block .content .path{ 
+	font-size: 16px;
+}
+.config-block .content .statusOn{
+	float:right;
+	height:40px;
+	width:40px;
+	background-image:url(images/configblock/status.png);
+	background-repeat:no-repeat;
+	background-position:0px -40px;
+	background-size:cover;
+	margin:-10px 0 0 0;
+}
+.config-block .content .statusOff{
+	float:right;
+	height:40px;
+	width:40px;
+	background-image:url(images/configblock/status.png);
+	background-repeat:no-repeat;
+	background-position:0px 0px;
+	background-size:cover;
+	margin:-10px 0 0 0;
+}
+.configaddbtn{
+	border:1px solid #1788fb;
+	border-radius:4px;
+	padding:4px 40px;
+	margin:0 4px;
+	color: #1788fb;
+}
+.configaddbtn:active{
+	background-color:#1788fb;
+	color:white;
+}
+.configaddbtndisable{
+	border:1px solid grey;
+	border-radius:4px;
+	padding:4px 40px;
+	margin:0 4px;
+	color: grey;
+}
+.configdeletebtn{
+	border:1px solid #EF2C26;
+	border-radius:4px;
+	padding:4px 40px;
+	margin:0 4px;
+	color: #EF2C26;
+}
+.configdeletebtn:active{
+	background-color:#EF2C26;
+	color:white;
+}
+.hrline{
+	color:#e8e8e8;
+	margin-top: 10px;
+	width: calc(100% - 120px);
+}
+.config-border {
+    padding: 10px 0;
+    margin:5px 0 0 0;
+}
+
+.config-title {
+    width:60px;
+    font-size:14px;
+    float:left;
+    color:#1788fb;
+    margin-top: -10px;
+}
+.inform{
+   display: none;
+}
+.config-inputbox{
+	vertical-align: bottom;
+}
+.icon-set{
+	color: #1788fb;
+    font-weight: bold;
+    float: right;
+    margin: -6px 0 0 4px;
+    width: 50px;
+}
+.margintop{
+    margin:0 0 0 0;
+}
+.textinoneline{
+	word-break:keep-all;           /* 不换行 */
+	white-space:nowrap;          /* 不换行 */
+	overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+</style>

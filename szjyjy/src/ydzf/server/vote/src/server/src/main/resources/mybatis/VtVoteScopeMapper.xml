@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.vote.dao.VtVoteScopeMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.vote.entity.VtVoteScope">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="vote_info_id" jdbcType="VARCHAR" property="voteInfoId" />
+    <id column="org_id" jdbcType="VARCHAR" property="orgId" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+  </resultMap>
+</mapper>

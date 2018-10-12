@@ -1,0 +1,45 @@
+<%if(data.length=="0"){%>
+    <%=noDataHTML%>
+<%}else{%>
+<ul class="list">
+    <% for(var i=0,roomData; roomData=data[i++];) { %>
+    <li class="SID-Room-Li list-li underline" data-roomid="<%=roomData.roomId%>">
+        <div class="list-thumbnail">
+            <img data-load-src="<% if(roomData.layout!="" && roomData.layout!=null){%><%=roomData.layout%>_264x168<% } %>" src="images/list-default.png" data-error-src="<%= imgPath %>/list-default.png"/>
+            <div class="SID-collection-div sticker sticker-icon top left" <% if(roomData.collection==0){%> style="display:none;" <% } %> >
+                <span class="size12 icon-fav-fill"></span>
+            </div>
+        </div>
+        <div class="list-container">
+            <div class="list-title" style="margin-bottom: 4px;">
+            	<span class="bjyh-word" style="max-width: 60%;">
+                <%=roomData.roomName%>
+                </span>
+	            <% if (roomData.roomType == 1) { %>
+	            <span class="app-buttonMark success">需审批</span>
+	            <% } %>
+            </div>
+            <div class="list-row bjyh-list-row">
+                <i class="list-icon bjyh-icon-user color-primary"></i>
+                <p class="list-font color-feature">
+                   最多可容纳<%=roomData.capacity%>人
+                </p>
+            </div>
+            <div class="list-row bjyh-list-row">
+                <i class="list-icon bjyh-icon-computer color-primary"></i>
+                <p class="list-font">
+                    <% var str="" %>
+                    <% if(roomData.stereo==1){str+="音响,";} %>
+                    <% if(roomData.display==1){str+="显示器,";} %>
+                    <% if(roomData.projector==1){str+="投影,";} %>
+                    <% if(roomData.wifi==1){str+="无线网,";} %>
+                    <% if(roomData.microphone==1){str+="麦克风,";} %>
+                    <%= str.substr(0,str.length-1) %>
+                </p>
+            </div>
+        </div>
+        <i class="list-icon icon-arrowright"></i>
+	</li>
+    <% } %>
+</ul>
+<%}%>

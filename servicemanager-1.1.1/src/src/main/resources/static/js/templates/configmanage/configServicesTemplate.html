@@ -1,0 +1,31 @@
+<% for(var i=0,services; service=services[i++];) { %>
+        <div class="form-item" data-appId="<%=appId%>" data-svcId="<%=service.svcId%>" rankNo="<%=i%>">
+            <label class="form-item-label"><%=service.svcName+"("+service.svcId+")"%></label>
+            <div class="SID-appkey-sercet-<%=i%> form-item-editbox">
+            <% if(service.svcName == "未注册服务"){ %>
+                <label style="color:red">该服务未注册,请添加注册路由</label>
+            </div>
+            <%}else if(service.appkey == undefined || service.secret == undefined){%>
+            	<label>未绑定路由</label>
+           	</div>
+           	<div class="SID-optBox-<%=i%>">
+           		<a class="meet-add configaddbtn SID-bind-btn"></span>绑定</a>
+           	</div>
+            <%}else if(service.appkey == "" || service.appkey == "已绑定"){%>
+            	<label>已绑定</label>
+           	</div>
+           	<div class="SID-optBox-<%=i%>">
+           		<a class="meet-add configaddbtn SID-cancel-btn"></span>取消</a>
+           	</div>
+            <%}else{%>
+            	<label>appkey: </label>
+                <label class="service-appkey" style="width: 270px;display:inline-block"><%=service.appkey%></label>
+                <label>密钥: </label>
+                <label class="service-secret" style="width: 150px;display:inline-block"><%=service.secret%></label>
+            </div>
+            <div class="SID-optBox-<%=i%>">
+           		<a class="meet-add configaddbtn SID-cancel-btn"></span>取消</a>
+           	</div>
+            <%}%>
+        </div>
+<%}%>

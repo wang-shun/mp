@@ -1,0 +1,98 @@
+<header style="position: relative;z-index:11;">
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center SID-room-page">会议室</h1>
+        <h1 class="titlebar-title text-center SID-meeting-page" style="display:none;">我的会议</h1>
+        <h1 class="titlebar-title text-center SID-check-page" style="display:none;">预定审批</h1>
+        <div class="titlebar-right">
+        	<a class="titlebar-button SID-room-page" id="ID-Room-BtnFilter"><i class="icon icon-filter"></i></a>
+        	<a class="titlebar-button SID-meeting-page" id="ID-Index-BtnSearch" style="display:none;"><i class="icon icon-search"></i></a>
+        	<a class="titlebar-button SID-check-page" id="ID-Check-BtnFilter" style="display:none;"><i class="icon icon-filter"></i></a>
+        </div>
+    </div>
+    <div class="calendar underline SID-meeting-page" id="ID-Index-Calendar" style="padding-bottom: 5px;"></div>
+</header>
+<article style="top:0px;position: relative;display: block;-webkit-box-flex: 1;">
+    <div class="slider-container" id="ID-Pages" style="height: 600px;">
+	    <div class="slider-wrapper">
+		    <div class="slider-slide">
+		        <!--第一页:start-->
+			    <div class="surveyList SID-Index-List">
+			    </div>
+		        <!--第一页:end-->
+		    </div>
+		    <div class="slider-slide">
+		        <!--第二页:start-->
+			    <div class="surveyList SID-Index-List">
+			    </div>
+		        <!--第二页:end-->
+		    </div>
+		    <div class="slider-slide SID-check-topbar">
+		        <!--第三页:start-->
+			    <div class="surveyList SID-Index-List">
+			    </div>
+		        <!--第三页:end-->
+		    </div>
+	    </div>
+    </div>
+</article>
+
+<div class="topBar bjyh-topBar">
+	<ul id="ID-Tabbar" class="tabbar tabbar-rect" style="width:100%;">
+        <li class="SID-Tabbar tab active" data-index="0">
+            <label class="tab-label"><i class="bjyh-icon-hys"></i><p>会议室</p></label>
+        </li>
+        <li class="SID-Tabbar tab" data-index="1">
+            <label class="tab-label"><i class="bjyh-icon-wdhy"></i><p>我的会议</p></label>
+        </li>
+        <% if(isAdmin=='1'){ %>
+        <li class="SID-Tabbar tab SID-check-topbar" data-index="2">
+            <label class="tab-label"><i class="bjyh-icon-ydsp"></i><p>预定审批</p></label>
+        </li>
+        <% } %>
+    </ul>
+</div>
+<!--状态筛选-->
+<div id="ID-Room-DialogFilter" style="background-color:white;display:none;">
+	<div style="padding: 12px 0px 16px 12px;">
+		<p>预约时间</p>
+		<div class="inputbox underline SID-DivDateTime">
+			<i class="icon icon-time size20 color-primary"></i>
+			<input type="text" name="NID-Room-TimeStart" class="input-text SID-DateTimeStart" readonly placeholder="会议开始时间">
+		</div>
+		<div class="inputbox underline SID-DivDateTime">
+			<i class="icon icon-time size20 color-primary"></i>
+			<input type="text" name="NID-Room-TimeEnd" class="input-text SID-DateTimeEnd" readonly placeholder="会议结束时间">
+		</div>
+		<p style="margin-top: 14px;">容量(人)</p>
+		<div style="margin-top: 10px;">
+			<span>&gt;=</span>
+			<input type="text" name="NID-Room-PeopleNum" maxlength="4" class="input-text bordered text-center" style="padding:4px 12px;width:75px;margin-left:12px;border-radius: 4px;">
+		</div>
+	</div>
+	<div class="app-footBtns topline">
+		<button class="button color-cancel" id="ID-Room-BtnReset">
+			<i class="icon icon-rdorefuse size20"></i>
+			<span>重置</span>
+		</button>
+		<button class="button color-success" id="ID-Room-BtnSubmit">
+			<i class="icon icon-rdook size20"></i>
+			<span>完成</span>
+		</button>
+	</div>
+</div>
+<!--状态筛选-->
+<div id="ID-Check-DialogFilter" style="background-color:white;display:none;">
+    <ul class="app-popListSelect">
+        <li class="SID-Check-State active underline" data-status="0">
+            <div>待审批</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Check-State" data-status="1">
+            <div>已审批</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+    </ul>
+</div>

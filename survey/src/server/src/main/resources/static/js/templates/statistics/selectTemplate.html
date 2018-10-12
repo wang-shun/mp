@@ -1,0 +1,28 @@
+<div class="search-list padding-left SID-select-where-div">
+    <label class="search-label">
+    	<select class="SID-select-where-question">
+    		<option value="" selected="selected">请选择题目</option>
+    		<% for(var i=0,option; option=data[i++];) { %>
+    		<option value="<%=option.value%>"><%=option.text%></option>
+    		<% } %>
+    	</select>
+    </label>
+    <label class="search-label">
+    	<select class="SID-select-where-type">
+    		<option value="" selected="selected">请选择</option>
+    		<option value="1" selected="selected">选择了</option>
+    		<option value="0" >没选择</option>
+    	</select>
+    </label>
+    <label class="search-label">
+    	<select class="SID-select-where-option">
+    		<option value="" selected="selected">请选择选项</option>
+    	</select>
+    </label>
+    <label class="search-label">
+    	<a class="SID-select-where-del"><span class="fhicon-trash"></span></a>
+    </label>
+    <label class="search-label red SID-error" style="display:none;">
+    	筛选内容不可为空，请完整填写
+    </label>
+</div>

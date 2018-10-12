@@ -1,0 +1,53 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back" href="javascript:mplus.closeWindow()">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">活动</h1>
+        <div class="titlebar-right">
+            <a class="titlebar-button" id="ID-Index-BtnSearch"><i class="icon icon-search"></i></a>
+            <a class="titlebar-button" id="ID-Index-BtnAdd"><i class="icon icon-rdoadd"></i></a>
+        </div>
+    </div>
+    <div class="app-stateFilterBar underline" id="ID-Index-BtnFilter">
+        <div class="app-stateFilterBar-font">
+            <i class="icon-filter size20"></i>
+            <span>综合排序</span>
+        </div>
+        <i class="app-stateFilterBar-icon icon-arrowdown"></i>
+        <i class="app-stateFilterBar-icon icon-arrowup"></i>
+    </div>
+</header>
+<article style="top:84px;">
+    <div style="position: relative;width: 100%" id="ID-Index-List"></div>
+    <a class="button block primary radius4 SID-past-activity-btn" style="display:none;margin:12px 80px;">查看往期活动</a>
+</article>
+<!--状态筛选-->
+<div id="ID-Index-DialogFilter" style="background-color:white;display:none;">
+    <ul class="app-popListSelect">
+        <li class="SID-Index-State active underline" data-status="1">
+            <div>综合排序</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Index-State underline" data-status="2">
+            <div>即将开始</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Index-State underline" data-status="3">
+            <div>最新发布</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Index-State underline" data-status="4">
+            <div>人气最高</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Index-State underline" data-status="5">
+            <div>我参与的</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Index-State" data-status="6">
+            <div>我创建的</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+    </ul>
+</div>

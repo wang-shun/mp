@@ -1,0 +1,133 @@
+//会议详情-会议信息
+.tree-container{
+	&.detail{
+		border: 0;
+		top:0;
+	}
+	.base-info{
+		width: 85%;
+    	margin: 15px auto;
+    	border-bottom: 1px solid #e8e8e8;
+        padding-bottom: 15px;
+    	h3{
+    		font-size: 15px;
+    	}
+    	.content{
+    		width: 100%;
+    		display: table;
+    		.name{
+    			width: 40%;
+    			margin-left: 60px;
+    			float: left;
+    			margin-top: 5px;
+    			height: 25px;
+    			&.long{
+    				width: 80%;
+    				display: table;
+    			}
+    			.header{
+    				width: 24%;
+    				float: left;
+    				&.info{
+    					width: 12%;
+    				}
+    			}
+    			.long{
+    				display: table;
+    			}
+    		}
+    	}
+	}
+	.meeting-schedule{
+		width: 85%;
+    	margin: 15px auto;
+    	border-bottom: 1px solid #e8e8e8;
+    	h3{
+    		font-size: 15px;
+    	}
+    	.content{
+    		width: 100%;
+    		display: table;
+    		margin: 10px 0;
+    		.title{
+    			width: 60px;
+			    float: left;
+			    margin-top: 5px;
+    		}
+    		.name{
+    			width: 40%;
+    			margin-left: 60px;
+    			float: left;
+    			margin-top: 5px;
+    			height: 25px;
+    			&.first{
+    				margin-left: 0;
+    				width: 80%;
+    				.header{
+    					width: 10%;
+    				}
+    			}
+    			&.long{
+    				width: 80%;
+    				display: table;
+    			}
+    			.header{
+    				width: 20%;
+    				float: left;
+    				&.info{
+    					width: 10%;
+    				}
+    			}
+    			.long{
+    				display: table;
+    			}
+    		}
+    	}
+	}
+	.remark{
+		width: 85%;
+    	margin: 15px auto;
+    	.content{
+    		width: 100%;
+    		display: table;
+    		margin: 10px 0 30px;
+    		.title{
+    			width: 60px;
+			    float: left;
+			    margin-top: 5px;
+    		}
+    		.detail{
+    			margin-top: 5px;
+    			display: table;
+    			width: 80%;
+    		}
+    	}
+	}
+	.sign-info{
+		width: 100%;
+    	margin-top: 20px;
+    	display: none;
+    	.text-name{
+    		cursor: pointer;
+    		color: #1788fb;
+    		margin-left: 10px;
+    	}
+    	.histogram{
+    		width: 100%;
+    		margin-top: 20px;
+    		table{
+    			margin: 0 auto;
+    			width: 90%;
+    			td{
+    				text-align: center;
+    			}
+    		}
+    	}
+	}
+	.tableblock{
+		&.info{
+			width: 85%;
+	    	margin: 0 auto;
+	    }
+	}
+}

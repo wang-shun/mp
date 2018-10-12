@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		
+		
+		<script src="scripts/lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/common.js" ></script>
+		<!--<script type="text/javascript" src="scripts/lib/layer/mobile/layer.js" ></script>-->
+		<script type="text/javascript" src="scripts/lib/laydate/laydate.js" ></script>
+		<script type="text/javascript" src="scripts/lib/moment/moment-with-locales.js" ></script>
+		
+		<link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome.css">
+		
+		<link rel="stylesheet" href="scripts/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style/trip.css">
+		<link rel="stylesheet" href="style/triprangedate.css?v=1" />
+	</head>
+	<body>
+		<header>
+		<div class="titlebar">
+			<a href="#" onclick="closeSelf()">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</a>
+			<h1 class="titlebar-title text-center">日期范围</h1>
+			<a href="#" onclick="checkResult()">
+				<i class="fa fa-check fa-lg"></i>
+			</a>
+		</div>
+		</header>
+		<div id="laydate" class="rangeDateContent" style="width: 100%;height: 100%;"></div>
+	</body>
+	<script>
+	
+	function init(){
+		
+	    //var now = moment().format("YYYY-MM-DD") ;
+		//console.log(now);
+		laydate.render({
+	        elem: '#laydate', //指定元素  
+	        position: 'static',
+	        range:"~" ,
+	        showBottom :true,
+	        show:true ,
+	        min:moment().valueOf(),
+	        done:parent.dateRangeCallBack
+	    })
+	}
+		    document.addEventListener("backpressed",function(){
+			closeSelf();
+		}, false);
+	    
+	function closeSelf(){
+		//alert(1);
+//		parent.layclose("dateRange");
+		backToOpen();
+	}
+	
+	function checkResult(){
+		//class="laydate-btns-confirm laydate-disabled"
+		//$(".laydate-btns-confirm").click();
+		
+		//alert(1);
+		var selected = $(".layui-this") ;
+		//alert(selected.length);
+		//console.log(selected);
+		if(selected.length == 2 ){
+			var d1 = $(selected[0]).attr("lay-ymd") ;
+			var d2 = $(selected[1]).attr("lay-ymd") ;
+//			parent.dateRangeCallBack(1,d1,d2);
+			backToOpen(d1,d2);
+		}
+	}
+	
+	
+	function backToOpen(beginDate,endDate){
+		
+		var returnUrl = getUrlParam("returnUrl");
+		if(returnUrl){
+			var returnurl_full = returnUrl + window.location.search ;
+			if(beginDate){
+				
+				returnurl_full = setUrlParam(returnurl_full,"beginDate",_formatDate(beginDate));
+			}
+			if(endDate){
+				returnurl_full = setUrlParam(returnurl_full,"endDate",_formatDate(endDate));
+			}
+			
+			window.open(returnurl_full,"_self");
+		}
+		
+	}
+	
+	function _formatDate(dateStr){
+		var dd = dateStr.split("-");
+		if(dd[1].length<=1){
+			dd[1] = "0"+dd[1];
+		}
+		if(dd[2].length<=1){
+			dd[2] = "0"+dd[2];
+		}
+		return dd[0]+"-"+dd[1]+"-"+dd[2];
+	}
+
+	
+	
+	init();
+	</script>
+	
+</html>

@@ -1,0 +1,161 @@
+/**权限管理**/
+.blockInside{
+	margin-bottom: 0;
+}
+.crumb{
+	margin-top: 4px;
+}
+.book-container{
+	width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    .book-aside{
+    	position: relative;
+	    float: left;
+	    border-right: #e8e8e8 1px solid;
+	    width: 245px;
+	    overflow: auto;
+	    display: block;
+	    height: 100%;
+	    .meetinfo-num{
+			width: 220px;
+    		margin-top: 50px;
+    		border-bottom: 1px solid #ccc;
+    		td{
+    			border: 1px solid #ccc;
+    			border-bottom: 0;
+			    height: 35px;
+			    text-align: center;
+			    padding: 5px;
+			    line-height: 35px;
+			    
+			    a{
+			    	color: #000;
+			    }
+			    &.active{
+			    	background-color: #1788fb;
+	    			a{
+	    				color: #fff;
+	    			}
+			    }
+    		}
+    		td:hover{
+    			background-color: #1788fb;
+    			a{
+    				color: #fff;
+    			}
+    		}
+	    }
+	    .fhicon-search{
+	    	float: left;
+		    font-size: 20px;
+		    margin-top: 16px;
+		    margin-left: 8px;
+	    }
+	    input{
+	    	margin-top: 13px;
+		    text-align: center;
+		    height: 25px;
+		    float: left;
+		    position: relative;
+		    border-radius: 4px;
+		    width: 190px;
+		    border: 1px solid #ccc;
+	    }
+    }
+    .right-main{
+    	margin-left: 310px;
+    	.right-center{
+    		width: 100%;
+    		margin-top: 30px;
+    		.form-item{
+    			padding-bottom: 20px;
+	            .form-item-label{
+	            	width: 120px;
+	            }
+	            .form-item-editbox{
+	            	position: relative;
+	            	.memblock{
+	            		border: #e8e8e8 1px solid;
+					    min-height: 210px;
+					    width: 350px;
+					    .list{
+					    	li{
+					    	    &.select{
+					    	    	background-color:#f3f3f3;
+					    	    }
+					    		a{
+					    			display: block;
+	    							padding: 0 10px;
+					    		}
+					    		a:hover{
+					    			background-color:#f3f3f3;
+					    		}
+					    	}
+					    }
+	            	}
+	            	.pop-searchbar{
+	            		border: #e8e8e8 1px solid;
+					    border-radius: 4px;
+					    height: 30px;
+					    line-height: 30px;
+					    margin: 0 0 10px 0;
+					    width: 350px;
+					    input{
+					    	width: 88%;
+						    padding-left: 10px;
+						    border: 0;
+					    }
+					    a{
+					    	font-size: 18px;
+						    position: absolute;
+						    padding-top: 6px;
+						    color: #ccc;
+					    }
+	            	}
+	            	.pop-rankbox{
+	            		width: 352px;
+	            		&.pop-rankbox-maskColor{
+	            			position: absolute;
+						    left: 0;
+						    z-index: 2;
+						    margin-top: -11px;
+						    .rank-list{
+						    	border: #b9daf4 1px solid;
+    							background-color: #f6fdff;
+    							.rank-item{
+								    a{
+								    	font-size: 14px;
+									    padding: 0 10px;
+									    display: block;
+									    overflow: hidden;
+									    white-space: nowrap;
+									    text-overflow: ellipsis;
+								    }
+    							}
+						    }
+						    .rank-userbox{
+						    	border: #b9daf4 1px solid;
+    							background-color: #f6fdff;
+    							.rank-item{
+								    a{
+								    	font-size: 14px;
+									    padding: 0 10px;
+									    display: block;
+									    overflow: hidden;
+									    white-space: nowrap;
+									    text-overflow: ellipsis;
+								    }
+    							}
+						    }
+	            		}
+	            	}
+	            	.buttonblue{
+	            		margin: 15px 10px 0 5px;
+	            	}
+	            }
+	        }
+    	}
+    }
+}

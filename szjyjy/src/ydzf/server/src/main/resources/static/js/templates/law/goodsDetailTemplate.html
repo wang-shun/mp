@@ -1,0 +1,75 @@
+<div  align=center>
+<br/>
+	<div   class="div" > 货物信息</div>
+	
+	
+	<table width="700px"  class="table"  cellspacing="0px">
+		<tr class="tr">
+				        <td class="td" width="20%">HS编码</td>
+				        <td class="td" width="20%">品名</td>
+				        <td class="td" width="20%">数量/重量</td>
+				        <td class="td" width="20%">货物总值</td>
+				        <td class="td" width="20%">原产地</td>
+		</tr>
+		<% if(goodsDetails.length==0){%>
+		<tr >
+				        <td class="td" align=center colSpan="5" width="100%">无货物信息</td>
+		</tr>
+		
+		<% } %>
+		<% for(var i=0,goodsDetail; goodsDetail=goodsDetails[i++];) { %>
+				    <tr >
+				        <td class="td" width="20%"><%=goodsDetail.hs_CODE_DESC%></td>
+				        <td class="td" width="20%"><%=goodsDetail.decl_GOODS_CNAME%></td>
+				        <td class="td" width="20%"><%=goodsDetail.qty%><%=goodsDetail.qty_CNAME%>/<%=goodsDetail.weight%><%=goodsDetail.wt_CNAME%></td>
+				        <td class="td" width="20%"><%=goodsDetail.total_VAL_CN%></td>
+				        <td class="td" width="20%"><%=goodsDetail.cname%></td>
+				    </tr>
+		<% } %>
+	</table>
+	<br/>
+	<div   class="div" > 集装箱信息</div>
+	
+	
+	<table width="700px"  class="table"  cellspacing="0px">
+		<tr class="tr">
+				        <td class="td" width="20%">集装箱规格</td>
+				        <td class="td" width="20%">集装箱数量</td>
+				        <td class="td" width="20%">集装箱号码串</td>
+				        <td class="td" width="20%">重量</td>
+				        <td class="td" width="20%">操作时间</td>
+		</tr>
+		<% if(containerDetails.length==0){%>
+		<tr >
+				        <td class="td" align=center colSpan="5" width="100%">无集装箱信息</td>
+		</tr>
+		
+		<% } %>
+		<% for(var i=0,containerDetail; containerDetail=containerDetails[i++];) { %>
+				    <tr >
+				        <td class="td" width="20%"><%=containerDetail.cntnr_MODE_CNAME%></td>
+				        <td class="td" width="20%"><%=containerDetail.container_QTY%></td>
+				        <td class="td" width="20%"><%=containerDetail.cont_NO%></td>
+				        <td class="td" width="20%"><%=containerDetail.weight%><%=containerDetail.wt_CNAME%></td>
+				        <td class="td" width="20%"><%=containerDetail.oper_TIME%></td>
+				    </tr>
+		<% } %>
+	</table>
+
+</div>
+
+<style >
+.td{border:solid #ccc; border-width:0px 1px 1px 0px; padding: 5px; font-family: "Microsoft YaHei", helvetica, arial;font-size: 14px;}
+.table{border:solid #ccc; border-width:1px 0px 0px 1px;font-size: 14px;width:700px}
+.div{	background:#ccc;
+		height:30px;
+		width:700px;
+		margin:0 auto;
+		text-align:center;
+		line-height:30px;
+		font-size: 14px;
+		font-family: "Microsoft YaHei, helvetica, arial"
+	}
+.tr{	background:#f0f0f0;
+	}
+</style>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.meetingroom.dao.MrDisableRoomMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meetingroom.entity.MrDisableRoom">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="disable_begin_time" jdbcType="TIMESTAMP" property="disableBeginTime" />
+    <result column="disable_end_time" jdbcType="TIMESTAMP" property="disableEndTime" />
+    <result column="disable_user_id" jdbcType="VARCHAR" property="disableUserId" />
+    <result column="disable_user_name" jdbcType="VARCHAR" property="disableUserName" />
+    <result column="disable_user_dept" jdbcType="VARCHAR" property="disableUserDept" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+</mapper>

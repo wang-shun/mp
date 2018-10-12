@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmSvcAuthMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmSvcAuth">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="app_id" jdbcType="VARCHAR" property="appId" />
+    <id column="svc_id" jdbcType="VARCHAR" property="svcId" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="svc_name" jdbcType="VARCHAR" property="svcName" />
+    <result column="appkey" jdbcType="VARCHAR" property="appkey" />
+    <result column="secret" jdbcType="VARCHAR" property="secret" />
+    <result column="expired_time" jdbcType="DATE" property="expiredTime" />
+    <result column="auth_time" jdbcType="DATE" property="authTime" />
+    <result column="route_id" jdbcType="VARCHAR" property="routeId" />
+  </resultMap>
+  
+  <select id="getServiceInfoByAppId" parameterType="java.util.Map" resultType="ClientServiceInfo">
+    select * from 
+    (select ssa.svc_id as svcId,ssa.appkey,ssa.secret,ssa.app_id,sr.path    
+    from SM_SVC_AUTH ssa 
+    left join SM_ROUTE sr on ssa.svc_id = sr.service_id) ssar
+	where ssar.app_id=#{appId,jdbcType=VARCHAR} 
+  </select>
+</mapper>

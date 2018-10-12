@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.meetingroom.dao.MrFavoriteMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meetingroom.entity.MrFavorite">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="fav_time" jdbcType="TIMESTAMP" property="favTime" />
+  </resultMap>
+</mapper>

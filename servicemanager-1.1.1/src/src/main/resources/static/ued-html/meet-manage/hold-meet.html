@@ -1,0 +1,248 @@
+<div class="blockInside">
+    <ul class="tablist">
+        <li class="active" data-name="add-service"><a>添加服务</a></li>
+    </ul>
+    <!-- 召开会议模块 -->
+    <div class="hold-meet">
+        <div class="add-main">
+             <a class="meet-add"><span class="fhicon-meeting-add"></span>新增会议室</a>
+        </div>
+        <div class="tree-container tree-container-nobutton">
+            <!-- 表格内容 -->
+            <div class="tableblock">
+                <table class="stable" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="tabletit">会议名称</td>
+                        <td class="tabletit">会议创建时间</td>
+                        <td class="tabletit">会议开始时间</td>
+                        <td class="tabletit">会议结束时间</td>
+                        <td class="tabletit">会议地点</td>
+                        <td class="tabletit">会议状态</td>
+                        <td class="tabletit">操作</td>
+                    </tr>
+                    <tr>
+                        <td>会议1</td>
+                        <td></td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>公司A栋1003 会议室1</td>
+                        <td>已结束</td>
+                        <td>
+                            <div class="tb-opt-box">
+                                <a class="table-operation"><span class="fhicon-set2"></span></a>
+                                <div class="tb-opt-main" style="display: none">
+                                    <a><span class="fhicon-eye"></span>查看</a>
+                                    <a><span class="fhicon-pencil"></span>编辑</a>
+                                    <a><span class="fhicon-delete"></span>取消</a>
+                                    <a><span class="fhicon-trash"></span>删除</a>
+                                    <a><span class="fhicon-active"></span>发布</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>会议2</td>
+                        <td></td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>公司A栋1003 会议室1</td>
+                        <td>已结束</td>
+                        <td>
+                            <div class="tb-opt-box">
+                                <a class="table-operation active"><span class="fhicon-set2"></span></a>
+                                <div class="tb-opt-main" style="display: block;">
+                                    <a class="grey"><span class="fhicon-pencil"></span>修改</a>
+                                    <a><span class="fhicon-delete"></span>禁用</a>
+                                    <a><span class="fhicon-active"></span>调试</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>    
+    <!-- 参与会议模块 -->
+    <div class="join-meet">
+        <div class="tree-container tree-container-noadd">
+            <div class="searchBlock">
+                <!--变为展开查询的时候span标签调用样式fhicon-arrowD2,search-modle后增加hide-->
+                <div class="search-toggleBar">
+                    <a class="search-toggle">
+                        <span class="icon-set fhicon-arrowU2"></span><span>关闭查询</span>
+                    </a>
+                </div>
+                <div class="search-modle">
+                    <div class="hold-meet-mod lef">
+                        <div class="search-list">
+                            <label class="search-label">会议名称：<input type="text" class="choose-text name"/></label>
+                            <label class="search-label">会议日期：</label>
+                            <input type="date" class="choose-date" />~<input type="date" class="choose-date"/>
+                            <label class="search-label pos">会议召开人：<input type="text" class="choose-text"/></label>
+                            <label class="search-label rel">会议状态：
+                                <select>
+                                    <option value="">未进行</option>
+                                    <option value="">进行中</option>
+                                    <option value="">已取消</option>
+                                    <option value="">已结束</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="search-button seb"><a>查询</a><a>清空</a></div>
+                </div>
+            </div>
+            <!-- 表格内容 -->
+            <div class="tableblock">
+                <table class="stable" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="tabletit">数据库类型</td>
+                        <td class="tabletit">地址</td>
+                        <td class="tabletit">端口</td>
+                        <td class="tabletit">服务名/数据库</td>
+                        <td class="tabletit">用户名</td>
+                        <td class="tabletit">状态</td>
+                        <td class="tabletit">分配应用数</td>
+                        <td class="tabletit">操作</td>
+                    </tr>
+                    <tr>
+                        <td>会议1</td>
+                        <td>张三</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>公司A栋1003 会议室1</td>
+                        <td>已结束</td>
+                        <td>
+                            <div class="tb-opt-box">
+                                <a class="table-operation"><span class="fhicon-set2"></span></a>
+                                <div class="tb-opt-main" style="display: none">
+                                    <a><span class="fhicon-trash"></span>删除</a>
+                                    <a><span class="fhicon-eye"></span>查看</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>会议2</td>
+                        <td>张三</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>公司A栋1003 会议室1</td>
+                        <td>已结束</td>
+                        <td>
+                            <div class="tb-opt-box">
+                                <a class="table-operation active"><span class="fhicon-set2"></span></a>
+                                <div class="tb-opt-main" style="display: block;">
+                                    <a><span class="fhicon-trash"></span>删除</a>
+                                    <a><span class="fhicon-eye"></span>查看</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>    
+    </div>
+    <!-- 服务会议模块 -->
+    <div class="service-meet">
+        <div class="tree-container tree-container-noadd">
+            <div class="searchBlock">
+                <!--变为展开查询的时候span标签调用样式fhicon-arrowD2,search-modle后增加hide-->
+                <div class="search-toggleBar">
+                    <a class="search-toggle">
+                        <span class="icon-set fhicon-arrowU2"></span><span>关闭查询</span>
+                    </a>
+                </div>
+                <div class="search-modle">
+                    <div class="hold-meet-mod lef">
+                        <div class="search-list">
+                            <label class="search-label">会议名称：<input type="text" class="choose-text name"/></label>
+                            <label class="search-label">会议日期：</label>
+                            <input type="date" class="choose-date" />~<input type="date" class="choose-date"/>
+                            <label class="search-label pos">会议召开人：<input type="text" class="choose-text"/></label>
+                            <label class="search-label rel">会议状态：
+                                <select>
+                                    <option value="">未进行</option>
+                                    <option value="">进行中</option>
+                                    <option value="">已取消</option>
+                                    <option value="">已结束</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="search-button seb"><a>查询</a><a>清空</a></div>
+                </div>
+            </div>
+            <!-- 表格内容 -->
+            <div class="tableblock">
+                <table class="stable" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="tabletit">数据库类型</td>
+                        <td class="tabletit">地址</td>
+                        <td class="tabletit">端口</td>
+                        <td class="tabletit">服务名/数据库</td>
+                        <td class="tabletit">用户名</td>
+                        <td class="tabletit">状态</td>
+                        <td class="tabletit">分配应用数</td>
+                        <td class="tabletit">操作</td>
+                    </tr>
+                    <tr>
+                        <td>会议1</td>
+                        <td>张三</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>公司A栋1003 会议室1</td>
+                        <td>已结束</td>
+                        <td>
+                            <div class="tb-opt-box">
+                                <a class="table-operation"><span class="fhicon-set2"></span></a>
+                                <div class="tb-opt-main" style="display: none">
+                                    <a><span class="fhicon-trash"></span>删除</a>
+                                    <a><span class="fhicon-eye"></span>查看</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>会议2</td>
+                        <td>张三</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>2016-03-31 15:00:14</td>
+                        <td>公司A栋1003 会议室1</td>
+                        <td>已结束</td>
+                        <td>
+                            <div class="tb-opt-box">
+                                <a class="table-operation active"><span class="fhicon-set2"></span></a>
+                                <div class="tb-opt-main" style="display: block;">
+                                    <a><span class="fhicon-trash"></span>删除</a>
+                                    <a><span class="fhicon-eye"></span>查看</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>    
+    </div>
+</div>
+<script type="text/javascript">
+    $(".tablist li").on("click",function(){
+        $(".tablist li").removeClass("active");
+        $(this).addClass("active");
+        if($(this).data("name")=="hold-meet"){
+            $(".hold-meet").show();
+            $(".join-meet").hide();
+            $(".service-meet").hide();
+        }
+        if($(this).data("name")=="join-meet"){
+            $(".join-meet").show();
+            $(".hold-meet").hide();
+            $(".service-meet").hide();
+        }
+        if($(this).data("name")=="service-meet"){
+            $(".service-meet").show();
+            $(".join-meet").hide();
+            $(".hold-meet").hide();
+        }
+    });
+</script>

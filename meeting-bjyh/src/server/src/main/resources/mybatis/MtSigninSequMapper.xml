@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.MtSigninSequMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.MtSigninSequ" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="meeting_id" property="meetingId" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="sequ" property="sequ" jdbcType="NUMERIC" />
+  </resultMap>
+  
+  <delete id="deleteByMeetingId" parameterType="java.util.Map">
+    delete from mt_signin_sequ where meeting_id = #{meetingId}
+  </delete>
+  
+  <select id="getByMeetingId" parameterType="java.util.Map" resultType="MtSigninSequ">
+    select id,remarks,sequ,meeting_id meetingId
+    ,(select count(1) from mt_signin_record sr where sr.meeting_id = ss.meeting_id and sr.sequ_id = ss.id
+      <if test="createUserId != null">
+		and person_id &lt;&gt; #{createUserId,jdbcType=VARCHAR}
+	  </if>
+    ) totalNum
+    ,(select count(1) from mt_signin_record sr where sr.meeting_id = ss.meeting_id and sr.sequ_id = ss.id and sr.signed = 'Y'
+      <if test="createUserId != null">
+		and person_id &lt;&gt; #{createUserId,jdbcType=VARCHAR}
+	  </if>
+    ) signedNum
+    from mt_signin_sequ ss where meeting_id = #{meetingId,jdbcType=VARCHAR} order by sequ asc
+  </select>
+</mapper>

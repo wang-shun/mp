@@ -1,0 +1,17 @@
+<% var ulStyle="",ulFlag="active"; if (pageNum != "1") { ulStyle="display:none;"; ulFlag=""; } %>
+<ul class="SID-question-ul <%=ulFlag%>" data-pageNum="<%=pageNum%>" style="<%=ulStyle%>">
+<% for(var i=0,question; question=questionArr[i++];) { %>
+
+	<% var typeShow = "display:none;"; %>
+	<% if (question.type == "1" || question.type == "2" || question.type == "3" ) { %>
+	<% typeShow = ""; %>
+	<% } %>
+    <li class="SID-question-li" style="<%=typeShow%>" data-question-id="<%=question.id%>" data-question-type="<%=question.type%>" data-required="<%=question.required%>">
+        <dl>
+            <dt style="background-color: #dbdbdb;"><span class="SID-question-sequ" style="margin-left:0.25rem"></span><%=question.question%></dt>
+		    <div class="histogram" id="ID-chart-<%=question.id%>" style="width:100%;height:12rem;">
+		    </div>
+        </dl>
+    </li>
+<% } %>
+</ul>

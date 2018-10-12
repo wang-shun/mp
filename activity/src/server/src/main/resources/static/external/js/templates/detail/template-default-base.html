@@ -1,0 +1,41 @@
+<div class="qrcodePanel-top"></div>
+<div class="qrcodePanel">
+	<div class="app-title"><%=meetingInfo.meetingName%></div>
+	<div style="padding: 10px 0;">
+		<div class="app-qrcode-box">
+			<img src="<%=imgQrcode%>" class="app-qrcode" />
+			<p>扫描二维码签到</p>
+		</div>
+	</div>
+	<img src="<%= imgPath %>/panelBtm.png" class="qrcodePanel-bottom"/>
+</div>
+<div class="group group-inputbox">
+	<div class="inputbox">
+		<div class="inputbox-left">时间</div>
+		<div class="inputbox-right group-right-label"><%=meetingInfo.beginTimeStr%> ~ <%=meetingInfo.endTimeStr%></div>
+	</div>
+	<div class="inputbox">
+		<div class="inputbox-left">地点</div>
+		<div class="inputbox-right group-right-label"><%=meetingInfo.address%></div>
+	</div>
+	<%if(meetingInfo.person){%>
+	<div class="inputbox">
+		<div class="inputbox-left">召开人</div>
+		<div class="inputbox-right group-right-label"><%=meetingInfo.person%></div>
+	</div>
+	<%}%>
+	<%if(meetingInfo.tel){%>
+	<div class="inputbox">
+		<div class="inputbox-left">电话</div>
+		<div class="inputbox-right group-right-label"><%=meetingInfo.tel%></div>
+	</div>
+	<%}%>
+</div>
+<%if(remarksList.length > 0){ %>
+<div class="group">
+	<p class="app-remarktitle">会议备注</p>
+	<% for(var i=0,remarksData; remarksData=remarksList[i++];) { %>
+	<p class="app-remark"><%=remarksData.remarks%></p>
+	<% } %>
+</div>
+<%}%>

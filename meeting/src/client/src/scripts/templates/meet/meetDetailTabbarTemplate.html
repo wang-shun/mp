@@ -1,0 +1,20 @@
+<ul class="tabbar tabbar-rect" data-col="4" style="width:90%;">
+    <li class="tab active">
+        <label class="tab-label">基本信息</label>
+    </li>
+    <li class="tab">
+        <label class="tab-label">会议议程</label>
+    </li>
+    <li class="tab">
+        <label class="tab-label">附件资料</label>
+    </li>
+    <%if((data.meeting.isSelfCreate == "1" || data.meeting.isSelfService == "1") && data.signinSequList.length>0){%>
+    <li class="tab">
+        <label class="tab-label">签到记录</label>
+    </li>
+    <%}else{%>
+    <li class="tab">
+        <label class="tab-label">参会人员</label>
+    </li>
+    <%}%>
+</ul>

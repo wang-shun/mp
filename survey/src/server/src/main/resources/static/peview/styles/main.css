@@ -1,0 +1,306 @@
+
+/*public*/
+.size32 { width: 1.3rem; height:1.3rem; }
+
+
+/* 覆盖
+*/
+.titlebar-title {
+    font-size: 0.7rem;
+}
+.fhicon-back { color: #24d1e1; } 
+.tabbar-rect .tab.active {
+    color: white;
+    background-color: #11cdde;
+    border-color: #11cdde;
+}
+
+.tab {
+    font-size: 0.55rem;
+}
+
+.tab-label {
+    font-size: 0.55rem;
+}
+
+.progressbox-content { padding:0.3rem 0 0 0 ; margin-left: 0.5rem; }
+
+.grid[data-col="4"] li {
+    width: 2.4rem;
+}
+.doughtut { width: 2.4rem; height: 2.4rem; }
+.doughtut-wrapper { width: 1.2rem; height: 2.4rem; }
+.doughtut-circle { width: 2.4rem; height: 2.4rem; }
+.doughtut-label { font-size: 0.5rem; }
+.doughtut.orange .doughtut-circle { border-width: 0.12rem ; }
+.doughtut.orange .doughtut-circle.right { border-right-width: 0.12rem ; border-left-width: 0.12rem; }
+.doughtut.orange .doughtut-circle.left { border-bottom-width: 0.12rem ; border-left-width: 0.12rem ; }
+
+.progress-bar { height: 0.6rem; border-width: 0.05rem; }
+.progress { padding: 0.2rem; }
+.grid { left: 50%; margin-left: -1.2rem; }
+
+
+.surveyList .complete .progress-bar.theme-1 {
+    background-color: #d9d9d9;
+    border-color: #bfbfbf;
+}
+
+.titlebar-button { color: #11cdde; }
+
+.input-checkbox:checked, .input-radio:checked, .input-checkbox.active, .input-radio.active {
+    color: #11cdde;
+}
+
+.input-checkbox[disabled], .input-radio[disabled] {
+    color: #d1d1d1;
+}
+
+.fhicon-checkbox, .fhicon-radio {
+    height:0.8rem;
+    width: 0.8rem;
+    line-height:0.8rem;
+    font-family: "fhicon";
+    font-size:0.8rem;
+}
+
+.fhicon-radio:checked:before {
+  content: "\e905";
+}
+.fhicon-checkBox:checked:before {
+  content: "\e902";
+}
+
+.input-text {
+    min-height: 0.7rem;
+    line-height: 0.7rem;
+    padding: 0;
+}
+
+.error-font {
+    color: #888;
+    text-align: center;
+    margin-top: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 0.65rem;
+}
+
+.button {
+    height: 1.5rem;
+    border-width: 0.05rem;
+}
+
+
+.button.submit {
+    color: white;
+    background-color: #11cdde;
+    border-color: #11cdde;
+}
+
+.button.submit:active {
+  background-color: #82e0e9;
+  border-color: #82e0e9;
+}
+
+header + article {
+    padding-top: 1.68rem;
+}
+
+
+/* 新增
+*/
+.topBar { margin: 10px 0; }
+
+.marginBottom { margin-bottom: 10px; }
+.width100P { width: 100%; }
+
+.surveyList{ border-top:#cecece solid 0.05rem ; background-color: #fff;  display: block; overflow: hidden;}
+.surveyList li { border-bottom:#cecece solid 0.05rem ; padding:0.5rem 0;  display: block; overflow: hidden;}
+.surveyList li .sur-left { width:75%; float: left; display: block; overflow: hidden;}
+.surveyList li .sur-left h2 { font-size: 0.75rem; color: #333333; font-weight: normal; line-height: 1.5rem; margin-left: 0.5rem; overflow: hidden;
+text-overflow:ellipsis; white-space: nowrap; }
+.surveyList li .sur-left p { font-size: 0.7rem; color: #9e9e9e;  line-height: 1rem;  margin-left: 0.5rem;}
+.surveyList .fhicon-label,.surveyList .fhicon-time { color:#11cdde; font-size: 0.9rem; vertical-align:middle; margin-top: -0.1rem; margin-right: 0.1rem; }
+
+.surveyList li .sur-right { width: 25%; float: left; display: block; overflow: hidden;}
+.surveyList li .sur-right li { border:none;}
+.surveyList li .sUmber {font-size:0.5rem; text-align:center; line-height:1.04rem; margin:0.15rem 0 0 0.4rem; border-radius: 2rem; background-color: #f2f2f2; color: #494949; }
+
+.bodyWhite { background-color: #fff; }
+.uestionnaire { padding: 1rem; }
+.uestionnaire li { font-size:0.65rem; margin-bottom: 1rem; }
+.uestionnaire li dt { line-height: 1.2rem; }
+.uestionnaire li dd { background-color: #fcfcfc; border:#e1e1e1 solid 0.05rem; border-radius: 0.2rem; padding:0.5rem 0.5rem 0 0.5rem ; }
+.uestionnaire li dd p { margin-bottom: 0.5rem; }
+.uestionnaire li dd.active { border: #11ccdd solid 1px; }
+
+.paddingBottom { padding-bottom: 0.5rem; }
+
+.input-line { width: 11.5rem; margin:0 0 0 1.5rem; border:#dedede solid 0.05rem; border-radius:0.2rem; line-height: 1.3rem; height: 1.3rem; min-height: 1.3rem; text-indent: 0.2rem; }
+.input-gray { background-color: #dedede; }
+
+.textarea { border: none; height: 100px; overflow: auto;}
+
+.button-questionnaire { width: 100%; padding: 10px 0 50px; width: 100%; text-align: center; }
+.button-questionnaire  a { padding: 0.3rem 1rem; margin: 0 14px; border-radius: 50px; display: inline-block; text-align: center; border:#13cce0 1px solid; color: #13cce0; }
+.button-questionnaire  a:hover { opacity: 0.5; }
+
+
+.dunit01 { width: 96%; margin:0 2%; }
+.dunit01 .dunit01-inner01 {
+    width: 70%;
+}
+.dunit01  .dunint-inner { width: 1rem; padding-top: 0.35rem; }
+
+
+
+.surveyList li .dunit01 h2 { font-size: 0.75rem; color: #333333; font-weight: normal; line-height: 1.2rem; margin-left: 0.1rem;  }
+.surveyList li .dunit01 p { font-size: 0.7rem; color: #9e9e9e;  line-height: 1rem;  margin-left: 0.1rem;}
+.surveyList li .dunit01 .sur-right { width:90%; float: none; margin-left: 10%; }
+.surveyList li .dunit01 .progressbox-content { margin-left: 0; }
+.surveyList .complete .fhicon-label,.surveyList .complete .fhicon-time,.surveyList li .complete h2,.surveyList li .complete p { color:#9da5a6; }
+
+
+/* preview */
+
+.bg-preview { background-color: #fefefe;  }
+
+.q-preview-title { width: 100%; height: 78px; background-color: #fff; border-bottom:#dbdbdb solid 1px; -moz-box-shadow: 0 5px 10px #f3f3f3; /* 老的 Firefox */
+box-shadow: 0 5px 10px #f3f3f3; text-align: center; }
+.q-preview-title a { padding: 0 60px; color: #000; line-height: 78px; font-size: 20px; display: inline-block; }
+
+a.q-preview-close { position: absolute; top: 20px; right: 15px; padding: 6px 10px; border:#dedede solid 1px; border-radius: 5px; color: #000; font-size: 12px; line-height: 26px;}
+a.q-preview-close:hover { opacity: 0.5 }
+
+.fhicon-mobile { font-size: 40px; }
+.fhicon-computer { font-size: 40px; }
+.fhicon-mobile.active { color: #30d8e8; }
+.fhicon-computer.active { color: #30d8e8 }
+label.active { color: #30d8e8; }
+label.active { color: #30d8e8 }
+
+.q-preview-phone { width: 524px; height: 836px; margin: 0 auto; background: url(../images/iPhone.png) no-repeat; position: relative;  }
+.q-preview-main { width: 290px; height: 518px; position: absolute; top: 160px; left: 106px; }
+
+.q-preview-computer { width: 900px; margin:0 auto; background-color: #fff; text-align: left; font-size: 14px; margin-top: 40px; }
+
+.q-preview-computer .uestionnaire li {
+    font-size: 14px;
+}
+
+.q-preview-computer .uestionnaire li dt {
+    line-height: 22px;
+}
+
+.q-preview-computer .uestionnaire li dd {
+    border: #e1e1e1 solid 1px;
+    border-radius: 5px;
+    padding: 10px 10px 0 10px;
+    background: none;
+}
+
+.q-preview-computer .input-line {
+    width: 500px;
+    margin: 0 0 0 30px;
+    border: #dedede solid 1px;
+    border-radius: 5px;
+    line-height: 30px;
+    height: 30px;
+    min-height: 30px;
+    text-indent: 10px;
+}
+
+.q-preview-computer .fhicon-checkbox,.q-preview-computer  .fhicon-radio {
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    font-family: "fhicon";
+    font-size: 20px;
+}
+
+.q-preview-computer  .uestionnaire {
+     padding: 0 50px; 
+}
+.uestionnaire li dd p {
+    margin-bottom: 0; 
+}
+/** 预览定制 **/
+/** 全局 **/
+.q-preview-computer {
+	line-height:30px;
+}
+.q-question p,.q-question span,.q-question u,.q-question em,.q-question strong{
+	line-height:30px;
+} 
+.q-option p,.q-option span,.q-option u,.q-option em,.q-option strong{
+	line-height:30px;
+} 
+/** 标题 **/
+.q-preview-computer .q-title {
+	font-size: 24px;
+}
+/** 题号 **/
+.q-preview-computer .q-mi{
+	line-height:30px;
+	float: left;
+    word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    color: red;
+}
+.q-preview-computer .q-sequ{
+	line-height:30px;
+	float: left;
+    word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+/** 题目 **/
+.q-preview-computer .q-question{
+	line-height:30px;
+	word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+/** 选项按钮 **/
+.q-preview-computer .q-option-btn{
+    word-break: normal;
+    width: auto;
+    display: block;
+}
+/** 选项 **/
+.q-preview-computer .q-option{
+	line-height:30px;
+	word-break: normal;
+    width: 90%;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+/** 选项备注 **/
+.q-preview-computer .q-option-remark{
+	line-height:30px;
+	word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+
+
+
+
+
+

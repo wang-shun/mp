@@ -1,0 +1,38 @@
+
+    <% for(var i=0,roomData; roomData=data[i++];) { %>
+    <% var liInvalid="";if(roomData.status=='40' || roomData.status=='50'){liInvalid="app-list-disabled"}%>
+    <li class="SID-Index-Li list-li underline <%=liInvalid%>" data-meetingId="<%=roomData.meetingId %>">
+        <div class="list-container">
+            <div class="list-row app-rowTitle" style="margin:3px 0;">
+                <div class="list-title nowrap" style="max-width: 68%;">
+                    <%=roomData.meetingName%>
+                </div>
+                <% if(roomData.isSelfCreate=='1'){ %>
+                <span class="mark-info outline" style="margin-left: 4px;">召开</span>
+                <% } %>
+                <% if(roomData.isSelfJoin=='1'){ %>
+                <span class="mark-success outline" style="margin-left: 4px;">参与</span>
+                <% } %>
+                <% if(roomData.isSelfService=='1'){ %>
+                <span class="mark-warn outline" style="margin-left: 4px;">服务</span>
+                <% } %>
+            </div>
+            <div class="list-row" style="margin:3px 0;">
+                <i class="list-icon icon-time color-primary"></i>
+                <p class="list-font color-primary">
+                <%if(roomData.beginTimeStr.split(" ")[0] == roomData.endTimeStr.split(" ")[0]){%>
+                   <%=roomData.beginTimeStr.split(" ")[0]%> <%=roomData.beginTimeStr.split(" ")[1]%> ~ <%=roomData.endTimeStr.split(" ")[1]%>
+                <% }else{ %>
+                   <%=roomData.beginTimeStr%> ~ <%=roomData.endTimeStr%>
+                <% } %>
+                </p>
+            </div>
+            <div class="list-row" style="margin:3px 0;">
+                <i class="list-icon icon-position color-primary"></i>
+                <p class="list-font">
+                    <%=roomData.address%>
+                </p>
+            </div>
+        </div>
+    </li>
+    <% } %>

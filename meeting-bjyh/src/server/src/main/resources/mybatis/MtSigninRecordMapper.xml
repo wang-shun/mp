@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.MtSigninRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.MtSigninRecord" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="meeting_id" property="meetingId" jdbcType="VARCHAR" />
+    <result column="sequ_id" property="sequId" jdbcType="VARCHAR" />
+    <result column="person_id" property="personId" jdbcType="VARCHAR" />
+    <result column="person_name" property="personName" jdbcType="VARCHAR" />
+    <result column="signed" property="signed" jdbcType="VARCHAR" />
+    <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="serv_id" property="servId" jdbcType="VARCHAR" />
+    <result column="person_type" property="personType" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <delete id="deleteByMeetingId" parameterType="java.util.Map">
+    delete from mt_signin_record where meeting_id = #{meetingId}
+  </delete>
+  
+  <select id="getByMeetingId" parameterType="java.util.Map" resultType="MtSigninRecord">
+    select id,meeting_id meetingId,sequ_id sequId,person_id personId,person_name personName,signed,to_char(sign_time,'yyyy-mm-dd hh24:mi:ss') signTimeStr
+    	  ,serv_id servId ,person_type personType 
+    from mt_signin_record where meeting_id = #{meetingId,jdbcType=VARCHAR} order by signed asc,sign_time desc
+  </select>
+    
+  <select id="getBySequId" parameterType="java.util.Map" resultType="MtSigninRecord">
+    select personId,personName
+    <if test = "allFlag == null">
+    ,id,meetingId,sequId,signTimeStr ,servId ,personType,signed,sign_time signTime
+    </if>
+    from (
+    select id,meeting_id meetingId,sequ_id sequId,person_id personId,person_name personName,to_char(sign_time,'yyyy-mm-dd hh24:mi:ss') signTimeStr,sign_time
+    	  ,serv_id servId ,person_type personType,case when sign_time &gt; #{time} and signed='Y' then 'N' else signed end signed
+    from mt_signin_record 
+    where meeting_id = #{meetingId,jdbcType=VARCHAR} 
+    <if test = "sequId != null">
+      and sequ_id = #{sequId,jdbcType=VARCHAR}
+    </if>
+    <if test="createUserId != null">
+	and person_id &lt;&gt; #{createUserId,jdbcType=VARCHAR}
+    </if>
+    ) a
+    where 1=1
+    <if test = "signed != null">
+      and signed = #{signed,jdbcType=VARCHAR}
+    </if>
+    <if test = "sort != null">
+	order by ${sort}
+	</if>
+	<if test = "sort == null">
+    order by signed asc,sign_time desc
+    </if>
+  </select>
+  
+  <update id="updateSignRecord" parameterType="java.util.Map">
+   	update mt_signin_record set signed ='Y',sign_time = #{time},serv_id=#{serId,jdbcType=VARCHAR}
+   	where meeting_id = #{meetingId,jdbcType=VARCHAR} and sequ_id=#{sequId,jdbcType=VARCHAR} and person_id = #{personId,jdbcType=VARCHAR}
+  </update>
+  <select id="getUpdateData" parameterType="java.util.Map" resultType="MtSigninRecord">
+  	select * from mt_signin_record where meeting_id = #{meetingId,jdbcType=VARCHAR} and sequ_id=#{sequId,jdbcType=VARCHAR} and person_id = #{personId,jdbcType=VARCHAR}
+  </select>
+  <select id = "getSignList" parameterType="java.util.Map" resultType="MtSigninRecord">
+  	select msr.person_id personId,msr.person_name personName,mss.sequ,to_char(msr.sign_time,'yyyy-MM-dd hh24:mi:ss') signTimeStr,msr.person_type personType 
+	from mt_signin_record msr, mt_signin_sequ mss 
+    where mss.meeting_id = msr.meeting_id and msr.sequ_id = mss.id and msr.meeting_id= #{meetingId,jdbcType=VARCHAR} 
+	  and msr.person_type in ('inner','outer')
+  </select>
+  <select id = "getSignPerson" parameterType="java.util.Map" resultType="MtSigninRecord">
+  	select msr.person_id personId,msr.sign_time
+	 from mt_signin_record msr, mt_signin_sequ mss 
+		where mss.meeting_id = msr.meeting_id and msr.sequ_id = mss.id and msr.meeting_id= #{meetingId,jdbcType=VARCHAR} and msr.person_type in ('inner','outer') 
+		<if test = "sequ != null">
+		and mss.sequ = ${sequ}
+		</if>
+		GROUP BY msr.person_id,msr.sign_time
+		<if test = "sort != null">
+		order by ${sort}
+		</if>
+		<if test = "sort == null">
+		order by person_id 
+		</if>
+  </select>
+  
+  <select id="getSignDetail" parameterType="java.util.Map" resultType="java.util.Map">
+	select person_id,person_name,person_type
+	<if test = "colSql != null">
+	${colSql}
+	</if>
+	from 
+	(
+	select sr.person_id,sr.person_name,sr.person_type
+	<if test = "caseSql != null">
+	${caseSql}
+	</if>
+	from mt_signin_record sr,mt_signin_sequ ss
+	where ss.meeting_id = sr.meeting_id
+	  and sr.meeting_id=#{meetingId,jdbcType=VARCHAR}
+	) a
+	group by person_id,person_name,person_type
+	<if test = "sort != null">
+	order by ${sort}
+	</if>
+	<if test = "sort == null">
+	order by person_id 
+	</if>
+  </select>
+</mapper>

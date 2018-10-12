@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: mapps-meetingroom     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.103:5432/mr_demo
+    username: mr
+    password: 123456 
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.103:7001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+  login:
+    serviceUrl: http://192.168.160.103:7001/clientaccess
+
+services: 
+  fileservice:
+    serviceUrl: http://192.168.160.162:9081/api
+    appKey: meetingroom
+    appSecret: FHuma025
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+    webRoot: http://miap.cc:9100/img/

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuSurveyGroupMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuSurveyGroup">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sequ" jdbcType="NUMERIC" property="sequ" />
+  </resultMap>
+  
+  <select id="getMaxSequ" resultType="java.lang.Long">
+  	select max(sequ) from su_survey_group where ecid = #{ecid}
+  </select>
+  
+  <update id="updateGroupName" parameterType="SuSurveyGroup">
+  	update su_survey_group set name=#{name} where id = #{id}
+  </update>
+  
+</mapper>

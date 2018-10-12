@@ -1,0 +1,102 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center" id="ID-RoomDetail-BtnToggle">
+        	<label class="SID-RoomDetail-Title bjyh-word" style="max-width: 60%;"></label>
+        	<i class="icon icon-rdoinfo size20"></i> 
+        </h1>
+        <a class="titlebar-button titlebar-right" id="ID-RoomDetail-BtnFav"></a>
+    </div>
+</header>
+<article>
+	<!--日历-->
+	<div id="ID-RoomDetail-Calendar" class="calendar"></div>
+	<!--时间段-->
+	<div id="ID-RoomDetail-Timepart" class="timepart"></div>
+	<div class="group">
+    	<!--时间选择-->
+    	<div style="padding: 0 0 0 12px;">
+	    	<div class="inputbox underline SID-DivDateTime">
+				<i class="icon icon-time size20 color-primary"></i>
+				<input type="text" name="NID-RoomDetail-TimeStart" class="input-text SID-DateTimeStart" readonly="" placeholder="会议开始时间">
+			</div>
+			<div class="inputbox underline SID-DivDateTime">
+				<i class="icon icon-time size20 color-primary"></i>
+				<input type="text" name="NID-RoomDetail-TimeEnd" class="input-text SID-DateTimeEnd" readonly="" placeholder="会议结束时间">
+			</div>
+		</div>
+	</div>
+    <!--预定按钮-->
+    <div class="app-blockbtn">
+        <a class="button primary" style="width: 100%;border-radius: 4px;" id="ID-RoomDetail-BtnSubmit">预定</a>
+    </div>
+</article>
+<!--会议室详情弹出框-->
+<div class="app-roomInfo" id="ID-MeetDetatil-RoomPop">
+    <div class="app-row underline">
+        <div class="app-rowLeft">会场类型</div>
+        <div class="app-rowRight">
+        	<span class="app-buttonMark success SID-needApprove" style="margin-left: 4px;">需审批</span>
+        </div>
+    </div>
+	<div class="app-row underline">
+        <div class="app-rowLeft">会场容量</div>
+        <div class="app-rowRight SID-capacity"></div>
+    </div>
+    <div class="app-row underline">
+        <div class="app-rowLeft">会场面积</div>
+        <div class="app-rowRight SID-area"></div>
+    </div>
+    <div class="app-row underline">
+        <div class="app-rowLeft" style="width: auto;">会场设备</div>
+        <div class="app-rowRight SID-device"></div>
+    </div>
+    <div class="app-row underline">
+        <div class="app-rowLeft">管理人员</div>
+        <div class="app-rowRight SID-adminName"></div>
+    </div>
+    <div class="app-row underline">
+        <div class="app-rowLeft">服务人员</div>
+        <div class="app-rowRight SID-serviceName"></div>
+    </div>
+    <div class="app-row underline" style="-webkit-box-orient:vertical;">
+        <div style="padding: 12px 0 4px 0;">会议室详情</div>
+        <!-- <div class="app-rowRight SID-serviceName"></div> -->
+        <p class="app-smallList SID-remarks" style="padding: 4px 0 12px 0;"></p>
+    </div>
+</div>
+<!--是否可选弹出框-->
+<div id="ID-MeetDetatil-Pop" style="background-color: white;">
+	<div class="app-popError" id="ID-MeetDetatil-PopOk">
+		<img src="<%= imgPath %>/calendar.png">
+		<span>该时间段可预定</span>
+	</div>
+	<div class="app-popError" id="ID-MeetDetatil-PopCancel">
+		<img src="<%= imgPath %>/clock.png">
+		<span>该时间段已过，无法预定...</span>
+	</div>
+	<div id="ID-MeetDetatil-PopContent">
+        <div class="app-row underline">
+            <div class="app-rowLeft">预定人</div>
+            <div class="app-rowRight" id="ID-RoomDetail-ReservedPeople">张小琴</div>
+        </div>
+        <div class="app-row underline">
+            <div class="app-rowLeft">联系方式</div>
+            <div class="app-rowRight" id="ID-RoomDetail-ReservedPhone">18973738989</div>
+        </div>
+        <!-- <div class="app-row underline">
+            <div class="app-rowLeft">会议名称</div>
+            <div class="app-rowRight">工作圈频道启动会</div>
+        </div> -->
+        <div class="app-row underline">
+            <div class="app-rowLeft">开始时间</div>
+            <div class="app-rowRight" id="ID-RoomDetail-ReservedStart">12-13 11:30</div>
+        </div>
+        <div class="app-row underline">
+            <div class="app-rowLeft">结束时间</div>
+            <div class="app-rowRight" id="ID-RoomDetail-ReservedEnd">12-13 12:30</div>
+        </div>
+	</div>
+</div>

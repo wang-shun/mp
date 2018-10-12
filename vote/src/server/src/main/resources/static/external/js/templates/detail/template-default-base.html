@@ -1,0 +1,15 @@
+<p class="app-title"><%=meetingInfo.meetingName%></p>
+<p class="app-subtitle">
+	<span><%=meetingInfo.address%></span>
+</p>
+<p class="app-subtitle" style="margin: 16px 0;"><%=meetingInfo.beginTimeStr%> —— <%=meetingInfo.endTimeStr%></p>
+<div class="text-center">
+	<img src="<%=imgPath%>" class="app-qrcode" />
+</div>
+<hr/>
+<div style="padding:0px 15px;">
+	<p class="app-remarktitle">会议备注：</p>
+	<% for(var i=0,remarksData; remarksData=remarksList[i++];) { %>
+	<p class="app-remark"><%=remarksData.remarks%></p>
+	<% } %>
+</div>

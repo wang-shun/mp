@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.TmpReservedMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.TmpReserved">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="time_begin" jdbcType="TIMESTAMP" property="timeBegin" />
+    <result column="time_end" jdbcType="TIMESTAMP" property="timeEnd" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="checkRoomReserved" parameterType="TmpReserved" resultType="int">
+    SELECT count(1) FROM tmp_reserved 
+    where room_id = #{roomId}
+    <if test="timeBegin != null and timeEnd != null">
+      and (
+		(time_begin &lt;= #{timeBegin} and #{timeBegin} &lt; time_end)
+		or 
+		(time_begin &lt; #{timeEnd} and #{timeEnd} &lt;= time_end)
+		or
+		(#{timeBegin} &lt; time_begin and time_begin &lt; #{timeEnd})
+		or 
+		(#{timeBegin} &lt; time_end and time_end &lt; #{timeEnd})
+		)
+      </if>
+  </select>
+  
+  <delete id="clearLock" parameterType="TmpReserved">
+    delete tmp_reserved where create_time &lt; #{createTime}
+  </delete>
+</mapper>

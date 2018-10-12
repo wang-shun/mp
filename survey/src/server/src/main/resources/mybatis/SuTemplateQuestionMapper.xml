@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuTemplateQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuTemplateQuestion">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="template_id" jdbcType="VARCHAR" property="templateId" />
+    <id column="question_id" jdbcType="VARCHAR" property="questionId" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sequ" jdbcType="NUMERIC" property="sequ" />
+  </resultMap>
+  
+  <delete id="deleteTemplateQuestionBySurveyId">
+  	delete from su_template_question where template_id = #{surveyId}
+  </delete>
+</mapper>

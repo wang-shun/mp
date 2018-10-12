@@ -1,0 +1,34 @@
+<!--菜单弹出框-->
+<%var meetInfo = data.meeting;%>
+<ul>
+<%if(meetInfo.hasGroup=="1" && meetInfo.status!="40" && meetInfo.status!="50"){%>
+	<li class="underline" id="ID-MeetDetail-BtnGroupChat">
+		<i class="icon icon-chats"></i>
+		<label>会议群聊</label>
+	</li>
+<%}%>
+<%if(meetInfo.isSelfCreate=="1" && meetInfo.status=="20"){%>
+	<li class="underline" id="ID-MeetDetail-BtnEdit">
+		<i class="icon icon-edit-fill"></i>
+		<label>编辑会议</label>
+	</li>
+<%}%>
+<%if(meetInfo.isSelfCreate=="1" && meetInfo.status=="20"){%>
+	<li class="underline" id="ID-MeetDetail-BtnCancel"> 
+		<i class="icon icon-rdocancel"></i>
+		<label>取消会议</label>
+	</li>
+<%}%>
+<%if(meetInfo.isSelfCreate=="1" && meetInfo.status=="30"){%>
+	<li class="underline" id="ID-MeetDetail-BtnFinish">
+		<i class="icon icon-rdook"></i>
+		<label>结束会议</label>
+	</li>
+<%}%>
+<%if(meetInfo.status!="10" && meetInfo.status!="30"){%>
+	<li class="underline" id="ID-MeetDetail-BtnDel">
+		<i class="icon icon-del"></i>
+		<label>删除会议</label>
+	</li>
+<%}%>
+</ul>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmResourceAssignMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmResourceAssign">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="res_id" jdbcType="VARCHAR" property="resId" />
+    <result column="res_code" jdbcType="VARCHAR" property="resCode" />
+    <result column="res_name" jdbcType="VARCHAR" property="resName" />
+    <result column="assign_time" jdbcType="DATE" property="assignTime" />
+    <result column="reource_id" jdbcType="VARCHAR" property="reourceId" />
+  </resultMap>
+  
+  <select id="getResourceListByAppId" parameterType="java.util.Map" resultType="ResourceAssignInfo">
+    select res_id as resId,res_code as resCode,id   
+    from SM_RESOURCE_ASSIGN 
+	where app_id=#{appId,jdbcType=VARCHAR} 
+  </select>
+</mapper>

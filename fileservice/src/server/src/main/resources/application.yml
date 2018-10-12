@@ -1,0 +1,49 @@
+eureka:
+  client:
+    enabled: false
+
+spring:
+  application:
+    name: mapps-fileservice    
+  jmx:
+    enabled: false   
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://127.0.0.1:5432/111
+    username: mr
+    password: 123456
+  zipkin:
+    enabled: false
+    locator:
+      discovery:
+        enabled: false
+
+flywaydb: 
+  locations: db/migration
+
+fileservice:
+  store: fdfs # 可选 file 和 fdfs，即文件存储和fastdfs的分布式存储
+  path: ../upload  # 如果使用的存储方式（fileservice.store）为“file", 需配置为文件存储路径.
+  webRoot: http://192.168.10.210:9081/d/  #访问文件的url路径
+  maxUploadSize: 100000000
+ 
+fdfs:
+  webRoot: http://miap.cc:9100/img/
+  soTimeout: 1501
+  connectTimeout: 601
+  trackerList:            #TrackerList参数,支持多个
+    - 127.0.0.1:22122
+    
+api:
+  endpoint: /api 
+    
+server:
+  port: 9081
+  
+logging:
+  level: 
+    com:
+      fiberhome:
+        mapps:
+          mssdk: DEBUG
+  path: logs    

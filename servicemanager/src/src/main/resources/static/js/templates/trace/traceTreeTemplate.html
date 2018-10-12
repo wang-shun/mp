@@ -1,0 +1,13 @@
+<div class="SID-treetoggle" data-parentLevel="<%=traceLevel %>" data-parentIndex="<%=traceIndex %>" style="margin: 2px 5px 0 <%=(traceLevel-1)*20 %>px;width: 14px;height: 14px;float: left;font-size: 14px;text-align: center;vertical-align: middle;padding: 0;border: 1px solid #888;cursor: pointer;color: #888;line-height: 14px;">+</div>
+<div style="width: <%=(880-traceLevel*20) %>px;float: left;">
+	<div class="SID-traceDiv tracehover" data-index="<%=traceIndex %>" style="padding: 0 0 4px 0;display: inline-block;width: 100%;cursor: pointer;height: 40px">
+		<div style="width: 20%;float: left;height: 20px">
+		<%=trace.serviceName %>
+		</div>
+		<div style="width: 600px;float: right;height: 40px;overflow: hidden;" title="<%=trace.duration+' : '+trace.name %>">
+			<%=trace.duration+" : "+trace.name %>
+			<div class="<%=trace.color %>" style="height: 20px;width: <%=trace.width %>;margin-left: <%=trace.left %>;overflow: visible;white-space: nowrap;margin-top: 7px;"></div>
+		</div>
+	</div>
+</div>
+<div class="SID-childBox-<%=trace.id %>"></div>

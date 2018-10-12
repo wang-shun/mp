@@ -1,0 +1,109 @@
+/*******************   面包屑导航     *******************/
+.crumb{
+	color:$fontColorDark;
+	span{color:$fontColorDarkS;}
+}
+.crumbLine{ @extend .marginTop10;}
+.tablist{
+ 	@extend .marginTop15;
+ 	@extend .clearfix;
+	border-bottom:$borderLinecolor 1px solid;
+	padding:0 0 0 10px;
+	li{
+		@extend .left;
+		border:$borderLinecolor 1px solid;
+		height: 36px;
+		line-height: 36px;
+		margin:0 2px 0 0;
+		margin-bottom: -1px;
+		border-top-left-radius:$radiusSmall;
+		border-top-right-radius:$radiusSmall;
+		a{ display:block; padding:0 25px; color:$fontColorDark;}
+		&:hover{
+			border-bottom:#fff 1px solid;
+			a{ color:$colorMain;}
+		}
+	}
+	.active{
+		border-bottom:#fff 1px solid;
+		a{ color:$colorMain;}
+	}
+}
+.search-toggle-bar{
+	@extend .marginTop15;
+	.gridBtn{
+		//@extend .left;
+		padding:0 100px 0 0;
+		a{
+			@extend .bold; padding:0 30px; color:$colorMain; border:$colorMain 1px solid; border-radius:20px; height:30px; line-height:30px; display:inline-block; margin:0 8px 5px 0; font-size:$fontSizeSs;
+			&:hover{ @extend %opacity5;}
+		}
+	}
+	.search-toggle{
+		@extend .right;
+		color:$fontColorDarkS;
+		width: 100px;
+		text-align:right;
+		span{ color:$colorMain; margin:0 5px 0 0;}
+	}
+
+}
+.search-mod{
+	@extend .relative;
+	//margin:5px 0;
+	.search-list{
+		padding:0 100px 0 0;
+		.search-item{
+			display:inline-block; margin:0 20px 0 0; width:250px; padding:5px 0;
+			.search-label{
+				display:inline-block; text-align:right; width:80px; font-size:$fontSizeSs; color:$fontColorDark;
+			}
+			input{ width:170px; box-sizing:border-box; border-radius:$radiusSmall; font-size:$fontSizeSs; color:$fontColorDark; padding:0 15px; height:30px; line-height:30px;}
+		}
+	}
+	.search-btn{
+		@extend .absolute;
+		bottom:5px; right:0;
+		border:$colorMain 1px solid; border-radius:20px; color:$colorMain; padding:0 20px; height:28px; line-height:28px; display:inline-block;
+		&:hover{}
+	}
+}
+
+//
+.searchBlock{
+	@extend .relative; width:100%;
+	.search-toggleBar{
+		height:10px;
+		.search-toggle{
+			@extend .absolute;
+			right:0; top:-10px;
+			color:$fontColorDarkS; background-color:#fff; display:inline-block; padding:0 0 0 10px;
+			.fhicon{ color:$colorMain; margin:0 5px 0 0; @extend .bold;}
+		}
+	}	
+	.search-modle{
+		width:100%; @extend .marginTop10;
+		.search-list{
+			.search-item{
+				display:inline-block; margin:0 20px 0 0; width:250px; padding:5px 0;
+				.search-label{
+					display:inline-block; text-align:right; width:80px; font-size:$fontSizeSs; color:$fontColorDark;
+				}
+				input{ width:170px; box-sizing:border-box; border-radius:$radiusSmall; font-size:$fontSizeSs; color:$fontColorDark; padding:0 15px; height:30px; line-height:30px;}
+			}
+		}
+	}
+	.search-button{
+		margin:10px 0;
+		a{
+			background-color:$colorMain; color:white; border-radius:20px; padding:0 35px; height:30px; line-height:30px; display:inline-block; margin:0 10px;
+			&:hover{ @extend %opacity5;}
+		}
+	}
+}
+
+
+
+
+
+

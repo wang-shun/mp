@@ -1,0 +1,23 @@
+version: "2"
+services: 
+  trackor: 
+    image: mapps/fastdfs-trackor
+    network_mode: host
+    ports: 
+      - "22122:22122"
+    volumes:
+      - /home/adminroot/docker/fastdfs/conf:/etc/fdfs
+      - /home/adminroot/docker/fastdfs/data:/data
+  storage:
+    image: mapps/fastdfs-storage
+    network_mode: host
+    ports:
+      - "23000:23000"
+      - "9080:80"
+    volumes:
+      - /home/adminroot/docker/fastdfs/conf:/etc/fdfs
+      - /home/adminroot/docker/fastdfs/data:/data
+      - /home/adminroot/docker/fastdfs/data/logs/nginx:/usr/local/nginx/logs/
+      - /home/adminroot/docker/fastdfs/conf/nginx:/usr/local/nginx/conf/
+
+

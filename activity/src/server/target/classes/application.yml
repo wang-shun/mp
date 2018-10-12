@@ -1,0 +1,114 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
+      
+spring: 
+  application:
+    name: mapps-activity     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.103:5432/mr
+    username: mr
+    password: 123456 
+    
+flywaydb: 
+  locations: db/migration    
+  
+management:
+  context-path: /__mng__
+  port: 39998
+  address: 127.0.0.1  
+    
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.activity.entity
+   
+api:
+  endpoint: /api  
+
+priv:
+  roles: 
+    admin: 
+      - mapps.fileservice.file.upload
+      - mapps.meeting.meeting.client.add
+      - mapps.meeting.meeting.webquery
+      - mapps.meeting.meeting.clientquery
+      - mapps.meeting.meeting.detail
+      - mapps.meeting.meeting.detailForWeb
+      - mapps.meeting.meeting.cancel
+      - mapps.meeting.meeting.apply
+      - mapps.meeting.meeting.delete
+      - mapps.meeting.meeting.signin
+      - mapps.meeting.meeting.queryAttach
+      - mapps.meeting.meeting.querySequ
+      - mapps.meeting.meeting.querySign
+      - mapps.meeting.meeting.exportSignInfo
+      - mapps.meeting.meeting.detailsign
+      - mapps.thirdpart.mobileark.createImGroup
+      - mapps.thirdpart.mobileark.joingroup
+      - mapps.thirdpart.mobileark.getpersondocs
+      - mapps.thirdpart.mobileark.getdocurl
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.thirdpart.mobileark.getlimtedusers
+      - mapps.meeting.meeting.outerdetail
+      - mapps.meeting.meeting.service.add
+      - mapps.meeting.meeting.getattachmentfromWeb
+      - mapps.meeting.meeting.service.publish
+    user: 
+      - mapps.fileservice.file.upload
+      - mapps.meeting.meeting.client.add
+      - mapps.meeting.meeting.webquery
+      - mapps.meeting.meeting.clientquery
+      - mapps.meeting.meeting.detail
+      - mapps.meeting.meeting.detailForWeb
+      - mapps.meeting.meeting.cancel
+      - mapps.meeting.meeting.apply
+      - mapps.meeting.meeting.delete
+      - mapps.meeting.meeting.signin
+      - mapps.meeting.meeting.queryAttach
+      - mapps.meeting.meeting.querySequ
+      - mapps.meeting.meeting.querySign
+      - mapps.meeting.meeting.exportSignInfo
+      - mapps.meeting.meeting.detailsign
+      - mapps.thirdpart.mobileark.createImGroup
+      - mapps.thirdpart.mobileark.joingroup
+      - mapps.thirdpart.mobileark.getpersondocs
+      - mapps.thirdpart.mobileark.getdocurl
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.meeting.meeting.service.add
+      - mapps.meeting.meeting.getattachmentfromWeb
+      - mapps.meeting.meeting.service.publish
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: activitymng
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.154:7777/mos/api
+
+services: 
+  fileservice:
+    serviceUrl: http://192.168.160.162:9081/api
+    appKey: meetingroom
+    appSecret: FHuma025
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+    webRoot: http://miap.cc:9100/img/
+
+web:
+  url: http://miap.cc:9100/mt
+
+client: 
+  appId: activity
+  appName: 活动报名

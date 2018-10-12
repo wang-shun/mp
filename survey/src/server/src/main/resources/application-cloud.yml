@@ -1,0 +1,148 @@
+servicemanager:
+  endpoint: http://sm.mapps.ip:8761
+
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: ${servicemanager.endpoint}/eureka
+    healthcheck:
+      enabled: true    
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}  
+    metadataMap:
+      appName: 问卷调查                            # 应用名称
+      logo: /logo.png                          # 应用logo 
+      remarks: 描述                             # 应用描述
+      portal: /websso                           # 自服务门户集成入口
+      mgr-port: ${management.port}                  # 管理端口
+      mgr-context-path: ${management.context-path}  # 管理endpoint的context path
+      configProperties:                         # 配置属性
+      dependencies:
+        services: mapps-fileservice
+        resources:
+          database: default
+          mplus: default
+          redis: default
+      
+jdbc-url:
+  oracle: jdbc:oracle:thin:@${resources.database.default.host:}:${resources.database.default.port:1521}:${resources.database.default.db:}
+  postgresql: jdbc:postgresql://${resources.database.default.host:}:${resources.database.default.port:5432}/${resources.database.default.db:}
+
+spring:  
+  application:
+    name: mapps-survey     
+  jmx:
+    enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${jdbc-url.${resources.database.default.type:postgresql}}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}
+  redis:
+    database: ${resources.redis.default.dbIndex:0} # Redis数据库索引（默认为0）
+    host: ${resources.redis.default.host:default.redis.ip}
+    port: ${resources.redis.default.port:6379}
+    password: ${resources.redis.default.password:}   # Redis服务器连接密码（默认为空）
+    pool:
+      max-active: 1 # 连接池最大连接数（使用负值表示没有限制）
+      max-waite: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 10 # 连接池中的最大空闲连接
+      min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 5000 # 连接超时时间（毫秒）
+    
+server: 
+  port: 18017    
+  
+management:
+  context-path: /__mng__
+  port: 38017
+
+endpoints:
+  restart:
+    enabled: true
+
+sqllocaltion:
+  oracle: db/oracle
+  postgresql: db/migration
+    
+flywaydb:
+  locations: ${sqllocaltion.${resources.database.default.type:postgresql}} 
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.survey.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.survey.webget
+      - mapps.survey.add
+      - mapps.survey.update
+      - mapps.surveyTemplate.webget
+      - mapps.survey.groupSave
+      - mapps.survey.groupDel
+      - mapps.surveyTemplate.delete
+      - mapps.survey.delete
+      - mapps.survey.preview
+    user: 
+      - mapps.survey.clientquery
+      - mapps.survey.clientdetail
+      - mapps.survey.clientsubmit
+      - mapps.survey.webget
+      - mapps.survey.add
+      - mapps.survey.update
+      - mapps.survey.preview
+      - mapps.survey.copy
+      - mapps.survey.delete
+      - mapps.survey.close
+      - mapps.survey.dataAnalysis
+      - mapps.survey.sessionforever
+      - mapps.surveyTemplate.webget
+      - mapps.surveyTemplate.delete
+      - mapps.surveyTemplate.groupSave
+      - mapps.surveyTemplate.groupDel
+      - mapps.surveyTemplate.groupGet
+      - mapps.surveyTemplate.copy
+      - mapps.surveyTemplate.update
+      - mapps.surveyTemplate.add
+      - mapps.surveyTemplate.preview
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.survey.answerPeople
+      - mapps.survey.webdetail
+      - mapps.surveyTemplate.useTimes
+      - mapps.survey.mysurvey
+
+mplus: 
+  sso:
+    serviceUrl: ${resources.mplus.default.mplus.sso.serviceUrl:}
+    appKey: ${resources.mplus.default.mplus.sso.appKey:}
+    secret: ${resources.mplus.default.mplus.sso.secret:}
+    appId: mapps-survey
+    appType: 4
+  login:
+    serviceUrl: ${resources.mplus.default.mplus.login.serviceUrl:}
+    loginPage: ${resources.mplus.default.mplus.login.loginPage:} 
+    
+services: 
+  fileservice:
+    serviceUrl: ${services.mapps-fileservice.serviceUrl:}/api
+    appKey: ${services.mapps-fileservice.appkey:}
+    appSecret: ${services.mapps-fileservice.secret:}
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+  
+client: 
+  appId: survey
+  appName: 问卷调查
+
+logging:
+  path: logs

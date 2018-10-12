@@ -1,0 +1,100 @@
+test_delete_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.delete
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId: 
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true
+      
+test_delete_room_empty:
+  service:  *svcbase
+  request: *reqbase   
+  assert:     
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true
+
+test_delete_room_base1: 
+  service:  &svcbase
+    method: 
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId: 
+  assert: &respbase    
+    code: 
+      _eq: 1026
+    roomId: 
+      _null: true
+      
+test_delete_room_base2: 
+  service:  &svcbase
+    method:  mapps.meetingroom.room.delete123
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId: 
+  assert: &respbase    
+    code: 
+      _eq: 1027
+    roomId: 
+      _null: true      
+      
+      
+test_delete_room_base3: 
+  service:  &svcbase
+    method:  mapps.meetingroom.room.delete
+    v: 1.09
+    session: true
+  request: &reqbase
+    roomId: 
+  assert: &respbase    
+    code: 
+      _eq: 1029
+    roomId: 
+      _null: true 
+      
+test_delete_room_base4: 
+  service:  &svcbase
+    method:  mapps.meetingroom.room.delete
+    v: 
+    session: true
+  request: &reqbase
+    roomId: 
+  assert: &respbase    
+    code: 
+      _eq: 1028
+    roomId: 
+      _null: true 
+ 
+test_delete_room_base5: 
+  service:  &svcbase
+    method:  mapps.meetingroom.room.delete
+    v: 
+    session:  
+  request: &reqbase
+    roomId: 
+  assert: &respbase    
+    code: 
+      _eq: 1033
+    roomId: 
+      _null: true 
+ 
+#  操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含
+
+#  正常删除一个；无数据时继续删；删除时不填method，返回1026  ；错误的method，返回1027；错误的version，返回1029；没有version，返回1028；缺少session，返回1033；

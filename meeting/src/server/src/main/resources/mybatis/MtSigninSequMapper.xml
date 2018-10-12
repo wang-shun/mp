@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.meeting.dao.MtSigninSequMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meeting.entity.MtSigninSequ" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="meeting_id" property="meetingId" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="sequ" property="sequ" jdbcType="NUMERIC" />
+    <result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
+  </resultMap>
+  
+  <delete id="deleteByMeetingId" parameterType="java.util.Map">
+    delete from MT_SIGNIN_SEQU where meeting_id = #{meetingId}
+  </delete>
+  
+  <select id="getByMeetingId" parameterType="java.util.Map" resultType="ClientMtSigninSequInfo">
+    select id,remarks,sequ,meeting_id meetingId,qrcode 
+    ,(select count(1) from MT_SIGNIN_RECORD sr where sr.meeting_id = ss.meeting_id and sr.sequ_id = ss.id) totalNum
+    ,(select count(1) from MT_SIGNIN_RECORD sr where sr.meeting_id = ss.meeting_id and sr.sequ_id = ss.id and sr.signed = 'Y') signedNum
+    from MT_SIGNIN_SEQU ss where meeting_id = #{meetingId,jdbcType=VARCHAR} order by sequ asc
+  </select>
+</mapper>

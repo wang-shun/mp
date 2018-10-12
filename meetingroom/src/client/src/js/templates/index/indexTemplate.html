@@ -1,0 +1,68 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-back" href="javascript:void(0)">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">会议室预定</h1>
+        <div class="titlebar-right" href="javascript:void(0)">
+            <a class="titlebar-button SID-TabFilter" href="javascript:void(0)">
+                <i class="icon icon-filter"></i>
+            </a>
+            <a href="javascript:void(0)" class="titlebar-button SID-manager">
+                <i class="icon icon-user">
+                    <div class="dot red absolute top right SID-reddot" style="top:-2px;right:-2px;display:none;"></div>
+                </i>
+            </a>
+        </div>
+    </div>
+</header>
+<article style="top:44px;">
+    <div class="box box-middlecenter box-vertical SID-Nodata" style="height: 400px;position: absolute;width: 100%;background-color: #f0f0f0;z-index: 1;display: none;">
+        <img src="<%= imgPath %>/nodata.png" style="width:200px;"/>
+        <p style="margin-top: 20px;">还没有内容</p>
+    </div>
+    <ul class="list SID-meetList" id="meetlist">
+    </ul>
+</article>
+<!--筛选框-->
+<section id="dialogFilter" style="background-color:white;display:none;">
+    <article style="top:0;bottom:39px;">
+        <p class="title" style="margin:12px 8px 4px 12px;">预定时间</p>
+        <div class="calendar" id="calender_select_container" style="border:0"></div>
+        <!--选择日期-->
+        <form id="formFilter">
+            <div class="box" style="margin: 8px 12px;">
+                <input type="text" class="input-text bordered radius4 text-center box-flex-1 SID-Time1" placeholder="开始时间" readonly="readonly" name="time1" style="padding:6px 0;display:block;" data-rule-field="开始时间"/>
+                <span class="margin8" style="display:block;">-</span>
+                <input type="text" class="input-text bordered radius4 text-center box-flex-1 SID-Time2" placeholder="结束时间" readonly="readonly" name="time2" style="padding:6px 0;display:block;" data-rule-field="结束时间"/>
+            </div>
+            <hr/>
+            <!--容量-->
+            <p class="title" style="margin:12px;">容量(人)</p>
+            <div style="margin:8px 12px;">
+                <span>&gt;=</span>
+                <input type="tel" min="1" max="9999" class="input-text bordered radius4 text-center SID-peopleNum" placeholder="人数" id="peopleNum" name="peopleNum" style="width:80px;padding:6px 0;" />
+            </div>
+        </form>
+        <hr/>
+        <!--设备-->
+        <p class="title" style="margin:12px 8px 8px 12px;">设备</p>
+        <div class="device_block SID-DeviceBlock">
+            <div class="devicemark SID-device" key="projector">投影</div>
+            <div class="devicemark SID-device" key="display">显示</div>
+            <div class="devicemark SID-device" key="microphone">麦克风</div>
+            <div class="devicemark SID-device" key="stereo">音响</div>
+            <div class="devicemark SID-device" key="wifi">无线网</div>
+        </div>
+    </article>
+    <footer style="background-color:#f1f1f1;">
+        <div class="alert-handler" style="border-width:0;background-color: #f6f6f6;">
+            <a style="border:0;color:#68c75f;" class="SID-FilterReset">重置</a>
+            <a style="border:0;color:#68c75f;" class="SID-FilterSubmit">完成</a>
+        </div>
+    </footer>
+</section>
+<!-- <div class="mask" style="visibility: hidden; opacity: 0;"></div>
+<div class="scrollpicker" id="ID-Scrollpicker1" style="transform: translate3d(0px, 100%, 0px);"></div>
+<div class="mask" style="visibility: hidden; opacity: 0;"></div>
+<div class="scrollpicker" id="ID-Scrollpicker2" style="transform: translate3d(0px, 100%, 0px);"></div> -->

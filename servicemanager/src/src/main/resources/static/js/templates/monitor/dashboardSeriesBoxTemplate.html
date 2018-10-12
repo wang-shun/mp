@@ -1,0 +1,67 @@
+<div id="series<%=num %>" class="SID-seriesBox">
+	<div class="form-item" style="width: 50%; float: left;">
+		<label class="form-item-label" style="width: 30%"><span>*</span>保留策略：</label>
+		<div class="form-item-editbox" style="width: 70%">
+			<select class="SID-rp form-item-text form-item-select">
+			</select>
+		</div>
+		<div class="form-item-tip"
+			style="display: none; width: 60%; float: right;">
+			<div class="wrong-text"></div>
+		</div>
+	</div>
+	<div class="form-item" style="width: calc(50% - 10px); float: right; margin-left: 10px">
+		<label class="form-item-label" style="width: 30%"><span>*</span>指标：</label>
+		<div class="form-item-editbox" style="width: 70%">
+			<select class="SID-measurement form-item-text form-item-select">
+			</select>
+		</div>
+		<div class="form-item-tip">
+			<div class="wrong-text" style="display: none;"></div>
+		</div>
+	</div>
+	<div class="form-item" style="width: 100%">
+		<label class="form-item-label" style="width: 15%">过滤：</label>
+		<div class="form-item-editbox kapacitorFilterBox" style="width: 85%">
+			<input class="SID-kapacitorFilter form-item-text" placeholder="点击选择" type="text" name="kapacitorFilter" readonly value=""/>
+		</div>
+	</div>
+	<div id="bigbox" class="blurhide" style="margin-left: 13.8%; width: 85%; position: absolute; background-color: #FFF; border: 1px solid #CCCCCC; -webkit-box-shadow: 10px 10px 25px #ccc; -moz-box-shadow: 10px 10px 25px #ccc; box-shadow: 10px 0px 25px #ccc; display: none; z-index: 1000;margin-top: -340px;">
+		<!-- <a href="#"><span class="SID-closeFilter fhicon-close3" style="color: #1788fb; font-weight: bold; top: 5px; right: 5px; font-size: 20px; float: right;"></span></a> -->
+		<div id="box" class="scrollbar"
+			style="height: 300px; overflow: auto;">
+			<div class="SID-filterBox"></div>
+		</div>
+	</div>
+	<div class="form-item" style="width: 100%">
+		<label class="form-item-label" style="width: 15%"><span>*</span>字段：</label>
+		<div class="form-item-editbox fieldFilterBox" style="width: 85%">
+			<input class="SID-fieldFilter form-item-text" placeholder="点击选择" type="text" name="kapacitorFilter" readonly value=""/>
+		</div>
+		<div class="form-item-tip">
+			<div class="wrong-text" style="display: none;"></div>
+		</div>
+	</div>
+	<div id="fieldbox" class="blurhide" style="margin-left: 13.8%; width: 85%; position: absolute; background-color: #FFF; border: 1px solid #CCCCCC; -webkit-box-shadow: 10px 10px 25px #ccc; -moz-box-shadow: 10px 10px 25px #ccc; box-shadow: 10px 0px 25px #ccc; display: none; z-index: 1000;margin-top: -240px;">
+		<!-- <a href="#"><span class="SID-closeFilter fhicon-close3" style="color: #1788fb; font-weight: bold; top: 5px; right: 5px; font-size: 20px; float: right;"></span></a> -->
+		<div id="box" class="scrollbar"
+			style="height: 200px; overflow: hidden;">
+			<div class="SID-fieldBox"></div>
+		</div>
+	</div>
+	<div class="form-item" style="width: 100%">
+		<label class="form-item-label" style="width: 15%">查找语句：</label>
+		<div class="form-item-editbox" style="width: 85%">
+			<textarea id="SID-statement"
+				class="SID-statement form-item-textarea checkInputMark"
+				maxlength="999" disabled="disabled" placeholder="语句由以上选项自动生成,无法编辑" style="height: 60px;min-height: 60px;min-width: 250px;overflow: hidden"></textarea>
+		</div>
+		<div class="form-item-tip">
+			<div class="wrong-text" style="display: none;"></div>
+		</div>
+	</div>
+	<input class="wherejson" type="hidden"/>
+	<input class="fieldjson" type="hidden"/>
+	<input class="finalwhere" type="hidden"/>
+	<input class="finalgroupby" type="hidden"/>
+</div>

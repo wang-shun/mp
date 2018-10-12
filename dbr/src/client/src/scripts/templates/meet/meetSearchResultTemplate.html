@@ -1,0 +1,54 @@
+<ul class="list">
+    <% for(var i=0,roomData; roomData=data[i++];) { %>
+    <li class="SID-Search-Li underline" data-meetingId="<%=roomData.meetingId %>">
+        <div class="list-container">
+            <div class="list-row">
+                <div class="list-title nowrap" style="max-width: 90%;"><%=roomData.deviceName %></div>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-seal color-primary"></i>
+                <p class="list-font">
+                    <%=roomData.userName %>
+                </p>
+            </div>
+            <% if (roomData.borrowUserId){ %>
+            <div class="list-row">
+                <i class="list-icon icon-label color-primary"></i>
+                <p class="list-font">
+                   <%=roomData.borrowUserName %>
+                </p>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-time color-primary"></i>
+                <p class="list-font"><%=roomData.borrowTimeStr %></p>
+            </div>
+            <% } %>
+        </div>
+        <div>
+            <% if (roomData.deviceStatus=="0"){ %>
+                <!--待审批-->
+                        <div class="doughtut green rotate0" style="margin:0 auto;">
+                            <div class="doughtut-wrapper left">
+                                <div class="doughtut-circle left"></div>
+                            </div>
+                            <div class="doughtut-wrapper right">
+                                <div class="doughtut-circle right"></div>
+                            </div>
+                            <div class="doughtut-label">未出借</div>
+                        </div>
+            <% }else{ %>
+                <!--未批准-->
+                <div class="doughtut red rotate360" style="margin:0 auto;">
+                    <div class="doughtut-wrapper left">
+                        <div class="doughtut-circle left"></div>
+                    </div>
+                    <div class="doughtut-wrapper right">
+                        <div class="doughtut-circle right"></div>
+                    </div>
+                    <div class="doughtut-label">已出借</div>
+                </div>
+            <% } %>
+        </div>
+    </li>
+    <% } %>
+</ul>

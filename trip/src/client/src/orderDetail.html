@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单明细</title>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=yes">
+		
+		
+		<script src="scripts/lib/mplus/mplus.js"></script>
+		<script src="scripts/lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/layui/layui.all.js" ></script>
+		<script type="text/javascript" src="scripts/lib/laydate/laydate.js" ></script>
+		<script type="text/javascript" src="scripts/lib/moment/moment-with-locales.js" ></script>
+		<script type="text/javascript" src="scripts/baseModel.js" ></script>
+		<script type="text/javascript" src="scripts/lib/arttemplate/template.js" ></script>
+		<script type="text/javascript" src="scripts/lib/iscroll/iscroll.js" ></script>
+		<script type="text/javascript" src="scripts/common.js" ></script>
+		<script type="text/javascript" src="scripts/lib/mui/mui.min.js" ></script>
+		
+		<link rel="stylesheet" href="scripts/lib/mui/mui.css">
+		
+	    <link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome.css">
+	    <link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome-animation.min.css">
+		<link rel="stylesheet" href="scripts/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style/trip.css">
+		
+	</head>
+	<body class="bodybg">
+		<header>
+		<div class="titlebar">
+			<a href="#" onclick="back()">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</a>
+			<h1 class="titlebar-title text-center">订单详情</h1>
+			<a href="#" onclick="ex(true)">
+				<i class="fa fa-none fa-lg"></i>
+			</a>
+		</div>
+		</header>
+		
+		
+		<div id="htmlcontent">
+			
+		</div>
+		
+		<div class="footer footer-book" style="display:none" id="cancelBtn">
+			
+			<div class="footer-btn" style="width: 100%;" onclick="ordercancel()">取消订单
+			</div>
+		</div>
+		
+		<div class="reloadBtn" style="display:none">
+			<a class="btn btn-default btn-reload">
+				<i class="fa fa-refresh fa-2x  faa-shake animated"  onclick="reload();"></i>
+			</a>
+		</div>
+		
+	</body>
+	
+	
+	<script id="order-temp" type="text/x-handlebars-template">
+		<div class="panel tripform" style="margin: 10px 0px 0px 0px;">
+	   	<ul class="nav">
+	   		<li class="triprow"><span class="tripcontent">{{order.hotelName}}</span>
+	   			<span class="righttrip" id="detailInfo">{{order.orderStatus |getOrderState:1}}</span>
+	   		</li>
+			<li class="triprow"><span class="tripcontent">{{order.hotelAddr}}</span> <!--<span class="righttrip" id="mapInfo">地图<i class="fa fa-angle-right"></i>--></span></li>
+			<li class="triprow"><span class="tripcontent"><a href="tel:{{order.hotelTel}}">{{order.hotelTel}}</a></span><span class="righttrip"><i class="fa fa-phone"></i></span></li>
+		</ul>
+		</div>
+		
+		<div class="panel tripform"  style="margin: 10px 0px 0px 0px;">
+	   	<ul class="nav">
+	   		<li class="triprow">
+	   			<div class="triplabel">入住时间:</div>
+	   			<div class="tripcontent">{{order.checkInTime |getTimeStr:2}} - {{order.checkOutTime  |getTimeStr:2}}</div>
+	   		</li>
+	   		<li class="triprow">
+	   			<div class="triplabel">房间数:</div>
+	   			<div class="tripcontent">{{order.roomCount}}</div>
+	   		</li>
+	   		<li class="triprow">
+	   			<div class="triplabel">房型:</div>
+	   			<div class="tripcontent">{{order.roomTypeName}}</div>
+	   		</li>
+	   		<li class="triprow">
+	   			<div class="triplabel">付款金额:</div>
+	   			<div class="tripcontent">{{order.totalAmount}}</div>
+	   		</li>
+			<li class="triprow">
+	   			<div class="triplabel">付款类型:</div>
+	   			<div class="tripcontent">到付</div>
+	   		</li>
+		</ul>
+		</div>
+		
+		<div class="panel tripform"  style="margin: 10px 0px 0px 0px;">
+	   	<ul class="nav">
+	   		<li class="triprow">
+	   			<div class="triplabel">入住人:</div>
+	   			<div class="tripcontent">{{order.guestsName}}</div>
+	   		</li>
+	   		<li class="triprow">
+	   			<div class="triplabel">联系电话:</div>
+	   			<div class="tripcontent">{{order.contactPhone}}</div>
+	   		</li>
+		</ul>
+		</div>
+	
+	</script>
+	
+	
+	<script>
+		
+		
+		template.helper('getTimeStr', function(time,tp) {
+			
+		    var str = "" ;
+		    var format = "YYYY-MM-DD" ;
+		    
+		    if(tp == 1 ){
+		    	format = "YYYY-MM-DD HH:mm"
+		    }
+		    
+		    if(time){
+		    	str = moment(time).format(format) ;
+		    }
+		    return str ;
+		});
+		
+		template.helper('getOrderState', function(state,tp) {
+			
+			var str = "" ;
+		    if(state == 1){
+		    	str = "待付款"　;
+		    }else if(state == 2){
+		    	str = "本地取消"　;
+		    }else if(state == 3){
+		    	str = "待酒店确认"　;
+		    }else if(state == 4){
+		    	str = "预定成功"　;
+		    }else if(state == 5){
+		    	str = "预定失败"　;
+		    }else if(state == 100){
+		    	str = "酒店已取消"　;
+		    }else if(state == 101){
+		    	str = "noshow"　;
+		    }else if(state == 102){
+		    	str = "在住"　;
+		    }else if(state == 103){
+		    	str = "离店"　;
+		    }else if(state == 104){
+		    	str = "已评论"　;
+		    }
+		    return str ;
+		});
+		
+		
+		var orderId ;
+		
+		function init(){
+			
+			var _loadinglayer  = layer.load(2,{time:10000}) ;
+			
+			orderId = getUrlParam("orderId") ;
+			
+			var request_param = {orderId:orderId} ;
+			
+			model.api("mapps.trip.orderdetail.bt","1.0",request_param,true).then(function(data){
+				if(data){
+					var _param = {"order":data} ;
+					//显示酒店信息
+					var _html = template('order-temp',_param) ;
+					$("#htmlcontent").append(_html);
+					
+					if(data.orderStatus != 2 && data.orderStatus < 5){
+						$("#cancelBtn").show();	
+					}
+					
+					//$("#htmlcontent").show();
+				}else{
+					layer.msg("数据加载失败，点击【 重试】 重新加载",function(){
+						$(".reloadBtn").show();
+					});
+				}
+				
+				layer.close(_loadinglayer);
+				
+			}) ;
+			
+
+			
+		}
+		
+		function reload(){
+			window.location.reload();
+		}
+		
+		function ordercancel(){
+			
+			var btnArray = ['确定', '取消'];
+			mui.confirm("是否确定取消订单？", '', btnArray, function(e){
+				if(e.index == 0){
+					var _loadinglayer  = layer.load(2,{time:10000}) ;
+					var request_param = {orderId:orderId} ;
+					model.api("mapps.trip.ordercancel","1.0",request_param,true).then(function(data){
+						if(data == "1"){
+							layer.msg("订单取消成功！",function(){
+								window.open("orderList.html","_self" );
+							});
+						}else{
+							//layer.msg("数据加载失败，点击 重试 重新加载");
+						}
+						
+						layer.close(_loadinglayer);
+						
+					}) ;
+				}
+			 }) ;
+			
+		}
+		
+		function  back(){
+			window.open("orderList.html","_self" );
+			//window.close();
+		}
+		
+		document.addEventListener("plusready",plusreadyFun, false);
+	    function plusreadyFun(){
+	    	document.removeEventListener("plusready",plusreadyFun);
+	        init();
+	    }
+	    
+	    document.addEventListener("backpressed",function(){
+			back();
+		}, false);
+		
+	</script>
+	
+</html>

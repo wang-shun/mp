@@ -1,0 +1,27 @@
+http://192.168.100.6/project/mapps/mp/trunk/activity	活动报名
+http://192.168.100.6/project/mapps/mp/trunk/base-service-install-rhel6	基础服务安装包，用于fdfs
+http://192.168.100.6/project/mapps/mp/trunk/commonlib/src/contact	mos调用公用包
+http://192.168.100.6/project/mapps/mp/trunk/commonlib/src/intergration	mplus集成公用包
+http://192.168.100.6/project/mapps/mp/trunk/commonlib/src/msclientsdk	微服务sdk
+http://192.168.100.6/project/mapps/mp/trunk/commonlib/src/redismq	基于redis的消息队列及任务管理
+http://192.168.100.6/project/mapps/mp/trunk/commonlib/src/ropclient	升级版的ropclient
+http://192.168.100.6/project/mapps/mp/trunk/commonlib/src/roptest	roptest类库，基本暂时未用
+http://192.168.100.6/project/mapps/mp/trunk/commonlib/src/search	基于lucene的全文搜索的抽象实现
+http://192.168.100.6/project/mapps/mp/trunk/dbr	设备借还，内部使用
+http://192.168.100.6/project/mapps/mp/trunk/feedback 意见反馈（通用汽车）
+http://192.168.100.6/project/mapps/mp/trunk/fileservice 文件服务
+http://192.168.100.6/project/mapps/mp/trunk/gateway	应用网关
+http://192.168.100.6/project/mapps/mp/trunk/java8-docker	基于java8的docker build文件
+http://192.168.100.6/project/mapps/mp/trunk/meeting	会议管理
+http://192.168.100.6/project/mapps/mp/trunk/meeting-bjyh 会议管理（北京银行）
+http://192.168.100.6/project/mapps/mp/trunk/meetingroom 会议室预订
+http://192.168.100.6/project/mapps/mp/trunk/parent	mapps项目maven父项目
+http://192.168.100.6/project/mapps/mp/trunk/parent-1.0.0
+http://192.168.100.6/project/mapps/mp/trunk/servicemanager	服务管理
+http://192.168.100.6/project/mapps/mp/trunk/shell	微服务安装脚本
+http://192.168.100.6/project/mapps/mp/trunk/shell-1.0.0 应用安装脚本
+http://192.168.100.6/project/mapps/mp/trunk/sign	签到
+http://192.168.100.6/project/mapps/mp/trunk/survey	问卷调查
+http://192.168.100.6/project/mapps/mp/trunk/szjyjy	深圳检验检疫项目（仅开发）
+http://192.168.100.6/project/mapps/mp/trunk/vote	投票
+http://192.168.100.6/project/mapps/mp/trunk/trip	商旅，吴杰用

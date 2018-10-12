@@ -1,0 +1,224 @@
+.formBox{
+	margin:0 auto;
+	.form-item{
+		padding:5px 0;
+		width:100%;
+		display: table;
+		.form-item-label{
+			@extend %borderBox; float:left; display:inline; width:20%; padding:0 10px; vertical-align:top; line-height:30px; color:$fontColorDarkT; position:relative;
+			span{ color:$colorRed; position:absolute; left:0;}
+			.fontColorDarkS{ color:$fontColorDarkS; font-size:$fontSizeSs; padding:0 10px;}
+		}
+		.form-item-default{ float:left; display:inline; width:80%; line-height:30px; font-size:$fontSizeSmall; color:$fontColorDarkS;}
+		.form-item-default-color{ color:$fontColorDark;}
+		.form-item-editbox{
+			float:left; display:inline; width:40%; line-height:30px; font-size:$fontSizeSmall;
+			.form-item-text{
+				@extend %borderBox; height:30px; line-height:30px; font-size:$fontSizeSmall; border-radius:$radiusSmall; width:100%; padding:0 15px;
+				&:disabled{background-color:#f3f3f3;color:$fontColorDarkS;}//Chrome Firefox Opera Safari IE9+
+				&[disabled]{background-color:#f3f3f3;color:$fontColorDarkS;}//IE8
+			}
+			.form-item-text.error{border:$colorRed 1px solid;}
+			.form-item-textarea{@extend %borderBox; height:120px; line-height:30px; font-size:$fontSizeSmall; border-radius:$radiusSmall; width:100%; padding:0 15px; display:inline-block; overflow:hidden;}
+			.form-item-textarea.error{border:$colorRed 1px solid;}
+			.form-item-treebox{
+				width: 100%;
+				box-sizing:border-box;
+				border-radius:$radiusSmall;
+				border: 1px solid #e8e8e8;
+				&.noborder{
+					border: 0;
+				}
+				img{
+					width: 100%;
+				}
+			}
+			.form-item-btmtip{
+				width:100%; color:$fontColorDarkT; font-size:$fontSizeSmall; vertical-align:top;
+				span{@extend .cursorPointer; color:$colorMain; vertical-align:middle; margin:0 5px 0 0; font-size:$fontSizeMiddle; line-height:30px; display:inline-block;}
+				.tip-text{
+					  line-height:20px; padding:4px 0; background:#fff; font-size:$fontSizeSmall; color:$fontColorDarkS; display:inline;
+				}
+			}
+			.form-item-add{
+				width:100%;
+				.form-item-text{@extend %borderBox; height:30px; line-height:30px; font-size:$fontSizeSmall; border-radius:0; border-top-left-radius:$radiusSmall; border-bottom-left-radius:$radiusSmall; width:80%; padding:0 15px;}
+				.btn{ width:20%; text-align:center; background-color:$colorMain; color:#fff; display:inline-block; border-top-right-radius:$radiusSmall; border-bottom-right-radius:$radiusSmall;}
+			}
+		}
+		
+		.form-item-tip{
+			@extend %borderBox; float:left; display:inline; width:40%; padding:0 0 0 10px; vertical-align:top;
+			@extend .relative; color:$fontColorDarkT; font-size:$fontSizeSs;
+			span{@extend .cursorPointer; color:$colorMain; vertical-align:top; margin:0 5px 0 0; font-size:$fontSizeMiddle; line-height:30px; display:inline-block;}
+			.wrong-text{
+				display:inline-block; color:$colorRed; width:85%; line-height:20px; padding:4px 0;
+			}
+			.tip-text{
+				display: none;
+				@extend %borderBox; @extend .absolute; left:35px; top:0px; width:85%; line-height:20px; padding:4px 15px; background:#fff; font-size:$fontSizeSs; color:$fontColorDarkT; border:$colorMain 1px solid; border-radius:$radiusSmall;
+				&:before{content:""; @extend .absolute; left:-6px; top:7px; width:6px; height:13px; display:inline-block; z-index:5;background: url(#{$path}/images/icon/tiparrow.png) no-repeat;}
+			}
+		}
+	}
+	.form-item-hover{
+		.form-item-tip{
+			span{opacity:0.5;filter:Alpha(opacity=50);}
+			.tip-text{
+				display: block;
+			}
+		}
+	}
+	.form-item-edit{
+		.form-item-text,.form-item-textarea{border:$colorMain 1px solid;}
+		.form-item-tip{
+			span{opacity:0.5;filter:Alpha(opacity=50);}
+			.tip-text{
+				display: block;
+			}
+		}
+	}
+	.form-item-btnbar{
+		padding:30px 0 5px 0; margin:0 0 0 20%;
+		.buttondefault{ @extend .buttondefault}
+		.buttonblue{ @extend .buttonblue;}
+	}
+	.btn_addPic{ //模拟的上传控件
+		@extend .cursorPointer;
+		position: relative;
+		margin:0;
+		padding:0 15px;
+		span{
+			display: block; font-size:$fontSizeSmall; color:$fontColorDark;
+		}
+		.filePrew { 
+			display: block; 
+			position: absolute; 
+			top: 0; 
+			left: 0;
+			font-size:20px; /* 增大不同浏览器的可点击区域 */ 
+			opacity: 0; /* 实现的关键点 */ 
+			filter:alpha(opacity=0);/* 兼容IE */ 
+		}
+		&:hover{
+			span{ color:$colorMain;}
+		}
+	}
+	.pop-movebox{
+		display: inline-block;
+		width: 100%;
+		vertical-align:top;
+		.choice-list{
+			padding:5px;
+			border:$borderLinecolor 1px solid;
+			border-radius:$radiusSmall;
+			height: 120px;
+			overflow: auto;
+			.choice-item{
+				@extend .cursorPointer;
+				background-color:#f3f3f3;
+				line-height:24px;
+				margin: 0 0 5px 0;
+				span{
+					font-size:$fontSizeSs;
+					padding:0 5px;
+				}
+				i{
+					float:right; display:inline-block; line-height:24px; margin:0 5px 0 0; color:$colorMain;
+					&:hover{ @extend %opacity5;}
+				}
+			}
+			.choice-item.active{
+				background-color:$colorMain;
+				color:#fff;
+			}
+		}
+		.pop-searchbar{
+			@extend .relative;
+			border:$borderLinecolor 1px solid;
+			border-radius:$radiusSmall;
+			height: 24px;
+			line-height: 24px;
+			margin:0 0 6px 0;
+			box-sizing:border-box;
+			padding:0 15px;
+			width: 100%;
+			input{ border:0; font-size:$fontSizeSs; width:80%;}
+			label{ @extend .absolute; top:0; left:15px;font-size:$fontSizeSs; color:#b0b0b0;}
+			.fhicon-search{ @extend .absolute; top:0; right:15px; color:$colorMain; display:inline-block; line-height:24px; font-size:$fontSizeBig;}
+		}
+	}
+	.pop-rankbox{
+		width: 100%;
+		vertical-align:top;
+		.rank-list{
+			padding:5px 0;
+			border:$borderLinecolor 1px solid;
+			border-radius:$radiusSmall;
+			height: 120px;
+			overflow: auto;
+			.rank-item{
+				@extend .cursorPointer;
+				line-height:24px;
+				margin: 0 0 5px 0;
+				width: 100%;
+				span{
+					font-size:$fontSizeSmall;
+					padding:0 5px;
+				}
+				i{
+					float:right; display:none; width:20px; text-align:center; line-height:24px; margin:0 5px 0 0; color:$colorMain; font-size:$fontSizeBig;
+					&:hover{ @extend %opacity5;}
+				}
+			}
+			.rank-item:hover,.rank-item.active{
+				background-color:$colorMain;color:#fff;
+				i{ display:block; color:#fff;}
+			}
+		}
+	}
+    
+    //新增一种名称rank-userbox
+    .pop-rankbox{
+		width: 100%;
+		vertical-align:top;
+		.rank-userbox{
+			padding:5px 0;
+			border:$borderLinecolor 1px solid;
+			border-radius:$radiusSmall;
+			height: 120px;
+			overflow: auto;
+			.rank-item{
+				@extend .cursorPointer;
+				line-height:24px;
+				margin: 0 0 5px 0;
+				width: 100%;
+				span{
+					font-size:$fontSizeSmall;
+					padding:0 5px;
+				}
+				i{
+					float:right; display:none; width:20px; text-align:center; line-height:24px; margin:0 5px 0 0; color:$colorMain; font-size:$fontSizeBig;
+					&:hover{ @extend %opacity5;}
+				}
+			}
+			.rank-item:hover,.rank-item.active{
+				background-color:$colorMain;color:#fff;
+				i{ display:block; color:#fff;}
+			}
+		}
+	} 
+
+	.formbar{
+		padding:5px 0;width:100%; height:25px; line-height:25px;
+		.formbar_in{ width:60px; padding:0 10px; margin:0 5px;}
+		.formbar_label{ margin:0 10px 0 0;}
+		input[type=checkbox]{ margin:0 5px;}
+		.tag-hd{ @extend .right; background-color:$backgroundLabel; color:$fontColorDarkT; border-radius:$radiusSmall; font-size:$fontSizeSmall; display:inline-block; padding:0 10px;}
+		.formbar-error{
+			@extend %borderBox;@extend .absolute; display:none; z-index:10; color:$colorRed; border:$colorRed 1px solid; padding:4px 5px; border-radius:$radiusSmall; font-size:$fontSizeSs; line-height:20px; background:#fff; font-size:$fontSizeSs;white-space:pre-line; word-break: break-all; word-wrap: break-word;
+			&:before{content:""; @extend .absolute; left:-6px; top:7px; width:6px; height:13px; display:inline-block; z-index:5;background: url(#{$path}/images/icon/tiparrow_wrong.png) no-repeat;}
+		}
+		.formbar_in.error{border:$colorRed 1px solid;}
+	}
+}

@@ -1,0 +1,426 @@
+.formBox{
+	&.meeting-schedule,&.meeting-remark{
+		border-bottom: 1px solid #b3b3b3;
+    	padding-bottom: 15px;
+    	.form-item{
+    		width: 100%;
+			.form-item-label{
+				width: 110px;
+			}
+			.form-item-editbox{
+				width: 290px;
+			}
+    	}
+    	.info-button{
+    		.save{
+				margin-left: 245px;
+    		}
+    	}
+	}
+	&.meeting-sign{
+		width: 100%;
+		.pop-searchbar{
+			float: left;
+			border: #e8e8e8 1px solid;
+		    border-radius: 4px;
+		    height: 30px;
+		    line-height: 30px;
+		    margin-right: 6px;
+		    width: 270px;
+		    input{
+				width: 88%;
+			    padding-left: 10px;
+			    border: 0;
+		    }
+		}
+		.form-item{
+			width: 95%;
+    		padding-bottom: 10px;
+    		.form-item-label{
+				&.new{
+					width: 120px;
+					padding-left: 0;
+				}
+				&.person{
+					width: 115px;
+				}
+			}
+			.pop-rankbox{
+				width: 352px;
+				&.pop-rankbox-maskColor{
+			    z-index: 2;
+			    margin-left: 120px;
+			    position: absolute;
+			    display: none;
+				}
+				&.insider{
+					margin: 10px 0 0 120px;
+				}
+			    .rank-list{
+			    	border:1px solid #b9daf4;
+					background-color: #f6fdff;
+					&.new{
+						background-color: #fff;
+    					border: 1px solid #e8e8e8;
+					}
+					.rank-item{
+						.name{
+							width: 60px;
+							margin-left: 5px;
+							float: left;
+						}
+						.job{
+							width: 90px;
+							margin-left: 5px;
+							float: left;
+							overflow: hidden;
+						    white-space: nowrap;
+						    text-overflow: ellipsis;
+						}
+						.num{
+							width: 130px;
+						}
+						&.new{
+							margin-top: 10px;
+						}
+					}
+			    }
+			}
+			.form-item-editbox{
+				&.new{
+					width: 45%;
+				}
+				.first{
+					margin-left: 0;
+				}
+				.form-item-label{
+	    			width: 115px;
+		    		&.person{
+		    			padding-left: 0;
+		    		}
+	    		}
+	    		.form-item-button{
+	    			width: 70%;
+	    		}
+	    		.pop-searchbar{
+	    			border: #e8e8e8 1px solid;
+				    border-radius: 4px;
+				    height: 30px;
+				    line-height: 30px;
+				    margin: 10px 0 10px 120px;
+				    width: 350px;
+				    input{
+						width: 88%;
+					    padding-left: 10px;
+					    border: 0;
+				    }
+	    		}
+	    		.pop-rankbox{
+	    			width: 352px;
+	    			&.new{
+	    				margin-top: 10px;
+	    				margin-left: 120px;
+	    				margin-bottom: 10px;
+	    			}
+	    			.rank-list{
+						.name{
+							width: 60px;
+							margin-left: 5px;
+							float: left;
+						}
+						.job{
+							width: 90px;
+							margin-left: 5px;
+							float: left;
+							overflow: hidden;
+						    white-space: nowrap;
+						    text-overflow: ellipsis;
+						}
+						.num{
+							width: 130px;
+						}
+						&.new{
+							margin-top: 10px;
+							background-color: #fff;
+    						border: 1px solid #e8e8e8;
+						}
+					}
+	    			&.pop-rankbox-maskColor{
+					    z-index: 2;
+					    margin-top: -143px;
+					    left: 0;
+					    .rank-list{
+					    	border:1px solid #b9daf4;
+							background-color: #f6fdff;
+					    }
+	    			}
+	    		}
+			}
+			&.first{
+				border-top: 1px solid #b3b3b3;
+				border-bottom: 1px solid #b3b3b3;
+			}
+			&.line{
+				border-bottom: 1px solid #b3b3b3;
+			}
+			&.hide{
+				display: none;
+			}
+    		.form-sign{
+    			width: 473px;
+    			display: table;
+    			float: left;
+    			.form-item-label{
+	    			width: 120px;
+	    		}
+	    		.form-item-textarea{
+	    			height: 55px;
+	    			width: 335px;
+				    margin-top: 8px;
+				    line-height: 22px;
+				    padding-top: 4px;
+				    font-size: 13px;
+				    padding-left: 8px;
+    				padding-right: 8px;
+	    		}
+	    		.form-item-button{
+	    			padding-left: 313px;
+	    			margin-top: 5px;
+	    		}
+    		}
+    		.form-item-tip{
+    			margin-top: 20px;
+    			width: 25%;
+    		}
+		}
+	}
+	&.hide{
+		display: none;
+	}
+	margin-top: 15px;
+	width: 85%;
+	 .form-item {
+	    width: 95%;
+	    margin: 0 auto;
+	    .form-item-editbox{
+	    	width: 45%;
+	    	.equipment{
+	    		width: 20%;
+				float: left;
+				input{
+					margin-left: 5px;
+				}
+	    	}
+	    }
+	    .form-item-tip{
+	    	width: 35%;
+			&.hide{
+				display: none;
+			}
+	    }
+	}
+	&.meeting-people{
+		width: 95%;
+		position: relative;
+		.pop-rankbox{
+			width: 352px;
+			.rank-list{
+				.name{
+					width: 60px;
+					margin-left: 5px;
+					float: left;
+				}
+				.job{
+					width: 90px;
+					margin-left: 5px;
+					float: left;
+					overflow: hidden;
+				    white-space: nowrap;
+				    text-overflow: ellipsis;
+				}
+				.num{
+					width: 130px;
+				}
+			}
+			&.pop-rankbox-maskColor{
+			    z-index: 2;
+			    margin-left: 110px;
+			    position: absolute;
+			    display: none;
+			    .rank-list{
+			    	border:1px solid #b9daf4;
+					background-color: #f6fdff;
+			    }
+			}
+			&.insider{
+				margin: 10px 0 0 110px;
+			}
+		}
+		.pop-searchbar{
+			float: left;
+			border: #e8e8e8 1px solid;
+		    border-radius: 4px;
+		    height: 30px;
+		    line-height: 30px;
+		    margin-right: 6px;
+		    width: 270px;
+		    input{
+				width: 88%;
+			    padding-left: 10px;
+			    border: 0;
+		    }
+		}
+		.form-item{
+			width: 100%;
+			.form-item-label{
+				&.new{
+					width: 110px;
+				}
+			}
+			.form-item-editbox{
+				&.new{
+					width: 80%;
+				}
+				.first{
+					margin-left: 0;
+				}
+				.form-item-label{
+	    		width: 120px;
+	    		}
+	    		.form-item-tip{
+	    			position: absolute;
+				    margin-top: 45px;
+	    		}
+	    		.pop-rankbox{
+	    			width: 352px;
+	    			float: left;
+	    			margin-right: 5px;
+	    			.search-outpeople{
+	    				border: 1px solid #e8e8e8;
+	    				height: 29px;
+	    				margin-bottom: 10px;
+    					border-radius: 3px;
+    					width: 270px;
+    					float: left;
+	    				.name{
+	    					height: 24px;
+						    border: 0;
+						    border-right: 1px solid #e8e8e8;
+						    line-height: 24px;
+						    text-align: center;
+						    width: 80px;
+	    				}
+	    				.tel{
+	    					height: 24px;
+						    border: 0;
+						    border-right: 1px solid #e8e8e8;
+						    line-height: 24px;
+						    margin-left: 10px;
+						    width: 150px;
+	    				}
+	    				.img{
+	    					width: 12px;
+						    position: relative;
+						    left: 7px;
+	    				}
+	    			}
+	    			.clear{
+		    			margin: 0;
+					    margin-left: 10px;
+		    		}
+	    			.rank-list{
+	    				width: 100%;
+	    				&.new{
+							margin-top: 10px;
+						}
+						.name{
+							width: 60px;
+							margin-left: 5px;
+							float: left;
+						}
+						.job{
+							width: 90px;
+							margin-left: 5px;
+							float: left;
+							overflow: hidden;
+						    white-space: nowrap;
+						    text-overflow: ellipsis;
+						}
+						.num{
+							width: 130px;
+						}
+	    			}
+	    			&.pop-rankbox-maskColor{
+					    z-index: 2;
+					    margin-top: 3px;
+					    left: 0;
+					    .rank-list{
+					    	border:1px solid #b9daf4;
+							background-color: #f6fdff;
+					    }
+	    			}
+	    		}
+			}
+		}
+	}
+	&.annex-information{
+		width: 100%;
+	}
+}	
+
+.add-schedule{
+	&.hide{
+		display: none;
+	}
+	width: 85%;
+	display: block;
+	margin: 0 auto;
+	height: 60px;
+	cursor: pointer;
+	border-bottom: 1px solid #b3b3b3;
+	span{
+		color: #1d9ecd;
+		font-size: 15px;
+		text-align: center;
+		line-height: 55px;
+		display: block;
+	}
+}
+
+.add-sign{
+	&.hide{
+		display: none;
+	}
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+	height: 60px;
+	cursor: pointer;
+	border-bottom: 1px solid #b3b3b3;
+	span{
+		color: #1d9ecd;
+		font-size: 15px;
+		text-align: center;
+		line-height: 55px;
+		display: block;
+	}
+}
+
+.add-remark{
+	&.hide{
+		display: none;
+	}
+	width: 85%;
+	display: block;
+	margin: 0 auto;
+	height: 60px;
+	cursor: pointer;
+	border-bottom: 1px solid #b3b3b3;
+	span{
+		color: #1d9ecd;
+		font-size: 15px;
+		text-align: center;
+		line-height: 55px;
+		display: block;
+	}
+}

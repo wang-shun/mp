@@ -1,0 +1,72 @@
+.ztreecustom{
+	width:100%;overflow-x:auto; font-size:14px; color:#333; padding-top:10px;
+	li{
+		white-space:nowrap; outline:0;line-height:30px;
+		a{
+			cursor:pointer; color:#333; vertical-align:top; display:block;
+			&:hover{
+				text-decoration:none; background-color:#52a3ff;
+				span{ color:#fff;}
+				span.button.noline_open,span.button.noline_open.level0{background-position: 0 -18px;}
+				span.button.noline_close,span.button.noline_close.level0{background-position: -18px -18px;}
+			}
+		}
+		a.curSelectedNode{
+			padding-top:0px; background-color:#52a3ff; color:#fff; height:30px; line-height:30px;
+			span{ color:#fff;}
+			span.button.noline_open,span.button.noline_open.level0{background-position: 0 -18px;}
+			span.button.noline_close,span.button.noline_close.level0{background-position: -18px -18px;}
+		}
+		a.level0{
+			span{font-weight: bold; color:#333;}
+			&:hover{
+				span{color:#fff;}
+			}
+		}
+		a.level0.curSelectedNode{
+			span{ color:#fff;}
+		}
+		a.level1{ padding:0 0 0 10px;}
+		a.level2{ padding:0 0 0 20px;}
+		a.level3{ padding:0 0 0 30px;}
+		a.level4{ padding:0 0 0 40px;}
+		a.level5{ padding:0 0 0 50px;}
+		span{
+			line-height:16px; margin-right:2px; color:#9e9e9e;
+		}
+		span.button{
+			line-height:0; margin:0;margin-top: -5px; width:16px; height:16px; display:inline-block; vertical-align:middle;border:0 none; cursor: pointer;outline:none; background-attachment: scroll;background-image:url(#{$path}/images/ztreecustom/left_menuForOutLook.png);
+		}
+		span.button.switch {visibility:hidden}
+		span.button.noline_docu{ background:none;}
+		span.button.ico_loading{margin-right:2px; background:url(#{$path}/images/ztreecustom/loading.gif) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
+		span.button.switch.level0 {width: 20px; height:20px}
+		span.button.switch.level1 {width: 20px; height:20px}
+		span.button.noline_open,span.button.noline_open.level0{background-position: 0 0;}
+		span.button.noline_close,span.button.noline_close.level0{background-position: -18px 0;}
+	}
+}
+.ztreecustom.showIcon li a span.button.switch {visibility:visible}
+
+
+.ztreeForm{
+	width:100%;
+	background-color:#fff;
+	border:solid 1px #e1e1e1;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	z-index: 2;
+	overflow-y: auto;
+}
+
+
+
+
+
+
+
+

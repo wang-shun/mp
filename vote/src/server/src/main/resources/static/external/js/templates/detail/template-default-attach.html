@@ -1,0 +1,40 @@
+<% for(var i=0; attachData=attachmentList[i++];) { %>
+<div class="box box-middle">
+	<div class="padding8">
+		<i class="icon size32  
+        <% if(attachData.contentType!="mp3" && attachData.contentType!="mp4" && attachData.contentType!="pdf" && attachData.contentType!="doc" && attachData.contentType!="docx"
+            && attachData.contentType!="xls" && attachData.contentType!="xlsx" && attachData.contentType!="ppt" && attachData.contentType!="rar"
+            && attachData.contentType!="zip" && attachData.contentType!="md" && attachData.contentType!="pdf" && attachData.contentType!="txt"
+           ){ 
+        %> icon-typepic <% } %>
+        <% if(attachData.contentType=="mp3"){ %> icon-typeaudio <% } %>
+        <% if(attachData.contentType=="mp4"){ %> icon-typevideo <% } %>
+        <% if(attachData.contentType=="pdf"){ %> icon-typepdf <% } %>
+        <% if(attachData.contentType=="doc" || attachData.contentType=="docx"){ %> icon-typeword <% } %>
+        <% if(attachData.contentType=="xls" || attachData.contentType=="xlsx"){ %> icon-typeexcel <% } %>
+        <% if(attachData.contentType=="ppt"){ %> icon-typeppt <% } %>
+        <% if(attachData.contentType=="rar" || attachData.contentType=="zip"){ %> icon-typepack <% } %>
+        <% if(attachData.contentType=="md" || attachData.contentType=="txt"){ %> icon-typetext <% } %>
+        <% if(attachData.contentType=="pdf"){ %> icon-typepdf <% } %>
+           app-color-1"></i>
+	</div>
+	<div class="box-flex-1" style="word-wrap:break-word">
+		<%=attachData.fileName%>.<%=attachData.contentType%>
+	</div>
+	<div class="padding8">
+	</div>
+	<div class="padding8">
+<!-- 		<% if(attachData.privilege ==1){%> -->
+<!-- 			<img src="img/sent.png" class="size24 SID-getDoc" data-id="<%=attachData.filePath%>" data-value="1"style="margin-right:50px;"/> -->
+<!-- 		<%}else{%> -->
+			<% if(attachData.contentType=="jpg" || attachData.contentType=="png" || attachData.contentType=="gif" 
+	            || attachData.contentType=="jpeg" && attachData.contentType=="bmp" ){ 
+	        %>
+			<img src="img/sent.png" class="size24 SID-getDoc" data-id="<%=attachData.filePath%>" data-value="1"/>
+			<% } %>
+			<img src="img/down.png" class="size24 SID-getDoc" data-id="<%=attachData.filePath%>" data-value="0" style="margin-left: 12px;margin-right:12px;" />
+			<a class="preDown"></a>
+<!-- 		<%}%> -->
+	</div>
+</div>
+<% } %>

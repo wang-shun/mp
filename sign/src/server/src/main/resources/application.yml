@@ -1,0 +1,90 @@
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
+      
+spring: 
+  application:
+    name: mapps-sign     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.87:5432/mr_demo
+    username: mr
+    password: 123456 
+  zipkin:
+    enabled: false
+    locator:
+      discovery:
+        enabled: true
+
+server: 
+  port: 18005    
+    
+flywaydb: 
+  locations: db/migration    
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.sign.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.sign.query
+      - mapps.sign.add
+      - mapps.sign.servertime
+      - mapps.sign.detail
+      - mapps.sign.queryadmin
+      - mapps.sign.queryStat
+      - mapps.sign.lastSign.query
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.sign.getUserIcon
+    user: 
+      - mapps.sign.query
+      - mapps.sign.add
+      - mapps.sign.servertime
+      - mapps.sign.detail
+      - mapps.sign.queryadmin
+      - mapps.sign.queryStat
+      - mapps.sign.lastSign.query
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.sign.getUserIcon
+
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: signmng
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.154:7777/mos/api  
+    
+services: 
+  fileservice:
+    serviceUrl: http://172.16.229.128:9081/api
+    appKey: meetingroom
+    appSecret: FHuma025
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+  
+client: 
+  appId: sign
+  appName: 签到
+  
+sign:
+  upgrade: 
+    migrate: false  
+
+logging:
+  path: logs

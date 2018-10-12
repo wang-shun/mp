@@ -1,0 +1,33 @@
+<div class="analysis-chart-border">
+	<div class="analysis-chart-title">
+		<label class="word"><span style="color: #fbb317;">Q<%=data.sequ%>.</span><%=data.titleText%></label>
+		<% if (data.type != "3") { %>
+		<select class="SID-chart-type" data-sequ="<%=data.sequ%>">
+			<option value="pie" selected="selected">饼图</option>
+			<option value="bar">条形图</option>
+		</select>
+		<% } %>
+	</div>
+    <div class="histogram" id="analysis-Chart-<%=data.sequ%>" style="width:800px;height:360px;">
+    </div>
+    <div class="histogram">
+		<!-- 里面table内容根据需要替换 -->
+	    <table id="grid-table-<%=data.sequ%>" style="width:800px;" class="common-table">
+	      	<tr>
+	      		<th>选项</th>
+	      		<th>计数</th>
+	      		<th>占比</th>
+	      	</tr>
+	      	<% for(var i=0,tr; tr=data.tableData[i++];) { %>
+	      	<tr>
+	      		<td class="left"><%=tr.td1%></td>
+	      		<td class="right"><%=tr.td2%></td>
+	      		<td class="right"><%=tr.td3%></td>
+	      	</tr>
+	      	<% } %>
+	      	<tr>
+	      		<td colspan="3" class="left">答题人数：<%=data.total%></td>
+	      	</tr>
+	    </table>
+    </div>
+</div>

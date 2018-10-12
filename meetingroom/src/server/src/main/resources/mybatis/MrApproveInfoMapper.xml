@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.meetingroom.dao.MrApproveInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meetingroom.entity.MrApproveInfo" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="reserved_id" property="reservedId" jdbcType="VARCHAR" />
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="approved" property="approved" jdbcType="VARCHAR" />
+    <result column="approve_time" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="approve_result" property="approveResult" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getCountByUser" parameterType="java.util.Map" resultType="int" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT count(1) 
+    FROM MR_RESERVED r , MR_APPROVE_INFO ai
+    where r.id = ai.reserved_id
+      and r.ecid = #{ecid,jdbcType=VARCHAR} 
+      and ai.user_id = #{userId,jdbcType=VARCHAR}
+      and ai.approved = #{approved,jdbcType=VARCHAR}
+      and r.status = #{status,jdbcType=VARCHAR}
+      <orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+  </select>
+</mapper>

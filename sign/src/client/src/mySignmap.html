@@ -1,0 +1,479 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name = "format-detection" content = "telephone=no">
+	<title>mySignmap</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<style type="text/css">
+		input[type="date"]::-webkit-clear-button { display:none }
+		#allmap{
+			height:100%;
+		}
+		.shrinkcase{
+			padding:10px 0;
+		}
+		.pin-label{
+			position: absolute;
+			width:28px;
+			height:28px;
+			text-align:center;
+			line-height:28px;
+			left:2px;
+			top:2px;
+			border-radius: 100%;
+			-webkit-transform:rotate(45deg);
+			-webkit-transform-origin:center; 
+
+			color: white;
+		}
+		#signPeople{
+			height: 75px;
+    		margin-top: 14px;
+		}
+		#signPeople li{
+			width: 75px;
+		}
+		#signPeople li>a{
+			width:50px;
+			height: 50px;
+			box-sizing:border-box;
+			border-style:solid;
+			border-width:2px;
+		}
+		#signPeople li>a.active{
+			background-color:white!important;
+			color:#333;
+		}
+		.signDate{
+			padding-left: 10px;
+			position: absolute;top:10px;left:10px;z-index: 99999;
+			background-color: #4587F7;
+			text-align: center;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 1px 2px 2px 0 rgba(0,0,0,.4);
+		}
+		.signDate input[type=date]{
+			min-width: 110px;
+			width:auto;
+			/*width:110px;*/
+			text-align: center;
+			color:white;
+			border-width:0;
+			background-color: transparent;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.rightIcon{
+			width: 20px;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform:translate(0,-50%);
+		}
+		.icon-calendar.rightIcon{
+			z-index: 1;
+		}
+		input[type="date"].rightIcon{
+			z-index: 2;
+			width: 40px;
+			opacity: 0;
+		}
+		
+		.calenderBtn{
+	        font-size: 20px;
+	        color: #4587f7;
+	        vertical-align: text-bottom;
+	    }
+	    .calenderBtn .icon-arrowup{
+	        display: none;
+	    }
+	    .calenderBtn .icon-arrowdown{
+	        display: inline-block;
+	    }
+	    .calenderBtn.active .icon-arrowup{
+	        display: inline-block;
+	    }
+	    .calenderBtn.active .icon-arrowdown{
+	        display: none;
+	    }
+	    .calenderBtn input[type=button]{
+	    	color: #4587f7;
+	    	border-radius:8px;
+	    	background-color: white;
+	    	border:1px solid #4587f7; 
+	    	height:24px;
+		}
+		.calenderBtn input[type=button]:active{
+	    	color: white;
+	    	background-color: #4587f7;
+		}
+		
+		.app-calendarTitle a,.app-calendarTitle i,.app-calendarTitle input[type=date]{
+	    	pointer-events:none;
+	    }
+
+	</style>
+</head>
+
+<body>
+	<section id="page_local_db" class="active">
+		<header>
+           <div class="titlebar" style="z-index:99;">
+                <a class="left" href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center app-calendarTitle" style="display: none" onclick="toggleCalender()">
+                	<span class="text"></span>
+                	<a style="width: 40px;height: 100%;vertical-align: bottom;margin-top: 0;">
+	                    <i class="icon-calendar rightIcon"></i>
+	                    <input type="date" id="expireDate" value="" class="rightIcon" disabled="disabled"/>
+	                </a>
+                </h1>
+                
+            </div>
+            <div class="calendar" id="calender_select_container" style="background:#fff;visibility: hidden">
+                <ul class="list noborder nobg">
+                    <li style="">
+                        <div class="justify arrowleft">
+                            <i class="icon-arrowleft"></i>
+                        </div>
+                        <div class="justify-content" style="text-align:center;">
+                        <!-- <button class="calenderBtn">考勤月</button> -->
+                        <span class="calendar-title"></span>
+                        <span class="calenderBtn">
+                            <!-- <i class="icon-arrowup"></i>
+                            <i class="icon-arrowdown"></i>
+                            <input type="button" value="确定" onclick="chooseDate()"/> -->
+                        </span>
+                        </div>
+                        <div class="justify arrowright">
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </li>
+                </ul>
+                <div class="calender_container">
+                    <div class='day'>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                    </div>
+                    <div class='date_container'>
+                        <div class="month_container">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+		<article style="overflow: hidden;">
+			<!-- <div class="signDate">
+				<input type="date" id="expireDate" value="" />
+			</div> -->
+			<div id="allmap"></div>
+			<div id="maplist"></div>
+		</article>
+	</section>
+	<script id="maplist-tpl" type="text/x-handlebars-template">
+	
+	{{#if maplist}}
+	<div class="maptitle" id="maptitle"><i class="icon icon-arrowup"></i><i class="icon icon-arrowdown"></i>共{{length}}条签到记录</div>
+	<div class="maplistContent">
+		<ul class="sign-list animated fadeInUp">
+			{{#each maplist}}
+            <li>
+            	<div class="sign-info">
+            		<div class="clock" data-clock="{{timer signTimeStr}}">
+                        <div class="hour"></div>
+                        <div class="minute"></div>
+                        <div class="origin"></div>
+                    </div>
+                    <span class="time">{{timer signTimeStr}}&nbsp;&nbsp;&nbsp;{{taskNo}}</span>
+                    <span class="location"><i class="icon-position"></i>{{address}}</span>
+                    <div class="title"><pre>{{content}}</pre></div>
+            	</div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{else}}
+    <div class="maptitle" id="maptitle"><i class="icon icon-arrowup"></i><i class="icon icon-arrowdown"></i>暂无签到记录</div>
+    <div class="maplistContent">
+    	<div class="no-data box box-middlecenter" style="z-index: 10;"><!--暂无数据-->
+            <div class="nodata-content " style="padding-bottom: 0">
+                <!-- <img src="img/icon/no-data.png">
+                <br> -->
+                暂无签到记录！
+            </div> 
+        </div>
+    </div>
+    {{/if}}
+	
+	</script>	
+	<script src="plugin/jquery/jquery.min.js"></script>
+	<script src="plugin/seedsui/seedsui.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8830f84901336e9afd2c6d7033d2ebe5"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/inobounce.min.js"></script>
+	<script>
+		function chooseDate(){
+			initSignDate(selectCalenderDate);
+			document.getElementById('calender_select_container').style.visibility = "hidden";
+		}
+		function toggleCalender(){
+			if(document.getElementById('calender_select_container').style.visibility == "hidden"){
+				document.getElementById('calender_select_container').style.visibility = "visible";
+				document.getElementById('calender_select_container').style.display = "block";
+			}else{
+				document.getElementById('calender_select_container').style.visibility = "hidden";
+				document.getElementById('calender_select_container').style.display = "none";
+			}
+		}
+		var selectCalenderDate = new Date();
+		//日历
+		var paramdate = getParameter("date");
+		var jumpDate = paramdate.split("-")[0]+"/"+paramdate.split("-")[1]+"/"+paramdate.split("-")[2];
+	    var tempWeekSelectObject = new DateSelect({
+	            activeDate: new Date(jumpDate)
+	        }),
+	        tempDivId = "calender_select_container";
+	    var tempCalenderObject = new Calender({
+	        dateSelectObject: tempWeekSelectObject,
+	        containerDivId: tempDivId,
+	        mode: "month",
+	        calenderType: "OACalender",
+	        onChange: function(date) {
+	        	//selectCalenderDate = getDateStr(date);
+	        	initSignDate(getDateStr(date));
+				//document.getElementById('calender_select_container').style.visibility = "hidden";
+
+	        }
+	    });
+	    document.getElementById('calender_select_container').style.display = "none";
+	    function calendarCollapse(){
+	        tempCalenderObject.switchToWeek();
+	    }
+	    function calendarExpand(){
+	        tempCalenderObject.switchToMonth();
+	    }
+	    function today(){
+	        tempCalenderObject.jumpToDate(new Date());
+	    }
+	    
+	    
+	    
+		var URL = {
+			queryMySign:"&method=mapps.sign.query&format=json&v=1.0&appKey="
+		}
+		var Template = {
+	        maplist: $("#maplist-tpl").html()
+	    };
+		var markerPerson = [],curMarkers = []; 
+        //定义坐标和文字
+		/*var markerPerson=[
+			[116.417854,39.921988,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区王府井大街88号乐天银泰百货","<label class='pin-label'>1</label>","#53c6fd"],
+			[116.406605,39.921585,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区东华门大街","<label class='pin-label'>2</label>","#53c6fd"]
+		];*/
+		//初始化地图
+		var b=new BaiduMap("allmap");
+		// b.show();
+		var creator = "";
+		//初始化日期2016-3-22
+	    function initSignDate(date){
+	        var dateToast = new Toast("查看签到数据不得晚于当前日期！"),
+	        dateInput = document.getElementById('expireDate')
+	        today = new Date(),
+	        dateInput.valueAsDate = today;
+	        dateInput.defaultValue = getDateStr(today);
+	        var defaultDate = today;
+	        if(date){
+	        	var newD = date.split("-");
+	        	var t = new Date(newD[0],newD[1]-1,newD[2],12,00,00);
+	        	defaultDate = t;
+	        	dateInput.valueAsDate = t;
+	        	dateInput.defaultValue = t;//getDateStr(t);
+	        }
+	        $(".text-center").show();
+	        $(".text-center .text").html(getDateStr(dateInput.valueAsDate));
+	        //$(dateInput).change(function(){
+	        if(selectCalenderDate != date){
+	        	var inputDate = dateInput.valueAsDate;
+	        	if (inputDate > today){
+	                dateToast.show();
+	                dateInput.valueAsDate = defaultDate;
+	                $(".text-center .text").html(getDateStr(defaultDate));
+	                return;
+	            }else if(!inputDate){
+	            	dateInput.valueAsDate = today;
+	            }
+	            // dateInput.valueAsDate = defaultDate;
+	        	var dateStr = getDateStr($("#expireDate")[0].valueAsDate);
+	        	$(".text-center .text").html(dateStr);
+	        	queryMySign(creator,dateStr);
+	        	selectCalenderDate = date;
+	        }	
+	        //});
+	        $(dateInput).blur(function() {
+	        	$(this).trigger("change");
+	        })
+	    }
+
+	    //Entry
+	    window.addEventListener("load",function(){
+	    	var date = getParameter("date");
+	    	selectCalenderDate = date;
+	    	creator = getParameter("creator") || "";
+	    	initSignDate(date);
+	    	
+	    	queryMySign(creator,date);
+	    },false);
+	    
+	    function getParameter(argName){
+			var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
+			return param ? param[1] : param;
+		}
+		function queryMySign(creator,signDate){
+			/*alert(creator);
+			alert(signDate);*/
+	        ajaxModel.getData(URL.queryMySign,{
+	        	"creator":creator,
+	            "signDate":signDate//"2016-03-22"
+	        }).then(function(res){
+	            if(res.code === "1"){
+	                var data = res.data;
+	                markerPerson = [];
+	                if(data.length == 0){
+	                    // new Toast("暂无签到").show();
+	                    b.show();
+	                }else{
+
+	                	for(var i=0; i<data.length; i++){
+	                		var sign = data[i];
+	                		var pointInfo = [sign.longitude,sign.latitude];
+	                		pointInfo.push("<span class='color-1 bold'>"+sign.creatorName+"</span>&nbsp;"+sign.signTimeStr.split(/[\s]/)[1].substring(0,5)+"<br>任务编号："+sign.taskNo+"<br>签到地址："+sign.address);
+	                		pointInfo.push("<label class='pin-label'>"+(i+1)+"</label>");
+	                		pointInfo.push(sign.creatorName.toPinyin().substring(0,1).toColor());
+	                		markerPerson.push(pointInfo);
+	                	}
+	                	b.show(markerPerson); 
+	                }
+	                var _html = Handlebars.compile(Template.maplist)({
+		                'maplist': data,
+		                'length': data.length
+		            });
+		            $("#maplist").html(_html);
+		            DataClock();
+		            initMapList();
+	                // console.log(JSON.stringify(markerPerson));
+	            }else{
+	                new Toast("请求失败").show();
+	            }
+	        })
+	    }
+	    function getDateStr(date){
+	        // var date = new Date();
+	        var dd = date.getDate();
+	        var mm = date.getMonth()+1;
+	        var yyyy = date.getFullYear();
+	        if (mm < 10) {
+	        	mm = "0" + mm;
+	        }
+	        if (dd < 10) {
+	        	dd = "0" + dd;
+	        }
+	        return yyyy+"-"+mm+"-"+dd;
+	        // return yyyy+"-"+(mm>=10?mm:"0"+mm)+"-"+(dd>=10?dd:"0"+dd);
+	    }
+		//定义exmobi返回
+		function back(){history.go(-1);}
+		function initMapList(){
+			/* EventUtil.addHandler(maptitle,"tap",function(e){
+				var $maplist = $("#maplist");
+				if($maplist.hasClass("active")){
+					$("#allmap").css("height","100%");
+					$maplist.removeClass("active");
+				}else{
+					$maplist.addClass("active");
+				}
+			});
+			EventUtil.addHandler(maptitle,"swipeup",function(e){
+				var $maplist = $("#maplist");
+				if(!$maplist.hasClass("active")){
+					$maplist.addClass("active");
+				}
+			});
+			EventUtil.addHandler(maptitle,"swipedown",function(e){
+				var $maplist = $("#maplist");
+				if($maplist.hasClass("active")){
+					$("#allmap").css("height","100%");
+					$maplist.removeClass("active");
+				}
+			});
+			$(".maptitle").on("click",function(){
+				var maplist = $("#maplist");
+				if(maplist.hasClass("active")){
+					$("#allmap").css("height","100%");
+					maplist.removeClass("active");
+				}else{
+					maplist.addClass("active");
+				}
+			}); */
+			$(".maptitle").on("click",function(){
+				var maplist = $("#maplist");
+				if(maplist.hasClass("active")){
+					$("#allmap").css("height","100%");
+					maplist.removeClass("active");
+				}else{
+					maplist.addClass("active");
+				}
+			});
+			$(".maplistContent .sign-list li").on("click",function(){
+				$("#allmap").css("height","50%");
+				$this = $(this);
+				setTimeout(function(){
+					$this.addClass("active").siblings().removeClass("active");
+					var index = $this.index()+1;
+					b.removeMarkers(curMarkers);
+					curMarkers = b.addMarkers([markerPerson[index-1]]);
+				},200)
+				
+			});
+		}
+		Handlebars.registerHelper("timer",function(value){
+	        return value.split(/[\s]/)[1].substring(0,5);
+	    })
+	</script>
+</body>
+</html>

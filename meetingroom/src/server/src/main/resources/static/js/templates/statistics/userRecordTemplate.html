@@ -1,0 +1,40 @@
+<div class="statistic-mod">
+    <div class="search-list">
+        <div class="search-button-white"><a class="userRecord-export">导出</a></div>
+    </div>
+</div>
+<!-- 主体内容开始 -->
+<div class="tree-container tree-container-nobutton record">
+    <div class="searchBlock">
+        <div class="search-toggleBar">
+            <a class="search-toggle SID-search-toggle">
+                <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+            </a>
+        </div>
+    </div>
+    <div class="search-modle hide">
+        <div class="statistic-mod lef">
+            <div class="search-list">
+                <label class="search-label">预定人：<input type="text" class="choose-text SID-userName"/></label>
+                <label class="search-label">操作时间：</label>
+		        <label class="search-label"><a class="SID-day">当日</a></label>
+		        <label class="search-label"><a class="SID-week">本周</a></label>
+		        <label class="search-label"><a class="SID-month">本月</a></label>
+                <input type="text" class="choose-date SID-beginDate" name="from" id="from" readonly="readonly"/>~<input type="text" class="choose-date SID-endDate" id="to" name="to" readonly="readonly"/>
+                <label class="search-label pos">部门：<input type="text" class="choose-text lef SID-depName"/></label>
+                <label class="search-label rel">操作类型：
+                    <select class="SID-opType">
+                        <option value="" selected>==请选择==</option>
+                        <option value="预定">预定</option>
+                        <option value="取消">取消</option>
+                        <option value="结束">结束</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="search-button sea"><a class="SID-search">查询</a><a class="SID-clear">清空</a></div>
+    </div>
+    <div class="histogram">
+       <table id="grid-table" width="100%" class="common-table"></table>
+    </div>
+</div>

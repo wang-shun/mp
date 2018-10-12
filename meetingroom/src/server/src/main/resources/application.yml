@@ -1,0 +1,111 @@
+eureka:
+  client:
+    enabled: false
+      
+spring: 
+  application:
+    name: mapps-meetingroom     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.160.72:3306/mapps?characterEncoding=UTF-8
+    username: mapps
+    password: FHuma025
+  zipkin:
+    enabled: false
+    locator:
+      discovery:
+        enabled: true
+
+flywaydb: 
+  locations: db/mysql
+    
+mybatis:  
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.meetingroom.entity
+
+server: 
+  port: 18002
+ 
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.meetingroom.room.query
+      - mapps.meetingroom.room.detail
+      - mapps.meetingroom.room.add
+      - mapps.meetingroom.room.edit
+      - mapps.meetingroom.room.delete
+      - mapps.meetingroom.room.favorite
+      - mapps.meetingroom.reserved.query
+      - mapps.meetingroom.reserved.add
+      - mapps.meetingroom.reserved.delete
+      - mapps.meetingroom.stat.query
+      - mapps.fileservice.file.upload
+      - mapps.meetingroom.privilege.query
+      - mapps.meetingroom.privilege.add
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.meetingroom.oplog.query
+      - mapps.meetingroom.oplog.export
+      - mapps.meetingroom.stat.export
+      - mapps.meetingroom.room.queryweb
+      - mapps.meetingroom.privilege.addadmin
+      - mapps.meetingroom.privilege.queryadmin
+      - mapps.meetingroom.reserved.servicedetail
+      - mapps.meetingroom.reserved.query
+      - mapps.meetingroom.reserved.add
+      - mapps.meetingroom.reserved.delete
+      - mapps.meetingroom.reserved.detail
+      - mapps.meetingroom.reserved.queryapprove
+      - mapps.meetingroom.reserved.updateapprove
+      - mapps.meetingroom.reserved.detailone
+    user: 
+      - mapps.meetingroom.room.query
+      - mapps.meetingroom.room.detail
+      - mapps.meetingroom.room.favorite
+      - mapps.meetingroom.reserved.query
+      - mapps.meetingroom.reserved.add
+      - mapps.meetingroom.reserved.delete
+      - mapps.meetingroom.reserved.detail
+      - mapps.meetingroom.reserved.queryapprove
+      - mapps.meetingroom.reserved.updateapprove
+      - mapps.meetingroom.reserved.detailone
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: meetingroommng
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8170/p
+  
+
+services: 
+  fileservice:
+    serviceUrl: http://192.168.10.210:9081/api
+    appKey: meetingroom
+    appSecret: FHuma025
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+    webRoot: http://192.168.10.210:9081/d/
+    
+meetingroom:
+  privilege: 
+    whiteList: true # 权限设置 1.true 白名单模式 2.false 黑名单模式
+  routePath: mrtest # 路由地址 推送pc时  http://miap.cc:9100/mrtest/websso?sessionId=abc 中的 mrtest
+  pushToPc: false # 是否推送pc的开关 1.true 开启 2.false 关闭
+  clearDataByDay: 7 # 设置数据屏蔽 例如：7天前数据页面不可见
+    
+client: 
+  appId: meetingroom
+  appName: 会议室预定
+
+logging:
+  path: logs

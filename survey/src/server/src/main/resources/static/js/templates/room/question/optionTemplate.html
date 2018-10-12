@@ -1,0 +1,87 @@
+<% if (data.type == 1) { %>
+<dd class="choose SID-option-dd" custom_input="<%=data.customInput%>">
+	<div class="floatL">
+    <input type="radio" name="NAME-radio" class="input-radio">
+    </div>
+    
+    <div contenteditable="true" data-maxlength="1000" class="SID-validate-div SID-option-title width50-per-cent SID-updownFlag ckeditor-content">
+    <%=data.optionSequ%>
+	</div>
+	<% if (data.customInput == 0) { %>
+	<input type="text" class="input-text input-hide ckeditor-remark SID-other-input" style='display:none' /><span class="SID-other-span" style='display:none'>(必填)</span>
+	<% } else if (data.customInput == 1) { %>
+	<input type="text" class="input-text input-hide ckeditor-remark SID-other-input" /><span class="SID-other-span">(必填)</span>
+	<% } else if (data.customInput == 2) { %>
+	<input type="text" class="input-text input-hide ckeditor-remark SID-other-input" /><span class="SID-other-span" style='display:none'>(必填)</span>
+	<% } %>
+    <% if (data.showFlag != "1") { %>
+    <div class="buttonGroup">
+        <a class="questionnaire-narrowUp SID-up-option"></a>
+        <a class="questionnaire-narrowDown SID-down-option"></a>
+        <a class="questionnaire-menu SID-more-option"></a>
+        <a class="questionnaire-del SID-del-option"></a>
+    </div>
+    <% } %>
+	<br />
+</dd>
+<% } else if (data.type == 2 && data.op == "edit") { %>
+<dd class="choose SID-option-dd">
+	<div class="floatL">
+    <input type="radio" name="NAME-radio" class="input-radio">
+    </div>
+    <input type="text" maxlength="1000" class="borderNone SID-validate-input SID-sel-option-value width50-per-cent SID-updownFlag" value="<%=data.optionSequ%>">
+    <% if (data.showFlag != "1") { %>
+    <div class="buttonGroup">
+        <a class="questionnaire-narrowUp SID-up-option"></a>
+        <a class="questionnaire-narrowDown SID-down-option"></a>
+        <a class="questionnaire-del SID-del-option"></a>
+    </div>
+    <% } %>
+</dd>
+<% } else if (data.type == 2) { %>
+<dd class="choose SID-option-sel-dd">
+	
+    <select class="SID-question-sel select-padding">
+    	<% if (data.showFlag == "1") { %>
+    	<option value=""></option>
+    	<% } %>
+    <% for(var i=0,optionData; optionData=data.optionSel[i++];) { %>
+    	<option value="<%=optionData%>"><%=optionData%></option>
+    <% } %>
+    </select>
+    <% if (data.showFlag != "1") { %>
+    <a class="SID-toEditSel-option fontColor-blue">编辑选项</a>
+    <% } %>
+</dd>
+<div class="SID-edit-sel" style="display:none;">
+
+</div>
+<% } else if (data.type == 3) { %>
+<dd class="choose SID-option-dd" custom_input="<%=data.customInput%>">
+	<div class="floatL">
+    <input type="checkbox" class="input-check">
+    </div>
+    
+    <div contenteditable="true" data-maxlength="1000" class="SID-validate-div SID-option-title width50-per-cent SID-updownFlag ckeditor-content">
+    <%=data.optionSequ%>
+	</div>
+	<% if (data.customInput == 0) { %>
+	<input type="text" class="input-text input-hide ckeditor-remark SID-other-input" style='display:none' /><span class="SID-other-span" style='display:none'>(必填)</span>
+	<% } else if (data.customInput == 1) { %>
+	<input type="text" class="input-text input-hide ckeditor-remark SID-other-input" /><span class="SID-other-span">(必填)</span>
+	<% } else if (data.customInput == 2) { %>
+	<input type="text" class="input-text input-hide ckeditor-remark SID-other-input" /><span class="SID-other-span" style='display:none'>(必填)</span>
+	<% } %>
+    <% if (data.showFlag != "1") { %>
+    <div class="buttonGroup">
+        <a class="questionnaire-narrowUp SID-up-option"></a>
+        <a class="questionnaire-narrowDown SID-down-option"></a>
+        <a class="questionnaire-menu SID-more-option"></a>
+        <a class="questionnaire-del SID-del-option"></a>
+    </div>
+    <% } %>
+	<br />
+</dd>
+<% } else { %>
+
+<% } %>

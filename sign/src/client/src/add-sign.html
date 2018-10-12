@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－签到</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div id="loadingPage" style="display: none">
+        <div class="popup-mask" style="display: block; opacity: 1;"></div>
+        <div class="loading-box box box-middlecenter" style="text-align: center">
+            <!-- <div class="loading"></div> -->
+            <img src="img/icon/loading.gif" style="width:50px">
+        </div>
+    </div>
+	<section id="pageAddSign" class="active">
+		<header>
+           <div class="titlebar" style="z-index:99;">
+                <a class="left" href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">签到</h1>
+                <a class="right" id="submit-sign">
+                    <span>提交</span>
+                </a>
+            </div>
+        </header>
+        <article style="top:44px;bottom:0px;">
+            <div class="content">
+                <!-- <div class="date-input">
+                    <i class="icon-time"></i>
+                    <span class="date">加载中...</span>
+                    <span class="time"></span>
+                </div>
+                <hr> -->
+                <ul class="list location-list">
+                    <li id="changeLocation">
+                        <i class="icon-position-fill"></i>
+                        <div class="justify-content">
+                            <p class="nowrap" id="addressStr">地址定位中...</p>
+                            <!-- <p class="nowrap"><input id="address" type="text" value="江苏省南京市建邺区云龙山路88号" disabled="true"></p> -->
+                            <small class="nowrap">地点微调</small>
+                        </div>
+                        <div class="justify">
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </li>
+                     <li>
+                        <!-- <i class="icon-position-fill"></i> -->
+                        <div class="justify-content">
+                            <p class="nowrap"><input id="taskNo" type="text" maxlength="20" placeholder="填写任务编号" value="" style="border: 0 none; width:100%;background-color: transparent;"></p>
+                            <!-- <small class="nowrap">任务编号</small> -->
+                        </div>
+                    </li>
+                </ul>
+                <div class="info-content clearfix">
+                    <textarea placeholder="填写签到描述，250字以内" id="infoMainContent"></textarea>
+                    <span class="count"><span id="text-num">0</span>/250</span>
+                    <ul class="grid album" id="imgBlock">
+                       <!-- <li><a class="img" data-href="img/content/location1-img1.jpg" style="background-image:url(img/content/location1-img1.jpg);"><span class="close"><i class="icon-close"></i></span></a></li> -->
+                        <li><a class="add-img"><i class="icon-camera-fill"></i></a></li>
+                    </ul>
+                </div>
+                <input id="longitude" type="hidden" value="">
+                <input id="latitude" type="hidden" value="">
+                <input id="address" type="hidden" value="">
+                <input id="city" type="hidden" value="">
+                <!-- <input class="upload-image" type="hidden" value="1.png">
+                <input class="upload-image" type="hidden" value="2.png">
+                <input class="upload-image" type="hidden" value="3.png">
+                <input class="upload-image" type="hidden" value="4.png">
+                <input class="upload-image" type="hidden" value="5.png"> -->
+            </div>
+            <!-- <a id="submit-sign" class="radius4 button block margin8">提交</a> -->
+        </article>
+	</section>
+<script id="signImg-tpl" type="text/x-handlebars-template">
+<li><a class="img" data-href="img/content/location1-img1.jpg" style="background-image:url(img/content/location1-img1.jpg);"><span class="close"><i class="icon-close"></i></span></a></li>
+</script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="config.js"></script>
+    <script type="text/javascript" src="js/ajaxModel.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script>
+    var URL = {
+    	submitMySign:"&method=mapps.sign.add&format=json&v=1.0&appKey=",
+        serverTime:"&method=mapps.sign.servertime&format=json&v=1.0&appKey=",
+        baiduLBSURI:"http://api.map.baidu.com/telematics/v3/reverseGeocoding"
+    },
+    Template = {
+        "signImg":$("#signImg-tpl").html()
+    },
+    imgMaxCount = 1,signTime="";
+    //count function
+    function maxWordCount(){
+        var target = $("#infoMainContent"),
+        maxLimit = 250;
+        target.on({
+            input: function(){
+                var val = target.val(),
+                count = val.length;
+                if(count>=maxLimit){
+                    // new Toast("内容超出限制").show();
+                    $("#text-num").css("color","#fc4349");
+                    target.val(val.substring(0,maxLimit));
+                }else{
+                    $("#text-num").css("color","#aaa");
+                }
+                $("#text-num").html(target.val().length);
+            }
+        });
+    }
+    function getDateDay(){
+        var date = new Date();
+        var weekday=new Array(7);
+        var dd = date.getDate();
+        dd = dd>=10?dd:"0"+dd;
+        var mm = date.getMonth()+1;
+        mm = mm>=10?mm:"0"+mm;
+        var yyyy = date.getFullYear();
+        var hour = date.getHours();
+        hour = hour>=10?hour:"0"+hour;
+        var minute = date.getMinutes();
+        minute = minute>=10?minute:"0"+minute;
+        var fullDate = yyyy+"-"+mm+"-"+dd;
+        var time = hour+":"+minute;
+        weekday[0]="星期日";
+        weekday[1]="星期一";
+        weekday[2]="星期二";
+        weekday[3]="星期三";
+        weekday[4]="星期四";
+        weekday[5]="星期五";
+        weekday[6]="星期六";
+        console.log(weekday[date.getDay()]);
+        //$(".date").html();
+        $(".time").html(time);
+        $(".date").html(fullDate);
+        return fullDate+" "+time+":00";
+    }
+
+    function createSignInfo() {
+        unbindSubmitBtn();
+        var contentLength = $("#infoMainContent").val().length
+            params = {
+                // "sign.signTime" : signTime,
+                "sign.content" : $("#infoMainContent").val(),
+                "sign.longitude" : $("#longitude").val(),
+                "sign.latitude" : $("#latitude").val(),
+                "sign.address" : $("#address").val(),
+                "sign.city" : $("#city").val(),
+                "sign.taskNo": $("#taskNo").val()
+            };
+        //params["sign.longitude"] = "118.745002";
+        //params["sign.latitude"] = "31.996008";
+        //params["sign.address"] = "中国江苏省南京市建邺区云龙山路88号";
+        
+		
+        if(contentLength>250) {
+            new Toast("内容超出限制").show();
+            return;
+        }
+
+        params = $.extend(params,getImages());
+        // alert(JSON.stringify(params))
+        if(!params["sign.longitude"] || !params["sign.latitude"] || !params["sign.address"]){
+            new Toast("定位失败，请检查").show();
+            bindSubmitBtn();
+            return;
+        }
+        /*if(!params["sign.images[0]"]){
+            new Toast("请拍照！").show();
+            return;
+        }*/
+        var imgCount = $("#imgBlock .img").length;
+        if(imgCount>imgMaxCount){
+            new Toast("最多上传"+imgMaxCount+"张照片！").show();
+            return;
+        }
+        ajaxModel.postData(URL.submitMySign,params).then(function(res) {
+            if(res.code === "1"){
+               /* new Toast("提交成功").show(function(){
+                    back();
+                });*/
+                back();
+            }else if(res.code != null && res.code != undefined){
+            	new Toast(res.message).show();
+                bindSubmitBtn();
+            }else{
+                new Toast("提交失败").show();
+                bindSubmitBtn();
+            }
+        },function(){
+            bindSubmitBtn();
+        })
+    }
+
+    function getImages() {
+        var imageObj = {};
+        $("#imgBlock .img").each(function(index,obj) {
+            imageObj['sign.images['+index+']'] = $(obj).data("href");
+        })
+        return imageObj;
+    }
+
+    //初始化function
+    window.addEventListener("load",function(){
+        // getDateDay();
+        maxWordCount();
+        var c=DataClock();
+        bindEvents();
+        // getServerTime();
+        // 
+    },false);
+
+    document.addEventListener("plusready",function(){
+        Mplus.closeBackListener();
+        plusreadyFun()
+    }, false);
+    
+    function plusreadyFun(){
+        Mplus.config(window.accessId);
+        var local_sessionId = window.localStorage.getItem("sessionId") || "";
+        
+        var token = NativeObj.getToken();
+        if(local_sessionId==token){
+            return;
+        }
+        window.localStorage.setItem("sessionId",escape(token));
+        Mplus.getLocation(function(res){
+            changeLocation(res);
+        },function(res){
+            $("#address").val(res.errMsg);
+            $("#addressStr").html("定位失败");
+        })
+
+    }
+    function getServerTime(){
+        ajaxModel.getData(URL.serverTime).then(function(res) {
+            if(res.state === "success"){
+                signTime = res.data
+                var date = signTime.split(" ");
+                $(".time").html(date[1]);
+                $(".date").html(date[0]);
+            }
+        });
+    }
+    function changeLocation(data){
+        var latitude = data.latitude; // 纬度，浮点数，范围为90 ~ -90
+        var longitude = data.longitude; // 经度，浮点数，范围为180 ~ -180。
+        var address = data.name||data.address; //地址详情说明
+        if(address == "null"){
+            address = "定位失败";
+        }
+        if(address == "[位置]"){
+            address = data.address;
+        }
+        // getCityByCode(latitude,longitude);
+        
+
+        var dtd = $.Deferred();
+        $.when(getCityByCode(dtd,latitude,longitude)).always(function(city){
+            $("#latitude").val(latitude);
+            $("#longitude").val(longitude);
+            $("#address").val(address);
+            $("#addressStr").html(address);
+            $("#city").val(city);
+        })
+        
+    }
+    function previewImage(container,clickDom){
+        var $container = $(container),
+            $clickDom = $(clickDom);
+        var urls = [];
+        var current = $clickDom.data("href");
+        $container.find("[data-href]").each(function(){
+            (function(s){
+                var url = $(s).data("href");
+                urls.push(url);
+            })(this);  
+        })
+        Mplus.previewImage(current,urls);
+    }
+    function bindEvents(){
+        $(".add-img").click(function() {
+            $this = $(this);
+            Mplus.chooseImage([/*'album', */'camera'],
+            function(){
+                $("#loadingPage").show();
+            },
+            function(imgURL){
+                var image = new Image();
+                image.src = imgURL;
+                image.onload = function(){
+                    $("#loadingPage").hide();
+                    setTimeout(function(){
+                    	$this.parent().before('<li><a class="img" data-href="'+imgURL+'" style="background-image:url('+imgURL+');"><span class="close"><i class="icon-close"></i></span></a></li>');
+                    	var imgCount = $("#imgBlock .img").length;
+                        if(imgCount === imgMaxCount){
+                            new Toast("最多上传"+imgMaxCount+"张照片！").show();
+                            $(".add-img").hide();
+                            return;
+                        }
+                    },100);
+                }
+                image.onerror = function(){
+                    $("#loadingPage").hide();
+                }
+            },
+            function(){
+                $("#loadingPage").hide();
+            })
+        });
+        $(document).on("click","#imgBlock .img",function(){
+            var $this = $(this);
+            previewImage($this.parents("#imgBlock"),$this);
+        });
+        //删除图片
+        $(document).on("click","#imgBlock .close",function(){
+            var $this = $(this);
+            $this.parents("li").remove();
+            $(".add-img").show();
+        });  
+        /*$("#submit-sign").on("click",function(){
+            createSignInfo();
+        })*/
+        $("#changeLocation").click(function(){
+            Mplus.chooseLocation(function(res){
+                // alert(JSON.stringify(res));
+                changeLocation(res);
+            })
+        });
+        bindSubmitBtn();
+    }
+    function getCityByCode(dtd,lat,lng){
+        $.ajax({
+            url:URL.baiduLBSURI,
+            type : "GET",
+            dataType : "jsonp",
+            jsonp: "callback",
+            data:{
+                "location":lng+","+lat,//"118.732507,31.992908",//
+                "coord_type":"wgs84",
+                "output":"json",
+                "ak":"W79uNeeyw7QXp6FGUzR6r8lY"
+            },
+            success:function(res){
+                if(res.status == "Success"){
+                    var city = res.city || "";
+                    dtd.resolve(city);
+                }else{
+                    dtd.reject();
+                }
+            },
+            error:function(res){
+                dtd.reject();
+            }
+        });
+        return dtd.promise();
+    }
+    function bindSubmitBtn(){
+        $("#loadingPage").hide();
+        $("#submit-sign").on("click",function(){
+            createSignInfo();
+        })
+    }
+    function unbindSubmitBtn(){
+        $("#submit-sign").off("click");
+        $("#loadingPage").show();
+    }
+
+    
+
+	//定义exmobi返回
+	function back(){history.go(-1);}
+
+	</script>
+</body>
+</html>

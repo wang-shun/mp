@@ -1,0 +1,41 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">会议室</h1>
+        <a class="titlebar-button titlebar-right" id="ID-Room-BtnFilter">筛选</a>
+    </div>
+</header>
+<article style="top:50px;" class="topline">
+    <div id="ID-Room-List"></div>
+</article>
+<!--状态筛选-->
+<div id="ID-Room-DialogFilter" style="background-color:white;display:none;">
+	<div style="padding: 12px 0px 16px 12px;">
+		<p>预约时间</p>
+		<div class="inputbox underline SID-DivDateTime">
+			<i class="icon icon-time size20 color-primary"></i>
+			<input type="text" name="NID-Room-TimeStart" class="input-text SID-DateTimeStart" readonly placeholder="会议开始时间">
+		</div>
+		<div class="inputbox underline SID-DivDateTime">
+			<i class="icon icon-time size20 color-primary"></i>
+			<input type="text" name="NID-Room-TimeEnd" class="input-text SID-DateTimeEnd" readonly placeholder="会议结束时间">
+		</div>
+		<p style="margin-top: 14px;">容量(人)</p>
+		<div style="margin-top: 10px;">
+			<span>&gt;=</span>
+			<input type="text" name="NID-Room-PeopleNum" maxlength="4" class="input-text bordered text-center" style="padding:4px 12px;width:75px;margin-left:12px;border-radius: 4px;">
+		</div>
+	</div>
+	<div class="app-footBtns topline">
+		<button class="button color-cancel" id="ID-Room-BtnReset">
+			<i class="icon icon-rdorefuse size20"></i>
+			<span>重置</span>
+		</button>
+		<button class="button color-success" id="ID-Room-BtnSubmit">
+			<i class="icon icon-rdook size20"></i>
+			<span>完成</span>
+		</button>
+	</div>
+</div>

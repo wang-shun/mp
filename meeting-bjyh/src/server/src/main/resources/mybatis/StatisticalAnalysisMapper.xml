@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.meeting.dao.StatisticalAnalysisMapper">
+  
+  <select id="getStatisticalAnalysis" parameterType="java.util.Map" resultType="StatisticalAnalysis">
+	  select roomName,reservedNum,durationSum,durationAvgDay,durationAvgNum
+	  from
+	  (
+		select r.name roomName
+		,count(re.id) reservedNum
+		,sum(re.order_duration)/60 durationSum
+		,round(sum(re.order_duration)/60/#{dayNum},2) durationAvgDay
+		,round(sum(re.order_duration)/60/count(re.id),2) durationAvgNum
+		from mr_room r,mr_reserved re
+		where r.id = re.room_id
+		  and r.ecid = #{ecid,jdbcType=VARCHAR}
+		  and r.status = #{roomStatus,jdbcType=VARCHAR} 
+		  and re.status = #{reservedStatus,jdbcType=VARCHAR} 
+		  and re.order_time_begin > #{statBeginTime}
+		  and re.order_time_begin &lt; #{statEndTime}
+		group by r.id,r.name
+	  ) a 
+	  <if test="sort != null">
+	  order by ${sort}
+	  </if>
+	  <if test="sort == null">
+	  order by reservedNum desc
+	  </if>
+	  </select>
+</mapper>

@@ -1,0 +1,73 @@
+<div class="add-main">
+		<input class="SID-dashboardid" type="hidden"/>
+		<div style="width: 300px;float: left;">
+			<img src="images/icon/dashboard.png" style="vertical-align: middle;margin-right: 4px;width: 20px;"/>
+			<input class="dashboardInput SID-dashboardname" placeholder="请输入dashboard名称" style="width:220px"/>
+		</div>
+		<a class="meet-add SID-add-btn" style="float: right;"><span class="fhicon-meeting-add"></span>添加图表</a>
+		<div style="width: 260px;float: right;">
+			<img src="images/icon/timerange.png" style="vertical-align: middle;width: 18px;margin:0 4px;"/>
+			<span>时间范围</span>
+			<select class="SID-timeRange dashboardSelect" style="width:160px">
+				<option value="1m">1分钟</option>
+				<option value="5m">5分钟</option>
+				<option value="15m">15分钟</option>
+				<option value="1h">1小时</option>
+				<option value="6h">6小时</option>
+				<option value="12h">12小时</option>
+				<option value="1d">1天</option>
+				<option value="2d">2天</option>
+				<option value="7d">7天</option>
+				<option value="30d">30天</option>
+			</select>
+		</div>
+		<div style="width: 260px;float: right;">
+			<img src="images/icon/updatetime.png" style="vertical-align: middle;width: 30px;"/>
+			<span>刷新时间</span>
+			<select class="SID-refreshTime dashboardSelect" style="width:160px">
+				<option value="1m">1分钟</option>
+				<option value="5m">5分钟</option>
+				<option value="15m">15分钟</option>
+				<option value="1h">1小时</option>
+				<option value="6h">6小时</option>
+				<option value="12h">12小时</option>
+				<option value="1d">1天</option>
+				<option value="2d">2天</option>
+				<option value="7d">7天</option>
+				<option value="30d">30天</option>
+			</select>
+		</div>
+	</div>
+	<div class="tree-container tree-container-nobutton">
+	    <!-- <div class="searchBlock">
+	    	<form id = "subForm" onkeydown="if(event.keyCode==13)return false;">
+	        变为展开查询的时候span标签调用样式fhicon-arrowD2,search-modle后增加hide
+	        <div class="search-toggleBar">
+	            <a class="search-toggle SI-search-toggle">
+	                <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+	            </a>
+	        </div>
+	        <div class="search-modle hide">
+	            <div class="hold-meet-mod lef">
+	                <div class="search-list search-button">
+	                    <label class="search-label">搜索：<input type="text" class="choose-text SID-keyword" placeholder="搜索  地址/用户名" style="width:60%" name = "keyword" onpaste="return false"/></label>
+	                    <a class = "SID-search">查询</a><a class = "SID-clearSearch">清空</a>
+	                </div>
+	            </div>
+	            <div class="search-button seb"><a class = "SID-search">查询</a><a class = "SID-clearSearch">清空</a></div>
+	        </div>
+	       </form>
+	    </div> -->
+	    <!-- 表格内容 -->
+	    <!-- <div class="tableblock">
+	        <table id = "meet-hold" width = "100%" class = "common-table"></table>
+	    </div> -->
+	    
+		<div class="grid-stack">
+		</div>
+		
+		<div style="width:100%;text-align: center;padding-top: 20px;">
+			<a class="meet-add configaddbtn SID-save-btn">保存</a>
+		   	<a class="meet-add configaddbtn SID-cancel-btn">取消</a>
+		</div>
+	</div>

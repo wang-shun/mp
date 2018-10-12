@@ -1,0 +1,32 @@
+<div class="blockInside">
+    <div class="crumb">视频通道管理</div>
+    <div style="margin-top: 6px;margin-bottom: 4px;">
+         <a class="meet-add SID-channel-add"><span class="fhicon-meeting-add"></span>新增</a>
+    </div>
+    <div class="tree-container tree-container-nobutton" style="top: 68px;">
+        <div class="searchBlock">
+        <form id="subForm">
+            <!--关闭查询的时候span标签调用样式fhicon-arrowU2,取消样式hide-->
+            <div class="search-toggleBar">
+                <a class="search-toggle SI-search-toggle">
+                    <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+                </a>
+            </div>
+            <div class="search-modle hide">
+                <div class="search-mod">
+                    <ul class="search-list">
+                        <li class="search-item"><label class="search-label">通道名称：</label><input type="text" name="channel" class="SID-channel" /></li>
+                    </ul>
+                </div>
+                <div class="search-button"><a class="SID-search">查询</a><a class="SID-clearSearch">清空</a></div>
+            </div>
+            </form>
+        </div>
+        <!-- 表格内容 -->
+        <div class="tableblock">
+             <div class="tableblock">
+            	<table id="grid-table" width="100%" class="common-table"></table>
+            </div>	
+        </div>
+    </div>    
+</div>

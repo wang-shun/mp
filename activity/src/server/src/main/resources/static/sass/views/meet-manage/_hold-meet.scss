@@ -1,0 +1,141 @@
+// 会议管理
+.fixed-center{
+	left: 60px;
+	right: 60px;
+}
+.join-meet{
+	display: none;
+}
+.service-meet{
+	display: none;
+}
+.add-main{
+	margin-top: 10px;
+	.meet-add{
+		line-height: 28px;
+		color: #1788fb;
+		span{
+			font-size: 18px;
+		    color: #1788fb;
+		    line-height: 28px;
+		    display: block;
+		    float: left;
+		    margin-right: 7px;
+		}
+	}
+}
+.tree-container {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border-top: #e8e8e8 1px solid;
+	&.tree-container-nobutton {
+	    top: 100px;
+	}
+	&.tree-container-noadd{
+	    top: 70px;
+	}
+}
+.tb-opt-box .tb-opt-main {
+    display: none;
+    z-index: 2;
+    text-align: left;
+    background: #fff;
+    width: 85px;
+    padding: 1px;
+    right: 0;
+    top: 29px;
+    border: #1788fb 1px solid;
+    border-radius: 4px;
+    border-top-right-radius: 0;
+}
+.hold-meet-mod{
+	height: 40px;
+	&.lef{
+		width: 100%;
+	}
+	.search-button-white{
+		margin-top: 8px;
+		a{
+			background-color: #fff;
+		    color: #1788fb;
+		    border-radius: 20px;
+		    padding: 0 35px;
+		    height: 30px;
+		    line-height: 30px;
+		    display: inline-block;
+		    margin: 0 10px;
+		    border:1px solid #1788fb;
+		}
+		a:hover{
+			opacity: 0.5;
+		}
+	}
+	.search-label{
+		line-height: 50px;
+		padding-right: 30px;
+		&.pos{
+			display: block;
+			position: absolute;
+		}
+		&.rel{
+			display: block;
+			position: relative;
+			margin-left: 284px;
+		}
+		&.bl{
+			color: #1788fb;
+			margin-left: 50px;
+		}
+		a:hover{
+			color: #1788fb;
+		}
+		.choose-text{
+			height: 29px;
+		    border-radius: 4px;
+		    margin: 0 10px;
+		    padding-left: 5px;
+		    &.lef{
+		    	margin-left: 24px;
+		    }
+		    &.name{
+		    	margin: 0 -3px 0 23px;
+		    }
+		}
+		select{
+			height: 29px;
+		    border-radius: 4px;
+		    margin: 0 10px;
+		    padding-left: 5px;
+		    width: 160px;
+		    border-color: #ddd;
+		    margin-left: 30px;
+		    font-family: 微软雅黑;
+		}
+	}
+	.choose-date{
+		height: 27px;
+	    text-align: center;
+	    border-radius: 4px;
+	    margin: 0 10px;
+	    margin-left: 0;
+	}
+}
+
+
+
+.tableblock{
+	margin-top: 20px;
+}
+.search-toggle{
+	.icon-set{
+		color: #1788fb;
+	    font-weight: bold;
+	    margin-right: 4px;
+	}
+}
+.search-button{
+	&.seb{
+		margin-top: 70px;
+	}
+}

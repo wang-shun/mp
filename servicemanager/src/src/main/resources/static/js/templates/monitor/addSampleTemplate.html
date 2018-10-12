@@ -1,0 +1,48 @@
+<div class="outmain-cons">
+<form id="formMsg">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+
+            <!--<div class="form-item">-->
+                <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+                    <!--<input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="databassType" value="" />-->
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>采样指标：</label>
+                <div class="form-item-editbox" style="width: 55%">
+                    <input class="SID-measurement form-item-text {required: true} smmeasurementname" maxlength="30" type="text" name="measurement" value=""/>
+                </div>
+                <div class="form-item-tip" style="width: 25%"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>采样sql：</label>
+                <div class="form-item-editbox" style="width: 55%">
+                    <textarea class="SID-sampleSql form-item-textarea {required: true}" style="height: 200px" placeholder="请输入influxdb sql,不符合规则则无法新增或保存" maxlength="500" name="sampleSql"></textarea>
+                </div>
+                <div class="form-item-tip" style="width: 25%"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>采样说明：</label>
+                <div class="form-item-editbox" style="width: 55%">
+                    <textarea class="SID-remarks form-item-textarea {required: true}" style="height: 80px" maxlength="200" name="remarks"></textarea>
+                </div>
+                <div class="form-item-tip" style="width: 25%"><div class="wrong-text"></div></div>
+            </div>
+            
+        </div>
+
+    </div>
+</form>
+</div>
+
+<style>
+
+</style>
+
+<script type="text/javascript">
+
+</script>

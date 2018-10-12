@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mapps-meeting     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.160.72:3306/mapps?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: mapps
+    password: FHuma025 
+      
+flywaydb: 
+  locations: db/mysql

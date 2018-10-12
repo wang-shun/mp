@@ -1,0 +1,14 @@
+<% for(var i=0,option; option=data[i++];) { %>
+	<% var dataAttr="";for(var r in option){%>
+		<% dataAttr+=" data-"+r+"='"+option[r]+"'"; %>
+	<%}%>
+<div class="tree-line" <%=dataAttr%>>
+	<div class="tree-icon">
+        <span class="tree-photo" style="background-color:<%=option.name.substr(0,1).toPinyin().substr(0,1).toColor()%>"><%=option.name.substr(option.name.length-2,2)%></span>
+	</div>
+	<div class="tree-title"><%=option.name%></div>
+	<% if(tree.isSelected(option.id,option.parentId)==0){%>
+		<span class="tree-icon icon-rdoadd-fill tree-btnadd SID-TreeSearch-BtnAdd"></span>
+	<%}%>
+</div>
+<% } %>

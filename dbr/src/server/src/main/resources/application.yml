@@ -1,0 +1,75 @@
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
+      
+spring: 
+  application:
+    name: mapps-dbr     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.103:5432/mr
+    username: mr
+    password: 123456 
+
+flywaydb: 
+  locations: db/migration
+      
+server: 
+  port: 18011
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.dbr.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.dbr.submit
+      - mapps.dbr.adminquery
+      - mapps.dbr.borrowquery
+      - mapps.dbr.borrowreturn
+      - mapps.dbr.isadmin
+      - mapps.dbr.check
+    user: 
+      - mapps.dbr.submit
+      - mapps.dbr.adminquery
+      - mapps.dbr.borrowquery
+      - mapps.dbr.borrowreturn
+      - mapps.dbr.isadmin
+      - mapps.dbr.check
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: deviceborrowreturnmng
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.154:7777/mos/api  
+  
+
+services: 
+  fileservice:
+    serviceUrl: http://192.168.160.162:9081/api
+    appKey: meetingroom
+    appSecret: FHuma025
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+
+client: 
+  appId: deviceborrowreturn
+  appName: 设备借还
+  
+logging:
+  path: logs

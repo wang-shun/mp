@@ -1,0 +1,50 @@
+﻿安装gd库
+yum install -y gd*  
+
+检查是否装过nginx
+rpm -qa|grep nginx
+如果已经安装,则删除
+rpm -qa|grep nginx|xargs rpm -e --nodeps
+rm -rf (ngxin路径)
+
+新建nginx安装目录
+mkdir /usr/local/nginx/
+解压资源包到目录
+新建nginx安装目录
+tar -zxvf nginx-1.9.0.tar.gz -C /usr/local/nginx/
+
+安装nginx
+cd /usr/local/nginx/
+编译（不带fdfs功能，添加image filter）
+./configure --prefix=/usr/local/nginx --sbin-path=/usr/local/nginx/nginx --conf-path=/usr/local/nginx/nginx.conf --pid-path=/usr/local/nginx/nginx.pid --with-http_ssl_module  --with-http_stub_status_module --with-http_image_filter_module
+注:以上为一行命令
+make
+make install
+
+创建缓存路径
+mkdir  /usr/local/nginx/cache
+
+将配置文件放入nginx目录
+mv mappsfileservice.conf /usr/local/nginx/   (mappsfileservice.conf在fileservice根目录下)
+ 检查配置文件
+vi nginx.conf
+在nginx.conf 的http里的第一行添加 include       mappsfileservice.conf;  (注意分号)
+
+vi mappsfileservice.conf 
+修改两项ip端口配置
+
+放入自启动服务脚本
+cd /etc/init.d/
+上传nginx 文件
+chmod 755 nginx
+
+启动服务
+service nginx start（stop/restart）
+
+检查端口
+netstat -anpl|grep 9081
+
+
+检查日志
+tail -fn 200 /opt/mapps/(fileservice路径)/logs/spring.log 
+

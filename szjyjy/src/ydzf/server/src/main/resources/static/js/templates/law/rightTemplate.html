@@ -1,0 +1,21 @@
+<div class="book-center">
+     <div class="search-modle hide">
+         <div class="search-mod">
+             <ul class="search-list">
+                
+                
+                 <li class="search-item"><label class="search-label">报检单号：</label><input type="text" class="SID-declNo" /></li>
+                 <li class="search-item"><label class="search-label">检验人员：</label><input type="text" class="SID-name" /></li>
+                 <li class="search-item"><label class="search-label">开始时间：</label><input type="text" class="choose-date SID-startTime" name="from" id="from" readonly="readonly"/></li>
+            	 <li class="search-item"><label class="search-label">结束时间：</label><input type="text" class="choose-date SID-endTime" name="to" id="to" readonly="readonly"/></li>
+             </ul>
+             
+         </div>
+         <div class="search-button"><a class="SID-search">查询</a><a class="SID-clearSearch">清空</a></div>
+     </div>
+     <!-- 表格内容 -->
+     <div  class="tab-content">
+         <!-- 里面table内容根据需要替换 -->
+         <table id="grid-table" width="100%" class="common-table"></table>
+     </div>
+ </div>

@@ -1,0 +1,124 @@
+test_reserved_room_query_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.query
+    v: 1.0
+    session: true
+  request: &reqbase
+    displayName:
+    depName:
+    reservedStartDate: "2016-07-18"
+    reservedEndtDate: "2016-07-30"
+    status: 1
+    order: 1
+    timestamp: 
+    offset: 1
+    limit: 10
+  assert: &respbase    
+     code: 
+       _eq: 1
+     reservedId: 
+       _notNull: true 
+      
+test_reserved_room_query_base1: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.query
+    v: 1.0
+    session: true
+  request: &reqbase
+   displayName:
+   depName:
+   reservedStartDate: "2016-07-18"
+   reservedEndtDate: "2016-07-30"
+   status: 1
+   order: 2
+   timestamp:
+   offset: 1
+   limit: 10
+  assert: &respbase    
+   code: 
+      _eq: 1
+   reservedId: 
+      _notNull: true    
+      
+         
+test_reserved_room_query_base2: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.query
+    v: 1.0
+    session: true
+  request: &reqbase
+   displayName:
+   depName:
+   reservedStartDate: "2016-07-18"
+   reservedEndtDate: "2016-07-30"
+   status: 1
+   order: 2
+   timestamp:
+   offset: 1
+   limit: 20
+  assert: &respbase    
+    code: 
+      _eq: 1
+    reservedId: 
+      _notNull: true 
+      
+      
+test_reserved_room_query_base3: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.query
+    v: 1.0
+    session: true
+  request: &reqbase
+   displayName:
+   depName:
+   reservedStartDate: "2016-07-18"
+   reservedEndtDate: "2016-07-30"
+   status: 1
+   order: 1
+   timestamp:
+   offset: 1
+   limit: 20
+  assert: &respbase    
+    code: 
+      _eq: 1
+    reservedId: 
+      _notNull: true      
+      
+test_reserved_room_query_base4: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.query
+    v: 1.0
+    session: true
+  request: &reqbase
+   displayName:
+   depName:
+   reservedStartDate: "2016-07-30"
+   reservedEndtDate: "2016-07-18"
+   status: 1
+   order: 2
+   timestamp:
+   offset: 1
+   limit: 20
+  assert: &respbase    
+    code: 
+      _eq: 1003
+    roomId: 
+      _null: true
+      
+            
+#查询预定时间在7/18到7/30的，状态为准备中的已预约会议室的数据，按照预定时间【降序排列】每页显示【10行】所查的数据
+#查询预定时间在7/18到7/30的，状态为准备中的已预约会议室的数据，按照预定时间【升序排列】每页显示【10行】所查的数据  
+#查询预定时间在7/18到7/30的，状态为准备中的已预约会议室的数据，按照预定时间【升序排列每页显示20行】所查的数据 
+#查询预定时间在7/18到7/30的，状态为准备中的已预约会议室的数据，按照预定时间【降序排列每页显示20行】所查的数据
+#查询预定时间在7/30到7/18的，状态为准备中的已预约会议室的数据，按照预定时间【升序排列每页显示20行】所查的数据，【时间有误，给出报错提示，查不到数据；】
+  
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

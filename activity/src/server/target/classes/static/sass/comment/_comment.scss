@@ -1,0 +1,305 @@
+@import "comment/_variable.scss";
+/*Global annotation*/
+@charset "utf-8";
+
+/*Global style*/
+
+*{
+	margin:0;
+	padding:0;
+	font-size: 14px;
+}
+body{
+	background:$backgroundDefault;
+}
+html,body{
+	overflow:hidden;
+}
+/*In order to compatible datatable
+html, body {
+	height: 100%;
+}*/
+body,input,textarea{ font-family: "Microsoft YaHei", helvetica, arial; }
+
+ul,li,dl,dt,dd { list-style: none; }
+a{
+	text-decoration:none;
+	outline:none;
+	cursor:pointer;
+}
+
+a,label, :focus{
+	outline:0 none;
+}
+img {
+  border: 0;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+dfn {
+  font-style: italic;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+/*******************global-end*******************/
+
+/*layout*/
+[class^="fixed-"]{
+	position:absolute;
+	z-index:1;
+}
+	
+/*******************global-fix*******************/
+
+%fix-topLeft { position:absolute; top:0px; left:0px; }
+%fix-topBottom { position:absolute; top:0px; bottom:0px; }
+%fix-topRight { position:absolute;  top:0px; right:0px; }
+%fix-bottomLeft { position:absolute;  bottom:0px; left:0px; }
+%fix-bottomRight { position:absolute;  bottom:0px; right:0px; }
+%fix-leftRight { position:absolute;  left:0px; right:0px; }
+%fix-rightBottom { position:absolute;  right:0px; bottom:0px; }
+%fix-topHalf { position:absolute; top:$percentageHalf; }
+
+/*******************global-fontIcon*******************/
+%fontIconAlign{ display:block;}
+
+
+
+.bg-blue-Quick{ background-color:#609df8;} //首页快捷菜单背景蓝色
+.bg-green-Quick{ background-color:#73d454;} //首页快捷菜单背景绿色
+.bg-red-Quick{ background-color:#ff7073;} //首页快捷菜单背景红色
+.bg-orange-Quick{ background-color:#ff9e3e;} //首页快捷菜单背景橙色
+.bg-blue-equipment{ background-color:#2b98f0;} //首页设备背景蓝色
+.bg-red-equipment{ background-color:#ff7b73;} //首页设备背景蓝色
+
+
+.cursorPointer{ cursor:pointer;}
+.box-shadow{ -webkit-box-shadow:0 0 10px rgba(4, 0, 0, .1); -moz-box-shadow:0 0 10px rgba(4, 0, 0, .1); box-shadow:0 0 10px rgba(4, 0, 0, .1);}
+
+/*alignment*/
+
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+.text-center,td.text-center{
+	text-align:center;
+}
+.text-right,td.text-right{
+	text-align:right;
+}
+.middle{
+	position:absolute;
+	top:50%;
+	transform:translateY(-50%);
+	-ms-transform:translateY(-50%); 	/* IE 9 */
+	-moz-transform:translateY(-50%); 	/* Firefox */
+	-webkit-transform:translateY(-50%); /* Safari adn Chrome */
+	-o-transform:translateY(-50%); 
+}
+
+.relative { position: relative; }
+.absolute{ position:absolute; }
+.clearfix::after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+}
+.clearfix {
+}
+
+/*In order to compatible datatable*/
+.centerss{
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
+	-ms-transform:translateX(-50%);
+	-moz-transform:translateX(-50%);
+	-webkit-transform:translateX(-50%);
+	-o-transform:translateX(-50%); 
+}
+.middlecenterss{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%); 	/* IE 9 */
+	-moz-transform:translate(-50%,-50%); 	/* Firefox */
+	-webkit-transform:translate(-50%,-50%); /* Safari and Chrome */
+	-o-transform:translate(-50%,-50%); 
+}
+
+
+/*背景色设置*/
+.bg-transparent{
+	background-color:transparent;
+}
+.bg-white{
+	background-color:white;
+}
+
+
+/*clear float*/
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: " ";
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix{
+	zoom:1;
+}
+.clear{
+	clear:both;
+}
+
+
+/*布局设置*/
+.col4{
+	width:25%;
+}
+.col3{
+	width:33.33333%;
+}
+.col3-2{
+	width:66.66667%;
+}
+
+/*间距设置*/
+.marginTop20{margin-top:20px;}
+.marginTop15{margin-top:15px;}
+.marginTop10{margin-top:10px;}
+
+.border-right{ border-right:$borderLinecolor 1px solid;}
+
+/*******************alpha*******************/
+%opacity5 {
+	opacity:0.5;
+	filter:Alpha(opacity=50);
+}
+%opacity10 {
+	opacity:1;
+	filter:Alpha(opacity=100);
+}
+
+/*hover状态设置*/
+%hoverColor{ color:#1788fb;}
+
+
+/*******************   blockOutLine     *******************/
+%blockOutside {
+	padding:20px;
+	overflow:auto;
+	position:absolute;
+	top:0;left:0;right:0;bottom:0;
+}
+%blockInside {
+	margin:25px 20px 38px 20px;
+	overflow:auto;
+	position:absolute;
+	top:0;left:0;right:0;bottom:0;
+}
+
+.blockOutside{
+	@extend %blockOutside;
+}
+.blockInside{
+	@extend %blockInside;
+}
+
+hr{ border:0; border-top:$borderLinecolor 1px solid;}
+
+.bold{ font-weight:bold;}
+.hide{ display:none;}
+.red{ color:$colorRed;}
+.blue{ color:$colorMain;}
+
+/*按钮*/
+.buttonblue{
+	border-radius:20px; color:$colorMain; border:$colorMain 1px solid; height:28px; line-height:28px; padding:0 35px; display:inline-block; margin:10px 5px 0 5px;
+	&:hover{ @extend %opacity5;}
+}
+.buttondefault{
+	border-radius:20px; border:$borderLinecolor 1px solid; height:28px; line-height:28px; padding:0 35px; display:inline-block; margin:0 5px 0 5px;
+	&:hover{ color:$colorMain; border:$colorMain 1px solid;}
+}
+
+/*输入框获取焦点时变色*/
+input,textarea{ border:$borderLinecolor 1px solid;}
+input:focus,textarea:focus{ border:$colorMain 1px solid;}
+
+/*box-sizing:border-box*/
+%borderBox{
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box; 
+    -o-box-sizing: border-box; 
+    -ms-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
+/*动态checbox数据，自动换行*/
+.checkbox-list{ font-size:0px; white-space:pre-line;}
+.checkbox-list .checkbox-item{display:inline-block;*display:inline;*zoom:1; width:33%; font-size:12px; }
+        	
+.width10 { width:10px; }
+.width20 { width:20px; }
+.width30 { width:30px; }
+.width40 { width:40px; }
+.width50 { width:50px; }
+.width60 { width:60px; }
+.width70 { width:70px; }
+.width80 { width:80px; }
+.width90 { width:90px; }
+.width100 { width:100px; }
+.width200 { width:200px; }
+.width300 { width:300px; }
+.width400 { width:400px; }
+.width500 { width:500px; }
+.width600 { width:60px; }
+.width700 { width:700px; }
+.width800 { width:800px; }
+.width900 { width:900px; }
+.width1000 { width:1000px; }
+
+.percent10 { width:10%; }
+.percent20 { width:20%; }
+.percent30 { width:30%; }
+.percent40 { width:40%; }
+.percent50 { width:50%; }
+.percent60 { width:60%; }
+.percent70 { width:70%; }
+.percent80 { width:80%; }
+.percent90 { width:90%; }
+.percent100 { width:100%; }
+
+.formBoxPadding{padding: 10px }
+
+/**会议室维护**/
+.meet-add{
+	line-height: 28px;
+	color: #1788fb;
+	span{
+		font-size: 18px;
+	    color: #1788fb;
+	    line-height: 28px;
+	    display: block;
+	    float: left;
+	    margin-right: 7px;
+	}
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		
+		
+		<script src="scripts/lib/jquery/jquery.min.js"></script>
+		<script src="scripts/common.js"></script>
+		
+		<link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="scripts/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style/trip.css">
+		<link rel="stylesheet"  href="style/citypicker.css?v=1"  />
+		
+	</head>
+	<body >
+		<header>
+		<div id="showLetter" class="showLetter"><span>A</span></div>
+		<div class="titlebar">
+			<a href="#" onclick="closeSelf()">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</a>
+			<h1 class="titlebar-title text-center">城市选择</h1>
+			<a href="#" onclick="check()">
+				<i class="fa fa-none"></i>
+			</a>
+		</div>
+		</header>
+		
+		<div style="width: 100%;text-align: center;">
+			<input class="trip-form-control" id="search" style="margin:20px 40px;width: 80%;" placeholder="搜索(中文，拼音，简拼)"/>
+		</div>
+		<div class="letter">
+		    <ul>
+		    </ul>
+		</div>
+		<div class="city-letter">热门城市</div>
+		<div class="hotcity">
+		</div>
+		
+		
+	  <div class="city">
+	  </div>
+	  <div class="nodata" style="display: none;">
+	  		没有检索到相应的城市，请尝试其他输入。
+	  		<br/>如: 南京 ,  nj , nanjing
+	  </div>
+
+	</body>
+	<script>
+	
+	function init(){
+		
+		var letter = ["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","W","X","Y","Z"] ;
+		$.each(letter,function(i,lt){
+			$(".letter ul").append("<li><a href=\"javascript:;\">"+lt+"</a></li>") ;
+			$(".city").append("<div class=\"city-list\" id=\"content_"+lt+ "\"><span class=\"city-letter\" id=\""+lt+i+"\">"+lt+"</span></div>")
+		}) ;
+		
+		$.getJSON("data/hotcity.json",function(citys){
+			$.each(citys, function(i,city) {
+				$(".hotcity").append("<button class=\"btn hot\" data-id=\""+city.code+"\">"+city.name+"</button>");
+			});
+			
+			$(".hotcity button").on("click",function(){
+	    		//alert($(this).attr("data-id")) ;
+//	    		parent.cityPickerCallBack($(this).attr("data-id"),$(this).html());
+	    		backToOpen($(this).attr("data-id"),$(this).html());
+		    });
+			
+		}) ;
+		
+		$.getJSON("data/city3.json",function(citys){
+			$.each(citys, function(i,city) {
+				var spell = city.spell ;
+				if(spell){
+					var firstLetter = spell.substr(0,1) ;
+					//console.log(firstLetter);
+					$("#content_"+firstLetter.toUpperCase()).append("<p  data-search-key=\""+city.name+"|"+city.spell+"|"+city.spell_s+"\" data-id=\""+city.code+"\">"+city.name+"</p>");
+				}
+			});
+			
+			$(".city p").on("click",function(){
+
+	    		backToOpen($(this).attr("data-id"),$(this).html());
+		    });
+			
+		}) ;
+		
+//		$.each(letter,function(i,lt){
+//			$(".letter ul").append("<li><a href=\"javascript:;\">"+lt+"</a></li>") ;
+//		})
+		
+		$(".letter ul li a").on("click",function(){
+			var s = $(this).html();
+	        $(window).scrollTop($('#content_' + s).offset().top-45);
+	        $("#showLetter span").html(s);
+//	        $("#showLetter").show().delay(500).hide(0);
+		})
+		
+	    $("#search").on("change",function(){
+	    	var ss = $(this).val();
+	    	var fg = false ;
+	    	if(ss!=""){
+	    		ss = ss.toUpperCase() ;
+	    		$("p").each(function(i,ct){
+		    		var skey = $(this).attr("data-search-key").toUpperCase() ;
+		    		console.log(skey)
+		    		if(skey.indexOf(ss) < 0 ){
+		    			$(this).hide();
+		    		}else{
+		    			$(this).show();
+		    			fg = true ;
+		    		}
+		    	}) ;
+		    	if(!fg){
+		    		$(".nodata").show() ;
+		    	}else{
+		    		$(".nodata").hide() ;
+		    	}
+		    	$(".city-letter").hide() ;
+		    	$(".hotcity").hide() ;
+		    	$(".letter").hide();
+	    	}else{
+	    		$("p").show();
+	    		$(".hotcity").show() ;
+	    		$(".letter").show();
+	    		$(".city-letter").show() ;
+	    		$(".nodata").hide() ;
+	    	}
+	    	
+	    	
+	    	
+	    	
+	    	
+	    }) ;
+	}
+		    document.addEventListener("backpressed",function(){
+			closeSelf();
+		}, false);
+	function closeSelf(){
+		//alert("new");
+//		try{
+//			window.parent.layclose("citypicker");
+//		}catch(e){
+//			alert(e);
+//			alert(window.parent);
+//		}
+//alert(document.referrer);
+		backToOpen();
+	}
+	
+	function backToOpen(citycode,cityname){
+		var returnUrl = getUrlParam("returnUrl");
+		if(returnUrl){
+			var returnurl_full = returnUrl + window.location.search ;
+			if(citycode){
+				returnurl_full = setUrlParam(returnurl_full,"cityCode",citycode);
+			}
+			if(cityname){
+				returnurl_full = setUrlParam(returnurl_full,"cityName",cityname);
+			}
+			//alert(returnurl_full);
+			window.open(returnurl_full,"_self");
+		}
+		
+	}
+
+	
+	init();
+	</script>
+	
+</html>

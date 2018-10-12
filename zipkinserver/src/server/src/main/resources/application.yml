@@ -1,0 +1,18 @@
+spring: 
+  application:
+    name: mapps-zipkinserver     
+
+zipkin:
+  storage:
+    type: mysql
+    mysql: 
+      host: 192.168.160.72
+      username: zipkin
+      password: FHuma025
+      db: zipkin #selftest
+
+server: 
+  port: 9411
+  
+logging:
+  path: logs

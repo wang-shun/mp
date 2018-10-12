@@ -1,0 +1,41 @@
+<% for(var i=0,roomData; roomData=listData[i++];) { %>
+    <div class="SID-BtnPlanDetail list-li underline" id="<%= roomData.reservedId %>">
+        <div class="list-container">
+            <div style="margin-bottom: 4px;">
+                <span style="font-size: 16px;max-width:190px;display:-webkit-inline-box;-webkit-box-orient:vertical;overflow:hidden;-webkit-line-clamp:1;"><%=roomData.roomName%></span>
+                <% if(roomData.status==1){%>
+                <span class="mark-warn">准备中</span>
+                <% }else if(roomData.status==2){%>
+                <span class="mark-success">使用中</span>
+                <% }else if(roomData.status==3){ %>
+                <span class="mark-disable">已结束</span>
+                <% }else if(roomData.status=="a"){%>
+                <span class="mark-info">待审批</span>
+                <% }else if(roomData.status=="r"){%>
+                <span class="mark-cancel">未批准</span>
+                <% }else{ %>
+                <span class="mark-disable">已取消</span>
+                <% } %>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-file color-primary"></i>
+                <p class="list-font"><%=roomData.meetingName%></p>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-time color-primary"></i>
+                <p class="list-font"><%=roomData.reservedDate%> <%=roomData.reservedStartTime%>-<%=roomData.reservedEndTime%></p>
+            </div>
+        </div>
+        <div>
+            <% if(roomData.status==1 || roomData.status=="a"){%>
+            <a style="width:50px;height:26px;border-radius:3px;" class="SID-BtnCancel button disabled outline" data-reservedId="<%=roomData.reservedId%>" data-status="1">取消</a>
+            <% }else if(roomData.status==2){ %>
+            <a style="width:50px;height:26px;border-radius:3px;" class="SID-BtnFinsh button disabled outline" data-reservedId="<%=roomData.reservedId%>" data-status="2">结束</a>
+            <% }else if(roomData.status==3){%>
+            <a style="width:50px;height:26px;border-radius:3px;" class="SID-BtnDel button cancel outline" data-reservedId="<%=roomData.reservedId%>" data-status="3">删除</a>
+            <% }else{ %>
+            <a style="width:50px;height:26px;border-radius:3px;" class="SID-BtnDel button cancel outline" data-reservedId="<%=roomData.reservedId%>" data-status="4">删除</a>
+            <% } %>
+        </div>
+    </div>
+<% } %>

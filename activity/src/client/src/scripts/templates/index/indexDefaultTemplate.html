@@ -1,0 +1,22 @@
+<!--列表-->
+<% for(var i=0,li; li=data[i++];) { %>
+<div class="card bordered SID-actDiv SID-Index-Li" data-actId="<%=li.id%>">
+    <div class="card-photo underline" data-actId="<%=li.id%>" style="background-image: url(<%=imgPath%>/<%=li.defaultImage%>)">
+    	<% if (li.enterFlag == 1) { %>
+    	<span class="tagline top right" style="display:none;"><span>可报名</span></span>
+    	<% } %>
+    </div>
+    <div class="inputbox" style="padding: 10px 12px 0 12px;">
+        <div class="box-flex-1 card-title"><%- li.actTitle%></div>
+        <small style="color: #9e7eff;"><%=new Date(li.actStartTime).format("yyyy-MM-dd")%></small>
+    </div>
+    <div class="inputbox" style="padding: 5px 12px 10px 12px;">
+    	<i class="icon size16 icon-position block" style="color: #9e7eff;"></i>
+        <small class="box-flex-1"><%=li.actAddress%></small>
+        <small>报名人数: <%=li.enterNum%>/<%if(li.numLimit==999999999){%>无限制<%}else{%><%=li.numLimit%><%}%></small>
+    </div>
+    <div class="SID-Index-Del" data-actId="<%=li.id%>" style="position: absolute;display:none;-webkit-box-align:center;-webkit-box-pack:center;top:0;right: 0;color:white;width: 32px;height: 32px;background-color: rgba(0,0,0,.4)">
+        <i class="icon icon-del-fill size20"></i>
+    </div>
+</div>
+<% } %>

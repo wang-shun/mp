@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>酒店查询</title>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=yes">
+		
+		
+		
+		<script src="scripts/lib/mplus/mplus.js"></script>
+		<script src="scripts/lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/layui/layui.all.js" ></script>
+		<script type="text/javascript" src="scripts/lib/moment/moment-with-locales.js" ></script>
+		<script type="text/javascript" src="scripts/baseModel.js?v=1" ></script>
+		<script type="text/javascript" src="scripts/lib/arttemplate/template.js" ></script>
+		<script type="text/javascript" src="scripts/templatehelp.js" ></script>
+		<script type="text/javascript" src="scripts/lib/iscroll/iscroll.js" ></script>
+		
+		<script type="text/javascript" src="scripts/common.js?v=1" ></script>
+		<script type="text/javascript" src="scripts/lib/mui/mui.min.js" ></script>
+		
+		<link rel="stylesheet" href="scripts/lib/mui/mui.css">
+		
+		
+	    <link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome.css">
+	    <link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome-animation.min.css">
+		<link rel="stylesheet" href="scripts/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style/trip.css?v=1">
+		<link rel="stylesheet" href="scripts/lib/layui/css/layui.css">
+	</head>
+	
+	<body class="bodybg" >
+	<section id="s1">
+		<header>
+		<div class="titlebar">
+			<a href="#" onclick="back()">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</a>
+			<h1 class="titlebar-title text-center">酒店列表</h1>
+			<a href="#" onclick="ex(true)">
+				<i class="fa fa-none fa-lg"></i>
+			</a>
+		</div>
+		</header>
+			<div class="panel panel-default panel-trip trip-margin10">
+				<div class="panel-heading" id="citypk">
+					<i class="fa fa-map-marker fa-lg faa-burst"></i>
+					<input type="text" id="citycontent" readonly="true" placeholder="定位中" />
+					<span><i class="fa fa-exchange fa-lg"></i></span>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="date-panel">
+							<span>入住日期</span>
+							<span id="time1">&nbsp;</span>
+						</div>
+						<div id="days" class="date-tip">&nbsp;</div>
+						<div  class="date-panel">
+							<span>离店日期</span>
+							<span id="time2">&nbsp;</span>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			
+			<div class="tripSearchBar clearfix">
+				<ul class="nav nav-pills">
+				  <li style="width: 24%;"><a href="#" onclick="showSearchDiv(1)">排序 <i class="fa fa-caret-down" aria-hidden="true"></i></a></li>
+				  <li style="width: 27%;"><a href="#" onclick="showSearchDiv(2)">价格/品牌 <i class="fa fa-caret-down" aria-hidden="true"></i></a></li>
+				  <!--<li style="width: 20%;"><a href="#" onclick="showSearchDiv(3)">品牌 <span class="caret"></span></a></li>-->
+				  <li style="width: 27%;"><a href="#" onclick="showSearchDiv(4)">位置/区域<i class="fa fa-caret-down" aria-hidden="true"></i></a></li>
+				  <li style="width: 20%;">
+				  		<a href="#" onclick="reloadList()" >
+				  			<i class="fa fa-check fa-lg"></i>
+				  		</a>
+				  </li>
+				</ul>
+			</div>
+			
+			<div id="searchDiv1" class="panel searchDiv" style="display: none;">
+				<button type="button" group="sort" value="DISTANCE ASC" class="btn btn-search selected">距离最近</button>
+				<button type="button" group="sort" value="advanceprice ASC" class="btn btn-search-5">价格低到高</button>
+				<button type="button" group="sort" value="advanceprice DESC" class="btn btn-search-5">价格高到低</button>
+			</div>
+			<div id="searchDiv2" class="panel searchDiv" style="display: none;">
+				
+				<span>价格</span>
+				<button type="button" group="price" value="" class="btn btn-search selected">所有</button>
+				<button type="button" group="price" value="0-200" class="btn btn-search">200以下</button>
+				<button type="button" group="price" value="200-300" class="btn btn-search">200-300</button>
+				<button type="button" group="price" value="300-500" class="btn btn-search">300-500</button>
+				<button type="button" group="price" value="500-0" class="btn btn-search">500以上</button>
+				</br>
+				<span>星级</span>
+				<button type="button" group="level" value="" class="btn btn-search selected">所有</button>
+				<button type="button" group="level" multiple value="1" class="btn btn-search">经济型</button>
+				<button type="button" group="level" multiple value="2" class="btn btn-search">二星</button>
+				<button type="button" group="level" multiple value="3" class="btn btn-search">三星/舒适</button>
+				<button type="button" group="level" multiple value="4" class="btn btn-search">四星/高档</button>
+				<button type="button" group="level" multiple value="5" class="btn btn-search">五星/豪华</button>
+				<span>品牌</span>
+			</div>
+			<div id="searchDiv3" class="panel searchDiv" style="display: none;">
+				
+			</div>
+			<div id="searchDiv4" class="panel searchDiv" style="display: none;">
+				<span>位置</span>
+				<div class="container">
+				<input type="text" id="keywds" class="trip-form-control" style="margin: 5px 0px;" placeholder="酒店名称/地址" />
+				</div>
+				<span>行政区</span>
+				<div id="cityAreaContent"></div>
+			</div>
+			<div class="searchContent">
+				<ul class="nav" id="hotellist">		  
+				</ul>
+			</div>
+		<div id="nodata" class="nodata" style="display:none;"><i class="fa fa-coffee fa-lg"></i> 暂无数据 </div>
+		<div id="loadingTip" class="bottomLoading" style="display:none;">
+			<i class="fa fa-spinner faa-spin animated"></i> 加载中...
+		</div>
+	</section>
+	
+	<section id="s2" style="display: none;">
+	<header>
+		<div class="titlebar">
+			<a href="#" onclick="backToList()">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</a>
+			<h1 class="titlebar-title text-center">酒店详情</h1>
+			<a href="#">
+				<i class="fa fa-none fa-lg"></i>
+			</a>
+		</div>
+		</header>
+		<div id="htmlcontent" style="display:none">
+		<div class="imgWall">
+			<a class="imgBtn btn btn-default"  style="display: none;" onclick="showImg()"></a>
+			
+			<div class="layui-carousel" id="tripcarousel" style="width: 100%;">
+			  <div carousel-item="" id="carousel_content">
+			  	
+			  </div>
+			</div>
+		</div>
+		
+		<div class="panel tripform"  id="hotelContent">
+			
+		</div>
+		
+		<div class="panel tripform"  id="roomContent" style="width: 100%;margin-bottom: 0px;">
+			
+		</div>
+		</div>
+		
+	</section>
+	
+	<section id="s3" style="display: none;">
+		<header>
+		<div class="titlebar">
+			<a href="#" onclick="backToDetail()">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</a>
+			<h1 class="titlebar-title text-center">预订</h1>
+			<a href="#">
+				<i class="fa fa-none fa-lg"></i>
+			</a>
+		</div>
+		</header>
+		<div class="panel panel-default trip-margin10">
+			<div class="panel-body titleContent" id="titleContent">
+				
+			</div>
+		</div>
+		
+		<div class="panel panel-default bookContentPanel">
+			<div class="panel-body" id="bookContent">
+				
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<textarea placeholder="需要什么可以在这里备注告诉我们" id="remark" rows="3"  class="bookremark"></textarea>
+		</div>
+		
+		
+		<div class="panel panel-default " >
+			
+			<div class="panel-body payment">
+				<i class="fa fa-credit-card-alt fa-2x"></i>
+				<div>到店支付<font></font> </div>
+				<i class="fa fa-check fa-lg"></i>
+			</div>
+		</div>
+		
+		<div class="panel panel-default tripbottom" >
+			
+			<div class="panel-body" style="color:#CCCCCC;border-bottom:1px solid #F1F1F1">
+				当前显示价格为首日房价，价格随日期可能会有波动，请注意确认。
+			</div>
+			<ul class="nav" id="pricelist">
+				
+			</ul>
+		</div>
+		
+		<div class="panel" style="width: 100%;height: 0px;">
+		</div>
+		
+		<div class="footer footer-book">
+			<div class="footer-info" id="priceContent">
+				
+			</div>
+			<div class="footer-btn" onclick="bookin()">预订
+			</div>
+		</div>
+	</section>
+	<section id="s4">
+		
+		
+	</section>
+	
+	
+	</body>
+	<script id="hotel-temp" type="text/x-handlebars-template">
+	    {{each list as value i}}
+	    <li class="listItem clearfix" >
+		  	<img alt="image" class="img-circle" src="{{value.imgUrl}}"/>
+		  	<div class="itemContent"  onclick="showHotel({{value.hotelID}})" >
+		  		<div class="itemTitle"  >{{value.hotelName}}</div>
+		  		<div class="itemTitleSed"><i class="fa fa-map-marker fa-lg"></i>{{value.addr}}</div>
+		  		<div class="itemTitleTd">
+		  			{{each value.facility as facility i}}
+		  			   {{if i>0}}|{{/if}} {{facility.name}} 
+		  			{{/each}}
+		  		</div>
+		  		<div class="itemRight">
+		  			<span style="color:#CCCCCC;font-weight: 500;font-size: 12px;float: right;">{{value.distance |getDistance:1}}</span><br/>
+		  			¥{{value.minPrice }}<span>起</span> 
+		  		</div>
+		  	</div>
+		  </li>
+	    {{/each}}
+	</script>		
+	<script id="hotelContent-temp" type="text/x-handlebars-template">
+	   	<ul class="nav">
+	   		<li class="triprow" id="detailInfo"><span class="tripcontent">{{hotel.hotelName}}</span><span class="righttrip" >详情<i class="fa fa-angle-right"></i></span></li>
+			<li class="triprow" id="mapInfo" ><span class="tripcontent">{{hotel.addr}}</span> <span class="righttrip" >地图<i class="fa fa-angle-right"></i></span></li>
+			<li class="triprow" id="callPhone" style="border-bottom: 0px;">
+				<a href="tel:{{hotel.tel}}" style="position: absolute;width: 100%;margin: 0;padding: 0;color: #000;background-color: #fff;" >
+				<span class="tripcontent">{{hotel.tel}}</span><span class="righttrip" style="top: 0;"><i class="fa fa-phone"></i><i class="fa fa-angle-right"></i></span>
+				</a>
+			</li>
+		</ul>
+	</script>
+	<script id="hoteldetail-temp" type="text/x-handlebars-template">
+	   	<div class="hotelDetail" >
+	   		<div>
+	   			{{hotel.desc}}
+	   		</div>
+	   		<div>
+				星级：{{hotel.level |getLevel:1}}
+			</div>
+	   		<div>
+				{{hotel.facility |getFacility:1}}
+			</div>
+	   	</div>
+	</script>
+	<script id="room-temp" type="text/x-handlebars-template">
+		<ul class="nav">
+			<li class="triprow">
+				<span class="lefttrip"><i class="fa fa-calendar fa-lg"></i></span>
+				{{beginDate}} - {{endDate}} (首日房价)
+				<span class="righttrip" id="datetips">住{{total}}晚
+					<!--<i class="fa fa-angle-right"></i>-->
+				</span>
+			</li>
+		
+	    {{each roomType as value i}}
+	   	<li class="roomrow">
+	   		
+	   		<div class="roomleft" onclick="showRoomDetail({{value.rmTypeID}})" >
+	   			<img src="{{value.imgUrl |getRmTyImg:1 }}" />
+	   		</div>
+	   		<div class="roomcenter" onclick="showPriceList({{value.rmTypeID}})">
+	   			<div class="roomname">{{value.rmTypeName}} </div>
+	   			<div class="otherinfo1">{{value.otherInfo}}</div>
+	   		</div>
+	   		<div class="roomright">
+	   			<span class="">¥ {{value.rmTypeID |getSportPrice:fdate}}
+	   				<button class="btn btn-warning" onclick="booking({{value.rmTypeID}})">预订</button>
+	   			</span>
+	   		</div>
+	   	</li>
+	   	<li id="price-{{value.rmTypeID}}" style="display: none;"></li>
+	    {{/each}}
+	    </ul>
+	</script>
+	<script id="roomDetail-temp" type="text/x-handlebars-template">
+	<div class="roomDetail" >	
+		<div class="roomDetail_title1">
+			{{value.rmTypeName}}
+   		</div>
+   		<div class="imgWall" >
+   			<img style="width: 100%;" src="{{value.imgUrl |getRmTyImg:1 }}" />
+   		</div>
+   		<div class="detailContent">
+			<div class="contentLeft">门市价：</div>
+			<div class="contentRight">¥ <span style="text-decoration: line-through;">{{status.rackPrice}}</span></div>
+		</div>
+		<div class="detailContent">
+			<div class="contentLeft">到付价：</div>
+			<div class="contentRight">¥ {{status.spotPrice}} (首日房价 {{date}})
+			</div>
+		</div>
+		<div class="detailContent">
+			<div class="contentLeft">房间剩余：</div>
+			<div class="contentRight">{{status.saleable}}</div>
+		</div>
+		<div class="detailContent">
+			<div class="contentLeft">服务：</div>
+			<div class="contentRight">{{value |getOtherInfo:1 }}	</div>
+		</div>
+		<div class="detailContent">
+			<div class="contentLeft">房间设施：</div>
+			<div class="contentRight">{{value.otherInfo }}	</div>
+		</div>
+   		
+   	</div>
+	</script>
+	<script id="priceList-temp" type="text/x-handlebars-template">
+		<ul class="nav pricecontent">
+	    {{each statuss as value i}}
+	   	<li class="pricerow">
+	   		<i class="fa fa-calendar-check-o"></i>
+	   		<span style="margin: 0px 10px;">{{value.endOfDay |getTimeStr:2}}</span>
+	   		<span style="margin: 0px 10px ;">房间：{{value.saleable}}</span>
+	   		<span style="margin: 0px 10px ;float:right">¥ {{value.spotPrice}}</span>
+	   		
+	   	</li>
+	    {{/each}}
+	    </ul>
+	</script>
+		
+	<script id="title-temp" type="text/x-handlebars-template">
+		<div class="title1">{{hotelName}}</div>
+		<div class="title3">{{rmTypeName}}  {{roomDesc}}</div>
+		<div class="title2">{{beginDate}} 入住 - {{endDate}} 离店    <span>共{{totalNight}}晚</span></div>
+	</script>
+	<script id="info-temp" type="text/x-handlebars-template">
+		<div class="detailContent">
+			<div class="contentLeft">入住时间：</div>
+			<div class="contentRight">{{beginDate}} - {{endDate}} </div>
+		</div>
+		<div class="detailContent">
+			<div class="contentLeft">早餐：</div>
+			<div class="contentRight">
+				{{if hasBreakfast>=1 }}
+					<span class="label label-success">含早</span>
+				{{/if}}
+				{{if hasBreakfast==0 }}
+					无
+				{{/if}}
+				
+			</div>
+		</div>
+		<div class="detailContent"> 
+			<div class="contentLeft">房间数量：</div>
+			<div class="contentRight">
+				
+				<div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='{{limit}}'>
+				  <button class="mui-btn mui-numbox-btn-minus" style="line-height: normal;" type="button">-</button>
+				  <input class="mui-numbox-input" type="number"   value="{{roomcount}}"  id="roomcount"/>
+				  <button class="mui-btn mui-numbox-btn-plus" style="line-height: normal;" type="button">+</button>
+				</div>
+				(剩余：{{limit}})
+				<!--<input id="roomcount" class="trip-form-control" style="height: 35px;" type="number" value="{{roomcount}}"></input>-->
+			</div>
+		</div>
+		<div class="detailContent">
+			<div class="contentLeft">入住人：</div>
+			<div class="contentRight"><input id="contactname" class="trip-form-control" style="height: 35px;" type="text" value="{{contactname}}"></input></div>
+		</div>
+		<div class="detailContent">
+			<div class="contentLeft">手机号：</div>
+			<div class="contentRight"><input id="contactphone" class="trip-form-control" style="height: 35px;" type="text" value="{{contactphone}}"></input></div>
+		</div>
+	</script>
+	<script id="price-temp" type="text/x-handlebars-template">
+		¥ {{price1}} <span> 门市价 ¥ {{price2}}<span>
+	</script>
+	<script id="priceList2-temp" type="text/x-handlebars-template">
+		<ul class="nav pricecontent">
+	    {{each statuss as value i}}
+	   	<li class="pricerow">
+	   		<i class="fa fa-calendar-check-o"></i>
+	   		<span style="margin: 0px 10px;">{{value.endOfDay |getTimeStr:2}}</span>
+	   		<span style="margin: 0px 10px ;float:right">¥ {{value.spotPrice}}</span>
+	   		
+	   	</li>
+	    {{/each}}
+	    </ul>
+	</script>
+	
+	
+	<script type="text/javascript">
+	
+		function showPage(type){
+			
+			layer.closeAll() ;
+			
+			$("section").each(function(){
+				var id = $(this).attr("id");
+				if(id =="s"+type){
+					$(this).show();
+				}else{
+					$(this).hide();
+				}
+			});
+			_showPage = type ;
+			
+			
+			if(type == "1"){
+				//console.log(_scroll+"”");
+				setTimeout(function(){
+					window.scrollTo(0,_scroll) ;
+					console.log(_scroll);
+				}, 100);
+			}else{
+				setTimeout(function(){
+					window.scrollTo(0,0) ;
+				}, 100);
+			}
+		}
+	
+		//记录当前页码，每页记录数
+		var pageIndex = 1 ,pageSize = 10;
+		var beginDate,endDate,totalNight;
+		var price1="",price2="",sort="",districtCode="",brand="",cityCode="",cityName,cityCode,level;
+		var _paramCache ={};
+		var error_ct = 0 ;
+		var datepick,citypicker ;
+		var lat,lng,searchKey,hotellevel;
+		
+		function reloadList(){
+			pageIndex = 1 ;
+			pageSize = 10;
+			loadHotelList() ;
+		}
+		
+		function loadHotelList(efg){
+			
+			//return ;
+			showLoading(pageIndex);
+			closeSearchDiv();
+			//$("#loadingTip").show();
+			
+			//获取日期查询条件
+			
+			//获取页面的查询条件
+			var changed = false ;
+			$(".searchDiv").find("button.selected").each(function(){
+				var el = $(this);
+				var group = el.attr("group");
+				var val = el.val();
+//				if(!val){
+//					return ;
+//				}
+				
+				if(group == "price"){
+					
+					if(!val){
+						price1 = "" ;
+						price2 = "" ;
+					}else{
+						var prices = val.split("-");
+						if(prices[0] != 0){
+							price1 = prices[0] ;
+						}
+						if(prices[1] != 0){
+							price2 = prices[1] ;
+						}
+					}
+					
+					if(_paramCache.price1 != price1 || _paramCache.price2 != price2  ){
+						changed = true ;
+					}
+					
+				}else if(group == "brand"){
+					brand = val ;
+					if(_paramCache.brand != brand){
+						changed = true ;
+					}
+				}else if(group == "sort"){
+					
+					sort = val ;
+					if(_paramCache.orderByField != sort){
+						changed = true ;
+					}
+				}else if(group == "districtCode"){
+					
+					districtCode = val ;
+					if(_paramCache.districtCode != districtCode){
+						changed = true ;
+					}
+				}else if(group =="level"){
+					level = val ;
+					if(_paramCache.level != level){
+						changed = true ;
+					}
+				}
+			});
+			
+			if(changed){
+				pageIndex = 1 ;
+				pageSize = 10 ;
+			}
+			
+			//test st
+			//cityCode = "" ;
+			
+			var param = {
+							beginDate:beginDate,
+						  	endDate:endDate,
+							page:pageIndex,
+							rows:pageSize,
+							price1:price1,
+							price2:price2,
+							brand:brand,
+							districtCode:districtCode,
+							cityCode:cityCode,
+							lat:lat ,
+							lng:lng ,
+							level:level ,
+							keywords:$("#keywds").val(),
+							orderByField:sort
+						} ;
+			_paramCache = param ;
+			
+			model.api("mapps.trip.queryhotels","1.0",param,efg).then(function(data){
+				//$("#loadingTip").hide();
+				closeLoading(pageIndex) ;
+				if(data){
+					
+					//无数据
+					if(data.recordCount == 0){
+						$("#hotellist").html("");
+						$("#nodata").show();
+						window._list_loadFlag = false;
+					}else{
+						$("#nodata").hide();
+						
+						if(pageIndex == 1){
+							$("#hotellist").html("");
+						}
+						//加载模板
+						var tempData = {
+						    list: data.hotels
+						};
+						var _html = template('hotel-temp',tempData);
+						
+						$("#hotellist").append(_html) ;
+						 
+						if(pageIndex < data.pageCount){
+						 	pageIndex ++ ;
+						 	window._list_loadFlag = true;
+						}else{
+							$("#hotellist").append('<li style="text-align: center;color:#ccc;height：30px;line-height: 30px;">没有更多的酒店数据了</li>') ;
+							window._list_loadFlag = false;
+						}
+					}
+					error_ct = 0 ;
+				}else{
+					//请求失败 可以重新发起请求
+					window._list_loadFlag = true;
+					if(pageIndex == 1){
+						//如果是第一页，自动重新发起请求 最多重试1次
+						window._list_loadFlag = false;
+						if(error_ct < 1 ){
+							error_ct ++ ;
+							loadHotelList() ;
+						}
+					}
+					
+				}
+				 //window._list_loadFlag = true;
+				 //layer.close(index);
+			}) ;
+			
+		}
+	
+		function init(){
+			
+			//var loading = layer.load(2);//012
+			
+	    	window._list_loadFlag = true;
+	    	$(window).scroll(function() {
+	    		
+	    		if($("#s1").css("display") == "none"){
+	    			return ;
+	    		}
+	    		
+	       	    var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+	           
+	            if (($(document).height() <= totalheight)&&window._list_loadFlag)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+	            {
+	            	window._list_loadFlag = false;
+	            	loadHotelList();
+	            }
+	        });
+	        
+	        //获取页面参数
+	        //alert(window.location.search);
+	        beginDate = getUrlParam("beginDate");
+	        endDate = getUrlParam("endDate");
+	        cityName = getUrlParam("cityName");
+	        cityCode = getUrlParam("cityCode");
+	        lat = getUrlParam("lat");
+	        lng = getUrlParam("lng");
+	        
+	        searchKey = getUrlParam("searchKey");
+	        if(searchKey){
+	        	$("#keywds").val(searchKey);
+	        }
+	        
+	        hotellevel = getUrlParam("level");
+	        if(hotellevel){
+	        	
+	        	$("#searchDiv2").find("button[group=level]").each(function(){
+	        		console.log(this);
+	        		if($(this).val() == hotellevel){
+	        			$(this).addClass("selected");
+	        		}
+	        		if($(this).val() == ""){
+	        			$(this).removeClass("selected");
+	        		}
+	        	});
+	        }
+	        //alert(lat,lng)
+	        //alert(lat+"-1-"+lng)
+	        if(beginDate && endDate){
+				//处理日期
+	        	formatDate(moment(beginDate),moment(endDate));
+			}else{
+				//设置默认时间
+				formatDate(moment(),moment().add(1,"day"));
+			}
+	        
+	        
+	        //index传了地址显示地址
+	        if(cityName){
+	        	$("#citycontent").val(cityName);
+	        }
+	        
+	        //没有定位点的时候发起定位
+        	if(!lat || !lng){
+        		$(".fa-map-marker").addClass("animated");
+        		Mplus.getLocation(function(res){
+        			
+        			lat = res.latitude;
+    				lng = res.longitude;
+        			$(".fa-map-marker").removeClass("animated");
+        			cityName = res.address ;
+					var city = res.city ;
+					//从编码库里面检索对应 的citycode 
+					//加载城市
+					if(!cityCode){
+						$.getJSON("data/city3.json", function (citys){
+				        	$.each(citys, function(i,item) {
+				        		if(city.indexOf(item.name) >= 0){
+				        			//cityName = item.name ;	
+				        			cityCode = item.code ;
+				        		}
+				        	});
+				        	
+				        });
+						$("#citycontent").val(cityName);
+					}
+		        	loadCityArea() ;
+			        
+				},function(){
+					//layer.msg("位置获取失败");
+					//$("#citycontent").val("定位失败");
+					$(".fa-map-marker").removeClass("animated");
+				})
+        	}
+	        
+	        //加载品牌
+	        $.getJSON("data/hotelbrand.json", function (data){
+	        	//console.log(data) ;
+	        	var html = '<button type="button" group="brand" class="btn btn-search selected">所有</button>\n' ;
+	        	$.each(data,function(infoIndex, info){
+	        		if(info.state == 1 ){
+	        			html +='<button type="button" group="brand" value="'+info.brandID+'" class="btn btn-search">'+info.brandName+'</button>\n' ;	
+	        		}
+	        		
+	        	}) ;
+	        	$("#searchDiv2").append(html);
+	        	$("#searchDiv2").find("button").on("click",selectSearch) ;
+	        });
+	        //加载集团
+	        
+	        
+	        //区域查询条件
+	        loadCityArea();
+	        
+	        //排序查询条件
+			$("#searchDiv1").find("button").on("click",selectSearch) ;
+	        
+	        //弹出日期选择
+			$(".date-panel").on("click",function(){
+				var url =  "datePicker.html?returnUrl=hotelList.html" ;
+				if(cityName){
+					url = setUrlParam(url,"cityName",cityName);	
+				}
+				if(cityCode){
+					url = setUrlParam(url,"cityCode",cityCode);
+				}
+				if(lat){
+					url = setUrlParam(url, "lat", lat) ;
+				}
+				if(lng){
+					url = setUrlParam(url, "lng", lng) ;
+				}
+				if(hotellevel){
+					url = setUrlParam(url, "hotellevel", hotellevel) ;
+				}
+				if(searchKey){
+					url = setUrlParam(url, "searchKey", searchKey) ;
+				}
+				window.open(url,"_self");
+			});
+			
+			//弹出城市选择
+			$("#citypk").on("click",function(){
+				var url =  "cityPicker.html?returnUrl=hotelList.html" ;
+				if(beginDate){
+					url = setUrlParam(url,"beginDate",beginDate);	
+				}
+				if(endDate){
+					url = setUrlParam(url,"endDate",endDate);
+				}
+				if(cityName){
+					url = setUrlParam(url,"cityName",cityName);	
+				}
+				if(cityCode){
+					url = setUrlParam(url,"cityCode",cityCode);
+				}
+				if(lat){
+					url = setUrlParam(url, "lat", lat) ;
+				}
+				if(lng){
+					url = setUrlParam(url, "lng", lng) ;
+				}
+				if(hotellevel){
+					url = setUrlParam(url, "hotellevel", hotellevel) ;
+				}
+				if(searchKey){
+					url = setUrlParam(url, "searchKey", searchKey) ;
+				}
+				window.open(url,"_self");
+
+			});
+			
+			//加载酒店列表
+	        loadHotelList();
+	       
+    	}
+		
+		function loadCityArea(){
+			
+			$("#cityAreaContent").html("") ;
+			$.getJSON("data/area.json", function (data){
+	        	
+	        	var html = '<button type="button" group="districtCode" class="btn btn-search selected">所有</button>' ;
+	        	$.each(data,function(infoIndex, info){
+	        		if(cityCode && info.parentcode == cityCode ){
+	        			html +='<button type="button" group="districtCode" value="'+info.code+'" class="btn btn-search">'+info.name+'</button>' ;	
+	        		}
+	        	}) ;
+	        	$("#cityAreaContent").append(html);
+	        	$("#cityAreaContent").find("button").on("click",selectSearch) ;
+	        });
+	        
+		}
+		
+		function selectSearch(){
+			var el = $(this) ;
+			var group = el.attr("group") ;
+			var groups = group.split("|");
+			
+			for(var i = 0 ; i < groups.length ; i++){
+				var gp = groups[i] ;
+				el.parent().find("button[group*="+gp+"].selected").each(function(){
+					//console.log(this);
+					$(this).removeClass("selected");
+				});
+			}
+			
+			el.addClass("selected");
+			
+		}
+		
+		var _scroll ;
+		function showHotel(hotelID){
+			
+			//记录当前scroll
+			_scroll = parseFloat($(window).scrollTop());
+			
+			detailInit(hotelID);
+		}
+		
+		var _loadingLayer ;
+		function showLoading(type){
+			if(type > 1 ){
+				$("#loadingTip").show();	
+			}else{
+				_loadingLayer = layer.load(2,{time:20000}) ;
+			}
+		}
+		
+		function closeLoading(type){
+			if(type > 1 ){
+				$("#loadingTip").hide();	
+			}else{
+				layer.close(_loadingLayer) ;
+			}
+		}
+		
+		
+		function  back(){
+			window.open("index.html","_self");
+		}
+		
+		//日期输出
+		function formatDate(date1,date2){
+			$("#time1").html(date1.format("MM月DD日"));
+			$("#time2").html(date2.format("MM月DD日"));
+			
+			totalNight = date2.diff(date1,"day")
+			
+			$("#days").html(totalNight+"晚");
+			beginDate = date1.format("YYYY-MM-DD");
+			endDate = date2.format("YYYY-MM-DD");
+		}
+
+
+		function showSearchDiv(type){
+			$(".searchDiv").each(function(){
+				var el = $(this);
+				if(el.attr("id") == ("searchDiv"+type) && el.is(":hidden")){
+					el.show();
+				}else{
+					el.hide();
+				}
+			})
+		}
+		
+		function closeSearchDiv(){
+			$(".searchDiv").each(function(){
+				$(this).hide() ;
+			});
+		}
+	</script>
+	
+	<script type="text/javascript">
+	
+		var _rooms ;
+		var _roomTypes ;
+		var _hotelName ;
+		var _hotelID ;
+		var carousel = layui.carousel ;
+		function detailInit(hotelID){
+			
+			//清除已经加载的数据
+			$("#htmlcontent").hide();
+			$("#hotelimg").attr("src","");
+			$("#carousel_content").html("");
+			$("#hotelContent").html("");
+			$("#roomContent").html("");
+			//清除end
+			
+			var request_param = {beginDate:beginDate,endDate:endDate,hotelID:hotelID} ;
+			var _loadinglayer  = layer.load(2,{time:10000}) ;
+			
+			model.api("mapps.trip.hoteldetail","1.0",request_param,false).then(function(data){
+				
+				if(data){
+					
+					_rooms = data.roomStatus ;
+					_roomTypes = data.roomType ;
+					_hotelName = data.hotel.hotelName ;
+					_hotelID = hotelID ;
+					var hotelAddress = data.hotel.address ;
+					var phoneNum = data.hotel.tel;
+					
+//					$("#hotelimg").attr("src",data.hotel.imgUrl);
+					$("#carousel_content").append("<div><img src="+data.hotel.imgUrl+" /></div>");
+					carousel.render({
+					    elem: '#tripcarousel'
+					    ,interval: 2000
+					    ,anim: 'fade'
+					    ,width:"100%"
+					    ,height: '200px'
+					  });
+
+					var _param = {"hotel":data.hotel} ;
+					var hotellat = data.hotel.lat ;
+					var hotellng = data.hotel.lng ;
+					//显示酒店信息
+					var _html = template('hotelContent-temp',_param) ;
+					$("#hotelContent").append(_html);
+	
+					_param = {
+							  "beginDate":moment(beginDate).format("MM月DD日") ,
+							  "endDate":moment(endDate).format("MM月DD日") ,
+							  "fdate":beginDate ,
+							  "roomType":data.roomType ,
+							  "roomStatus":data.roomStatus ,
+							  "total": totalNight
+							 }
+					//显示房间信息
+					_html = template('room-temp',_param) ;
+					$("#roomContent").append(_html);
+					
+					//详情点击
+					$("#detailInfo").on("click",function(){
+						
+						var param_d = {"hotel":data.hotel} ;
+						layer.open({
+							  type: 1,
+							  shade: false,
+							  scrollbar: false,
+							  title: false, //不显示标题
+							  content:  template('hoteldetail-temp',param_d), 
+							  cancel: function(){
+							  	
+							  }
+							});
+					}) ;
+					
+					//地图点击
+					$("#mapInfo").on("click",function(){
+						mplus.openLocation({
+						    latitude: hotellat, 
+						    longitude: hotellng,
+						    name: _hotelName,
+						    address: hotelAddress ,
+						    scale: 1,
+						});
+					}) ;
+					
+					//地图点击
+					$("#callPhone").on("click",function(){
+//						alert(phoneNum);
+					}) ;
+					
+					//日期选择
+					$("#datetips").on("click",function(){
+						return ;
+						var url =  "datePicker.html?returnUrl=hotelDetail.html" ;
+						if(cityName){
+							url = setUrlParam(url,"cityName",cityName);	
+						}
+						if(cityCode){
+							url = setUrlParam(url,"cityCode",cityCode);
+						}
+						url = setUrlParam(url,"hotelID",hotelID);
+						url = setUrlParam(url,"beginDate",beginDate);
+						url = setUrlParam(url,"endDate",endDate);
+						window.open(url,"_self");
+
+					}) ;
+					
+					
+					loadHotelImg(hotelID);
+					
+					//关闭加载层
+					layer.close(_loadinglayer);
+					
+					$("#htmlcontent").show();
+					
+//					$("#s1").hide();
+//					$("#s2").show();
+					showPage(2);
+					
+					//显示第一个房型 价格列表
+					showPriceList(_roomTypes[0].rmTypeID);
+					
+				}else{
+					
+					layer.close(_loadinglayer);
+//					$("#s2").hide();
+//					$("#s1").show();
+					//showPage(1);
+//					layer.msg("数据加载失败，点击 【重试】 重新加载",function(){
+//						$(".reloadBtn").show();
+//					});
+					
+				}
+				
+							
+			}) ;
+		}
+		
+		
+		//获取某一天的房态数据
+		function getRoomStatus(tpid,d){
+			//return roomStatus ;
+			var format = "YYYY-MM-DD" ;
+			
+			for(var i=0 ; i<_rooms.length ; i++){
+				var room  = _rooms[i] ;
+				var str = moment(room.endOfDay).format(format) ;
+				if(d == str && tpid == room.rmTypeID){
+					return room ;
+				}
+			}
+			return null ;
+		}
+		//获取某个房型的房态数据集合
+		function getRoomStatusList(tpid){
+			var status = []
+			var format = "YYYY-MM-DD" ;
+			for(var i=0 ; i<_rooms.length ; i++){
+				var room  = _rooms[i] ;
+				if(tpid == room.rmTypeID){
+					status.push(room) ;
+				}
+			}
+			return status ;
+		}
+
+		function reloadRoomStatus(){
+
+			var param = {beginDate:beginDate,endDate:beginDate,hotelID:hotelID} ;
+			model.api("mapps.trip.roomstatus","1.0",param,false).then(function(data){
+				
+			});
+		}
+		
+		var imgDatalist ;
+		function loadHotelImg(hotelID){
+
+			var param = {hotelID:hotelID} ;
+			
+			model.api("mapps.trip.hotelimages","1.0",param,false).then(function(data){
+//				alert(data);
+				if(!data || data.length <= 0){
+					return ;
+				}
+				var length = data.length ;
+				$(".imgBtn").html(length+"张").show();
+				imglist = [] ;
+				for(var i=0 ; i <length ; i++){
+					var d = {
+						"alt":"酒店相册" ,
+						"pid":i ,
+						"src" : data[i].imgUrl,
+						"thumb":  data[i].imgUrl
+					}
+					imglist.push(d);
+				}
+				
+				imgDatalist = {
+					title:'酒店相册',
+					"id": 123, //相册id
+  					"start": 0, //初始显示的图片序号，默认0
+					data:imglist
+				}
+				for(var i=0; i<imglist.length ;i++  ){
+					var img = imglist[i] ;
+					if(i>=3){
+						break ;
+					}
+					$("#carousel_content").append("<div><img src="+img.src+" /></div>");
+				}
+				
+				//改变下时间间隔、动画类型、高度
+				 carousel.render({
+				    elem: '#tripcarousel'
+				    ,interval: 2000
+				    ,anim: 'fade'
+				    ,width:"100%"
+				    ,height: '200px'
+				 });
+				
+			}) ;
+			
+		}
+		
+		function showImg(){
+			if(!imgDatalist){
+				return ;
+			}
+			//alert(imglist);
+			layer.photos({
+			    photos: imgDatalist
+			    ,anim: 2 //0-6
+			});
+		}
+		
+		function booking(rmTypeID){
+			//校验房间是否可定
+			var roomStatusList = getRoomStatusList(rmTypeID) ;
+			var rommTp = getRoom(rmTypeID) ;
+			var roomStatus = getRoomStatus(rmTypeID,beginDate);
+			
+			var hasBreakfast = 0 ;
+			//var limit = 0 ;
+			var amountPrice = 0 ;
+			//判断是否含早
+			var tipmsg = "" ;
+			for(var i = 0 ; i < roomStatusList.length ; i++){
+				var ss = roomStatusList[i] ;
+				if(i==0){
+					limit = ss.saleable ;
+				}else if(limit > ss.saleable){
+					limit = ss.saleable ;
+				}
+				
+				if(ss.saleable == 0){
+					tipmsg +=moment(ss.endOfDay).format("【MM月DD日】");
+				}
+				
+				amountPrice +=  ss.spotPrice ;
+			}
+
+			if(limit == 0 ){
+				tipmsg += "剩余房间数量不足，无法预定" ;
+				layer.msg(tipmsg);
+				return ;
+			}
+
+			for(var i = 0 ; i < rommTp.extends.length ; i++){
+				var ext = rommTp.extends[i] ;
+				if(ext.code == "Breakfast"&& ext.value >= 1){
+					hasBreakfast = 1 ;
+				}
+			}
+			
+			
+			bookInit(rmTypeID,rommTp.rmTypeName,rommTp.rmTypeName,roomStatus.spotPrice,roomStatus.rackPrice,limit,amountPrice,hasBreakfast);
+
+		}
+		
+		function showRoomDetail(id){
+			layer.closeAll() ;
+			
+			var roomType = getRoom(id) ;
+			var status = getRoomStatus(id,beginDate) ;
+		
+			if(status){
+				var _param = {"value":roomType, "status":status,"date":beginDate } ;
+				layer.open({
+				  type: 1,
+				  shade: false,
+				  title: false, //不显示标题
+				  scrollbar: false,
+				  content: template('roomDetail-temp',_param),
+				  cancel: function(){
+				  }
+				}); 
+			}
+		}
+		
+		function showPriceList(id){
+			layer.closeAll() ;
+			var hideFlag = $("#price-"+id).is(":hidden")  ;
+			var html = $("#price-"+id).html() ;
+			//如果存在切加载 则显示
+			if(hideFlag && html!= "" ){
+				$("#price-"+id).show(300);
+				return ;
+			}else if( html != ""){
+				//存在 切显示  则 隐藏
+				$("#price-"+id).hide(300);
+				return ;
+			}else{
+				//加载
+				var roomType = getRoom(id) ;
+				var statuss = getRoomStatusList(id) ;
+				var _param = {"value":roomType, "statuss":statuss,"beginDate":beginDate,"endDate":endDate } ;
+				var _html = template('priceList-temp',_param) ;
+
+				$("#price-"+id).append(_html);
+				$("#price-"+id).show(300);
+				
+			}
+			
+			
+		}
+		
+		function getRoom(id){
+			for(var i = 0 ; i < _roomTypes.length ; i++){
+				if(id == _roomTypes[i].rmTypeID){
+					return _roomTypes[i] ;
+				}
+			}
+			return null ;
+		}
+		
+		function  backToList(){
+//			$("#s1").show().delay(300);
+//			$("#s2").hide();
+			showPage(1);
+		}
+		
+
+		function fomatFloat(src,pos){ 
+		 	return Math.round(src*Math.pow(10, pos))/Math.pow(10, pos); 
+		} 
+
+	</script>
+	
+	<script type="text/javascript" >
+		
+		var _bookflg = false ;
+		var _saleable = 0 ;
+		var _amountPrice = 0 ;
+		var _rmTypeID ,_hasBreakfast,_price1;
+		function  backToDetail(){
+			showPage(2);
+		}
+		
+		function bookInit(rmTypeID,rmTypeName,roomDesc,price1,price2,saleable,amountPrice,hasBreakfast){
+			
+			_saleable = saleable ;
+			_amountPrice = amountPrice ;
+			_hasBreakfast = hasBreakfast ;
+			_rmTypeID = rmTypeID ;
+			_price1 = price1 ;
+			//清除数据
+			$("#titleContent").html("");
+			$("#bookContent").html("");
+			$("#priceContent").html("");
+			$("#pricelist").html("");
+			//清除end
+			
+			//页面加载
+			var _param = {"beginDate":beginDate ,"endDate":endDate,"roomDesc":rmTypeName,"hotelName":_hotelName,"totalNight":totalNight,"rmTypeName":rmTypeName} ;
+			var _html = template('title-temp',_param) ;
+			$("#titleContent").append(_html);
+			
+			_param = {"beginDate":beginDate ,"endDate":endDate,"roomcount":1,"contactname":"","contactphone":"","hasBreakfast":hasBreakfast,"limit":saleable} ;
+			_html = template('info-temp',_param) ;
+			$("#bookContent").append(_html);
+			
+			_param = {"price1":price1 ,"price2":price2} ;
+			_html = template('price-temp',_param) ;
+			$("#priceContent").append(_html);
+
+			mui(".mui-numbox").numbox();
+
+			showPage(3);
+			
+			//获取用户信息
+			model.api("mapps.trip.userinfo","1.0",{},false).then(function(data){
+				//alert(data)
+				if(data){
+					if($("#contactname").val() == ""){
+						$("#contactname").val(data.userName) ;	
+					}
+					if($("#contactphone").val() == ""){
+						$("#contactphone").val(data.phoneNum) ;
+					}
+				}else{
+	
+				}
+			}) ;
+			
+			
+			var request_param = {
+				hotelID :　_hotelID,
+				roomTypeID　:　rmTypeID,
+				beginDate　:　beginDate,
+				endDate　:endDate　
+			}
+			model.api("mapps.trip.roomstatus","1.0",request_param,false).then(function(data){
+					var cdata = [] ;
+					for(var i= 0 ; i < data.length ; i++){
+						if(data[i].rmTypeID == rmTypeID){
+							cdata.push(data[i]);
+						}
+					}
+					var _param = {"statuss":cdata} ;
+					var _html = template('priceList2-temp',_param) ;
+					$("#pricelist").append(_html);
+					
+				}) ;
+		}
+		
+		//酒店预订
+		function bookin(){
+			
+			var remark = $("#remark").val();
+			var contactname = $("#contactname").val() ;
+			var contactphone = $("#contactphone").val() ;
+			var roomcount = $("#roomcount").val() ;
+			if(!roomcount){
+				layer.msg("房间数不正确") ;
+				return ;
+			}
+			if((roomcount-_saleable)>0){
+				layer.msg("超过可预订数："+saleable) ;
+				return ;
+			}
+			if(!contactname){
+				layer.msg("入住人不能为空") ;
+				return ;
+			}
+			if(!contactphone){
+				layer.msg("手机号不能为空") ;
+				return ;
+			}
+			
+			if(_bookflg){
+				return ;
+			}
+			
+			var totalAmount = _amountPrice * roomcount;
+			
+			var btnArray = ['确定', '取消'];
+			mui.confirm("订单总额：¥"+totalAmount+"， 是否确认预订？", '', btnArray, function(e){
+				if(e.index == 0){
+					var loadindex = layer.load(2);
+					var request_param = {checkintime:beginDate,
+										 checkouttime:endDate,
+										 hotelid:_hotelID,
+										 roomtypeid:_rmTypeID,
+										 remark:remark ,
+										 contactname:contactname,
+										 contactphone:contactphone,
+										 guestsname:contactname,
+										 price:_price1,
+										 roomcount:roomcount,
+										 hotelname:_hotelName ,
+										 totalamount:totalAmount ,
+										 totalnight:totalNight,
+										 hasBreakfast:_hasBreakfast 
+										} ;
+					_bookflg = true ;
+					console.log(request_param);
+					model.api("mapps.trip.orderadd","1.0",request_param,true).then(function(data){
+						layer.close(loadindex);
+						//预订成功 返回首页
+						if(data){
+							layer.msg("预订完成！可以在我的订单中跟踪订单状态",function(){
+								window.open("index.html","_self");
+							});
+						}else{
+							//layer.msg("预订失败，请稍后重试！");
+							_bookflg = false ;
+						}
+					}) ;
+				}
+			 }) ;
+			
+		}
+		
+		
+		document.addEventListener("plusready",plusreadyFun, false);
+	    function plusreadyFun(){
+	    	document.removeEventListener("plusready",plusreadyFun);
+	        init();
+	    }
+	    
+	    document.addEventListener("backpressed",function(){
+			pressback();
+		}, false);
+		var _showPage =  1 ;
+		function pressback(){
+			if(_showPage != 1 ){
+				showPage(_showPage -1 );	
+			}else{
+				back();
+			}
+		}
+		
+	</script>
+	
+	
+	
+</html>

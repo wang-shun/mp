@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单查询</title>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		<script src="scripts/lib/mplus/mplus.js"></script>
+		<script src="scripts/lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/layui/layui.all.js" ></script>
+		<script type="text/javascript" src="scripts/lib/laydate/laydate.js" ></script>
+		<script type="text/javascript" src="scripts/lib/moment/moment-with-locales.js" ></script>
+		<script type="text/javascript" src="scripts/baseModel.js" ></script>
+		<script type="text/javascript" src="scripts/lib/arttemplate/template.js" ></script>
+		<script type="text/javascript" src="scripts/lib/iscroll/iscroll.js" ></script>
+		
+		<script type="text/javascript" src="scripts/common.js" ></script>
+		
+	    <link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome.css">
+	    <link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome-animation.min.css">
+		<link rel="stylesheet" href="scripts/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style/trip.css">
+		
+	</head>
+	<body>
+		<header>
+		<div class="titlebar">
+			<a href="#" onclick="back()">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</a>
+			<h1 class="titlebar-title text-center">订单列表</h1>
+			<a href="#" onclick="ex(true)">
+				<i class="fa fa-none fa-lg"></i>
+			</a>
+		</div>
+		</header>
+			
+			<div class="tripSearchBar nomargin">
+				<ul class="nav nav-pills">
+				  <li class="col-2 selected"><a href="#" onclick="searchOrder(this,1)">全部 </a></li>
+				  <li class="col-2"><a href="#" onclick="searchOrder(this,2)">待入住 </a></li>
+				</ul>
+			</div>
+			
+			<div class="searchContent">
+				<div class="orderListContent" id="orderlist">		  
+				</div>
+			</div>
+		<div id="nodata" class="nodata" style="display:none;"><i class="fa fa-coffee fa-lg"></i> 暂无数据 </div>
+		<div id="loadingTip" class="bottomLoading" style="display:none;">
+			<i class="fa fa-spinner faa-spin animated"></i> 加载中...
+		</div>
+	</body>
+	
+	<script id="hotel-temp" type="text/x-handlebars-template">
+	    {{each list as value i}}
+	    <div class="orderListItem" >
+	    	<div class="itemTitle">
+	    		<font>订单编号</font></br>{{value.orderCode}}    
+	    		<font>{{value.orderStatus |getOrderState:1}}</font>
+	    	</div>
+	    	
+	    	<div class="itemContent" onclick="showOrder('{{value.orderID}}')">
+	    		<div style="font-weight: 600;padding: 5px 0px;">{{value.hotelName}}</div>
+	    		
+	    		<div style="color: #ccc;padding: 5px 0px;">
+	    		下单时间：{{value.createTime |getTimeStr:1}}
+	    		
+	    		</div>
+	    		<div >
+	    		总金额：&nbsp; <font style="color: orange;">¥{{value.totalAmount}}</font>
+	    		</div>
+	    	</div>
+	    	<!--
+            <img alt="image" class="img-circle" src="{{value.hotelImg}}"/>
+		  	<div class="itemContent" >
+		  		<div class="itemTitle">{{value.hotelName}}</div>
+		  		<div class="itemTitleSed"><i class="fa fa-map-marker fa-lg"></i>{{value.hotelAddress}}</div>
+		  		<div class="itemTitleTd">
+		  			123
+		  		</div>
+		  		<div class="itemRight">¥{{value.totalAmount}}</div>
+		  	</div>
+            -->
+		  	
+		</div>
+	    {{/each}}
+	</script>
+	
+	<script>
+		
+		template.helper('getTimeStr', function(time,tp) {
+			
+		    var str = "" ;
+		    var format = "YYYY-MM-DD" ;
+		    
+		    if(tp == 1 ){
+		    	format = "YYYY-MM-DD HH:mm"
+		    }
+		    
+		    if(time){
+		    	str = moment(time).format(format) ;
+		    }
+		    return str ;
+		});
+		
+		template.helper('getOrderState', function(state,tp) {
+			
+			var str = "" ;
+		    if(state == 1){
+		    	str = "待付款"　;
+		    }else if(state == 2){
+		    	str = "本地取消"　;
+		    }else if(state == 3){
+		    	str = "待酒店确认"　;
+		    }else if(state == 4){
+		    	str = "预定成功"　;
+		    }else if(state == 5){
+		    	str = "预定失败"　;
+		    }else if(state == 100){
+		    	str = "酒店已取消"　;
+		    }else if(state == 101){
+		    	str = "noshow"　;
+		    }else if(state == 102){
+		    	str = "在住"　;
+		    }else if(state == 103){
+		    	str = "离店"　;
+		    }else if(state == 104){
+		    	str = "已评论"　;
+		    }
+		    return str ;
+		});
+		//记录当前页码，每页记录数
+		var pageIndex = 1 ,pageSize = 5;
+		var orderState;
+		var error_ct = 0 ;
+		
+		
+		function reloadList(){
+			pageIndex = 1 ;
+			loadOrderList() ;
+		}
+		
+		function loadOrderList(efg){
+			
+			showLoading(pageIndex);
+			//$("#loadingTip").show();
+			
+			var param = {
+				orderStatus:orderState ,
+				page:pageIndex,
+				rows:pageSize
+			} ;
+
+			model.api("mapps.trip.orderlist.bt","1.0",param,efg).then(function(data){
+				//$("#loadingTip").hide();
+				closeLoading(pageIndex) ;
+				if(data){
+					//无数据
+					if(data.recordCount == 0){
+						$("#nodata").show();
+						window._list_loadFlag = false;
+					}else{
+						$("#nodata").hide();
+						
+						if(pageIndex == 1){
+							$("#orderlist").html("");
+						}
+						//加载模板
+						var tempData = {
+						    list: data.list
+						};
+						var _html = template('hotel-temp',tempData);
+						
+						$("#orderlist").append(_html) ;
+						 
+						if(pageIndex < data.pages){
+						 	pageIndex ++ ;
+						 	window._list_loadFlag = true;
+						}else{
+							$("#orderlist").append('<li style="text-align: center;color:#ccc;height：30px;line-height: 30px;">没有更多的订单数据了</li>') ;
+							window._list_loadFlag = false;
+						}
+					}
+					error_ct = 0 ;
+				}else{
+					//请求失败 可以重新发起请求
+					window._list_loadFlag = true;
+					if(pageIndex == 1){
+						//如果是第一页，自动重新发起请求 最多重试1次
+						if(error_ct < 1 ){
+							error_ct ++ ;
+							loadOrderList(true) ;
+						}
+						
+					}
+					
+				}
+				 //window._list_loadFlag = true;
+				 //layer.close(index);
+			}) ;
+			
+		}
+	
+		function init(){
+			
+			//var loading = layer.load(2);//012
+			
+	    	window._list_loadFlag = true;
+	    	$(window).scroll(function() {
+	       	    var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+	            if (($(document).height() <= totalheight)&&window._list_loadFlag)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+	            {
+	            	loadOrderList(true);
+	            	window._list_loadFlag = false;
+	           	    
+	            }
+	        });
+	    
+	        //加载订单列表
+	        loadOrderList();
+	        
+	        
+	       // layer.close(loading);
+	       
+    	}
+		
+		
+		function showOrder(orderId){
+			var url = "orderDetail.html" ;
+			url = setUrlParam(url,"orderId",orderId);
+			window.open(url,"_self" );
+		}
+		
+		var _loadingLayer ;
+		function showLoading(type){
+			if(type > 1 ){
+				$("#loadingTip").show();
+			}else{
+				_loadingLayer = layer.load(2,{time:20000}) ;
+			}
+		}
+		
+		function closeLoading(type){
+			if(type > 1 ){
+				$("#loadingTip").hide();
+			}else{
+				layer.close(_loadingLayer) ;
+			}
+		}
+		
+		function  back(){
+			window.open("index.html","_self");
+		}
+		
+		function searchOrder(obj,type){
+			
+			if($(obj).parent().hasClass("selected")){
+				return ;//重复提交不处理
+			}
+			
+			$(".selected").each(function(){
+				$(this).removeClass("selected");
+			})
+			
+			$(obj).parent().addClass("selected") ;
+			
+			if(type ==1){
+				orderState = "" ;
+			}else if(type == 2){
+				orderState = "4" ;
+			}
+			reloadList() ;
+			
+		}
+		
+		document.addEventListener("plusready",plusreadyFun, false);
+	    function plusreadyFun(){
+	    	document.removeEventListener("plusready",plusreadyFun);
+	        init();
+	    }
+		
+		document.addEventListener("backpressed",function(){
+			back();
+		}, false);
+	</script>
+	
+</html>

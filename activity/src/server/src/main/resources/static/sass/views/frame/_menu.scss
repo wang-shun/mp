@@ -1,0 +1,276 @@
+/*left*/
+.fixed-side-left{
+	width:$widthLeftMenu;
+	top:$heightHeaderTop;	
+	left: 0;
+	bottom:40px;
+	color:$fontColorMenu;
+	z-index:2;	
+	.nav-category{
+		height: 100%;
+		width: $widthLeftMenu;
+		background-color:$backgroundColorMenu;
+		float:left;		
+		box-sizing: border-box;
+		//border-right:$bordercolorWelcome 1px solid;
+		-webkit-box-shadow:0 0 10px rgba(4, 0, 0, .1); -moz-box-shadow:0 0 10px rgba(4, 0, 0, .1); box-shadow:0 0 10px rgba(4, 0, 0, .1);
+		.nav-category-list {			
+			a {
+				@extend .relative;
+				color:$buttonFontColor;
+				height:$buttonHeight;
+				line-height:20px;
+				display:block;
+				text-align:center;
+				vertical-align: middle;
+				font-size: 12px;
+				.line{
+					@extend .absolute;
+					background-color:$backgroundColorMenu;
+					width: 5px;
+					left:0;
+					top:0;
+					bottom:0;
+				}
+				span {
+					@extend %fontIconAlign;
+					font-size:$fontSizeIcon;
+					padding: 10px 0 5px 0;
+					}
+				}
+			a:hover {
+				color:$buttonFontColorH;
+				background-color:$buttonColor;
+				.line{
+					background-color:$buttonLineColorH;
+				}
+				span {
+					color:$buttonFontColorH;
+				}
+			}
+		}
+		.active {
+			a{
+				@extend .relative;
+				color:$buttonFontColorH;
+				height:$buttonHeight;
+				line-height:20px;
+				background-color:$buttonFontColor;
+				display:block;
+				text-align:center;
+				vertical-align: middle;
+				font-size: 12px;
+				border-top: 1px solid #c6d6de;
+				.line{
+					@extend .absolute;
+					background-color:$buttonLineColorH;
+					width: 5px;
+					left:0;
+					top:0;
+					bottom:0;
+				}
+				span {
+					@extend %fontIconAlign;
+					font-size:$fontSizeIcon;
+					padding: 10px 0 5px 0;
+				}	
+			}
+			a:hover {
+				color:$buttonFontColorH;
+				background-color:$buttonColor;
+				span{
+					color:$buttonFontColorH;
+				}
+			}	
+		}
+	}
+}
+
+
+.fixed-side-leftW{
+	width:$widthLeft;
+	top:$heightHeaderTop;	
+	left: 0;
+	bottom:0;
+	color:$fontColorMenu;	
+	z-index:2;
+	.nav-category{
+		height: 100%;
+		width: $widthLeftMenu;
+		background-color:$backgroundColorMenu;
+		float: left;		
+		box-sizing: border-box;
+		border-right:$bordercolorWelcome 1px solid;
+		-webkit-box-shadow:0 0 10px rgba(4, 0, 0, .1); -moz-box-shadow:0 0 10px rgba(4, 0, 0, .1); box-shadow:0 0 10px rgba(4, 0, 0, .1);
+		.nav-category-list {			
+			a {
+				@extend .relative;
+				color:$buttonFontColor;
+				height:$buttonHeight;
+				line-height:20px;
+				display:block;
+				text-align:center;
+				vertical-align: middle;
+				font-size: 12px;
+				margin-right: -1px;
+				.line{
+					@extend .absolute;
+					background-color:$backgroundColorMenu;
+					width: 5px;
+					left:0;
+					top:0;
+					bottom:0;
+				}
+				span {
+					@extend %fontIconAlign;
+					font-size:$fontSizeIcon;
+					padding: 10px 0 5px 0;
+					}
+				}
+			a:hover {
+				color:$buttonFontColorH;
+				background-color:$buttonColor;
+				.line{
+					background-color:$buttonLineColorH;
+				}
+				span {
+					color:$buttonFontColorH;
+				}
+			}
+		}
+		.active {
+			a{
+				@extend .relative;
+				color:$buttonFontColorH;
+				height:$buttonHeight;
+				line-height:20px;
+				background-color:$buttonColor;
+				display:block;
+				text-align:center;
+				vertical-align: middle;
+				font-size: 12px;
+				margin-right: -1px;
+				.line{
+					@extend .absolute;
+					background-color:$buttonLineColorH;
+					width: 5px;
+					left:0;
+					top:0;
+					bottom:0;
+				}
+				span {
+					@extend %fontIconAlign;
+					font-size:$fontSizeIcon;
+					padding: 10px 0 5px 0;
+				}	
+			}
+			a:hover {
+				color:$buttonFontColorH;
+				background-color:$buttonColor;
+				.line{
+					background-color:$buttonLineColorH;
+				}
+				span{
+					color:$buttonFontColorH;
+				}
+			}	
+		}
+	}
+	.submenu{
+		height: 100%;
+		width: $widthLeftSubmenu;
+		background-color:$backgroundColorSubmenu;
+		float:left;
+		border-color:$borderLineColorSubmenu;
+		border-style:solid;
+		border-width:1px 1px 1px 0;
+    	box-sizing: border-box;
+    	padding-top: 26px;
+		.sublist{
+			color: $fontColorMenusublist;
+			height: $buttonHeight-leftsublist;
+			line-height: $buttonHeight-leftsublist;
+			border-top:$borderLineColorSubmenu 1px solid;
+			a{ padding-left:15px; display:block; font-size:14px;}
+			a:hover{ color: $fontColorMenusublistH; background-color:$backgroundColorSubmenuH;margin-right: -1px;}
+		}
+		.active{
+			color: $fontColorMenusublistH;
+			height: $buttonHeight-leftsublist;
+			line-height: $buttonHeight-leftsublist;
+			border-top:$borderLineColorSubmenu 1px solid;
+			background-color:$backgroundColorSubmenuH;
+			margin-right: -1px;
+			a{ padding-left:15px; display:block; font-size:14px;}
+			a:hover{ color: $fontColorMenusublistH; background-color:$backgroundColorSubmenuH;margin-right: -1px;}
+		}
+	}
+}	
+	
+.side-left-switchR{
+	@extend .cursorPointer;
+	display: block;
+    height: 30px;
+    margin-top: -15px;
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    width: 12px;
+    z-index: 3;
+    background:url(#{$path}/images/main/arrowR.png) no-repeat;
+}	
+.side-left-switchL{
+	@extend .cursorPointer;
+	display: block;
+    height: 30px;
+    margin-top: -15px;
+    position: absolute;
+    right: -11px;
+    top: 50%;
+    width: 12px;
+    z-index: 3;
+    background:url(#{$path}/images/main/arrowL.png) no-repeat;
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

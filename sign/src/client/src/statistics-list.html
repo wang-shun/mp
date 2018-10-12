@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轻应用－签到－签到列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <!-- <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css"> -->
+    <link rel="stylesheet" href="plugin/seedsui2/seedsui.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+    .tabbar-line .tab:after{
+        width: 80%;
+        margin: 0 10%;
+    }
+    .df-circle{
+        position: absolute;
+    }
+    .slider-slide{
+        overflow: hidden;
+    }
+    .content{
+    	position:relative;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+    .white{
+        color:white;
+    }
+    .sign-list2 li .icon-name{
+        line-height: 56px;
+    }
+    .no-data{
+    	z-index:1;
+    }
+    </style>
+</head>
+<body>
+    <section id="pagePolllist" class="active">
+        <header>
+           <div class="titlebar">
+                <a class="titlebar-left titlebar-button" href="javascript:history.go(-1)">
+                    <i class="icon icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="titlebar-title text-center">统计</h1>
+            </div>
+            <ul class="tabbar tabbar-line animated" id="tabbar">
+                <li class="tab active">
+                    <label class="tab-label">已签到</label>
+                </li>
+                <li class="tab">
+                    <label class="tab-label">未签到</label>
+                </li>
+                <li class="tab">
+                    <label class="tab-label">请假</label>
+                </li>
+            </ul>
+        </header>
+        <article style="top:84px;bottom:0px;">
+            <div class="slider-container" id="carouselPage" style="height:100%;">
+                <div class="slider-wrapper">
+                    <div class="slider-slide" id="page1">
+                    	<div class="no-data box box-middlecenter hidden" id="ID-Nodata">
+                            <div class="nodata-content ">暂无签到记录！</div> 
+                        </div>
+                        <div class="content">
+                            <div style="height:40px;line-height: 40px;text-align: right;margin:0 8px;position:relative;">
+                                <input class="expireDate1 input-text" type="date" value="" style="height:32px;line-height:32px;border:none;color:#aaa;display: inline-block;padding:0;margin:0;text-align:right;direction: rtl;vertical-align: middle;background-color: transparent;" disabled="disabled"/>
+                                <i class="icon-calendar" style="font-size: 24px;vertical-align: middle;color:#F5C245;"></i>
+                            </div>
+                            
+                            <ul id="ID-Sign-List" class="sign-list2">
+                           		<li><div style="height:1500px;"></div></li>
+                            </ul>
+                        </div>
+                        <div class="load-more" style="display: none">正在加载更多...</div>
+                    </div>
+                    <!--page2-->
+                    <div class="slider-slide" id="page2">
+                        <div class="content">
+                            <!-- <div class="list-date-selection">
+                                <input class="expireDate" type="date" value="2016-03-23">
+                                <i class="icon-calendar"></i>
+                            </div> -->
+                            <div style="height:40px;line-height: 40px;text-align: right;margin:0 8px;">
+                                <input class="expireDate1 input-text" type="date" value="" style="height:32px;line-height:32px;border:none;color:#aaa;display: inline-block;padding:0;margin:0;text-align:right;direction: rtl;background-color: transparent;vertical-align: middle;" disabled="disabled"/>
+                                <i class="icon-calendar" style="font-size: 24px;vertical-align: middle;color:#F5C245;"></i>
+                            </div>
+                            <ul class="grid app unsigned-list"></ul>
+                        </div>
+                    </div>
+                    <!--page3-->
+                    <div class="slider-slide" id="page3">
+                        <div class="content">
+                            <div style="height:40px;line-height: 40px;text-align: right;margin:0 8px;">
+                                <input class="expireDate1 input-text" type="date" value="" style="height:32px;line-height:32px;border:none;color:#aaa;display: inline-block;padding:0;margin:0;text-align:right;direction: rtl;vertical-align: middle;background-color: transparent;" disabled="disabled"/>
+                                <i class="icon-calendar" style="font-size: 24px;vertical-align: middle;color:#F5C245;"></i>
+                            </div>
+                            <ul class="grid app radiusround leave-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <!--遮罩图-->
+    <div class="loading" id="loadingPage" style="display: block;">
+        <div class="loading-progress-box">
+            <img src="img/icon/loading.gif" style="width:50px;margin:25px;">
+        </div>
+    </div>
+
+    <script id="noSignedList-tpl" type="text/x-handlebars-template">
+    {{#each list}}
+    <li>
+        <a class="icon-name grid-icon size50 radiusround white" style="background-color: {{getColor creatorName}};border-color: {{getColor creatorName}};background-size: cover;" data-iconname="{{creator}}">
+            {{lastChar creatorName}}
+        </a>
+        <label class="grid-label">{{creatorName}}</label>
+    </li>
+    {{/each}} 
+    </script>
+    <script id="signedList-tpl" type="text/x-handlebars-template">
+    {{#each list}}
+    <li class="box" data-creator="{{creator}}" data-signTime="{{signTimeStr}}" style="cursor:pointer">
+        <a class="icon-name grid-icon size50 radiusround white" style="background-color:{{getColor creatorName}};border-color: {{getColor creatorName}};background-size: cover;" data-iconname="{{creator}}">
+            {{lastChar creatorName}}
+        </a>
+        <div class="info box-flex-1">
+            <div class="info-top">
+                <label class="person-name">{{creatorName}}</label>
+                <div class="sign-number">今天签到<span>{{signCount}}</span>次</div>
+            </div>
+            <div class="info-bottom box">
+                <i class="icon-position-fill"></i>
+                <div class="box-flex-1">
+                    <span class="time">{{parseTime signTimeStr}}</span>
+                    <span class="location">{{address}}</span>
+                </div>
+            </div>
+        </div>
+        <i class="icon-arrowright box box-middle"></i>
+    </li>
+    {{/each}} 
+    </script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <!-- <script src="plugin/seedsui/seedsui.min.js"></script> -->
+    <script src="plugin/seedsui2/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/common2.js"></script>
+    <!-- <script src="js/inobounce.min.js"></script> -->
+    <script>
+    var currentPage = 1;
+    var depIds = getParams("depIds");
+    var userIds = getParams("userIds");
+    var virtualGroupIds = getParams("virtualGroupIds");
+    var signDate = getParams("signDate");
+    
+    /* window.serviceUrl = "http://192.168.100.102:18005/api";
+	var token = "mobileark#54917843-928f-4dbf-be2b-9bd2c62a75ad";
+	var sessionId = escape(token);
+	window.localStorage.setItem("sessionId",sessionId);
+	window.localStorage.setItem("serviceUrl",serviceUrl);  */
+
+    //模板和URL信息
+    URL = {
+        querySignStat : "&method=mapps.sign.queryStat&format=json&v=1.0&appKey=",
+        querySignPage : "&method=mapps.sign.lastSign.query&format=json&v=1.0&appKey=",
+        queryUserIcon : "&method=mapps.sign.getUserIcon&format=json&v=1.0&appKey="
+    }
+
+    Template = {
+        noSignedList : $("#noSignedList-tpl").html(),
+        signedList : $("#signedList-tpl").html(),
+        leaveList : $("#leaveList-tpl").html()
+    }
+
+    var toast=new Toast("失败");
+    var drag1,pagination1,drag2,pagination2;
+    //初始化function
+    window.addEventListener("load",function(){
+        //$('#loadingPage').show();
+        new SimpleTab();
+        //设置日期控件时间
+        $(".expireDate1").val(signDate);
+        //已签到分页
+        pagination1={
+            hasData:null,
+            current:1,//当前页数
+            max:0,//总页数
+            limit:5,//每页条数
+            total:0//总条数
+        }
+        drag1=DfCircle({
+            overflowContainer:"#page1 .content",
+            //overflowContainer:"article",
+            //topContainer:false,
+            //bottomContainer:false,
+            topParent:"#page1",
+            bottomParent:"#page1 .content",
+            onTopRefresh:function(e){
+                console.log("头部刷新");
+                pagination1.current=1;
+                //加载已签到
+                _loadSignData();
+            },
+            onTopComplete:function(e){
+                console.log("头部完成");
+            },
+            onBottomRefresh:function(e){
+                console.log("底部刷新");
+                pagination1.current++;
+                _loadSignData(true);//下一页
+            },
+            onBottomComplete:function(e){
+                console.log("底部完成");
+            },
+            onBottomNoData:function(e){
+                console.log("底部无数据了");
+            }
+        });
+        var signData={};
+        function _loadSignData(isNext){
+            //如果是最后一页
+            if(isNext && pagination1.current>pagination1.max){
+                pagination1.current--;
+                //drag标识底部状态
+                drag1.bottomNoData();
+                return;
+            }
+            var params = {
+                signDate : $(".expireDate1").val(),
+                depIds : depIds,
+                userIds : userIds,
+                virtualGroupIds : virtualGroupIds,
+                offset : pagination1.current,
+                limit : pagination1.limit
+            }
+            var sessionId = window.localStorage.getItem("sessionId");
+            var serviceUrl = window.localStorage.getItem("serviceUrl");
+            var defUrl="?sessionId="+sessionId+"&reqSource=client";
+            var ajaxUrl=URL.querySignPage;
+            var url=serviceUrl+defUrl+ajaxUrl;
+            //ajax请求
+            $.ajax({
+                url: url,
+                data: params,
+                success: function(data){
+                    var data=Object.prototype.toString.call(data)==='[object String]'?JSON.parse(data):data;
+                    if(!data.total){
+                        drag1.topComplete();
+                        drag1.bottomNoData();
+                        document.getElementById("ID-Nodata").classList.remove("hidden");
+                        document.getElementById("ID-Sign-List").parentNode.style.overflow="hidden";
+                      	//加载未签到和请假
+                        _loadUnSignData();
+                        return;
+                    }
+                    document.getElementById("ID-Nodata").classList.add("hidden");
+                    document.getElementById("ID-Sign-List").parentNode.style.overflow="auto";
+                    //分页
+                    pagination1.hasData=true;
+                    pagination1.total = data.total;
+                    //pagination1.limit = data.limit;
+                    pagination1.max=Math.ceil(pagination1.total/pagination1.limit);
+                    //alert("总数:"+pagination1.total+";最多页数:"+pagination1.max);
+                    //alert(JSON.stringify(data.rows));
+                    var html = Handlebars.compile(Template.signedList)({
+                        list : data.rows
+                    });
+                    //头部刷新或者下一页
+                    if(!isNext){
+                        //加载未签到和请假
+                        _loadUnSignData();
+                        //$(".sign-list2").html(html);
+                        document.getElementById("ID-Sign-List").innerHTML=html;
+                        //drag标识头部状态
+                        drag1.topComplete();
+                        //alert("头部刷新完成");
+                    }else{
+                        $(".sign-list2").append(html);
+                        //drag标识底部状态
+                        drag1.bottomComplete();
+                        //alert("下一页刷新完成");
+                    }
+                    //如果没有超过一页
+                    if(pagination1.total <= pagination1.limit){
+                        //drag标识底部状态
+                        drag1.bottomNoData();
+                        //alert("末页完成");
+                    }
+                },
+                error: function(){
+                    if(isNext)pagination1.current--;
+                    drag1.topComplete();
+                    drag1.bottomNoData();
+                    toast.setText("请求数据失败，请重试");
+                    toast.show();
+                },
+                complete:function(){
+                    $('#loadingPage').hide();
+                }
+            });  
+        }
+        //加载已签到
+        _loadSignData();
+
+        //未签到分页
+        drag2=DfCircle({
+            overflowContainer:"#page2 .content",
+            //overflowContainer:"article",
+            //topContainer:false,
+            bottomContainer:false,
+            topParent:"#page2",
+            bottomParent:"#page2 .content",
+            onTopRefresh:function(e){
+                console.log("头部刷新");
+                pagination1.current=1;
+                //加载已签到
+                _loadSignData();
+            },
+            onTopComplete:function(e){
+                console.log("头部完成");
+            }
+        });
+        function _loadUnSignData(){
+            var params = {
+                signDate : $(".expireDate1").val(),
+                depIds : depIds,
+                userIds : userIds,
+                virtualGroupIds : virtualGroupIds
+            };
+            var sessionId = window.localStorage.getItem("sessionId");
+            var serviceUrl = window.localStorage.getItem("serviceUrl");
+            var defUrl="?sessionId="+sessionId+"&reqSource=client";
+            var ajaxUrl=URL.querySignStat;
+            var url=serviceUrl+defUrl+ajaxUrl;
+            //ajax请求
+            $.ajax({
+                url: url,
+                data: params,
+                success: function(data){
+                    var data=Object.prototype.toString.call(data)==='[object String]'?JSON.parse(data):data;
+
+                    renderNoSignedInfo(data.data.unsigned);//未签到
+                    renderLeaveInfo(data.data.leaves);//请假
+                    renderSignStat(data.data);//数字展现
+                    //用户图片
+                    //_loadUserIcon(data);
+                    $(".unsigned-list .icon-name,.leave-list .icon-name").getUserIcon();
+                    //drag标识头部状态
+                    drag2.topComplete();
+                },
+                error: function(){
+                    drag2.topComplete();
+                    toast.setText("未签到与请假加载失败，请重试");
+                    toast.show();
+                },
+                complete:function(){
+                    $('#loadingPage').hide();
+                }
+            });
+        };
+        
+        //绑定列表点击
+        bindEvents();
+    },false);
+    //数据处理
+    Handlebars.registerHelper("lastChar",lastChar);
+    Handlebars.registerHelper("getColor",getColor);
+    Handlebars.registerHelper("parseTime",parseTime);
+
+    function lastChar(value) {
+        return value.slice(-1);
+    }
+
+    function getColor(value) {
+        var c=value.toPinyin().substring(0,1).toColor();
+        return c;
+    }
+
+    function renderNoSignedInfo(data) {
+        var html,arr=[];
+        html = Handlebars.compile(Template.noSignedList)({
+            list : data
+        });
+        $(".grid.unsigned-list").html(html);
+    }
+    function renderLeaveInfo(data){
+        var html;
+        html = Handlebars.compile(Template.noSignedList)({
+            list : data
+        });
+        $(".grid.leave-list").html(html);
+    }
+    function renderSignStat(data) {
+        var signedCount = data.signedCount;
+        var noSignedCount = data.noSignedCount;
+        var leaveCount = data.leavesCount;
+        document.querySelectorAll("#tabbar .tab-label")[0].innerHTML = "已签到("+signedCount+")";
+        document.querySelectorAll("#tabbar .tab-label")[1].innerHTML = "未签到("+noSignedCount+")";
+        document.querySelectorAll("#tabbar .tab-label")[2].innerHTML = "请假("+leaveCount+")";
+    }
+    
+
+    function getDate() {
+        return $(".expireDate1").val();
+    }
+
+    function parseTime(time) {
+        return time.split(/[\s]/)[1].substring(0,5);
+    }
+
+    function bindEvents(){
+        $(document).on("click",".sign-list2 li.box",function(){
+            var creator = $(this).data("creator"),
+                signTime = $(this).data("signtime").split(/[\s]/)[0];
+            window.location.href="statistic-detail.html?creator="+creator+"&signTime="+signTime;
+        })
+    }
+
+    function getParams(name) {
+        var reg = new RegExp("(^|\\?|&)"+ name +"=([^&]*)(\\s|&|$)", "i");
+        if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " "));
+        return "";
+    };
+    //定义exmobi返回
+    function back(){history.go(-1);}
+
+    </script>
+</body>
+</html>

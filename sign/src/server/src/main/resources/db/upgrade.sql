@@ -1,0 +1,2 @@
+INSERT INTO sn_sign (ecid,sign_id,sign_time,longitude,latitude,address,city,content,creator,creator_name,create_time,dep_id,dep_order,task_no,state) (select 'fiberhome',sign_id,sign_time,longitude,latitude,address,city,content,creator,creator_name,create_time,dep_id,'',task_no,state from t_sign)
+INSERT INTO sn_sign_image (sign_id, sign_image_id, image) (select sign_id, sign_image_id, image from t_sign_image)

@@ -1,0 +1,150 @@
+/*center*/
+.fixed-center{
+	top:$heightHeaderTop;
+	min-width:$MinWidthRight;
+	//min-height:$MinHeightRight;
+	left: $widthLeftMenu;	
+	right:0px;
+	bottom:40px;
+}
+.fixed-centerW{
+	left:220px;	
+}
+
+/*欢迎页面*/
+.bgWelcome{
+	background-color:$backgroundWelcome;
+	//padding:20px;
+	.mainrow{
+		width:100%;
+		border-radius:$radiusSmall;
+		.mainitem{
+			@extend .left;
+			box-sizing:border-box;
+			height: 100px;
+			padding-right:20px;
+			.justify{
+				@extend .left;
+				@extend .relative;
+				@extend .cursorPointer;
+				width: 100px;
+				height: 100px;
+				text-align: center;
+				span{
+					line-height:100px;
+					font-size:$fontSizeIconW;
+					color:$buttonFontColor;
+				}
+				&:hover{ @extend %opacity5;}
+			}
+			.bg-blue-Quick{
+				border-top-left-radius:$radiusSmall;
+				border-bottom-left-radius:$radiusSmall;
+			}
+			.justify-arrow{
+				@extend .right;
+				@extend .relative;
+				@extend .cursorPointer;
+				height:100px;
+				width: 20px;
+				.fhicon-arrowR{
+					line-height:100px;
+					text-align:center;
+					color:$fontcolorsmallW;
+					&:hover{ @extend %opacity5;}
+				}				
+			}
+			
+			.justify-content{
+				padding:25px 20px 0 115px;
+				height: 75px;
+				.num{
+					@extend .cursorPointer; font-size: $fontSizeLarger; color:$fontColorDark; font-family: helvetica, arial; display:inline-block;
+					&:hover{ @extend %opacity5;}
+				}
+				small{ color:$fontcolorsmallW; font-size:$fontSizeSmall;}
+			}
+		}
+		.mainleft{ @extend .left;}
+		.centeritem{
+			padding-right:20px;	
+			.itemblock{
+				border-radius:$radiusSmall;
+			}
+			.justify{
+				@extend .left;
+				@extend .relative;
+				width: 75px;
+				height: 75px;
+				margin:12px 0 0 15px;
+				border-radius:100%;
+				span{ line-height: 75px;}
+			}
+			.justify-content{
+				padding:25px 10px 0 105px;
+				height: 75px;
+				.red{ color:$fontcolorRedW;}
+				.blue{ color:$fontcolorBlueW;}
+			}
+		}
+		.mainright{
+			@extend .right; min-height:220px; border-radius:$radiusSmall;
+			.mobileStyle{
+				text-align: center;
+				padding:35px 0 0 0;
+				height: 220px;
+				width:$percentageHalf;
+				float:left;
+				box-sizing:border-box;
+				span{ @extend .cursorPointer; font-size:$fontSizeMobileIcon;}
+				.num{ @extend .cursorPointer; font-size:$fontSizeIconW; color:$fontColorDark; font-family:helvetica, arial; margin-top:15px; display:inline-block;}
+				small{ color:$fontcolorsmallW; font-size:$fontSizeSmall;}
+				.green{ color:$fontcolorGreenW;}
+			}
+		}
+		.maindataL{
+			box-sizing:border-box;
+			padding-right:20px;			
+		}
+		.maindata{
+			border-radius:$radiusSmall;
+			.title{
+				border-bottom:$bordercolorWelcome 1px solid; height:50px; line-height:50px;
+				ul{
+					float:left;
+					li{
+						@extend .left;
+						@extend .cursorPointer;
+						font-size:$fontSizeMiddle;
+						padding:0 40px;
+						color:$fontColorDark;
+						border-right:$bordercolorWelcome 1px solid;
+						border-bottom:$bordercolorWelcome 1px solid;
+						&:hover{
+							color:$fontcolorBlueW;
+						}
+					}
+					.active{
+						color:$fontcolorBlueW;
+						margin-bottom:-1px;
+						border-bottom:#fff 1px solid;
+					}
+				}
+				.tit{ @extend .left; font-size:$fontSizeMiddle; color:$fontColorDark; text-indent:20px;}
+				.fonticon{
+					float:right;
+					margin:0 10px 0 0;
+					span{
+						@extend .cursorPointer; color:$fonticonData; font-size:$fontSizeBig; margin:0 10px; display:inline-block;
+						&:hover{ @extend %opacity5;}
+					}
+				}
+			}
+			.mainblock{
+				padding:15px;
+				text-align: center;
+			}
+		}
+	}
+}
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.trip.dao.TripOrderMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.trip.entity.TripOrder">
+    <!--
+      WARNING - @mbggenerated
+    -->
+  	<result property="orderId" jdbcType="VARCHAR" column="order_id"/>
+    <result property="outOrderId" jdbcType="VARCHAR" column="out_order_id"/>
+    <result property="outUserId" jdbcType="VARCHAR" column="out_user_id"/>
+    <result property="userId" jdbcType="VARCHAR" column="user_id"/>
+    <result property="userName" jdbcType="VARCHAR" column="user_name"/>
+    <result property="beginDate" jdbcType="VARCHAR" column="begin_date"/>
+    <result property="endDate" jdbcType="VARCHAR" column="end_date"/>
+    <result property="linkTel" jdbcType="VARCHAR" column="link_tel"/>
+    <result property="hotelName" jdbcType="VARCHAR" column="hotel_name"/>
+    <result property="hotelAddress" jdbcType="VARCHAR" column="hotel_address"/>
+    <result property="hotelLocation" jdbcType="VARCHAR" column="hotel_location"/>
+    <result property="roomType" jdbcType="VARCHAR" column="room_type"/>
+    <result property="roomNumber" jdbcType="INTEGER" column="room_number"/>
+    <result property="hasBreakfast" jdbcType="VARCHAR" column="has_breakfast"/>
+    <result property="price" jdbcType="NUMERIC" column="price"/>
+    <result property="payType" jdbcType="VARCHAR" column="pay_type"/>
+    <result property="orderStatus" jdbcType="VARCHAR" column="order_status"/>
+    <result property="createDate" jdbcType="TIMESTAMP" column="create_date"/>
+    <result property="updateDate" jdbcType="TIMESTAMP" column="update_date"/>
+    <result property="cancalDate" jdbcType="TIMESTAMP" column="cancal_date"/>
+    <result property="orgId" jdbcType="VARCHAR" column="org_id"/>
+    <result property="orgName" jdbcType="VARCHAR" column="org_name"/>
+    
+    <result property="hotelTel" jdbcType="VARCHAR" column="hotel_tel"/>
+    <result property="hotelImg" jdbcType="VARCHAR" column="hotel_img"/>
+    <result property="hotelId" jdbcType="VARCHAR" column="hotel_id"/>
+    <result property="totalAmount" jdbcType="NUMERIC" column="total_amount"/>
+    
+    
+  </resultMap>
+  
+</mapper>

@@ -1,0 +1,39 @@
+	<div class="base-info">
+             <h3>基本信息</h3>
+             <div class="content">
+                 <p class="name long"><span class="header info">会议名称:</span><%=meeting.meetingName%></p>
+                 <p class="name long"><span class="header info">会议地址:</span><%=meeting.address%></p>
+                 <p class="name"><span class="header">开始时间:</span><%=meeting.beginTimeStr%></p>
+                 <p class="name"><span class="header">结束时间:</span><%=meeting.endTimeStr%></p>
+             </div>
+         </div>
+<% if(agendasInfo != ''){%>
+    <div class="meeting-schedule">
+        <h3>会议议程</h3>
+<% for(var i=0,agenda; agenda=agendasInfo[i++];) { %>
+        <div class="content">
+            <p class="title">议程<%=i%></p>
+            <p class="name first"><span class="header info" style="width:15%">议程地址:</span><%=agenda.address%></p>
+            <p class="name"><span class="header" style="width:30%">开始时间:</span><%=agenda.beginTimeStr%></p>
+            <p class="name"><span class="header" style="width:30%">结束时间:</span><%=agenda.endTimeStr%></p>
+            <p class="name long">
+                <span class="header info" style="width:30%">议程说明:</span>
+                <span class="long"><%=agenda.remarks%></span>
+            </p>
+        </div>
+<%}%>
+    </div>
+<%}%>
+    <div class="remark">
+    <h3>备注</h3>
+   <% for(var i=0,remark; remark=remarks[i++];) { %>  
+        <div class="content" style="margin-bottom:10px;">
+            <p class="title">&nbsp&nbsp</p>
+            <p class="detail"><%=remark.remarks%></p>
+        </div>
+   <% } %>
+    </div>
+    <!-- 表格内容 -->
+    <div class="tableblock info">
+    	<table id="grid-attach" width="80%" class="common-table"></table>
+    </div>

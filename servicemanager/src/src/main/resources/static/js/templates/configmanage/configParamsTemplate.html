@@ -1,0 +1,47 @@
+<div class="form-item">
+	<label class="form-item-label" style="width:100%">
+		<a class="SID-toggle-name-key-btn" style="color: #1788fb">切换显示名称/参数名</a>
+	</label>
+</div>
+<% for(var i=0,configProperties; cp=configProperties[i++];) { %>
+        <div class="form-item">
+            <label class="SID-toggle-name-key form-item-label" style="overflow: hidden;text-overflow:ellipsis;" title="<%=cp.key%>" data-name="<%=cp.name%>" data-key="<%=cp.key%>"><%=cp.name%></label>
+            <div class="form-item-editbox config-inputbox" style="width: 35%" data-regex="<%=cp.regex%>" data-isDef="<%=cp.isDef%>">
+            	<% if(cp.type == 'text'){%>
+                	<input class="form-item-text {required: true} paramchange" group="<%=cp.group%>" maxlength="<%=cp.size%>" type="<%=cp.type%>" name="<%=cp.key%>" value="<%=cp.def%>"/>
+                <%}else if(cp.type == 'radio'){
+						var options = cp.options.split(",");  
+						for(var j=0,options;op=options[j++];){
+							var opval = op.split(":")[0];
+							var optext = op.split(":")[1];
+							var opid = cp.key+"-"+opval;
+							var opchecked = "";
+							if(cp.def == opval){
+								opchecked = "checked";
+							}
+							%>
+							<input class="form-item-text {required: true} paramchange" style="width:15px;height: 15px;position: relative" group="<%=cp.group%>" maxlength="<%=cp.size%>" type="<%=cp.type%>" name="<%=cp.key%>" value="<%=opval%>" <%=opchecked%> id="<%=opid %>"/><label style="margin:0 4px;" for="<%=opid %>"><%=optext%></label>
+	            <%		}
+                  }else if(cp.type == 'checkbox'){
+                  		var checkops = cp.def.split(",");
+						var options = cp.options.split(",");  
+						for(var j=0,options;op=options[j++];){
+							var opval = op.split(":")[0];
+							var optext = op.split(":")[1];
+							var opid = cp.key+"-"+opval;
+							var opchecked = ""
+							for(var k=0,checkops;checkop=checkops[k++];){
+								if(opval == checkop){
+									opchecked = "checked";
+								}
+							}
+							%>
+							<input class="form-item-text {required: true} paramchange" style="width:15px;height: 15px;position: relative;" group="<%=cp.group%>" maxlength="<%=cp.size%>" type="<%=cp.type%>" name="<%=cp.key%>" value="<%=opval%>" <%=opchecked%> id="<%=opid %>"/><label style="margin:0 4px;" for="<%=opid %>"><%=optext%></label>
+	            <%		}
+                  }
+                %>
+            </div>
+            <lable class="form-item-label textinoneline" style="width:42%" title="<%=cp.remark%>"><%=cp.remark%></lable><br/>
+            <div class="form-item-tip" style="width:80%;float:right;padding:0;display:none"><div class="wrong-text"></div></div>
+        </div>
+<%}%>

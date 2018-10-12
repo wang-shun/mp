@@ -1,0 +1,147 @@
+/**运维统计**/
+.blockInside{
+	margin-bottom: 0;
+}
+.crumb{
+	margin-top: 4px;
+}
+.statistic-mod{
+	height: 40px;
+	&.lef{
+		margin-left: 10px;
+	}
+	&.ser{
+		height: 89px;
+	}
+	.search-button-white{
+		margin-top: 8px;
+		a{
+			background-color: #fff;
+		    color: #1788fb;
+		    border-radius: 20px;
+		    padding: 0 35px;
+		    height: 30px;
+		    line-height: 30px;
+		    display: inline-block;
+		    margin: 0 10px;
+		    border:1px solid #1788fb;
+		}
+		a:hover{
+			opacity: 0.5;
+			filter: Alpha(opacity=50);
+		}
+	}
+	.search-label{
+		line-height: 50px;
+		padding-right: 30px;
+		&.pos{
+			display: block;
+			position: absolute;
+		}
+		&.rel{
+			display: block;
+			position: relative;
+			margin-left: 270px;
+		}
+		&.bl{
+			color: #1788fb;
+			margin-left: 50px;
+		}
+		a:hover{
+			color: #1788fb;
+		}
+		.choose-text{
+			height: 27px;
+		    border-radius: 4px;
+		    margin: 0 10px;
+		    padding-left: 5px;
+		    &.lef{
+		    	margin-left: 24px;
+		    }
+		}
+		select{
+			height: 27px;
+		    border-radius: 4px;
+		    margin: 0 10px;
+		    padding-left: 5px;
+		    width: 160px;
+		    border-color: #ddd;
+		    margin-left: 30px;
+		}
+	}
+	.choose-date{
+		height: 27px;
+	    text-align: center;
+	    border-radius: 4px;
+	    margin: 0 10px;
+	}
+}
+.search-button{
+	a{
+		background-color: #1788fb;
+	    color: white;
+	    border-radius: 20px;
+	    padding: 0 35px;
+	    height: 30px;
+	    line-height: 30px;
+	    display: inline-block;
+	    margin: 0 10px;
+	}
+	a:hover{
+		opacity: 0.5;
+		filter: Alpha(opacity=50);
+	}
+	&.sea{
+		margin-top: 70px;
+	}
+}
+.info-button{
+	margin-top: 10px;
+	margin-left: 19%;
+	a{
+		background-color: #fff;
+	    color: #1788fb;
+	    border:1px solid #1788fb;
+		border-radius: 20px;
+	    padding: 0 35px;
+	    height: 30px;
+	    line-height: 30px;
+	    display: inline-block;
+	    margin: 0 10px;
+	}
+	a:hover{
+		opacity: 0.5;
+		filter: Alpha(opacity=50);
+	}
+}
+.tree-container{
+	&.tree-container-nobutton{
+		&.record{
+			top: 135px;
+		}
+	}
+} 
+.text-name{
+	font-weight: bold;
+    font-size: 15px;
+    margin: 20px 0 40px 10%;
+    &.out{
+    	color: #1788fb;
+    }
+}
+.histogram{
+	max-height: 500px;
+	width: 100%;
+    display: table;
+    margin: 20px auto;
+    img{
+    	display: block;
+    	margin: 0 auto;
+    }
+    table{
+    	margin: 0 auto;
+	    td{
+	    	text-align: center;
+	    }
+    }
+}

@@ -1,0 +1,68 @@
+test_reserved.add_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.add
+    v: 1.0
+    sessionId: 
+    session: true
+  request: &reqbase
+    roomId:
+    meetingName: 二季度总结会议
+    reservedDate: 2016-07-25
+    reservedStartTime: 9:00
+    reservedEndTime: 11:30
+  assert: &respbase    
+    code: 
+      _eq: 1
+    reservedId: 
+      _notNull: true
+      
+test_reserved.add_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.add
+    v: 1.0
+    sessionId: 
+    session: true
+  request: &reqbase
+    roomId:
+    meetingName: 二季度总结会议这里要超过100个字符 超出最大长度的校验二季度总结会议这里要超过100个字符 超出最大长度的校验二季度总结会议这里要超过100个字符 超出最大长度的校验二季度总结会议这里要超过100个字符 超出最大长度的校验二季度总结会议这里要超过100个字符 超出最大长度的校验二季度总结会议这里要超过100个字符 超出最大长度的校验
+    reservedDate: 2016-07-26
+    reservedStartTime: 9:00
+    reservedEndTime: 11:30
+  assert: &respbase    
+    code: 
+      _eq: 0
+    reservedId: 
+      _null: true
+      
+test_reserved.add_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.add
+    v: 1.0
+    sessionId: 
+    session: true
+  request: &reqbase
+    roomId:
+    meetingName: 会议时间有问题
+    reservedDate: 2016-07-25
+    reservedStartTime: 11:00
+    reservedEndTime: 9:30
+  assert: &respbase    
+    code: 
+      _eq: 1003
+    reservedId: 
+      _null: true   
+
+#1.预定一个7/25上午9点到11:30的，会议主题为【二季度总结会议】的会议室
+#2.预定一个7/26下午9点到11:30的，会议主题为【会议名超过100个字符】的会议室
+#3.预定一个7/25上午11点到9:30的，会议主题为【会议时间有问题】的会议室
+    
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

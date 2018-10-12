@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuSurveyTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuSurveyTemplate">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="title_html" jdbcType="VARCHAR" property="titleHtml" />
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="owner" jdbcType="VARCHAR" property="owner" />
+    <result column="pager" jdbcType="VARCHAR" property="pager" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="use_times" jdbcType="NUMERIC" property="useTimes" />
+    <result column="questions" jdbcType="NUMERIC" property="questions" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modified_time" jdbcType="DATE" property="modifiedTime" />
+  </resultMap>
+  
+  <select id="getSurveyTemplate" resultType="SuSurveyTemplatePojo">
+  	select t.id,t.ecid,t.title,t.group_id groupId,t.type,t.owner,pager,t.status,t.use_times useTimes,t.questions,g.name groupName,t.modified_time modifiedTime 
+  	from su_survey_template t left join su_survey_group g on t.group_id = g.id
+  	where 1=1
+  	<if test="title != null">
+  		and	t.title like '%'||#{title}||'%'
+  	</if>
+  	<if test="type != null">
+  		and t.type = #{type}
+  	</if>
+  	<if test="defaultid != null">
+  		and t.group_id = #{defaultid}
+  	</if>
+  	<if test="userId !=null">
+  		and t.owner =#{userId}
+  	</if>
+  	<if test="sort != null">
+	  order by ${sort}
+	</if>
+	<if test="sort == null">
+	  order by modified_time desc
+	</if>
+  </select>
+  
+  <update id="updateUseTimes">
+  	update su_survey_template set use_times = use_times+1 where id = #{surveyId}
+  </update>
+</mapper>

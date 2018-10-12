@@ -1,0 +1,5 @@
+ALTER TABLE MC_SYSTEM RENAME COLUMN "ADMIN_USER" TO "DB_USER";
+
+ALTER TABLE MC_SYSTEM RENAME COLUMN "ADMIN_PASSWD" TO "DB_PASSWD";
+
+update mc_system set db_user = 'metrics' where id='1';

@@ -1,0 +1,95 @@
+.maskBg{
+	background-color:rgba(0,0,0,0.3);
+	position: absolute;
+    top: 0;
+    left: 0;
+    bottom:0;
+    right:0;
+}
+.maskBox{
+	background:#fff;
+	border:#5d687a 2px solid;
+	.masktopBar{
+		width:100%;
+		height:37px;
+		line-height:37px;
+		position:relative;
+		.maskTit{
+			background:#424954;
+			color:#fff;		
+			padding:0 10px;
+			font-size:14px;
+			font-weight:bold;
+		}
+		.maskIcon{
+			position:absolute;
+			right:10px;
+			top:2px;
+			color:#fff;
+			i{font-size:16px;}
+		}
+		.maskIcon:hover{
+			color:#b93d41;
+		}
+	}
+	.maskBlock{
+		width:100%;
+		position:absolute;
+		top:37px;
+		bottom:61px;
+		overflow:auto;
+		top:0;
+		bottom:0;
+	}
+	.maskBtm{
+		padding: 12px 0;
+		background-color: #ebebeb;
+		border-top: 1px solid #cecece;
+		height:37px;
+		position:absolute;
+		bottom:0;
+		left:0;
+		right:0;
+		text-align:center;
+		.maskBtn{
+			background:#1cb162;
+			color:#fff;
+			display:inline-block;
+			height:37px;
+			line-height:37px;
+			border-radius:3px;
+			padding:0 30px;
+			margin:0 15px 0 0;
+		}
+		.maskBtn:hover{
+			background: #107a42;
+		}
+		.maskBtn:last-child{
+			margin:0;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

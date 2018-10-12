@@ -1,0 +1,121 @@
+servicemanager:
+  endpoint: http://sm.mapps.ip:8761
+
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: ${servicemanager.endpoint}/eureka
+    healthcheck:
+      enabled: true    
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}  
+    metadataMap:
+      appName: 铂旅                                                                                        # 应用名称
+      logo: /logo.png                          # 应用logo 
+      remarks: 描述                                                                                        # 应用描述
+      portal: /websso                           # 自服务门户集成入口
+      mgr-port: ${management.port}                  # 管理端口
+      mgr-context-path: ${management.context-path}  # 管理endpoint的context path
+      configProperties:                         # 配置属性
+      dependencies:
+        services: mapps-fileservice
+        resources:
+          database: default
+          mplus: default
+      
+jdbc-url:
+  oracle: jdbc:oracle:thin:@${resources.database.default.host:}:${resources.database.default.port:1521}:${resources.database.default.db:}
+  postgresql: jdbc:postgresql://${resources.database.default.host:}:${resources.database.default.port:5432}/${resources.database.default.db:}
+
+spring:  
+  application:
+    name: mapps-trip     
+  jmx:
+    enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${jdbc-url.${resources.database.default.type:postgresql}}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}
+    
+server: 
+  port: 18018    
+  
+management:
+  context-path: /__mng__
+  port: 38018
+
+endpoints:
+  restart:
+    enabled: true
+
+sqllocaltion:
+  oracle: db/oracle
+  postgresql: db/migration
+    
+flywaydb:
+  locations: ${sqllocaltion.${resources.database.default.type:postgresql}} 
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.trip.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    user: 
+      - mapps.trip.orderadd
+      - mapps.trip.orderlist
+      - mapps.trip.orderdetail
+      - mapps.trip.ordercancel
+      - mapps.trip.checkbookingresult
+      - mapps.trip.checkcancelresult
+      - mapps.trip.orderlist.bt
+      - mapps.trip.orderdetail.bt
+      - mapps.trip.userinfo
+      - mapps.trip.setadmin
+      - mapps.trip.closeaudit
+      - mapps.trip.corpinfo
+      - mapps.trip.hotelgrouplist
+      - mapps.trip.hotelbrand
+      - mapps.trip.queryhotelids
+      - mapps.trip.gethotelinfo
+      - mapps.trip.hotelimages
+      - mapps.trip.hotelroomtype
+      - mapps.trip.roomstatus
+      - mapps.trip.queryhotels
+      - mapps.trip.hoteldetail
+      - mapps.trip.roomstatuswithrmtype
+
+mplus:
+  sso:
+    serviceUrl: ${resources.mplus.default.mplus.sso.serviceUrl:}
+    appKey: ${resources.mplus.default.mplus.sso.appKey:}
+    secret: ${resources.mplus.default.mplus.sso.secret:}
+    appId: mapps-trip
+    appType: 4
+  login:
+    serviceUrl: ${resources.mplus.default.mplus.login.serviceUrl:}
+    loginPage: ${resources.mplus.default.mplus.login.loginPage:} 
+    
+services: 
+  fileservice:
+    serviceUrl: ${services.mapps-fileservice.serviceUrl:}/api
+    appKey: ${services.mapps-fileservice.appkey:}
+    appSecret: ${services.mapps-fileservice.secret:}
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+  
+client: 
+  appId: trip
+  appName: 铂旅
+
+logging:
+  path: logs

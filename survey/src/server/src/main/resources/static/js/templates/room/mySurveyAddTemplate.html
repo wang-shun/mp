@@ -1,0 +1,73 @@
+<!-- 问卷页面 -->
+<div class="pop-config-box SID-survey-page1">
+
+    <div class="pop-cons pop-cons-fall">
+        <div class="formBox">
+			<div class="remind SID-save-ok" style="display:none;"><p>已保存</p></div>
+            <div class="crumb crumb-postion">
+                问卷模板&gt;<span><%=data.title%></span>
+
+                <label class="chose-questionnaire">
+                	<a class="buttonblue SID-submitPreview" style="padding:5px 15px;display:unset">预览问卷</a>
+                </label>
+	            <hr class="crumbLine">
+            </div>
+    
+            <div class="mll-left type-problem SID-scrollbar">
+                <div class="type-problemChoose">
+                    <div class="title-questionnaire"><h3>题型选择</h3></div>
+                    <ul>
+                        <li class="SID-add-problem" data-type="1"><a><span class="questionnaire-radio"></span>单选题</a></li>
+                        <li class="SID-add-problem" data-type="2"><a><span class="fhicon-arrowD2"></span>下拉选择题</a></li>
+                        <li class="SID-add-problem" data-type="3"><a><span class="questionnaire-checkbox"></span>多选题</a></li>
+                        <li class="SID-add-problem" data-type="4"><a><span class="questionnaire-completionS"></span>单行填空题</a></li>
+                        <li class="SID-add-problem" data-type="5"><a><span class="questionnaire-completionM"></span>多行填空题</a></li>
+                        <li class="SID-add-problem" data-type="6"><a><span class="fhicon-namelist"></span>描述说明</a></li>
+                        <li class="SID-add-problem" data-type="7"><a><span class="fhicon-arrowR"></span>分页符</a></li>
+                    </ul>
+                </div>
+
+                <div class="type-problemChoose SID-commonQuestion-div">
+                    <div class="title-questionnaire"><h3>典型题型</h3></div>
+                </div>
+            </div>
+            <form id="formMsg" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+	            <input type="hidden" id="ID-survey-id" value="<%=data.id%>"/>
+	            <div class="questionnaire-content">
+	                <div class="mll-left questionnaire-right">
+	                    <div class="mll-left questionnaire-list">
+	                        <ul class="SID-question-ul1">
+	                            <li data-type="0">
+	                                
+							        <div contenteditable="true" data-maxlength="50" class="input-textNoLine SID-validate-div SID-survey-title ">
+										<%=data.titleHtml%>
+									</div>
+	                            </li>
+	                        </ul>
+	                        <ul class="SID-question-ul" id="ID-question-ul">
+	                        </ul>
+	                        <ul class="SID-question-ul2">
+	                            <li data-type="7">
+								    <dl>
+								        <dd>
+								           <p style="text-align: right; padding-right: 10px;"><span class="SID-page-title">页码1/1</span></p>
+								        </dd>
+								    </dl>
+								</li>
+							</ul>
+	                    </div>
+	
+	                    <div class="form-btns form-btns-middle" style="margin-bottom:80px;">
+	                        <a class="buttonblue SID-cancel-btn">取消</a><a class="buttonblue SID-save-btn">保存</a>
+	                    </div>
+	
+	                </div>
+	            </div>
+			</form>
+        </div>        
+    </div>
+</div>
+
+<script>
+windowResize();
+</script>

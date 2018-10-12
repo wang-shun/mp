@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.meetingroom.dao.MrRoomMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meetingroom.entity.MrRoom">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="area" jdbcType="NUMERIC" property="area" />
+    <result column="capacity" jdbcType="NUMERIC" property="capacity" />
+    <result column="projector" jdbcType="VARCHAR" property="projector" />
+    <result column="display" jdbcType="VARCHAR" property="display" />
+    <result column="microphone" jdbcType="VARCHAR" property="microphone" />
+    <result column="stereo" jdbcType="VARCHAR" property="stereo" />
+    <result column="wifi" jdbcType="VARCHAR" property="wifi" />
+    <result column="layout" jdbcType="VARCHAR" property="layout" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
+  </resultMap>
+  
+  <select id="checkName" parameterType="MrRoom" resultType="int" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT count(1) FROM MR_ROOM 
+    where name = #{name} and ecid=#{ecid,jdbcType=VARCHAR}
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+    <if test="id != null">
+      and id != #{id}
+    </if>
+  </select>
+  
+  <select id="getMrRoom" parameterType="java.util.Map" resultType="GetMrRoom" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  select roomId,roomName,address,area,capacity,projector,display,microphone,stereo,wifi,layout,collection,remarks
+  from
+  (
+    select id roomId,name roomName,address,area,capacity,projector,display,microphone,stereo,wifi,layout,create_time,coalesce(remarks,'') remarks
+	      ,(select case when count(1) > 0 then 1 else 0 end from MR_FAVORITE f where f.room_id = r.id and f.user_id = #{userId}) collection
+	from MR_ROOM r
+	where status = '1' and r.ecid = #{ecid,jdbcType=VARCHAR} 
+	<orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+	  <if test="isUser != null">
+	  	<if test="whiteList">
+	  and (
+	          (exists (select 1 from MR_PRIVILEGE p where p.type='dept' and #{deptOrder,jdbcType=VARCHAR} like p.dept_order||'%' and p.room_id = r.id))
+	       or (exists (select 1 from MR_PRIVILEGE p where p.type='user' and p.entity_id=#{userId} and p.room_id = r.id))
+           )
+        </if>
+	  	<if test="!whiteList">
+	  and (
+	          (exists (select 1 from MR_PRIVILEGE p where p.type='dept' and #{deptOrder,jdbcType=VARCHAR} like p.dept_order||'%' and p.room_id = r.id))
+	       or (exists (select 1 from MR_PRIVILEGE p where p.type='user' and p.entity_id=#{userId} and p.room_id = r.id))
+           or (0 = (select count(1) from MR_PRIVILEGE p where p.room_id = r.id))
+           )
+        </if>
+	  </if>
+	  <if test="roomIds != null">
+	  and id not in ${roomIds}
+	  </if>
+	  <if test="noData != null">
+	  and 1&lt;&gt;1
+	  </if>
+	  <if test="roomId != null">
+	  and id = #{roomId,jdbcType=VARCHAR}
+      </if>
+	  <if test="reservedStartTime != null and reservedEndTime != null">
+	  and not exists 
+	  (
+	    select 1 from MR_RESERVED re 
+	    where r.id = re.room_id and re.status in ('1','2','a')
+	      and 
+	      (
+			(order_time_begin &lt;= #{reservedStartTime} and #{reservedStartTime} &lt; order_time_end)
+			or 
+			(order_time_begin &lt; #{reservedEndTime} and #{reservedEndTime} &lt;= order_time_end)
+			or
+			(#{reservedStartTime} &lt; order_time_begin and order_time_begin &lt; #{reservedEndTime})
+			or 
+			(#{reservedStartTime} &lt; order_time_end and order_time_end &lt; #{reservedEndTime})
+	      )
+	  )
+      </if>
+	  <if test="name != null">
+	  and name like #{name,jdbcType=VARCHAR}
+      </if>
+	  <if test="address != null">
+	  and address like #{address,jdbcType=VARCHAR}
+      </if>
+	  <if test="capacity != null">
+	  and capacity >= #{capacity,jdbcType=INTEGER}
+      </if>
+	  <if test="projector != null">
+	  and projector = #{projector,jdbcType=VARCHAR}
+      </if>
+	  <if test="display != null">
+	  and display = #{display,jdbcType=VARCHAR}
+      </if>
+	  <if test="microphone != null">
+	  and microphone = #{microphone,jdbcType=VARCHAR}
+      </if>
+	  <if test="stereo != null">
+	  and stereo = #{stereo,jdbcType=VARCHAR}
+      </if>
+	  <if test="wifi != null">
+	  and wifi = #{wifi,jdbcType=VARCHAR}
+      </if>
+    ) a
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+	  <if test="order == null">
+	  order by create_time desc
+	  </if>
+  </select>
+  
+  <!-- 2.0 -->
+  <select id="getMrRoomFormWeb" parameterType="java.util.Map" resultType="GetMrRoom" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  select roomId,roomName,address,area,capacity,projector,display,microphone,stereo,wifi,layout,collection,remarks,roomType 
+  from
+  (
+    select id roomId,name roomName,address,area,capacity,projector,display,microphone,stereo,wifi,layout,create_time,coalesce(remarks,'') remarks
+	      ,(select case when count(1) > 0 then 1 else 0 end from MR_FAVORITE f where f.room_id = r.id and f.user_id = #{userId}) collection
+	      ,(select case when count(1) > 0 then '1' else '0' end from MR_PRIVILEGE p where p.room_id = r.id and p.priv = 'admin') roomType
+	from MR_ROOM r
+	where status = '1' and r.ecid = #{ecid,jdbcType=VARCHAR} 
+	<orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+	  <if test="roomId != null">
+	  and id = #{roomId,jdbcType=VARCHAR}
+      </if>
+	  <if test="name != null">
+	  and name like #{name,jdbcType=VARCHAR}
+      </if>
+	  <if test="address != null">
+	  and address like #{address,jdbcType=VARCHAR}
+      </if>
+	  <if test="projector != null">
+	  and projector = #{projector,jdbcType=VARCHAR}
+      </if>
+	  <if test="display != null">
+	  and display = #{display,jdbcType=VARCHAR}
+      </if>
+	  <if test="microphone != null">
+	  and microphone = #{microphone,jdbcType=VARCHAR}
+      </if>
+	  <if test="stereo != null">
+	  and stereo = #{stereo,jdbcType=VARCHAR}
+      </if>
+	  <if test="wifi != null">
+	  and wifi = #{wifi,jdbcType=VARCHAR}
+      </if>
+    ) a
+    where 1=1
+	  <if test="roomType != null">
+	  and roomType = #{roomType}
+      </if>
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+	  <if test="order == null">
+	  order by create_time desc
+	  </if>
+  </select>
+</mapper>

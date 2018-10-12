@@ -1,0 +1,89 @@
+/**会议室预定管理**/
+.blockInside{
+	margin-bottom: 0;
+}
+.crumb{
+	margin-top: 4px;
+}
+.book-container{
+	width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    .book-aside{
+    	position: relative;
+	    float: left;
+	    border-right: #e8e8e8 1px solid;
+	    width: 245px;
+	    overflow: auto;
+	    display: block;
+	    height: 100%;
+	    .meetinfo-num{
+			width: 220px;
+    		margin-top: 50px;
+    		border-bottom: 1px solid #ccc;
+    		td{
+    			border: 1px solid #ccc;
+    			border-bottom: 0;
+			    height: 35px;
+			    text-align: center;
+			    padding: 5px;
+			    a{
+			    	color: #000;
+			    }
+    		}
+    		td:hover{
+    			background-color: #1788fb;
+    			a{
+    				color: #fff;
+    			}
+    		}
+	    }
+	    .fhicon-search{
+	    	float: left;
+		    font-size: 20px;
+		    margin-top: 16px;
+		    margin-left: 8px;
+	    }
+	    input{
+	    	margin-top: 13px;
+		    text-align: center;
+		    height: 25px;
+		    float: left;
+		    position: relative;
+		    border-radius: 4px;
+		    width: 190px;
+		    border: 1px solid #ccc;
+	    }
+    }
+    .book-main{
+    	margin-left: 260px;
+    	.book-center{
+    		width: 100%;
+    		.search-mod{
+    			height: 54px;
+    			line-height: 43px;
+    		}
+			.search-button{
+				margin: 4px 0 0 22px;
+				a{
+					background-color: #1788fb;
+				    color: white;
+				    border-radius: 20px;
+				    padding: 0 35px;
+				    height: 30px;
+				    line-height: 30px;
+				    display: inline-block;
+				    margin: 0 10px;
+				}
+				a:hover{
+					opacity: 0.5;
+					filter: Alpha(opacity=50);
+				}
+			}
+			.tab-content{
+				margin-top: 17px;
+			}
+    	}
+    }
+}

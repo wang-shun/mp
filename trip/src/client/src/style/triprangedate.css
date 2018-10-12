@@ -1,0 +1,44 @@
+
+.layui-laydate-range {
+    width: 100%!important;
+}
+
+.layui-laydate-list>li, .layui-laydate-range .layui-laydate-main {
+    display: block !important;
+    vertical-align: middle;
+    width: 100%!important;
+}
+
+.layui-laydate-footer {
+    border-top: 1px solid #e2e2e2;
+    width: 100%;
+}
+
+/*.layui-laydate .layui-this {
+    background-color: #2abcbe!important;
+    color: #fff!important;
+}
+
+.layui-laydate-content .laydate-selected {
+	background-color: #e5ceff!important;
+}*/
+
+
+.layui-laydate-content{
+	 width: 100%!important;
+}
+
+.layui-laydate-content table{
+	border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%!important;
+}
+.layui-laydate-content td, .layui-laydate-content th {
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    text-align: center;
+}
+.layui-laydate-footer{
+	display:none ;
+}

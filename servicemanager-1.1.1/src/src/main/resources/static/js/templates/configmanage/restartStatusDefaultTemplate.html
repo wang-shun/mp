@@ -1,0 +1,9 @@
+<% for(var i=0,restartStatusList; restartStatus=restartStatusList[i++];) { %>
+	<!-- <div class="restartStatusResult"><label class="form-item-label restartStatusName"><%=restartStatus.appName%></label><label class="restartStatusExtend">http://<%=restartStatus.ip%>:<%=restartStatus.port%></label><img class="restartStatusImg" src="images/icon/loading.gif"/><label class="restartStatus" style="width:12%">重启中</label></div> -->
+	<tr class="restartStatusResult">
+        <td class="restartStatusName" width="33%"><%=restartStatus.appName%></td>
+        <td class="restartStatusExtend" width="46%">http://<%=restartStatus.ip%>:<%=restartStatus.port%></td>
+        <td class="" width="20%"><img class="restartStatusImg" src="images/icon/loading.gif"/><label class="restartStatus">重启中</label></td>
+    </tr>
+<%}%>
+

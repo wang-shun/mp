@@ -1,0 +1,1 @@
+update MC_SYSTEM set db_user = 'metric' where id='1';

@@ -1,0 +1,85 @@
+<div class="outmain-cons">
+<form id="formMsg">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info" style="width: 96%;">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+
+            <!--<div class="form-item">-->
+                <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+                    <!--<input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="databassType" value="" />-->
+
+            <div class="form-item" style="width: 100%">
+                <label class="form-item-label" style="width: 30%;">请求时长：</label>
+                <label class="form-item-label SID-duration" style="width: 20%;"></label>
+                <label class="form-item-label" style="width: 30%;">服务数：</label>
+                <label class="form-item-label SID-services" style="width: 20%;"></label>
+                <label class="form-item-label" style="width: 30%;">深度：</label>
+                <label class="form-item-label SID-depth" style="width: 20%;"></label>
+                <label class="form-item-label" style="width: 30%;">总请求数：</label>
+                <label class="form-item-label SID-spans" style="width: 20%;"></label>
+            </div>
+            
+            <div class="SID-traceBox">
+            
+            </div>
+            
+            <div class="SID-annotationBox"></div>
+        </div>
+
+    </div>
+</form>
+</div>
+
+<style>
+.traceColor0{
+	background: rgba(66,146,198,0.1);
+}
+.traceColor1{
+	background: rgba(66,146,198,0.2);
+}
+.traceColor2{
+	background: rgba(66,146,198,0.4);
+}
+.traceColor3{
+	background: rgba(66,146,198,0.6);
+}
+.traceColor4{
+	background: rgba(66,146,198,0.8);
+}
+.traceColor5{
+	background: rgba(66,146,198,1);
+}
+.traceRed0{
+	background: rgba(230, 162, 161,0.1);
+}
+.traceRed1{
+	background: rgba(230, 162, 161,0.2);
+}
+.traceRed2{
+	background: rgba(230, 162, 161,0.4);
+}
+.traceRed3{
+	background: rgba(230, 162, 161,0.6);
+}
+.traceRed4{
+	background: rgba(230, 162, 161,0.8);
+}
+.traceRed5{
+	background: rgba(230, 162, 161,1);
+}
+.tracehover{
+	height: 20px;
+	border: 1px solid white;
+}
+.tracehover:hover{
+	background: #eee;
+    border: 1px solid #ccc;
+}
+.even{
+    background-color: #fafafa;
+}
+.stable tr:hover {
+    background-color: #eaf5ff;
+}
+</style>

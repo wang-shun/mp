@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuSurveyMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuSurvey">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="title_html" jdbcType="VARCHAR" property="titleHtml" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="effective_time" jdbcType="DATE" property="effectiveTime" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="target_persons" jdbcType="NUMERIC" property="targetPersons" />
+    <result column="answer_persons" jdbcType="NUMERIC" property="answerPersons" />
+    <result column="push_to" jdbcType="VARCHAR" property="pushTo" />
+    <result column="pager" jdbcType="VARCHAR" property="pager" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modified_time" jdbcType="DATE" property="modifiedTime" />
+  </resultMap>
+  
+  <select id="getSurvey" parameterType="java.util.Map" resultType="SuSurveyPojo">
+  select a.id,a.title,a.status,a.effectiveTime,a.endTime,a.answerPersons,a.targetPersons,a.answered,a.modifiedTime 
+  from 
+  (
+  	select ss.id,ss.title,ss.status,ss.effective_time effectiveTime,ss.answer_persons answerPersons,ss.end_time endTime
+  		  ,ss.target_persons targetPersons,sp.answered ,ss.modified_time modifiedTime
+  		  ,case when sp.answered = '1' and ss.status = '1' then 1 when ss.status = '2' then 2  else 0 end num
+  	from su_survey ss,su_answer_people sp
+  	where ss.status !='0' and ss.id = sp.survey_id and sp.person_id = #{userId}
+  	<if test="ecid != null">
+  		and ss.ecid = #{ecid}
+  	</if>
+  	<if test="curenttimestamp != null">
+  		and ss.effective_time &lt;#{timestamp}
+  	</if>
+  	<if test = "timestamp != null">
+  		and ss.modified_time &lt;#{timestamp}
+  	</if>
+  	<if test="type != null">
+  		and sp.answered = '1'
+  	</if>
+  	) a
+  	order by num,effectiveTime desc,modifiedTime desc
+  </select>
+  
+  <update id="updateSurveyPersons" parameterType="java.lang.String">
+  	update su_survey set answer_persons = answer_persons + 1 
+  	where id = #{surveyId}
+  </update>
+  
+  <select id="getSurveyByQuestion" resultType="SuSurvey">
+  	select id,title,status,effective_time effectiveTime,end_time endTime,answer_persons answerPersons,target_persons targetPersons from su_survey where id = #{surveyId}
+  </select>
+  
+  <select id="getSurveyForWeb" parameterType="java.util.Map" resultType="SuSurveyPojo">
+  	select id,ecid,title,status,effective_time effectiveTime,end_time endTime,answer_persons answerPersons,target_persons targetPersons,create_time createTime
+  	from su_survey ss
+  	where 1=1
+  	<if test="title != null">
+  		and title like '%'||#{title}||'%'
+  	</if>
+  	<if test="status != null">
+  		and status = #{status}
+  	</if>
+  	<if test="ecid != null">
+  		and ecid = #{ecid}
+  	</if>
+  	<if test= "userId != null">
+  		and creator  = #{userId}
+  	</if>
+	<if test="nowDate !=null">
+		and to_char(effective_time,'yyyy-mm-dd') = #{nowDate}
+		and (select count(1) from su_answer_people sap where sap.survey_id = ss.id and sap.notice_status = '0') > 0
+		and push_to = '1'
+	</if>
+	<if test="beginTime !=null and endTime !=null">
+		and effective_time >= #{beginTime} and effective_time &lt;= #{endTime}
+	</if>
+  	<if test="sort != null">
+	  order by ${sort}
+	</if>
+	<if test="sort == null">
+	  order by create_time desc
+	</if>
+  </select>
+  
+  <insert id="copySurvey" parameterType="java.lang.String">
+  	insert into su_survey 
+  	(id,ecid,title,status,effective_time,end_time,target_persons,answer_persons,push_to,creator,create_time,modifier,modified_time)
+  	select #{id},ecid,title,status,effective_time,end_time,target_persons,answer_persons,push_to,creator,create_time,modifier,modified_time
+  	from su_survey where id=#{surveyId}
+  </insert>
+  
+  <update id="closeSurvey" >
+   	update su_survey set status = '2'  where end_time &lt; #{current} and status = '1'
+  </update>
+  
+  <update id="publishSurvey" >
+   	update su_survey set status = '1'  where effective_time &lt; #{current} and status = '0'
+  </update>
+  <!-- v1.1 -->
+  <select id="getMySurvey" parameterType="java.util.Map" resultType="SuSurveyPojo">
+  select a.id,a.title,a.status,a.effectiveTime,a.endTime,a.answerPersons,a.targetPersons,a.answered,a.modifiedTime,a.mystatus  
+  from 
+  (
+  	select ss.id,ss.title,ss.status,ss.effective_time effectiveTime,ss.answer_persons answerPersons,ss.end_time endTime
+  		  ,ss.target_persons targetPersons,sp.answered ,ss.modified_time modifiedTime
+  		  ,case when ss.status='2' and sp.answered = '0' then '3'
+  		  		when sp.answered = '0' then '1'
+  		  		when sp.answered = '1' then '2'
+  		   else '9' end mystatus
+  		  ,case when sp.answered = '1' and ss.status = '1' then 1 when ss.status = '2' then 2  else 0 end num
+  	from su_survey ss,su_answer_people sp
+  	where ss.status !='0' and ss.id = sp.survey_id and sp.person_id = #{userId}
+  	<if test="ecid != null">
+  		and ss.ecid = #{ecid}
+  	</if>
+  	<if test="title != null">
+  		and title like '%'||#{title}||'%'
+  	</if>
+  	<if test="type != null">
+  		and sp.answered = '1'
+  	</if>
+  	) a
+  	where 1=1
+  	<if test="mystatus != null">
+  		and mystatus = #{mystatus}
+  	</if>
+  	<if test="sort != null">
+  	order by ${sort}
+  	</if>
+  	<if test="sort == null">
+  	order by mystatus,effectiveTime desc,modifiedTime desc
+  	</if>
+  </select>
+</mapper>

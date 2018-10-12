@@ -1,0 +1,33 @@
+<!-- 0 不支持 1 文本框必输 2 可跳过 -->
+<% 
+  var hasOther="";
+  var optionRequired="";
+  var hide = "";
+  if (data.customInput == "0") {
+  	hide=" style='display:none;' ";
+  }
+  else if (data.customInput == "1") {
+  	hasOther = " checked='checked' ";
+  } else if (data.customInput == "2") {
+  	hasOther = " checked='checked' ";
+	optionRequired = " checked='checked' ";
+  }
+%>
+<div class="pop-config-box"  style="margin:20px 0 0 0;">
+    <div class="pop-cons" style="margin:0 0 0 30px;">
+        <div class="formBox">
+            <div class="datePush margintTop">
+                <ul>
+                    <li  style="margin-bottom:10px;">
+                        <input type="checkbox" <%=hasOther%> class="input-check SID-hasOther">
+                        <label>选项后增加填空框</label>
+                    </li>
+                    <li <%=hide%> class="SID-optionRequired-li">
+                        <input type="checkbox" <%=optionRequired%> class="input-check SID-optionRequired">
+                        <label>填空框可跳过不答</label>
+                    </li>
+                </ul>
+            </div>
+        </div>        
+    </div>
+</div>

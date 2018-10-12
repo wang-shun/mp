@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'fhicon';
+  src:  url('fonts/fhicon.eot?eerv1b');
+  src:  url('fonts/fhicon.eot?eerv1b#iefix') format('embedded-opentype'),
+    url('fonts/fhicon.ttf?eerv1b') format('truetype'),
+    url('fonts/fhicon.woff?eerv1b') format('woff'),
+    url('fonts/fhicon.svg?eerv1b#fhicon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="fhicon-"], [class*=" fhicon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'fhicon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fhicon-narrowD1:before {
+  content: "\e909";
+}
+.fhicon-back:before {
+  content: "\e900";
+}
+.fhicon-checkBox:before {
+  content: "\e901";
+}
+.fhicon-checkBoxC:before {
+  content: "\e902";
+}
+.fhicon-label:before {
+  content: "\e903";
+}
+.fhicon-radio:before {
+  content: "\e904";
+}
+.fhicon-radioC:before {
+  content: "\e905";
+}
+.fhicon-time:before {
+  content: "\e906";
+}

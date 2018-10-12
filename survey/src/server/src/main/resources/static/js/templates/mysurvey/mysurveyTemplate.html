@@ -1,0 +1,33 @@
+<div class="blockInside SID-survey-list">
+    <div class="crumb crumb-postion">问卷调查 &gt; <span>我的问卷</span><hr class="crumbLine"></div>
+            
+    <div class="tree-container tree-container-nobutton" style="top: 65px;">
+        <div class="searchBlock">
+            <!--关闭查询的时候span标签调用样式fhicon-arrowU2,取消样式hide-->
+            <div class="search-toggleBar">
+                <a class="search-toggle SI-search-toggle">
+                    <span class="icon-set fhicon-arrowD2"></span><span>展开查询</span>
+                </a>
+            </div>
+            <div class="search-modle hide">
+                <div class="search-mod">
+                    <ul class="search-list" style="margin-top: -4px;">
+                        <li class="search-item"><label class="search-label">状态：</label><select class="SID-status" style="border: #e8e8e8 1px solid;width: 170px;box-sizing: border-box;border-radius: 4px;font-size: 12px;color: #333;padding: 0 15px;height: 30px;line-height: 30px;">
+                        	<option value="" selected="selected">全部状态</option><option value="1">未填写</option><option value="2">已填写</option><option value="3">已完成</option>
+                        </select></li>
+                        <li class="search-item"><label class="search-label">标题：</label><input type="text" maxlength="50" class="SID-title" /></li>
+                    </ul>
+                </div>
+                <div class=""><a class="buttonblue SID-search">查询</a><a class="buttonblue SID-clearSearch">清空</a></div>
+            </div>
+        </div>
+        <!-- 表格内容 -->
+        <div class="tableblock" style="margin-bottom: 40px;">
+             <div class="tableblock">
+            	<table id="grid-table" width="100%" class="common-table"></table>
+            </div>	
+        </div>
+    </div>    
+</div>
+<div class="SID-mysurvey-stat">
+</div>

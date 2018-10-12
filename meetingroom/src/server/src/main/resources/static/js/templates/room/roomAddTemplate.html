@@ -1,0 +1,70 @@
+<div class="outmain-cons">
+    <div class="main-cons">
+    <form id="formMsg" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+    <input type="hidden" name="roomId" id="roomId" value=""/>
+    <input type="hidden" name="imagePath" id="imagePath" value=""/>
+        <div class="formBox">
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>会议室名称：</label>
+                <div class="form-item-editbox"><input class="form-item-text {required: true,maxlength:20} " type="text" placeholder="最多输入20个字" id="SID-roomName" name="roomName"/></div>
+            	<div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>面积(m²)：</label>
+                <div class="form-item-editbox"><input class="form-item-text {required: true,range:[1,9999],digits:true}" type="text" placeholder="请输入大于0的整数" id="SID-area" name="area"/></div>
+            	<div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>容纳人数：</label>
+                <div class="form-item-editbox"><input class="form-item-text {required: true,range:[1,9999],digits:true}" type="text" placeholder="请输入大于0的整数" id="SID-capacity" name="capacity"/></div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            <div class="form-item">
+                <label class="form-item-label">设备：</label>
+                <div class="form-item-editbox">
+                    <div class="equipment">
+                        <input type="checkbox" name="projector" id="SID-projector1" value="1"><label for="SID-projector1">投影</label>
+                    </div>
+                    <div class="equipment">
+                        <input type="checkbox" name="display" id="SID-display1" value="1"><label for="SID-display1">显示</label>
+                    </div>
+                    <div class="equipment">
+                        <input type="checkbox" name="microphone" id="SID-microphone1" value="1"><label for="SID-microphone1">麦克风</label>
+                    </div>
+                    <div class="equipment">
+                        <input type="checkbox" name="stereo" id="SID-stereo1" value="1"><label for="SID-stereo1">音响</label>
+                    </div>
+                    <div class="equipment-no">
+                        <input type="checkbox" name="wifi" id="SID-wifi1" value="1"><label for="SID-wifi1">无线网络</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item form-item-wrong">
+                <label class="form-item-label"><span>*</span>地址：</label>
+                <div class="form-item-editbox"><input class="form-item-text {required: true,maxlength:30}" type="text" placeholder="最多输入30个字" id="SID-address" name="address"/></div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            <div class="form-item">
+                <label class="form-item-label">详情：</label>
+                <div class="form-item-editbox"><textarea class="form-item-textarea {maxlength:100}"  placeholder="最多输入100个字" id ="SID-remarks" name="remarks"></textarea></div>
+            	 <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            <div class="form-item">
+                <label class="form-item-label">布局图：</label>
+                <div class="form-item-editbox down">
+                    <div class="form-item-treebox">
+                    	<div class="img-show" style="">
+                            <span class="close">
+                                <i class="fhicon-close2 parentClose"></i>
+                            </span>
+                        </div>
+						<a class="upload-img">点击上传图片</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <div class="SID-upload upload-file">
+    </div>
+</div>
+</div>

@@ -1,0 +1,25 @@
+<% for(var i=0,roomData; roomData=data[i++];) { %>
+<div class="list-li underline">
+	<div class="list-container">
+		<div class="list-title">
+            <span><%=roomData.personName %></span>
+            <small><%=roomData.deptName %></small>
+        </div>
+		<div class="list-row">
+		<% if(roomData.phone != "") { %>
+            <i class="list-icon icon-tel color-primary"></i>
+            <p class="list-font color-primary SID-phone" data-phone="<%=roomData.phone %>">
+               <%=roomData.phone %>
+            </p>
+        <% } %>
+        </div>
+	</div>
+    <% if(roomData.signed=='Y'){ 
+    console.log(roomData.signTimeStr)
+    %>
+    <div class="app-signStauts"><span><%=roomData.signTimeStr.substr(5,11) %></span></div>
+    <% }else{ %>
+	<div class="app-signStauts unsign"><span>未签到</span></div>
+    <% } %>
+</div>
+<% } %>

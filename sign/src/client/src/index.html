@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－签到</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="pageSignList" class="active">
+		<header>
+           <div class="titlebar" style="z-index:99;">
+                <a class="left" id="closeW">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">签到</h1>
+                <a href="select-person.html" class="right">
+                    <i class="icon-chartbar"></i>
+                </a>
+            </div>
+            <div class="date-info animated fadeInDown">
+                <span class="day"></span>
+                <br>  
+                <span class="date"></span>
+                <a href="sign-history.html" class="sign-record button"><i class="icon-file-fill"></i>签到记录</a>
+            </div>
+        </header>
+        <article style="top:124px;bottom:0px;">
+            <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
+                <div class="nodata-content ">
+                    <!-- <img src="img/icon/no-data.png">
+                    <br> -->
+                    暂无签到记录！
+                </div> 
+            </div>
+            <ul class="sign-list" id="signList">
+               <!--  <li class="sign-info">
+                   <div class="clock" data-clock="8:30">
+                       <div class="hour"></div>
+                       <div class="minute"></div>
+                       <div class="origin"></div>
+                   </div>
+                   <span class="time">8:30</span>
+                   <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
+                   <div class="title">我来上班了！！快看我地点!!!! 我来上班了！！快看我地点快看我地点快看我地点快看我地点</div>
+                   <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                   <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                   <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                   <hr> 
+               </li>
+               
+               <li class="sign-info bottom-space"></li> -->
+            </ul>
+        </article>
+        <a href="add-sign.html" class="add-sign-btn animated zoomIn"><i class="icon-position-fill"></i></a>
+	</section>
+<script id="mySignInfo-tpl" type="text/x-handlebars-template">
+{{#each signList}}
+<li class="sign-info" data-sign-id="{{signId}}" data-sign-time="{{signTimeStr}}">
+    <div class="clock" data-clock="{{timer signTimeStr}}">
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="origin"></div>
+    </div>
+    <span class="time">{{timer signTimeStr}}&nbsp;&nbsp;&nbsp;{{taskNo}}</span>
+    <!--<div style="word-wrap: break-word;margin-top:5px;">{{taskNo}}</div>-->
+    <span class="location"><i class="icon-position"></i>{{address}}</span>
+    <div class="title" style="word-wrap: break-word;"><pre>{{content}}</pre></div>
+    {{#each images}}
+    <a class="img-location" style="background-image:url(img/placeholder/placeholder-small.png);" data-bg="{{this}}" data-href="{{this}}"></a>
+    {{/each}}
+    <hr> 
+</li>
+{{/each}} 
+<li class="sign-info bottom-space"></li>          
+</script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="config.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script>
+    var URL = {
+        queryMySign:"&method=mapps.sign.query&format=json&v=1.0&appKey="
+    },
+    Template = {
+        "mySignInfo":$("#mySignInfo-tpl").html()
+    }
+
+    function noData(){
+        var listLength = $("#signList").find(".sign-info").length;
+        if (listLength == 0){
+            container.find(".no-data").removeClass("hidden");
+        }
+    }
+    function getDateDay(){
+        var date = new Date();
+        var weekday=new Array(7);
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
+        if (mm < 10) {
+        	mm = "0" + mm;
+        }
+        if (dd < 10) {
+        	dd = "0" + dd;
+        }
+        var fullDate = yyyy+"-"+mm+"-"+dd;
+        weekday[0]="星期日";
+        weekday[1]="星期一";
+        weekday[2]="星期二";
+        weekday[3]="星期三";
+        weekday[4]="星期四";
+        weekday[5]="星期五";
+        weekday[6]="星期六";
+        //$(".date").html();
+        $(".day").html(weekday[date.getDay()]);
+        $(".date").html(fullDate);
+
+        return yyyy+"-"+mm+"-"+dd;
+    }
+    //初始化function
+    window.addEventListener("load",function(){
+        getDateDay();
+        // var c=DataClock();
+        // queryMySign();
+        bindEvents();
+
+    },false);
+    document.addEventListener("plusready",function(){
+        Mplus.openBackListener();
+    }, false)
+    document.addEventListener("backpressed",function(){
+        back();
+    }, false)
+    function back(){
+        Mplus.closeBackListener();
+        mplus.closeWindow();
+    }
+    function queryMySign(){
+        ajaxModel.getData(URL.queryMySign,{
+            "signDate":getDateStr()//"2016-03-22"
+        }).then(function(res){
+            // alert(JSON.stringify(res));
+            if(res.code === "1"){
+                var data = res.data;
+                if(data.length == 0){
+                    $(".no-data").removeClass("hidden");
+                }else{
+                    $(".no-data").addClass("hidden");
+                    var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
+                    $("#signList").html(html);
+                    DataClock();
+                    lazyloadImg();
+                }
+                
+            }else{
+                new Toast("请求失败").show();
+            }
+        })
+    }
+
+    function getDateStr(){
+        var date = new Date();
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
+        if (mm < 10) {
+        	mm = "0" + mm;
+        }
+        if (dd < 10) {
+        	dd = "0" + dd;
+        }
+        return yyyy+"-"+mm+"-"+dd;
+    }
+
+    function lazyloadImg(container){
+        $("[data-bg],[data-img]").each(function(){
+            (function(s){
+                var img = new Image();
+                var data = $(s).data();
+                if($(s).data("img")){
+                    //img.src = window.photoDownload_m + $(s).data('img');
+                    img.src = $(s).data('img');
+                    img.onload=function(){
+                        $(s).attr('src', img.src);
+                    }
+                }else{
+                    img.src = $(s).data('bg');
+                    //img.src = window.photoDownload_m + $(s).data('bg');
+                    img.onload=function(){
+                        $(s).css("background-image","url(" + img.src + ")");
+                    }
+                }
+                
+            })(this);
+        });
+    }
+    function previewImage(container,clickDom){
+        var $container = $(container),
+            $clickDom = $(clickDom);
+        var urls = [];
+        var current = window.photoDownload + $clickDom.data("href");
+        $container.find("[data-href]").each(function(){
+            (function(s){
+                var url = window.photoDownload + $(s).data("href");
+                urls.push(url);
+            })(this);  
+        })
+        Mplus.previewImage(current,urls);
+    }
+    function bindEvents(){
+        $(document).on("click","#signList .img-location",function(){
+            var $this = $(this)
+            previewImage($this.parents(".sign-info"),$this);
+        });  
+        $("#closeW").click(function(){
+            back()
+        });
+        $("#signList").on("click",".location",function(){
+            var signLi = $(this).parents(".sign-info");
+            var signId = signLi.data("signId"),
+                signTime = signLi.data("signTime").split(/[\s]/)[0];
+            window.location.href="map.html?signId="+signId+"&date="+signTime;
+        });
+    }
+    document.addEventListener("plusready",function(){
+        plusreadyFun()
+    }, false);
+    
+    function plusreadyFun(){
+    	mplus.getServiceAddress({
+    	    success: function (res) {
+    	        var serviceAddress = res.serviceAddress; //应用服务网关地址
+    	        var serviceFinalUrl = serviceAddress+"/mapps-sign/api";
+    	        window.localStorage.setItem("serviceUrl",serviceFinalUrl);
+    	        window.serviceUrl = serviceFinalUrl;
+    	        webViewAfterReady();
+    		},
+    		fail: function (res) {
+    			window.localStorage.setItem("serviceUrl","");
+    			webViewAfterReady();
+    		}
+    	});
+    }
+    
+    function webViewAfterReady(){
+    	var token = NativeObj.getToken();
+        window.localStorage.setItem("sessionId",escape(token));
+        queryMySign();
+    }
+    
+    /*Handlebars*/
+    Handlebars.registerHelper("timer",function(value){
+    	/*var date = new Date(value);
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
+        if (mm < 10) {
+        	mm = "0" + mm;
+        }
+        if (dd < 10) {
+        	dd = "0" + dd;
+        }
+        return yyyy+"-"+mm+"-"+dd;*/
+        return value.split(/[\s]/)[1].substring(0,5);
+    })
+
+	</script>
+</body>
+</html>

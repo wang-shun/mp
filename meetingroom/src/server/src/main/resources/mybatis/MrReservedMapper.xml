@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.meetingroom.dao.MrReservedMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.meetingroom.entity.MrReserved">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="reserved_user_id" jdbcType="VARCHAR" property="reservedUserId" />
+    <result column="reserved_user_name" jdbcType="VARCHAR" property="reservedUserName" />
+    <result column="reserved_user_dept" jdbcType="VARCHAR" property="reservedUserDept" />
+    <result column="reserved_time" jdbcType="TIMESTAMP" property="reservedTime" />
+    <result column="order_time_begin" jdbcType="TIMESTAMP" property="orderTimeBegin" />
+    <result column="order_time_end" jdbcType="TIMESTAMP" property="orderTimeEnd" />
+    <result column="order_duration" jdbcType="NUMERIC" property="orderDuration" />
+    <result column="meeting_name" jdbcType="VARCHAR" property="meetingName" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="reserved_user_dept_id" jdbcType="VARCHAR" property="reservedUserDeptId" />
+    <result column="need_approve" jdbcType="VARCHAR" property="needApprove" />
+    <result column="remarks" jdbcType="VARCHAR" property="reservedRemark" />
+    <result column="participants_num" jdbcType="NUMERIC" property="participantsNum" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="res_remark" jdbcType="VARCHAR" property="resRemark" />
+  </resultMap>
+
+  <select id="getRoomByDo" parameterType="java.util.Map" resultType="Room" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select r.id roomId,r.name roomName 
+    from MR_ROOM r
+    left join MR_RESERVED re on r.id = re.room_id and re.del_flag = '0'
+    where r.ecid = #{ecid,jdbcType=VARCHAR}
+	  and 
+	  <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(re.order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(re.order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+      </choose>
+       = #{reservedDate} 
+	  and re.status in ('1','2','3')
+	  <orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+    group by r.id ,r.name ,r.create_time
+    order by r.create_time desc
+  </select>
+<!-- and to_char(re.order_time_begin,'yyyy-MM-dd') = #{reservedDate} 
+	  and re.status = '1' -->
+  <select id="getReservedDetail" parameterType="java.util.Map" resultType="ReservedDetail" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT reserved_user_id reservedUserId,reserved_user_name reservedUserName,remarks reservedRemark, 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'hh24:mi') 
+    	</otherwise>
+    </choose>
+     starttime,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_end,'hh24:mi') 
+    	</otherwise>
+    </choose>
+     endtime , 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>
+     reservedDate
+          ,meeting_name meetingName,status
+          ,(select name from MR_ROOM r where r.id = room_id) roomName,id reservedId,participants_num participantsNum
+    FROM MR_RESERVED 
+    where del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+    <if test="roomId != null">
+	  and room_id = #{roomId}
+    </if>
+    <if test="status != null">
+	  and status in (${status})
+    </if>
+    <if test="reservedDate != null">
+	  and 
+	  <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+     </choose>
+	   = #{reservedDate}
+    </if>
+    <if test="reservedId != null">
+	  and id = #{reservedId}
+    </if>
+    order by order_time_begin asc
+  </select>
+  
+  <update id="updateStatusSchedule" parameterType="java.util.Map" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    update MR_RESERVED r set status = case when r.order_time_begin &lt;= #{now} and  #{now} &lt;= r.order_time_end then '2'
+                                           when #{now} &gt; r.order_time_end then '3' 
+                                           else '1' 
+                                      end
+    where r.status in ('1','2')
+    <orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+  </update>
+  
+  <select id="selectApproveStatusSchedule" parameterType="java.util.Map" resultType="MrReserved" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select id,room_id roomId,order_time_begin orderTimeBegin,order_time_end orderTimeEnd,reserved_user_name reservedUserName,reserved_user_id reservedUserId,ecid  
+    from MR_RESERVED r
+    where r.status in ('a') and #{now} &gt; r.order_time_begin and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+  </select>
+  
+  <update id="updateApproveStatusSchedule" parameterType="java.util.Map" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    update MR_RESERVED r set status = '4' 
+    where r.status in ('a') and #{now} &gt; r.order_time_begin
+    <orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+  </update>
+  
+  <select id="checkRoomReserved" parameterType="MrReserved" resultType="int" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT count(1) FROM MR_RESERVED 
+    where room_id = #{roomId} and status in ('1','2','a') and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+    <if test="orderTimeBegin != null and orderTimeEnd != null">
+      and (
+		(order_time_begin &lt;= #{orderTimeBegin} and #{orderTimeBegin} &lt; order_time_end)
+		or 
+		(order_time_begin &lt; #{orderTimeEnd} and #{orderTimeEnd} &lt;= order_time_end)
+		or
+		(#{orderTimeBegin} &lt; order_time_begin and order_time_begin &lt; #{orderTimeEnd})
+		or 
+		(#{orderTimeBegin} &lt; order_time_end and order_time_end &lt; #{orderTimeEnd})
+		)
+      </if>
+  </select>
+  
+  <select id="getReservedCountByUser" parameterType="MrReserved" resultType="int" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT count(1) FROM MR_RESERVED 
+    where ecid = #{ecid,jdbcType=VARCHAR} and status = #{status} and order_time_begin &gt; #{orderTimeBegin} and reserved_user_id = #{reservedUserId}
+      and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+  </select>
+  
+  <select id="getReservedDates" parameterType="java.util.Map" resultType="ReservedDate" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>
+    reservedDate 
+    FROM MR_RESERVED 
+    where room_id = #{roomId} and status in ('1','2')
+      and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+    group by 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>
+  </select>
+  
+  <select id="getReservedTimes" parameterType="java.util.Map" resultType="ReservedTime" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'hh24:mi') 
+    	</otherwise>
+    </choose>
+    starttime,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_end,'hh24:mi') 
+    	</otherwise>
+    </choose>
+    endtime ,order_duration duration 
+    FROM MR_RESERVED 
+    where room_id = #{roomId} and status in ('1','2') and 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>
+     = #{reservedDate}
+      and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+  </select>
+  
+  <select id="getReservedByDay" parameterType="java.util.Map" resultType="MrReserved" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+  <if test="roomId != null">
+    select roomId from (
+  </if>
+    SELECT room_id roomId,order_time_end orderTimeEnd,order_duration orderDuration
+    ,case when order_time_begin &lt; 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		UNIX_TIMESTAMP(
+			    STR_TO_DATE(#{reservedTime}, '%Y-%m-%d %H:%i')
+			)
+    	</when>
+    	<otherwise>
+    		to_timestamp(#{reservedTime},'yyyy-mm-dd hh24:mi') 
+    	</otherwise>
+    </choose>
+          and 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		UNIX_TIMESTAMP(
+			    STR_TO_DATE(#{reservedTime}, '%Y-%m-%d %H:%i')
+			)
+    	</when>
+    	<otherwise>
+    		to_timestamp(#{reservedTime},'yyyy-mm-dd hh24:mi') 
+    	</otherwise>
+    </choose>      
+          &lt; order_time_end 
+          then 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		UNIX_TIMESTAMP(
+			    STR_TO_DATE(#{reservedTime}, '%Y-%m-%d %H:%i')
+			)
+    	</when>
+    	<otherwise>
+    		to_timestamp(#{reservedTime},'yyyy-mm-dd hh24:mi') 
+    	</otherwise>
+    </choose>      
+          else order_time_begin 
+          end orderTimeBegin
+    FROM MR_RESERVED 
+    where status in ('1','2') and 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>
+     = #{reservedDate}
+      and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+  <if test="roomId != null">
+  ) a group by roomId
+  </if>
+  </select>
+  
+  <select id="getMrReserved" parameterType="java.util.Map" resultType="GetMrReserved" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select r.id roomId,r.name roomName,r.address,re.id reservedId,meeting_name meetingName,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-mm-dd') 
+    	</otherwise>
+    </choose>
+          reservedDate,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'hh24:mi') 
+    	</otherwise>
+    </choose>     
+          reservedStartTime,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_end,'hh24:mi') 
+    	</otherwise>
+    </choose>       
+          reservedEndTime,re.status,re.reserved_user_name displayName,re.reserved_user_dept depName,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(re.reserved_time,'%Y-%m-%d %H:%i:%s') 
+    	</when>
+    	<otherwise>
+    		to_char(re.reserved_time,'yyyy-mm-dd hh24:mi:ss') 
+    	</otherwise>
+    </choose>          
+          createTime,re.reserved_user_id reservedUserId,re.remarks reservedRemark,re.participants_num participantsNum
+	from MR_ROOM r,MR_RESERVED re
+	where r.status = '1' and r.ecid = #{ecid,jdbcType=VARCHAR} and r.id = re.room_id and re.status in ('1','2','3','4')
+	  and re.del_flag = '0'
+	<orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+	<orgdepfilter prefix="and" deporder="re.org_dept_order"/>
+      <if test="startDate != null">
+	  and re.order_time_begin &gt; #{startDate}
+      </if>
+      <if test="endDate != null">
+	  and re.order_time_end &lt;= #{endDate}
+      </if>
+      <if test="displayName != null">
+	  and re.reserved_user_name like #{displayName}
+      </if>
+      <if test="depName != null">
+	  and re.reserved_user_dept like #{depName}
+      </if>
+	  <if test="userId != null">
+	  and re.reserved_user_id = #{userId}
+      </if>
+	  <if test="status != null">
+	  and re.status in (${status})
+      </if>
+      <if test="roomId != null">
+	  and r.id = #{roomId}
+      </if>
+      <if test="queryTerm != null">
+	  and (r.name like #{queryTerm} or r.address like #{queryTerm} or re.meeting_name like #{queryTerm})
+      </if>
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+      <if test="order == null">
+	  order by case when re.status='2' then '1' when re.status='1' then '2' else re.status end asc,order_time_begin asc
+	  </if>
+  </select>
+  
+  <!-- 2.0 新增 -->
+  <select id="getReviewForReserved" parameterType="java.util.Map" resultType="GetMrReserved" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select r.id roomId,r.name roomName,r.address,re.id reservedId,meeting_name meetingName,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-mm-dd') 
+    	</otherwise>
+    </choose>
+          reservedDate,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'hh24:mi') 
+    	</otherwise>
+    </choose>      
+          reservedStartTime,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_end,'hh24:mi') 
+    	</otherwise>
+    </choose>       
+          reservedEndTime
+          ,re.status,re.reserved_user_name displayName,re.reserved_user_dept depName,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%Y-%m-%d %H:%i:%s') 
+    	</when>
+    	<otherwise>
+    		to_char(re.reserved_time,'yyyy-mm-dd hh24:mi:ss') 
+    	</otherwise>
+    </choose>        
+          createTime
+          ,re.remarks reservedRemark
+          ,ai.approved,re.reserved_user_id reservedUserId,ai.approve_result approveResult ,re.participants_num participantsNum 
+	from MR_ROOM r,MR_RESERVED re,MR_APPROVE_INFO ai
+	where r.status = '1' and r.ecid = #{ecid,jdbcType=VARCHAR} and r.id = re.room_id
+	  and ai.reserved_id = re.id and ai.user_id = #{userId}
+	  and ai.approve_time &lt;= #{time}
+	  and re.status in ('1','2','3','a','r')
+	  and #{now} &lt; re.order_time_begin
+	  and re.del_flag = '0'
+	  <orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+	  <orgdepfilter prefix="and" deporder="re.org_dept_order"/>
+	  <if test="approved != null">
+	  and ai.approved in (${approved})
+      </if>
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+      <if test="order == null">
+	  order by ai.approved asc,approve_time asc
+	  </if>
+  </select>
+  
+  <select id="getReservedDatesV20" parameterType="java.util.Map" resultType="ReservedDate" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>
+    reservedDate 
+    FROM MR_RESERVED 
+    where room_id = #{roomId} and status in ('1','2','a')
+      and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+    group by 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>
+  </select>
+  
+  <select id="getReservedTimesV20" parameterType="java.util.Map" resultType="ReservedTime" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'hh24:mi') 
+    	</otherwise>
+    </choose>
+          starttime,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_end,'hh24:mi') 
+    	</otherwise>
+    </choose>      
+          endtime 
+          ,order_duration duration 
+    FROM MR_RESERVED 
+    where room_id = #{roomId} and status in ('1','2','a') and 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>    
+       = #{reservedDate}
+      and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+  </select>
+  
+  <select id="getReservedStatus" parameterType="java.util.Map" resultType="ReservedStatus" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT re.status,ai.approved
+    FROM MR_RESERVED re ,MR_APPROVE_INFO ai
+    where re.id = ai.reserved_id
+      and re.del_flag = '0'
+    <orgdepfilter prefix="and" deporder="re.org_dept_order"/>
+    <if test="userId != null">
+	  and ai.user_id = #{userId}
+    </if>
+    <if test="reservedId != null">
+	  and re.id = #{reservedId}
+    </if>
+  </select>
+  
+  <select id="getReservedDetailOne" parameterType="java.util.Map" resultType="ReservedDetail" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    SELECT reserved_user_id reservedUserId,reserved_user_name reservedUserName,remarks reservedRemark, 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'hh24:mi') 
+    	</otherwise>
+    </choose> 
+          starttime,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_end,'hh24:mi') 
+    	</otherwise>
+    </choose>      
+          endtime , 
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-MM-dd') 
+    	</otherwise>
+    </choose>        
+          reservedDate
+          ,meeting_name meetingName
+          ,(select name from MR_ROOM r where r.id = room_id) roomName
+          ,(select ai.approve_result from MR_APPROVE_INFO ai where id = ai.reserved_id and user_id=#{userId,jdbcType=VARCHAR} ) approveResult
+          ,participants_num participantsNum
+    FROM MR_RESERVED 
+    where id = #{reservedId} and del_flag = '0'
+    <orgdepfilter prefix="and" deporder="org_dept_order"/>
+  </select>
+  
+  <select id="getMrReservedV20" parameterType="java.util.Map" resultType="GetMrReserved" lang="com.fiberhome.mapps.intergration.mybatis.MyLanguageDriver">
+    select r.id roomId,r.name roomName,r.address,re.id reservedId,meeting_name meetingName,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%Y-%m-%d') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'yyyy-mm-dd') 
+    	</otherwise>
+    </choose>
+          reservedDate,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_begin,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_begin,'hh24:mi') 
+    	</otherwise>
+    </choose>      
+          reservedStartTime,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(order_time_end,'%H:%i') 
+    	</when>
+    	<otherwise>
+    		to_char(order_time_end,'hh24:mi') 
+    	</otherwise>
+    </choose>           
+          reservedEndTime
+          ,re.status,re.reserved_user_name displayName,re.reserved_user_dept depName,
+    <choose>
+    	<when test="databaseType == 'db/mysql'">
+    		date_format(re.reserved_time,'%Y-%m-%d %H:%i:%s') 
+    	</when>
+    	<otherwise>
+    		to_char(re.reserved_time,'yyyy-mm-dd hh24:mi:ss') 
+    	</otherwise>
+    </choose>      
+          createTime
+          ,re.reserved_user_id reservedUserId,re.remarks reservedRemark
+          ,coalesce((select approved from MR_APPROVE_INFO mai where re.id = mai.reserved_id and mai.user_id = #{loginUserId,jdbcType=VARCHAR}),'1') approved
+          ,re.participants_num participantsNum
+	from MR_ROOM r,MR_RESERVED re
+	where r.status = '1' and r.ecid = #{ecid,jdbcType=VARCHAR} and r.id = re.room_id and re.status in ('1','2','3','4','a','r')
+	  and re.del_flag = '0'
+	<orgdepfilter prefix="and" deporder="r.org_dept_order"/>
+	<orgdepfilter prefix="and" deporder="re.org_dept_order"/>
+      <if test="startDate != null">
+	  and re.order_time_begin &gt; #{startDate}
+      </if>
+      <if test="endDate != null">
+	  and re.order_time_end &lt;= #{endDate}
+      </if>
+      <if test="now != null">
+	  and re.order_time_end &gt; #{now}
+      </if>
+      <if test="displayName != null">
+	  and re.reserved_user_name like #{displayName}
+      </if>
+      <if test="depName != null">
+	  and re.reserved_user_dept like #{depName}
+      </if>
+	  <if test="userId != null">
+	  and re.reserved_user_id = #{userId}
+      </if>
+	  <if test="status != null">
+	  and re.status in (${status})
+      </if>
+      <if test="roomId != null">
+	  and r.id = #{roomId}
+      </if>
+      <if test="queryTerm != null">
+	  and (r.name like #{queryTerm} or r.address like #{queryTerm} or re.meeting_name like #{queryTerm})
+      </if>
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+      <if test="order == null">
+	  order by case when re.status='2' then '01' 
+	                when re.status='1' then '02'
+	                when re.status='a' then '03' 
+	                when re.status='3' then '04' 
+	                when re.status='4' then '05' 
+	                when re.status='r' then '06' 
+	                else re.status||'0' end asc,order_time_begin asc
+	  </if>
+  </select>
+  
+  <update id="clearData" parameterType="java.util.Map">
+    update MR_RESERVED set del_flag = '1' where status in ('3','4','r') 
+    and #{now} &gt; order_time_begin
+  </update>
+</mapper>

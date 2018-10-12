@@ -1,0 +1,7 @@
+version: "2"
+services:
+  service:
+     image: n01.docker.ip:5000/mapps/${project.name}
+     network_mode: host
+     volumes:
+       - "./config:/root/config"

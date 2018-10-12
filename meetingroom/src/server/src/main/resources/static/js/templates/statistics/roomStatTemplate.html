@@ -1,0 +1,20 @@
+<div class="statistic-mod ser">
+    <div class="search-list">
+        <label class="search-label">统计日期：</label>
+        <label class="search-label"><a class="SID-day">当日</a></label>
+        <label class="search-label"><a class="SID-week">本周</a></label>
+        <label class="search-label"><a class="SID-month">本月</a></label>
+        <input type="text" class="choose-date SID-beginDate" name="from" id="from" readonly="readonly"/>~<input type="text" class="choose-date SID-endDate" id="to" name="to" readonly="readonly"/>
+        <div class="search-button SID-search"><a>查询</a></div>
+    </div>
+</div>
+<hr class="crumbLine" />
+<div class="normal-checkblock">
+    <div class="histogram" id="analysis-Chart" style="width:900px;height:360px;">
+    </div>
+    <div class="text-name out"><a class="SID-export">导出</a></div>
+    <div class="histogram">
+      <!-- 里面table内容根据需要替换 -->
+      <table id="grid-table" width="100%" class="common-table"></table>
+    </div>
+</div>

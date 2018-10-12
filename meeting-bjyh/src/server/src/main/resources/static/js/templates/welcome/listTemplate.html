@@ -1,0 +1,78 @@
+<% if (room && room.length < 1) {%>
+<div class="schedule-row"><div class="schedule-name" style="border-width: 0 0 0 0;">无会议室预定</div></div>
+<% } %>
+<% for(var i=0,roomData; roomData=room[i++];) { %>
+			<div class="schedule-row">
+				<div class="schedule-name"><%=roomData.roomName%></div>
+				<div class="schedule-content">
+					<div class="schedule-space">&nbsp;</div>
+					<div class="schedule-timepart">
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<label class="timepart-part"></label>
+						<% for(var j=0,reservedData; reservedData=roomData.reservedDetailList[j++];) { %>
+						<div class="schedule-timepart-progress" style="
+						<% if (reservedData.status=="1") { %>
+						background-color:#01cd78;color:white;
+						<% } else if (reservedData.status=="2") { %>
+						background-color:#ffa274;color:white;
+						<% } else if (reservedData.status=="3") { %>
+						background-color:#40ccfa;color:white;
+						<% } %>
+						" data-start="<%=reservedData.starttime%>" data-end="<%=reservedData.endtime%>">
+							<p><%=reservedData.reservedUserName%></p>
+							<div class="schedule-pop">
+								<table cellpadding="0" cellspacing="0">
+									<tr>
+										<td style="width: 90px;">预定人</td>
+										<td><%=reservedData.reservedUserName%></td>
+									</tr>
+									<tr>
+										<td style="width: 90px;">所属部门</td>
+										<td><%=reservedData.deptName%></td>
+									</tr>
+									<tr>
+										<td>联系方式</td>
+										<td><%=reservedData.phoneNum%></td>
+									</tr>
+									<tr>
+										<td>开始时间</td>
+										<td><%=reservedData.starttime%></td>
+									</tr>
+									<tr>
+										<td>结束时间</td>
+										<td><%=reservedData.endtime%></td>
+									</tr>
+									<tr>
+										<td>会议名称</td>
+										<td><%=reservedData.meetingName%></td>
+									</tr>
+									<tr>
+										<td>预定状态</td>
+										<td><% if (reservedData.status=="1") { %>准备中<% } else if (reservedData.status=="2") { %>使用中<% } else if (reservedData.status=="3") { %>已结束<% } %></td>
+									</tr>
+									<tr>
+										<td>会议备注</td>
+										<td><%=reservedData.reservedRemark%></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<% } %>
+					</div>
+					<div class="schedule-space">&nbsp;</div>
+				</div>
+			</div>
+<% } %>

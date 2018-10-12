@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mapps-servicemanager     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.160.72:3306/sm2?characterEncoding=UTF-8
+    username: mapps
+    password: FHuma025 
+      
+flywaydb: 
+  locations: db/mysql

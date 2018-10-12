@@ -1,0 +1,46 @@
+<ul class="list">
+    <% for(var i=0,roomData; roomData=data[i++];) { %>
+    <li class="underline list-li SID-Check-Li" data-reservedId="<%=roomData.reservedId %>">
+        <div class="list-container">
+            <div class="list-title app-rowTitle">
+                <%=roomData.roomName %>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-label color-primary"></i>
+                <p class="list-font" style="color: #333;">
+                   <%=roomData.meetingName %>
+                </p>
+            </div>
+            <div class="list-row">
+                <i class="list-icon icon-time color-primary"></i>
+                <p class="list-font"><%=roomData.reservedStartTime %> ~ <%=roomData.reservedEndTime %></p>
+            </div>
+        </div>
+        <div>
+            <% if (roomData.approved=="0" || roomData.status=="a"){ %>
+                <!--待审批-->
+                        <div class="doughtut yellow rotate15" style="margin:0 auto;">
+                            <div class="doughtut-wrapper left">
+                                <div class="doughtut-circle left"></div>
+                            </div>
+                            <div class="doughtut-wrapper right">
+                                <div class="doughtut-circle right"></div>
+                            </div>
+                            <div class="doughtut-label">待审批</div>
+                        </div>
+            <% }else{ %>
+                <!--未批准-->
+                <div class="doughtut red rotate360" style="margin:0 auto;">
+                    <div class="doughtut-wrapper left">
+                        <div class="doughtut-circle left"></div>
+                    </div>
+                    <div class="doughtut-wrapper right">
+                        <div class="doughtut-circle right"></div>
+                    </div>
+                    <div class="doughtut-label">已审批</div>
+                </div>
+            <% } %>
+        </div>
+    </li>
+    <% } %>
+</ul>

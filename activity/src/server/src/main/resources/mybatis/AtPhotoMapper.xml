@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.activity.dao.AtPhotoMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.activity.entity.AtPhoto" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="phone_id" property="phoneId" jdbcType="VARCHAR" />
+    <result column="act_id" property="actId" jdbcType="VARCHAR" />
+    <result column="phone_route" property="phoneRoute" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="NUMERIC" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

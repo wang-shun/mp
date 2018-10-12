@@ -1,0 +1,209 @@
+//弹出框通用样式
+.outmain-cons{
+	margin:10px;
+	.rule-steps{
+		height:60px; width:100%; text-align:center; padding:15px 0;
+		.devRuleCss{
+			font-size:$fontSizeSs; line-height:20px; display:inline-block; text-align:center; color:$fontColorDarkS;
+			span{
+				@extend .relative; display:inline-block; color:#dbe4ec; font-size:48px; font-family:helvetica, arial;
+				i{ @extend .absolute; top:13px; left:19px; color:#fff; font-size:18px; display:inline-block; font-style:normal;}
+			}
+		}
+		.devRuleCss_now{
+			color:$colorMain;
+			span{ color:$colorMain;}
+		}
+		.devRuleCss_preterite{
+			color:#86d36b;
+			span{ color:#86d36b;}
+		}
+		.devRuleLine{ border-top:#dbe4ec 2px solid; display:inline-block; width:80px; vertical-align:top; margin:19px 0 0 0;}
+		.devRuleLine_now{ border-color:$colorMain;}
+		.devRuleLine_preterite{ border-color:#86d36b;}
+	}
+	.main-cons{
+		.main-cons-bar{
+			margin: 10px 0;
+			.main-cons-span{ display:inline-block; margin:0 10px 0 0;}			
+		}
+		.button-mask{ padding:0 20px;}
+		.memblock{
+			border:$borderLinecolor 1px solid; min-height:300px;
+			.list{
+				li{
+					a{
+						display:block; padding:0 10px;
+						&:hover{ background-color:#f3f3f3;}
+					}
+				}
+				li.select{
+					a{ background-color:#f3f3f3;}
+				}
+			}
+			.list-checkbox{
+				li{
+					padding:0 10px;
+					input[type=checkbox]{ margin:0 5px 0 0;}
+				}
+			}
+		}
+	}
+}
+//弹出框通用样式--左右结构
+.pop-config-box{
+	@extend .absolute;
+	top:40px;
+	bottom:54px;
+	left:0;
+	right:0;
+	.pop-aside{
+		background-color:$buttonColor;
+		width:130px;
+		float:left;
+		padding-top:26px;
+		border-color: #e0e0e0;
+	    border-style: solid;
+	    border-width: 0 1px 1px 0;
+	    box-sizing:border-box;
+	    height: 100%;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+		.pop-asidelist{
+			border-bottom:$borderLineColorSubmenu 1px solid;
+			li{
+				a{
+					@extend .relative;
+					color: $fontColorDarkT;
+					height: $buttonHeight-leftsublist;
+					line-height: $buttonHeight-leftsublist;
+					border-top:$borderLineColorSubmenu 1px solid;
+					display: block;
+					padding:0 5px 0 20px;
+					.line{
+						@extend .absolute;
+						background-color:$buttonColor;
+						width: 2px;
+						left:0;
+						top:0;
+						bottom:0;
+					}
+					&:hover{
+						@extend .bold; color:$colorMain; background-color:#fafafa;margin-right: -1px;
+						.line{
+							background-color:$buttonLineColorH;
+						}
+					}
+				}
+			}
+			.active{				
+				a{
+					@extend .bold;
+					color:$colorMain;
+					background-color:#fafafa;
+					margin-right: -1px;
+					.line{
+						background-color:$buttonLineColorH;
+					}
+				}
+			}
+		}
+	}
+	.pop-cons{
+		margin:0 10px 0 140px; height:100%; overflow:auto;
+		.button-mask{ padding:0 20px;}
+		.memblock{
+			border:$borderLinecolor 1px solid; min-height:200px;
+			.list{
+				li{
+					a{
+						display:block; padding:0 10px;
+						&:hover{ background-color:#f3f3f3;}
+					}
+				}
+				li.select{
+					a{ background-color:#f3f3f3;}
+				}
+			}
+			.list-checkbox{
+				li{
+					padding:0 10px;
+					input[type=checkbox]{ margin:0 5px 0 0;}
+				}
+			}
+		}
+		.rolePriv{
+			width:96%; margin:0 auto;
+			.rolePriv_node1{
+				li{
+					@extend .relative;
+					background:url(#{$path}/images/user/rolePriv_nodeline.png) repeat-x 0 7px; width:100%; overflow:hidden; padding:5px 0;
+					.rolePriv_node_arrow{
+						@extend .bold; @extend .absolute;
+						color:$colorMain; top:5px; right:0; background:#fff; padding-left:10px; font-size:$fontSizeBig;
+					}
+					.rolePriv_nodebar{
+						label{
+							background:#fff; padding-right:10px;
+							input[type=checkbox]{ margin:0 5px 0 0; vertical-align:-1px;}
+						}
+					}
+					.rolePriv_node2{
+						padding:0 0 0 20px;
+						li{
+							background:none;
+							float:left; display:inline-block; width:100%;
+							label{
+								input[type=checkbox]{ margin:0 5px 0 0; vertical-align:-1px;}
+							}
+							.rolePriv_node3{
+								padding:0 0 0 20px;
+								li{
+									float:left; display:inline; width:auto;
+									label{
+										margin:0 20px 0 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.groupList{
+	width:90%; margin:0 auto;
+	.group-item{
+		@extend .left; width:30%; margin: 20px 1.5%; border:$borderLinecolor 1px solid;
+		.group-hd{color:$colorMain; border-bottom:$borderLinecolor 1px solid; padding:5px 10px;}
+		.group-bd{
+			padding:5px 10px; height:120px; overflow: auto;
+			.group-label{
+				display:inline-block; padding:5px 0;
+				input{ margin: 0 5px 0 0;}
+			}
+		}
+	}
+}
+
+//弹出框列表模型
+.popmaskTree{
+	width:100%; border-top:$borderLinecolor 1px solid; margin:20px 0 0 0;
+	.inner-aside{
+		@extend .absolute; float:left; border-right:$borderLinecolor 1px solid; width:250px; padding-right:10px; overflow:auto; display:block; height:100%;
+		.aside-top{
+			margin:10px 0 0 0; width:100%;
+			input[type=checkbox]{ margin:0 5px 0 0;}
+		}
+	}
+	.inner-main{
+		margin: 0 0 0 261px;
+		padding:0 0 0 10px;
+		.inner-center{
+			width:100%;
+		}				
+	}
+}
+
+

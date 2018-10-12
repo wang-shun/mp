@@ -1,0 +1,213 @@
+servicemanager:
+  endpoint: http://sm.mapps.ip:8761
+
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: ${servicemanager.endpoint}/eureka
+    healthcheck:
+      enabled: true    
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}  
+    metadataMap:
+      appName: 活动报名                            # 应用名称
+      logo: /logo.png                          # 应用logo 
+      remarks: 描述                             # 应用描述
+      mgr-port: ${management.port}                  # 管理端口
+      mgr-context-path: ${management.context-path}  # 管理endpoint的context path
+      configProperties:                         # 配置属性
+        - key: mail.host
+          name: 发件服务器地址
+          type: text
+          remark: 发件服务器的域名或ip(不含http://或https://头)
+          size: 255
+          options: null
+          regex: \S+
+          group: 通用设置
+          default: null
+        - key: mail.account
+          name: 发件邮箱账号
+          type: text
+          remark: 报名表发送邮箱的账号
+          size: 255
+          options: null
+          regex: ^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$
+          group: 通用设置
+          default: null
+        - key: mail.password
+          name: 发件邮箱密码
+          type: text
+          remark: 报名表发送邮箱的密码
+          size: 255
+          options: null
+          regex: 
+          group: 通用设置
+          default: null
+        - key: workcircle.id
+          name: 工作圈接入id
+          type: text
+          remark: 工作圈的accessid
+          size: 255
+          options: null
+          regex: 
+          group: 通用设置
+          default: 250446ef-9e17-4fa3-bd5e-b80419d77183
+        - key: activity.im-on-off
+          name: im开关
+          type: radio
+          remark: 是否启用im聊天
+          size: 255
+          options: true:开,false:关
+          regex: "(true)|(false)"
+          group: 通用设置
+          default: true
+      dependencies:
+        services: mapps-fileservice,mapps-imsg,mapps-contacts
+        resources:
+          database: default
+          redis: default
+          mplus: default
+      
+jdbc-url:
+  oracle: jdbc:oracle:thin:@${resources.database.default.host:}:${resources.database.default.port:1521}:${resources.database.default.db:}
+  postgresql: jdbc:postgresql://${resources.database.default.host:}:${resources.database.default.port:5432}/${resources.database.default.db:}
+  mysql: jdbc:mysql://${resources.database.default.host:}:${resources.database.default.port:3306}/${resources.database.default.db:}?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+
+spring:  
+  application:
+    name: mapps-activity     
+  jmx:
+    enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${jdbc-url.${resources.database.default.type:postgresql}}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}
+  redis:
+    database: ${resources.redis.default.dbIndex:0} # Redis数据库索引（默认为0）
+    host: ${resources.redis.default.host:default.redis.ip}
+    port: ${resources.redis.default.port:6379}
+    password: ${resources.redis.default.password:}   # Redis服务器连接密码（默认为空）
+    pool:
+      max-active: 1 # 连接池最大连接数（使用负值表示没有限制）
+      max-waite: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 10 # 连接池中的最大空闲连接
+      min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 5000 # 连接超时时间（毫秒）
+    
+server: 
+  port: 18012    
+  
+management:
+  context-path: /__mng__
+  port: 38012
+
+endpoints:
+  restart:
+    enabled: true
+
+sqllocaltion:
+  oracle: db/oracle
+  postgresql: db/migration
+  mysql: db/mysql
+    
+flywaydb:
+  locations: ${sqllocaltion.${resources.database.default.type:postgresql}} 
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.activity.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.fileservice.file.upload
+      - mapps.activity.one.add
+      - mapps.activity.one.delete
+      - mapps.activity.list.query
+      - mapps.activity.list.queryMyEnter
+      - mapps.activity.one.enter
+      - mapps.activity.list.queryEnter
+      - mapps.activity.list.queryMyCreate
+      - mapps.activity.privilege.add
+      - mapps.activity.privilege.query
+      - mapps.activity.group.join
+      - mapps.thirdpart.mobileark.createImGroup
+      - mapps.thirdpart.mobileark.joingroup
+      - mapps.thirdpart.mobileark.getpersondocs
+      - mapps.thirdpart.mobileark.getdocurl
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.thirdpart.mobileark.getlimtedusers
+      - mapps.activity.exportEnter
+      - mapps.activity.circle.share
+    user: 
+      - mapps.fileservice.file.upload
+      - mapps.activity.one.add
+      - mapps.activity.one.delete
+      - mapps.activity.list.query
+      - mapps.activity.list.queryMyEnter
+      - mapps.activity.list.queryMyCreate
+      - mapps.activity.one.enter
+      - mapps.activity.list.queryEnter
+      - mapps.activity.privilege.add
+      - mapps.activity.privilege.query
+      - mapps.activity.group.join
+      - mapps.thirdpart.mobileark.createImGroup
+      - mapps.thirdpart.mobileark.joingroup
+      - mapps.thirdpart.mobileark.getpersondocs
+      - mapps.thirdpart.mobileark.getdocurl
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.activity.exportEnter
+      - mapps.activity.circle.share
+
+
+mplus: 
+  sso:
+    serviceUrl: ${resources.mplus.default.mplus.sso.serviceUrl:}
+    appKey: ${resources.mplus.default.mplus.sso.appKey:}
+    secret: ${resources.mplus.default.mplus.sso.secret:}
+    appId: mapps-activity
+    appType: 4
+  login:
+    serviceUrl: ${resources.mplus.default.mplus.login.serviceUrl:}
+    loginPage: ${resources.mplus.default.mplus.login.loginPage:}
+  imsg:
+    serviceUrl: ${services.mapps-imsg.serviceUrl:}/api  #http://192.168.160.72:7777/mos/api  
+  contacts:
+    serviceUrl: ${services.mapps-contacts.serviceUrl:}/api  #http://192.168.160.72:7777/mos/api  
+    
+services: 
+  fileservice:
+    serviceUrl: ${services.mapps-fileservice.serviceUrl:}/api
+    appKey: ${services.mapps-fileservice.appkey:}
+    appSecret: ${services.mapps-fileservice.secret:}
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+  
+client: 
+  appId: activity
+  appName: 活动报名
+
+mail: 
+  host: 192.168.100.4
+  account: liyanwei@nj.fiberhome.com.cn
+  password: r4408866
+  
+logging:
+  path: logs 
+  
+workcircle: 
+  id: 250446ef-9e17-4fa3-bd5e-b80419d77183
+  
+activity:
+  im-on-off: false # im开关

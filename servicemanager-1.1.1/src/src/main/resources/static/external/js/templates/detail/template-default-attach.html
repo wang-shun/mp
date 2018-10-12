@@ -1,0 +1,53 @@
+<ul class="attach-list">
+<% for(var i=0; attachData=attachmentList[i++];) { %>
+	<li>
+		<div class="attach-list-licon">
+			<i class='icon
+	        <% if(attachData.contentType=="png" || attachData.contentType=="jpg" || attachData.contentType=="gif"){ %> 
+	        	attach-icon-typepic
+	        <% }else if(attachData.contentType=="mp3"){ %>
+	        	attach-icon-typeaudio
+	        <% }else if(attachData.contentType=="mp4"){ %> 
+	        	attach-icon-typevideo
+	        <% }else if(attachData.contentType=="pdf"){ %>
+	        	attach-icon-typepdf
+	        <% }else if(attachData.contentType=="doc" || attachData.contentType=="docx"){ %>
+	        	attach-icon-typeword
+	        <% }else if(attachData.contentType=="xls" || attachData.contentType=="xlsx"){ %>
+	        	attach-icon-typeexcel
+	        <% }else if(attachData.contentType=="ppt"){ %>
+	        	attach-icon-typeppt
+	        <% }else if(attachData.contentType=="rar" || attachData.contentType=="zip"){ %>
+	        	attach-icon-typepack
+	        <% }else if(attachData.contentType=="md" || attachData.contentType=="txt"){ %>
+	        	attach-icon-typetxt
+	        <% }else if(attachData.contentType=="pdf"){ %>
+	        	attach-icon-typepdf
+	        <% }else if(attachData.contentType=="dps"){ %>
+	        	attach-icon-typedps
+	        <% }else{ %>
+	        	attach-icon-typeunknow
+	        <% } %>
+	        '></i>
+		</div>
+		<div class="attach-list-content">
+			<p class="nowrap" style="width: 100%;">
+			<%=attachData.fileName%>.<%=attachData.contentType%>
+			</p>
+		</div>
+		<!-- <% if(attachData.contentType=="jpg" || attachData.contentType=="png" || attachData.contentType=="gif" 
+			            || attachData.contentType=="jpeg" && attachData.contentType=="bmp" ){ 
+			        %>
+		<div class="attach-list-ricon SID-getDoc" data-id="<%=attachData.filePath%>" data-value="1">
+			<i class="icon icon-rdototop"></i>
+			<small>发送</small>
+		</div>
+		<% } %> -->
+		<div class="attach-list-ricon SID-getDoc" data-id="<%=attachData.filePath%>" data-value="0">
+			<i class="icon icon-rdotobottom"></i>
+			<small>下载</small>
+		</div>
+			<!-- <a class="preDown"></a> -->
+	</li>
+<% } %>
+</ul>

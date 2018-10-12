@@ -1,0 +1,12 @@
+{
+  "name": "trip",
+  "version": "1.0.0",
+  "description": "html content",
+  "environment": "release",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "1.2.0",
+    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1"
+  }
+}

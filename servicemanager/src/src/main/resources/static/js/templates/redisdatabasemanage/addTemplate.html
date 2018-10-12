@@ -1,0 +1,73 @@
+<div class="outmain-cons">
+<form id="formMsg">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+
+            <!--<div class="form-item">-->
+                <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+                    <!--<input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="databassType" value="" />-->
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>主机地址：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-host form-item-text {required: true} smhost" maxlength="30" type="text" name="host" value=""/>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>端口：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-port form-item-text {required: true} smport" type="text" name="port" value=""/>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>数据库索引：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-dbIndex form-item-text {required: true} smdigit" type="text" name="dbIndex" value=""/>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+
+            <!--<div class="form-item">-->
+                <!--<label class="form-item-label"><span>*</span>用户名：</label>-->
+                <!--<div class="form-item-editbox">-->
+                    <!--<input class="SID-username form-item-text {required: true}" type="text" name="username" value="" pattern="[A-z,0-9]{1,20}" title="用户名格式错误"/>-->
+                <!--</div>-->
+                <!--<div class="form-item-tip"><div class="wrong-text"></div></div>-->
+            <!--</div>-->
+
+            <div class="form-item">
+                <label class="form-item-label">密码：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-password form-item-text smpassword" type="password" name="password" value=""/>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label"><span>*</span>说明：</label>
+                <div class="form-item-editbox">
+                    <textarea class="SID-remarks form-item-textarea {required: true}" maxlength="60" name="remarks"></textarea>
+                </div>
+                <div class="form-item-tip"><div class="wrong-text"></div></div>
+            </div>
+            
+            <input class="SID-enabled" type="hidden" name="enabled" value=""/>
+        </div>
+
+    </div>
+</form>
+</div>
+
+<style>
+
+</style>
+
+<script type="text/javascript">
+
+</script>

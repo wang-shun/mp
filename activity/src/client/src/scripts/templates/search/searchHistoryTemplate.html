@@ -1,0 +1,42 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">往期活动</h1>
+    </div>
+    <div class="app-blockSearch">
+        <form id="ID-SearchHistory-SearchForm" method="post" class="inputbox inputbox-search" data-input="clear">
+            <input type="search" name="NID-SearchHistory-Search" maxlength="50" class="search input-text" style="padding: 6px 12px;">
+            <i class="color-placeholder icon icon-clear-fill hide size20"></i>
+            <div class="inputbox-search-placeholder">
+                <i class="inputbox-search-icon icon-search"></i>
+                <span class="inputbox-search-font">请输入活动名称</span>
+            </div>
+        </form>
+    </div>
+    <div class="app-stateFilterBar underline" id="ID-SearchHistory-BtnFilter">
+        <div class="app-stateFilterBar-font">
+            <i class="icon-filter size20"></i>
+            <span>我参与的</span>
+        </div>
+        <i class="app-stateFilterBar-icon icon-arrowdown"></i>
+        <i class="app-stateFilterBar-icon icon-arrowup"></i>
+    </div>
+</header>
+<article style="top:127px;">
+    <div id="ID-SearchHistory-List"></div>
+</article>
+<!--状态筛选-->
+<div id="ID-SearchHistory-DialogFilter" style="background-color:white;display:none;">
+    <ul class="app-popListSelect">
+        <li class="SID-SearchHistory-State underline active" data-status="5">
+            <div>我参与的</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-SearchHistory-State" data-status="6">
+            <div>我创建的</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+    </ul>
+</div>

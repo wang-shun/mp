@@ -1,0 +1,54 @@
+<% var roomdata=roomDetailData %>
+<ul class="list noclick" style="margin:6px 8px 4px 8px;">
+    <li>
+        <div class="justify list-meetimg">
+            <div class="list-img">
+            <img src="<% if(roomdata.imagePath!="" && roomdata.imagePath!=null){%><%=roomdata.imagePath%>_264x168<% } %>" onerror="javascript:this.src='<%= imgPath %>/list-default.png';"/>
+            </div>
+        </div>
+        <div class="justify-content" style="height:67px;">
+            <p class="nowrap" id="forMeetname" style="padding-top:5px;"><%=roomdata.roomName%></p>
+            <small style="display:block;margin-top:11px;">容量:<%=roomdata.capacity%>&nbsp;&nbsp;&nbsp;面积:<%=roomdata.area%>㎡</small>
+            <a style="width:54px;right:8px;bottom:16px;" 
+            class="button absolute outline radius4 height26 purple SID-Favorite" data-collection="<%=roomdata.collection%>">
+            <% if(roomdata.collection==1){%>已收藏<% } else {%>收藏<% } %>
+            </a>
+        </div>
+    </li>
+</ul>
+<hr/>
+<div class="description" style="margin: 0 8px;">
+    <div class="inputbox noborder">
+        <div class="justify-content" style="font-size: 14px;padding:8px 8px 4px 8px">详情</div>
+        <small class="justify" style="right:6px;">
+            <a class="SID-MoreDepute" style="display:none">更多</a>
+        </small>
+    </div>
+    <p class="SID-MoreHandler" style="font-size: 12px;">
+    <% if(roomdata.remarks && roomdata.remarks.length>0){ %>
+    <%=roomdata.remarks%>
+    <% } %>
+    </p>
+    <p style="font-size: 12px;">
+        <span style="width: 100%;">地址：<%=roomdata.address%></span>
+        <span style="height: 21px;">设备：</span>
+    <span class="equipment">
+    <% if(roomdata.stereo==1){%>
+    音响 
+    <% } %>
+    <% if(roomdata.display==1){%>
+    显示器 
+    <% } %>
+    <% if(roomdata.projector==1){%>
+    投影 
+    <% } %>
+    <% if(roomdata.wifi==1){%>
+    无线网 
+    <% } %>
+    <% if(roomdata.microphone==1){%>
+    麦克风
+    <% } %>
+    </span>
+    </p>
+</div>
+<hr/>

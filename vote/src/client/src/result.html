@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+	<title>投票</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div id="loading">
+        <div class="popup-mask" style="display: block; opacity: 1;"></div>
+        <div class="loading-box box box-middlecenter">
+            <div class="loading"></div>
+        </div>
+    </div>
+	<section id="page_pollPic" class="active">
+		<header>
+			<div class="titlebar">
+                <!-- <a href="javascript:history.go(-1)"> -->
+                <a id="back">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">投票</h1>
+            </div>
+		</header>
+		<article>
+			<div class="card overflow-hide" id="resultCard">
+			</div>
+		</article>
+	</section>
+<script id="resultTemplate" type="text/x-handlebars-template">
+
+{{#with result}}
+<ul class="list noclick">
+    <li class="nojustify nopadding">
+        <div class="justify-content" style="padding:12px;">
+            <p>{{title}}</p>
+            <small><pre>{{content}}</pre></small>
+        </div>
+        <div class="justify nopadding">
+            <img src="img/content/poll-main-default.jpg" data-img="{{image}}" data-href="{{image}}" id="bannerPic" class="width-full">
+        </div>
+    </li>
+    {{#with firstItem}}
+    <li class="nopadding top-result">
+        {{#if image}}
+        <div class="justify nopadding result-img" style="background-image:url(img/placeholder/placeholder-main.png);" data-bg="{{image}}"></div>
+        {{/if}}
+        <div class="justify-content text-center" style="padding:12px 24px;">
+            <img src="img/icon/icon-crown.png" class="crown">
+            <h1>TOP CHOICE</h1>
+            <div class="progress-bar radiusround float-right">
+                <span class="progress" style="width: {{percent itemCount ../voteCount}}"></span>
+                <span class="text"><a class="timer" data-duration="1000" data-to="25">{{itemCount}}</a>/{{../voteCount}}</span>
+            </div>
+            <div class="selection-text">
+                {{content}}
+            </div>
+        </div>
+    </li>
+    {{/with}}
+</ul>
+
+<ul class="list noclick">
+    <li>
+        <div class="justify-content box box-middle">
+            <p>投票结果</p>
+        </div>
+        <div class="justify">
+            <i class="icon-chartpie" style="font-size:24px;color:#4587f7;" onclick="toggleCharts(this)"></i>
+        </div>
+    </li>
+</ul>
+<div id="barcharts" class="chart">
+    <ul class="list result-list">
+        {{#each items}}
+        <li class="result-list nopadding box" data-href="{{image}}">
+            {{#if image}}
+            <div class="justify nopadding result-img img-click" style="background-image:url(img/placeholder/placeholder-main.png);" data-bg="{{image}}"></div>
+            {{/if}}
+            <div class="selection-text box box-middle">
+                {{content}}
+            </div>
+            <div class="progress-bar float-right box-flex-1">
+                <span class="progress {{colorCSS @index}}" style="width: {{percents itemCount ../voteCount}}%"></span>
+                <span class="text"><a class="timer" data-duration="1000" data-to="25">{{itemCount}}</a>/{{../voteCount}}</span>
+            </div>
+            
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<div id="piecharts"  class="pie-chart chart" style="display: none;" data-votecount="{{voteCount}}">
+    <ul class="grid" data-col="2">
+        {{#each items}}
+        <li class="doughnutblock text-center" data-href="{{image}}">
+            <div class="doughnutblock-canvas" style="background-image:url(img/placeholder/placeholder-main.png)" data-bg="{{image}}">
+                <!-- <canvas id="chart6" width="140" height="140" data-itemCount="{{percents itemCount ../voteCount}}"/> -->
+                <canvas id="chart6" width="140" height="140" data-itemCount="{{itemCount}}"/>
+            </div>
+            <div class="doughnutblock-overlay box box-middlecenter img-click">
+                <div>
+                    <p class="percent">{{percents itemCount ../voteCount}}%</p>
+                    <p>{{itemCount}}/{{../voteCount}}</p>
+                </div>
+            </div>
+            <label style="height:40px;" class="title">{{content}}</label>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<ul class="list noclick noborder">
+    <li class="between">
+        <div class="justify">
+            <div class="round" style="background-color:{{nameColor creatorName}};font-size: 25px;">{{splitName creatorName}}</div>
+        </div>
+        <div class="justify-content">
+            <p>{{creatorName}}</p>
+            <small class="top right">于{{timer expireStr}}截止</small>
+            <small>
+                创建:{{timer createTimeStr}}
+                <div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                    <span class="progress" style="width: {{percent voteCount scopeCount}}"></span>
+                    <span class="text"><a class="timer" data-duration="1000" data-to="25">{{voteCount}}</a>/{{scopeCount}}</span>
+                </div>
+            </small>
+        </div>
+    </li>
+</ul>
+
+{{/with}}
+</script>
+	<script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/charts/Chart.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/result.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script type="text/javascript">
+        //饼状图参数
+        var colors={fillColor:["#53c6fd","#ffae02","#3ae3ea","#ff6f36","#cf7af3","#4cd32e","#4587f7","#00c2eb","#ff618f","#21d9a1"],default:"#ebe8e3"};
+        // var values=[];
+        var doughnutConfig={
+            segmentShowStroke:false,
+            showTooltips:false,
+            animationEasing : "easeOut",
+            animationSteps:10,
+            percentageInnerCutout:80
+        }
+        function toggleCharts(thisobj){
+            //切换到饼图
+            if($(thisobj).hasClass("icon-chartpie")){
+                $(thisobj)[0].className="icon-chartbar";
+                $("#piecharts").css("display","block");
+                $("#barcharts").css("display","none");
+                initCharts();
+            }else{
+                $(thisobj)[0].className="icon-chartpie";
+                $("#piecharts").css("display","none");
+                $("#barcharts").css("display","block");
+            }
+        }
+        function getConfig(index,voteCount){
+            var canvas = $("canvas"),
+                len = canvas.length,
+                result = [];
+            for(var i=0; i<len; i++){
+                itemCount = canvas.eq(index).data("itemcount");
+                result.push({
+                    value:index===i ? itemCount:(voteCount-itemCount)/(len-1),
+                    color:index===i ? colors.fillColor[i%10] : colors.default
+                })
+            }
+            return result;
+        }
+        function initCharts(){
+            var voteCount = $("#piecharts").data("votecount");
+            //初始化饼状图
+            $("canvas").each(function(i,el){
+                var ctx = el.getContext("2d");
+                // var result =getConfig(i,voteCount);
+                // new Chart(ctx).Doughnut(result,doughnutConfig);
+                var itemCount = $(el).data("itemcount");
+                var config = [
+                    {
+                        value:itemCount,
+                        color:colors.fillColor[i%10],
+                    },
+                    {
+                        value:voteCount-itemCount,
+                        color:colors.default,
+                    }
+                ];
+                new Chart(ctx).Doughnut(config,doughnutConfig);
+            })
+        }
+        function getParameter(argName){
+            var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
+            return param ? param[1] : param;
+        }
+        var itemsCount;
+        function renderVoteInfo(){
+            voteId = getParameter("id")
+            Result.getVoteInfo({
+                id: voteId
+            },function(res){
+                $("#loading").hide();
+                if(res.code === "1"){
+                    var items = res.items;
+                    /*for(var i=0; i<items.length; i++){
+                        itemsCount.push(items[i].)
+                    }*/
+                    var firstItem,maxCount=0;
+                    for(var i=0; i<items.length; i++){
+                        var itemCount = items[i].itemCount;
+                        if(itemCount>maxCount){
+                            firstItem = items[i];
+                            maxCount = itemCount;
+                        }
+                    }
+                   	res.voteInfo.items = items;
+                    var renderData = {
+                        result:$.extend({},res.voteInfo,{firstItem:firstItem})
+                    }
+                    Result.renderVoteInfo(renderData,function(html){
+                        $("#resultCard").html(html);
+                        lazyloadImg();
+                    })
+                }else{
+                    $("#loading").hide();
+                    new Toast(res.message).show();
+                }
+            },function(res){$("#loading").hide();})
+            //.always(function(){
+            //    $("#loading").hide();
+            //})
+            ;
+        }
+        
+        $("#resultCard").on("click",".img-click",function(){
+            var $this = $(this),
+                $chart = $this.parents(".chart");
+            previewImage($chart,$this.parent("li"),false);
+        });
+        $("#resultCard").on("click","#bannerPic",function(){
+            var $this = $(this);
+            previewImage($this.parent(),$this,false);
+        })
+        
+        $("#back").click(function(){
+           var hash = window.location.hash.split("#");
+           if(hash.indexOf("voted") === 1){
+                var sessionId = window.localStorage.getItem("sessionId");
+                window.location.href="index.html?sessionId="+sessionId;
+           }else{
+                history.go(-1);
+           }
+        })
+		window.addEventListener("load",function(e){
+			Animate.counter();
+            renderVoteInfo();
+		},false);
+    </script>
+</body>
+</html>

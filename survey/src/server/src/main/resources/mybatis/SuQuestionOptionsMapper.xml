@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuQuestionOptionsMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuQuestionOptions">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="question_id" jdbcType="VARCHAR" property="questionId" />
+    <result column="options" jdbcType="VARCHAR" property="options" />
+    <result column="options_html" jdbcType="VARCHAR" property="optionsHtml" />
+    <result column="custom_input" jdbcType="CHAR" property="customInput" />
+    <result column="sequ" jdbcType="NUMERIC" property="sequ" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modified_time" jdbcType="DATE" property="modifiedTime" />
+  </resultMap>
+  
+  <select id="getQuestionOptionsByQuestionId" resultType="SuQuestionOptions">
+  	select id,question_id questionId,options,options_html optionsHtml,sequ,custom_input customInput,creator,create_time createTime,modifier,modified_time modifiedTime
+  	from su_question_options 
+  	where question_id=#{questionId}
+  	order by sequ
+  </select>
+  
+  <select id="getOptionsAnswersByQuestionId" resultType="SuQuestionOptionsJson">
+  	select sq.id ,sq.options,sq.options_html optionsHtml ,sq.sequ,sq.custom_input customInput,sa.answer ,case when sa.id is null or sa.id='' then 0 else 1 end isCheck 
+  	from su_question_options sq 
+  	left join 
+  	(select * from su_answer where answer_id = #{personId} and question_id = #{questionId}) sa on sq.question_id = sa.question_id 
+  		and sq.sequ = sa.sequ where sq.question_id = #{questionId}
+	order by sq.sequ
+  </select>
+  
+  <select id="deleteQuestionOptionBySurveyId">
+  	delete from su_question_options where question_id in (select question_id from su_survey_question where survey_id = #{surveyId})
+  </select>
+  
+  <select id="deleteQuestionOptionByTemplateId">
+  	delete from su_question_options where question_id in (select question_id from su_template_question where template_id = #{templateId})
+  </select>
+  
+  <select id="getQuestionAnalysis" resultType="AnalysisQuestionOptionsJson">
+  select so.id,so.options,so.sequ,sa.selected from su_question_options so left join
+  	(select sequ,count(sequ) selected,question_id from su_answer 
+  	where question_id = #{questionId} 
+  	<if test ="answerId != null">
+	  	and answer_id in
+	  	<foreach item="item" index="index" collection="answerId" open="(" separator="," close=")">
+	    	#{item}
+	    </foreach>
+  	</if>
+  	 group by sequ,question_id ) sa
+  	on so.sequ = sa.sequ and so.question_id = sa.question_id 
+  	where so.question_id = #{questionId} 
+  </select>
+  
+  <select id="getQuestionAnswerCount" resultType="java.lang.Long">
+  	select count(distinct(answer_id))  from su_answer 
+  	where question_id = #{questionId} 
+  	<if test ="answerId != null">
+	  	and answer_id in
+	  	<foreach item="item" index="index" collection="answerId" open="(" separator="," close=")">
+	    	#{item}
+	    </foreach>
+  	</if>
+  </select>
+  
+  <select id="getOptionByQuestionAndSequ" resultType="java.lang.String">
+  	select options from su_question_options where question_id=#{questionId} and sequ = #{sequ}
+  </select>
+  
+</mapper>

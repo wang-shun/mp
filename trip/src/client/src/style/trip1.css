@@ -1,0 +1,68 @@
+.trip-margintop{
+	margin-top: 150px;
+	margin-left: 15px;
+	margin-right: 15px;
+	padding: 10px 15px 0px 15px;
+}
+
+.row-trip{
+	text-align: left;
+    margin: 0px 0px 0px 40px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #eee;
+}
+.row-calendar{
+	text-align: left;
+    margin: 0px 0px 0px 40px;
+	height: 75px;
+	line-height: 75px;
+	border-bottom: 1px solid #eee;
+}
+.row-calendar div{
+	display: inline-block;
+	height: 30px;
+	width: 80%;
+}
+.row-trip>i:last-child{
+	width:5%;
+	color: #eee;
+	line-height: 45px;
+	float: right;
+	vertical-align: middle;
+}
+.row-calendar>i:last-child{
+	color: #eee;
+	line-height: 75px;
+	float: right;
+	vertical-align: middle;
+}
+.row-trip>i:first-child,.row-calendar>i:first-child{
+	width:5%;
+	color: #CCCCCC;
+	position: relative;
+	left: -30px;
+}
+.row-trip input{
+	margin-left: -5%;
+	border: 0;
+	vertical-align: middle;
+	line-height: normal;
+	height: 35px;
+}
+
+
+.row-trip span{
+	/*font-size: 17px;*/
+	font-weight: 600;
+}
+.row-trip .tips{
+	color: #CCCCCC;
+	font-weight: 500;
+	/*font-size: 16px;*/
+}
+.row-trip button{
+	width: 100%;
+	position: relative;
+	left:-15px
+}

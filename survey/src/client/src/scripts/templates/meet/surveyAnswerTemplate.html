@@ -1,0 +1,80 @@
+<% var ulStyle="",ulFlag="active"; if (pageNum != "1") { ulStyle="display:none;"; ulFlag=""; } %>
+<ul class="SID-question-ul <%=ulFlag%>" data-pageNum="<%=pageNum%>" style="<%=ulStyle%>">
+<% for(var i=0,question; question=questionArr[i++];) { %>
+    <li class="SID-question-li" data-question-id="<%=question.id%>" data-question-type="<%=question.type%>" data-required="<%=question.required%>">
+        <dl>
+        	<% if (question.type != "6") { %>
+        	<% var aa = "";if (question.required == 0) { aa = "display:none;" } %>
+            <dt>
+            <span class="SID-required-flag q-mi" style="color: red;<%=aa%>">*</span>
+            <span class="SID-question-sequ q-sequ"></span>
+            <span class="q-question"><%=question.question%></span>
+            </dt>
+            <% } else {%>
+            <dt><span class="q-question"><%=question.question%></span></dt>
+            <% } %>
+			<% if (question.type == "1") { %>
+			<dd>
+            	<% for(var j=0,option; option=question.suQustionOptions[j++];) { %>
+            	<% var checked = "";if (option.isCheck == 1) { checked = " checked='checked' " } %>
+                <label class="inputbox option-label" style="padding-bottom: 0.5rem;">
+                    <input type="radio" <%=checked%> value="<%=option.id%>" name="NID-<%=question.id%>" data-customInput="<%=option.customInput%>" class="input-radio fhicon-radio option-input q-option-btn">
+                    <span class="option-span q-option"><%=option.option%></span>
+                </label>
+	                <% if (option.customInput == "1") { %>
+	                <label class="inputbox option-label" style="padding-bottom: 0.5rem;">
+	                    <input type="text" class="input-line" value="<%=option.answer%>" name="NID-<%=option.id%>" maxlength="1000" placeholder="请输入"><span style="color: red;">*</span>
+	                </label>
+	                <% } else if (option.customInput == "2") { %>
+	                <label class="inputbox option-label" style="padding-bottom: 0.5rem;">
+	                    <input type="text" class="input-line" name="NID-<%=option.id%>" value="<%=option.answer%>" maxlength="1000" placeholder="请输入">
+	                </label>
+	                <% } %>
+                <% } %>
+            </dd>
+			<% } else if (question.type == "2") { %>
+			<dd>
+                <div class="inputbox paddingBottom">
+                    <select class="input-text" name="NID-<%=question.id%>">
+                    	<option value="">请选择</option>
+                    <% for(var j=0,option; option=question.suQustionOptions[j++];) { %>
+            		<% var selected = "";if (option.isCheck == 1) { selected = " selected='selected' " } %>
+                        <option value="<%=option.id%>" <%=selected%> ><%=option.option%></option>
+                    <% } %>
+                    </select>
+                    <i class="color-placeholder icon fhicon-narrowD1"></i>
+                </div>
+            </dd>
+            <% } else if (question.type == "3") { %>   
+            <dd>
+            	<% for(var j=0,option; option=question.suQustionOptions[j++];) { %>
+            	<% var checked = "";if (option.isCheck == 1) { checked = " checked='checked' " } %>
+            	<label class="inputbox option-label" style="padding:0 0 0.5rem 0;">
+                    <input type="checkbox" <%=checked%> value="<%=option.id%>" name="NID-<%=question.id%>" data-customInput="<%=option.customInput%>" class="input-checkbox fhicon-checkBox option-input q-option-btn">
+                    <span class="option-span q-option"><%=option.option%></span>
+                </label>
+                    <% if (option.customInput == "1") { %>
+                    <label class="inputbox option-label" style="padding-bottom: 0.5rem;">
+                    <input type="text" class="input-line" value="<%=option.answer%>" name="NID-<%=option.id%>" maxlength="1000" placeholder="请输入"><span style="color: red;">*</span>
+                    </label>
+                    <% } else if (option.customInput == "2") { %>
+                    <label class="inputbox option-label" style="padding-bottom: 0.5rem;">
+                    <input type="text" class="input-line" name="NID-<%=option.id%>" value="<%=option.answer%>" maxlength="1000" placeholder="请输入">
+                    </label>
+                    <% } %>
+				<% } %>
+            </dd>
+			<% } else if (question.type == "4") { %>
+			<dd>
+				<input type="text" name="NID-<%=question.id%>" value="<%=question.textValue%>" class="width100P marginBottom" maxlength="50" />
+            </dd>
+			<% } else if (question.type == "5") { %> 
+			<dd>
+				<textarea name="NID-<%=question.id%>" class="textarea width100P marginBottom" maxlength="1000"><%=question.textValue%></textarea>
+            </dd>
+			<% } else if (question.type == "6") { %> 
+    		<% } %>
+        </dl>
+    </li>
+<% } %>
+</ul>

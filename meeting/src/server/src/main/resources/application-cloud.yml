@@ -1,0 +1,165 @@
+servicemanager:
+  endpoint: http://sm.mapps.ip:8761
+
+eureka:
+  client:
+    enabled: true
+    region: mapps
+    serviceUrl:
+      defaultZone: ${servicemanager.endpoint}/eureka
+    healthcheck:
+      enabled: true    
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}  
+    metadataMap:
+      appName: 会议管理                            # 应用名称
+      logo: /logo.png                          # 应用logo 
+      remarks: 描述                             # 应用描述
+      portal: /websso                                          # 自服务门户集成入口
+      mgr-port: ${management.port}                  # 管理端口
+      mgr-context-path: ${management.context-path}  # 管理endpoint的context path
+      configProperties:                         # 配置属性
+      dependencies:
+        services: mapps-fileservice,mapps-imsg  
+        resources:
+          database: default
+          mplus: default
+      
+jdbc-url:
+  oracle: jdbc:oracle:thin:@${resources.database.default.host:}:${resources.database.default.port:1521}:${resources.database.default.db:}
+  postgresql: jdbc:postgresql://${resources.database.default.host:}:${resources.database.default.port:5432}/${resources.database.default.db:}
+  mysql: jdbc:mysql://${resources.database.default.host:}:${resources.database.default.port:3306}/${resources.database.default.db:}?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+
+spring:  
+  application:
+    name: mapps-meeting    
+  jmx:
+    enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${jdbc-url.${resources.database.default.type:postgresql}}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}
+    
+server: 
+  port: 18003    
+  
+management:
+  context-path: /__mng__
+  port: 38003
+
+endpoints:
+  restart:
+    enabled: true
+
+sqllocaltion:
+  oracle: db/oracle
+  postgresql: db/migration
+  mysql: db/mysql
+    
+flywaydb:
+  locations: ${sqllocaltion.${resources.database.default.type:postgresql}} 
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.meeting.entity
+  
+api:
+  endpoint: /api  
+  
+priv:
+  roles: 
+    admin: 
+      - mapps.fileservice.file.upload
+      - mapps.meeting.meeting.client.add
+      - mapps.meeting.meeting.webquery
+      - mapps.meeting.meeting.clientquery
+      - mapps.meeting.meeting.detail
+      - mapps.meeting.meeting.detailForWeb
+      - mapps.meeting.meeting.cancel
+      - mapps.meeting.meeting.apply
+      - mapps.meeting.meeting.delete
+      - mapps.meeting.meeting.client.edit
+      - mapps.meeting.meeting.signin
+      - mapps.meeting.meeting.queryAttach
+      - mapps.meeting.meeting.querySequ
+      - mapps.meeting.meeting.querySign
+      - mapps.meeting.meeting.exportSignInfo
+      - mapps.meeting.meeting.detailsign
+      - mapps.thirdpart.mobileark.createImGroup
+      - mapps.thirdpart.mobileark.joingroup
+      - mapps.thirdpart.mobileark.getpersondocs
+      - mapps.thirdpart.mobileark.getdocurl
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.thirdpart.mobileark.getlimtedusers
+      - mapps.meeting.meeting.outerdetail
+      - mapps.meeting.meeting.service.add
+      - mapps.meeting.meeting.getattachmentfromWeb
+      - mapps.meeting.meeting.service.publish
+      - mapps.meeting.meeting.querysignstatus
+    user: 
+      - mapps.fileservice.file.upload
+      - mapps.meeting.meeting.client.add
+      - mapps.meeting.meeting.webquery
+      - mapps.meeting.meeting.clientquery
+      - mapps.meeting.meeting.detail
+      - mapps.meeting.meeting.detailForWeb
+      - mapps.meeting.meeting.cancel
+      - mapps.meeting.meeting.apply
+      - mapps.meeting.meeting.delete
+      - mapps.meeting.meeting.client.edit
+      - mapps.meeting.meeting.signin
+      - mapps.meeting.meeting.queryAttach
+      - mapps.meeting.meeting.querySequ
+      - mapps.meeting.meeting.querySign
+      - mapps.meeting.meeting.exportSignInfo
+      - mapps.meeting.meeting.detailsign
+      - mapps.thirdpart.mobileark.createImGroup
+      - mapps.thirdpart.mobileark.joingroup
+      - mapps.thirdpart.mobileark.getpersondocs
+      - mapps.thirdpart.mobileark.getdocurl
+      - mapps.thirdpart.mobileark.getdepartments
+      - mapps.thirdpart.mobileark.getusers
+      - mapps.thirdpart.mobileark.getlimtedusers
+      - mapps.meeting.meeting.service.add
+      - mapps.meeting.meeting.getattachmentfromWeb
+      - mapps.meeting.meeting.service.publish
+      - mapps.meeting.meeting.querysignstatus
+
+
+mplus: 
+  sso:
+    serviceUrl: ${resources.mplus.default.mplus.sso.serviceUrl:}
+    appKey: ${resources.mplus.default.mplus.sso.appKey:}
+    secret: ${resources.mplus.default.mplus.sso.secret:}
+    appId: mapps-meeting
+    appType: 4
+  login:
+    serviceUrl: ${resources.mplus.default.mplus.login.serviceUrl:}
+    loginPage: ${resources.mplus.default.mplus.login.loginPage:}
+  mos:
+    serviceUrl: ${services.mapps-imsg.serviceUrl:}/api  #http://192.168.160.72:7777/mos/api  
+    
+services: 
+  fileservice:
+    serviceUrl: ${services.mapps-fileservice.serviceUrl:}/api
+    appKey: ${services.mapps-fileservice.appkey:}
+    appSecret: ${services.mapps-fileservice.secret:}
+    format: json
+    v: 1.0
+    method: mapps.fileservice.file.upload
+    webRoot: http://192.168.100.102:7788/d/
+  
+client: 
+  appId: meeting
+  appName: 会议管理
+  
+sign:
+  upgrade: 
+    migrate: false  
+
+logging:
+  path: logs

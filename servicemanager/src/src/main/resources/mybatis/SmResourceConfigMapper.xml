@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmResourceConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmResourceConfig" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="resource_id" property="resourceId" jdbcType="CHAR" />
+    <result column="param_key" property="paramKey" jdbcType="VARCHAR" />
+    <result column="param_value" property="paramValue" jdbcType="VARCHAR" />
+    <result column="config_ver" property="configVer" jdbcType="NUMERIC" />
+    <result column="actived" property="actived" jdbcType="VARCHAR" />
+    <result column="setup_user" property="setupUser" jdbcType="VARCHAR" />
+    <result column="setup_time" property="setupTime" jdbcType="DATE" />
+  </resultMap>
+  
+  <select id="getConfigVersion" parameterType="java.util.Map" resultType="Long">
+    SELECT case when max(config_ver) is null then 0 else max(config_ver) end  as curversion FROM SM_RESOURCE_CONFIG 
+    where resource_id=#{resourceId,jdbcType=VARCHAR}
+  </select>
+</mapper>

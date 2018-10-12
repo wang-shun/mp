@@ -1,0 +1,27 @@
+<div class="formBox meeting-schedule SID-agenda-div SID-module-div">
+    <div class="form-item">
+        <label class="form-item-label">议程地址：</label>
+        <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+        <div class="form-item-editbox"><input class="form-item-text SID-agenda-address" maxlength="30" type="text" name="address<%=sequName%>" value="<%=agenda.address %>" /></div>
+    </div>
+    <div class="form-item">
+        <label class="form-item-label"><span>*</span>开始时间：</label>
+        <div class="form-item-editbox"><input class="form-item-text SID-agenda-start {required: true}" type="text" name="sTime<%=sequName%>" value="<%=agenda.beginTimeStr %>"  readonly="readonly"/></div>
+        <div class="form-item-tip"><div class="wrong-text"></div></div>
+    </div>
+    <div class="form-item">
+        <label class="form-item-label"><span>*</span>结束时间：</label>
+        <div class="form-item-editbox"><input class="form-item-text SID-agenda-end {required: true}" type="text" name="eTime<%=sequName%>" value="<%=agenda.endTimeStr %>"  readonly="readonly"/></div>
+        <div class="form-item-tip"><div class="wrong-text"></div></div>
+    </div>
+    <div class="form-item">
+        <label class="form-item-label"><span>*</span>议程说明：</label>
+        <div class="form-item-editbox">
+            <textarea class="form-item-textarea SID-agenda-remarks {required: true}" maxlength="40" name="aRemaek<%=sequName%>"><%=agenda.remarks%></textarea>
+        </div>
+        <div class="form-item-tip"><div class="wrong-text"></div></div>
+    </div>
+    <div class="info-button">
+        <a class="buttonblue button-mask SID-module-del">删除</a>
+    </div>
+</div>

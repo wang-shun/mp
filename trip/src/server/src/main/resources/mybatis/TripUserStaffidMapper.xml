@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.trip.dao.TripUserStaffidMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.trip.entity.TripUserStaffid">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result property="userId" jdbcType="VARCHAR" column="user_id"/>
+    <result property="userName" jdbcType="VARCHAR" column="user_name"/>
+    <result property="staffId" jdbcType="INTEGER" column="staff_id"/>
+    <result property="createDate" jdbcType="TIMESTAMP" column="create_date"/>
+    
+  </resultMap>
+  
+</mapper>

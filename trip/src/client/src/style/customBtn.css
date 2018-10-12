@@ -1,0 +1,32 @@
+/** 定制样式*/
+/** 按钮样式*/
+.customBtn{
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  box-sizing: border-box;
+  border-width: 1px;
+  display: block !important;
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  margin: 10px auto;
+  border-radius: 4px;
+  color: white;
+  background-color: #20aeff;
+  border-color: #20aeff;
+}
+
+.customBtn.disabled, .customBtn[disabled]{
+  color: #adadad;
+  background-color: #e1e1e1;
+  border-color: #e1e1e1;
+}
+
+.customBtn.disabled:active, .customBtn[disabled]:active{
+  color: #adadad;
+  background-color: #e1e1e1;
+  border-color: #e1e1e1;
+}

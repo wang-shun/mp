@@ -1,0 +1,141 @@
+test_edit_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.edit
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId:
+    roomName: 小会议室
+    address: 一楼101室
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 简单布置下就好了
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true
+    
+    
+  
+test_edit_room_base1: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.edit
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId:
+    roomName: 小会议室啊小会议室这里要超过长度的校验还有三十个字符啦还有三已经超过三十个啦
+    address: 一楼101室
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 简单布置下就好了
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true     
+
+
+
+test_edit_room_base2: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.edit
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId:
+    roomName: 小会议室啊小会议室这里只输入二十九个字符试试不超长不会报错吧
+    address: 一楼101室
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 简单布置下就好了
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true 
+      
+      
+test_edit_room_base3: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.edit
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId:
+    roomName: 小会议室啊
+    address: 一楼101室【这里要测99个字符呢那就一直写一直在写 写到99个字符喽 一楼101室【这里要测99个字符呢】那就一直写一直在写 写到99个字符喽 一楼101室【这里要测99个字符呢】那就一直写一直在写 写到99个字符喽
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 简单布置下就好了
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+     code: 
+      _eq: 1
+     roomId: 
+      _notNull: true
+      
+           
+test_edit_room_base4: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.edit
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId:
+    roomName: 小会议室啊
+    address: 一楼101室【这里要测101个字符呢那就一直写一直在写 写到99个字符喽 一楼101室【这里要测99个字符呢】那就一直写一直在写 写到99个字符喽 一楼101室【这里要测99个字符呢】那就一直写一直在写写到99个字符喽再加十一个字符号来超长就好了
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 简单布置下就好了
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+     code: 
+      _eq: 0
+     roomId: 
+      _null: true     
+
+
+
+ #依次类推，可编辑会议室名称【30个字符】、会议室地址【100个字符】、   会场容量【最大1000000，最小1】、
+ #会议室面积【最大1000000，最小1】、会议室描述【最长200字符】等字段可逐一超过长度的校验
+    
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

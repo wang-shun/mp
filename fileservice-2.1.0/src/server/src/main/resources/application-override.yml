@@ -1,0 +1,7 @@
+      
+spring:  
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${resources.database.default.url}
+    username: ${resources.database.default.username}
+    password: ${resources.database.default.password}

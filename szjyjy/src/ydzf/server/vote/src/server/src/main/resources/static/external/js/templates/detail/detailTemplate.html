@@ -1,0 +1,57 @@
+<div id="ID-PageDetail" style="height:100%;overflow:hidden;">
+	<div class="app-popover" id="ID-RmenuPopover">
+		<ul>
+			<li class="app-rmenu-disabled" > 
+				<i class="icon icon-rdocancel"></i>
+				<div>取消会议</div>
+			</li>
+			<li class="app-rmenu-disabled">
+				<i class="icon icon-qrcodeline"></i>
+				<div>扫码签到</div>
+			</li>
+			<li class="app-rmenu-disabled" data-groupId="<%= meetInfo.groupId%>">
+				<i class="icon icon-chats"></i>
+				<div>会议群聊</div>
+			</li>
+			<li class="app-rmenu-disabled">
+				<i class="icon icon-trash"></i>
+				<div>删除会议</div>
+			</li>
+		</ul>
+	</div>
+	<header>
+		<div class="titlebar reverse">
+	        <a class="titlebar-button left SID-detailback hide" href="javascript:void(0)">
+	            <i class="icon icon-arrowleft"></i>
+	        </a>
+	        <h1 class="text-center">会议详情</h1>
+	        <a class="titlebar-button right hide" id="ID-Rmenu">
+                <i class="icon icon-menudot"></i>
+            </a>
+	    </div>
+	    <div style="padding:12px 0;border-bottom:1px solid #dedede;background-color:white;">
+		    <ul class="tabbar SID-detail-tabbar" data-type="rect">
+                <li class="tab active" data-id="ID-DetailBase">
+                    <label class="tab-label">基本信息</label>
+                </li>
+                <li class="<%= meetInfo.status==40 ? 'tab hide' : 'tab' %>" data-id="ID-DetailMeet">
+                    <label class="tab-label">会议议程</label>
+                </li>
+                <li class="tab" data-id="ID-DetailAttach">
+                    <label class="tab-label">附件资料</label>
+                </li>
+            </ul>
+        </div>
+	</header>
+	<article class="abs-article" style="top:101px;">
+		<div class="app-page active" id="ID-DetailBase" style="height:100%;background-color: white;overflow: auto;"></div>
+		<div class="app-page" id="ID-DetailMeet" style="height:100%;background-color: white;overflow:auto;"></div>
+		<div class="app-page" id="ID-DetailAttach" style="height:100%;background-color: white;overflow:auto;"></div>
+		<div class="app-page" id="ID-DetailSign" style="height:100%;background-color: white;overflow:auto;"></div>
+	</article>
+</div>
+
+    <section id="ID-List" style="background-color:#f8f8f8;z-index: 3;display:none;">
+    </section>
+	<section id="ID-Sign" style="background-color:#f8f8f8;z-index: 3;display:none;">
+    </section>

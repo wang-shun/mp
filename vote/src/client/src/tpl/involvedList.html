@@ -1,0 +1,28 @@
+{{#equal total 0}}
+<div class="no-data box box-middlecenter"><!--暂无数据-->
+    <div class="nodata-content ">
+        <img src="img/icon/no-data.png">
+        <br>
+        暂无投票，快去创建一个吧！
+    </div> 
+</div>
+
+{{else}}
+{{#each rows}}
+<div class="card vote" id="{{voteInfoId}}" data-involved="{{involved}}">
+    <!-- <img src="{{image}}" data-src="img/content/poll-main-default.jpg" onerror="this.src='img/content/poll-main-default.jpg'" class="img-main"> -->
+    <div class="img-main" style="background-image: url(img/content/poll-main-default.jpg);" data-src="{{image}}"></div>
+    <div class="poll-info">
+        <h1 class="title"><i class="dot"></i>{{title}}</h1>
+        <span class="end-date {{timerClass isExpired}}">{{timer expire}}</span>
+        <div class="progress-bar radiusround">
+            <span class="progress" style="width: {{percent voteCount scopeCount}}"></span>
+            <span class="text"><a class="timer" data-duration="1000" data-to="25">{{voteCount}}</a>/{{scopeCount}}</span>
+        </div>
+        <span class="status {{pollStateCss expire}}  {{timerClass isExpired}}">{{pollState involved}}</span>
+    </div>
+</div>
+{{/each}}
+{{/equal}}
+
+

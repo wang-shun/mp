@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.McDashboardPanelSeriesMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.McDashboardPanelSeries">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="panel_id" jdbcType="VARCHAR" property="panelId" />
+    <result column="dashboard_id" jdbcType="VARCHAR" property="dashboardId" />
+    <result column="retention_policy" jdbcType="VARCHAR" property="retentionPolicy" />
+    <result column="measurement" jdbcType="VARCHAR" property="measurement" />
+    <result column="where_setting" jdbcType="VARCHAR" property="whereSetting" />
+    <result column="fields_setting" jdbcType="VARCHAR" property="fieldsSetting" />
+    <result column="sql" jdbcType="VARCHAR" property="sql" />
+  </resultMap>
+  
+  <insert id="insertSelectiveMysql" parameterType="java.util.Map">
+    INSERT INTO MC_DASHBOARD_PANEL_SERIES ( ID,panel_id,dashboard_id,retention_policy,MEASUREMENT,where_setting,fields_setting,`SQL` ) 
+    VALUES( #{id,jdbcType=VARCHAR},#{panelId,jdbcType=VARCHAR},#{dashboardId,jdbcType=VARCHAR},#{retentionPolicy,jdbcType=VARCHAR},#{measurement,jdbcType=VARCHAR},#{whereSetting,jdbcType=VARCHAR},#{fieldsSetting,jdbcType=VARCHAR},#{sql,jdbcType=VARCHAR} ) 
+  </insert>
+  
+  <select id="selectMysql" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select id,panel_id as panelId,dashboard_id as dashboardId,retention_policy as retentionPolicy,measurement,where_setting as whereSetting,fields_setting as fieldsSetting,`sql` from MC_DASHBOARD_PANEL_SERIES 
+    WHERE panel_id = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

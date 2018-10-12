@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>会议室-首页</title>
+    <link rel="stylesheet" href="js/lib/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="config.js"></script>
+	<script data-main="js/main.js" src="js/lib/require.js"></script>
+    <script type="text/javascript">
+		function toIndex(){
+    		location.href="#indexPage";
+    	}
+    </script>
+    <style>
+    .titlebar-button:active{
+        opacity: 1!important;
+    }
+    </style>
+</head>
+
+<body ontouchstart="" style="overflow: hidden;" onload="toIndex();">	
+	<section class="SID-index-snippet SID-rank-one" style="display:block;"></section>
+	<section class="SID-detail-snippet SID-rank-one" style="padding:1px 0;display:none;"></section>
+    <section class="SID-addPlan-snippet SID-rank-one" style="display: none;"></section>
+	<section class="SID-manager-snippet SID-rank-one" style="display:none;"></section>
+    <section class="SID-planDetail-snippet SID-rank-one" style="display: none;"></section>
+    <!-- 加载遮罩 -->
+    <div class="loading SID-loading" style="display: block;">
+        <div class="loading-progress-box">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+</body>
+</html>

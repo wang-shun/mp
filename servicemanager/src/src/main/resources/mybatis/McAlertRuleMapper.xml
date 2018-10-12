@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.McAlertRuleMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.McAlertRule">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="system_id" jdbcType="VARCHAR" property="systemId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="past_time" jdbcType="VARCHAR" property="pastTime" />
+    <result column="measurement" jdbcType="VARCHAR" property="measurement" />
+    <result column="value_field" jdbcType="VARCHAR" property="valueField" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="enabled" jdbcType="VARCHAR" property="enabled" />
+    <result column="func" jdbcType="VARCHAR" property="func" />
+    <result column="group_by" jdbcType="VARCHAR" property="groupBy" />
+    <result column="wh_ere" jdbcType="VARCHAR" property="whEre" />
+    <result column="query_ql" jdbcType="VARCHAR" property="queryQl" />
+    <result column="rp" jdbcType="VARCHAR" property="rp" />
+  </resultMap>
+  
+  <select id="getQueryList" parameterType="java.util.Map" resultType="McAlertRule">
+    select id,system_id as systemId,name,past_time as pastTime,measurement,value_field as valueField,message,enabled   
+    from MC_ALERT_RULE 
+    where 1=1
+    <if test="isenabled != null">
+    and enabled=#{isenabled,jdbcType=VARCHAR}
+    </if>
+    <if test="keyword != null">
+	and measurement like #{keyword,jdbcType=VARCHAR} or name like #{keyword,jdbcType=VARCHAR}
+	</if>
+    <choose>
+    	<when test="sort != null">
+    		order by ${sort}
+    	</when>
+    	<otherwise>
+    		order by id
+    	</otherwise>
+    </choose>
+  </select>
+</mapper>

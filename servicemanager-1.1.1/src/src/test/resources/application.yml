@@ -1,0 +1,81 @@
+# with this config, eureka running standalone mode.       
+# High Availability, Zones and Regions @See http://cloud.spring.io/spring-cloud-static/spring-cloud.html#_high_availability_zones_and_regions
+server:
+  port: 8761
+
+api:
+  endpoint: /api 
+
+eureka:
+  server: 
+    enableSelfPreservation: true
+  instance:
+    hostname: sm.mapps.ip
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}  
+    
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka   
+      
+security:
+  ignored: /api/**, /eureka/**
+  basic: 
+    enabled: false
+  user:
+    name: 1
+    password: 1     
+      
+spring: 
+  application:
+    name: mapps-servicemanager     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.103:5432/mr_test
+    username: mr
+    password: 123456 
+  profiles:
+    active: native
+  redis:
+    database: 0 # Redis数据库索引（默认为0）
+    host: 192.168.160.45
+    port: 6379
+    password:   # Redis服务器连接密码（默认为空）
+    pool:
+      max-active: 5 # 连接池最大连接数（使用负值表示没有限制）
+      max-waite: 60 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 2 # 连接池中的最大空闲连接
+      min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 3000 # 连接超时时间（毫秒）
+
+flywaydb: 
+  locations: db/migration        
+  
+mybatis:  
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.servicemanager.entity  
+  
+
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: 
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.72:7777/mos/api  
+    
+gateway: 
+  serviceUrl: http://sm.mapps.ip:8080
+  security:
+    key: MY_kEY_x12   
+    
+logging:
+  path: logs

@@ -1,0 +1,680 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>tree</title>
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <style type="text/css">
+    /* .tree-box{
+        border: 10px solid red;
+    } */
+        #selection-box {
+            display: block;
+            background-color: rgba(0, 0, 0, 0.3);
+            position:absolute;
+            bottom:0px;
+            width:100%;
+            height: 50px;
+            overflow-x: auto;
+            white-space: nowrap;
+            /*display:none;*/
+        }
+        .selected-group {
+            border-radius: 20px;
+            padding:0px;
+            padding-left: 7px;
+            margin: 8px 6px;
+            padding-right: 7px;
+            line-height: 34px;
+            display: inline-block;
+            color:#fff;
+            background-color: #aaa;
+        }
+        .selected-group a {
+            color: #aaa;
+            margin-left: 5px;
+        }
+    .rectbar.signapp{
+        padding: 10px 0;
+        background-color: white;
+    }
+    .rectbar.signapp .tab{
+        -moz-transition: all .25s ease-in-out; 
+        -webkit-transition: all .25s ease-in-out; 
+        -ms-transition: all .25s ease-in-out; 
+        -o-transition: all .25s ease-in-out; 
+        transition: all .25s ease-in-out;
+    }
+    .rectbar.signapp .tab.active{
+        background-color: #4587f7;
+        color: #fff;
+    }
+    .treetitle .treeicon{
+        color:#aaa;
+    }
+    .treetitle .icon{
+        color:#fff;
+    }
+    .treetitle .treeicon:not(.radiusround), .treetitle .right {
+        color: #aaaaaa;
+    }
+    /*新增*/
+    .slider-container{
+        overflow-y:auto;
+    }
+    .slider-wrapper{
+        width:100%;
+    }
+    .slider-slide{
+        width:100%;
+    }
+    /*新增*/
+    </style>
+</head>
+
+<body>
+    <div id="loadingPage" style="display: none">
+        <div class="popup-mask" style="display: block; opacity: 1;"></div>
+        <div class="loading-box box box-middlecenter" style="text-align: center">
+            <!-- <div class="loading"></div> -->
+            <img src="img/icon/loading.gif" style="width:50px">
+        </div>
+    </div>
+    <section id="page_treeSelected" class="active">
+        <header>
+           <div class="titlebar">
+                <a class="left" href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">选择人员</h1>
+                <!-- <a href="signmap.html" class="right"> -->
+                <a class="right">
+                    <i class="icon-rdohook"></i>
+                </a>
+            </div>
+            <div class="selected-display"></div>
+
+            <ul class="tabbar animate-oneline group-tabbar" id="tabbar">
+                <li class="tab active">
+                    <label class="tab-label">部门</label>
+                </li>
+                <li class="tab">
+                    <label class="tab-label">群组</label>
+                </li>
+            </ul>
+
+        </header>
+
+
+        <article style="top: 85px;bottom:50px;">
+
+        <div class="scroller">
+        <!-- tree -->
+            <div class="slider-container" id="carouselPage" style="height:100%;overflow-y: auto;">
+                <div class="slider-wrapper">
+                    <!-- page1 -->
+                    <div class="slider-slide" id="page1">
+                        <div class="tree-box" id="tree">
+
+                        </div>
+                    </div>
+                    <!-- page2 -->
+
+                    <div class="slider-slide" id="page2">
+                        <div class="tree-box tree-box2" id="tree2"></div>
+                    </div>
+
+                </div>
+            </div>    
+            <!-- /tree -->
+            </div>
+        </article>
+        <div class="statusbar" id="selection-box"></div>
+    </section>
+<script id="tree-tpl" type="text/x-handlebars-template">
+<ul class="tree" style="display: block">
+    {{#each members}}
+    <li>
+        <div class="treetitle {{id}}" data-memberid="{{loginId}}" data-groupname="{{name}}" data-id="{{id}}">
+            <span class="round" style="background-color: {{nameColor name}};">{{firstName name}}</span>
+            <a class="icontitle">{{name}}</a>
+            <a class="icon icon-rdoadd right middle" style="padding:10px;"></a>
+        </div>
+    </li>
+    {{/each}}
+    {{#each groups}}
+    <li>
+        <div class="treetitle {{id}}" data-groupid="{{id}}" data-groupname="{{name}}" data-id="{{id}}">
+        <i class="treeicon"></i>
+            <span class="icon icon-persons round"></span>
+            <a class="icontitle">{{name}}</a>
+            <a class="icon icon-rdoadd right middle" style="padding:10px;"></a>
+        </div>
+    </li>
+    {{/each}}
+</ul>  
+</script>
+<script id="tree2-tpl" type="text/x-handlebars-template">
+    {{#grpupFunc isGroup}}
+    <ul class="tree" style="display: block">
+        {{#each userArr}}
+        <li>
+            <div id="{{id}}" class="treetitle tree2-group {{id}}" data-name="{{name}}" data-id="{{id}}" data-treeid="id">
+                <i class="treeicon"></i>
+                <span class="icon icon-persons round"></span>
+                <a class="icontitle">{{name}}</a>
+                <a class="icon icon-rdoadd right middle" style="padding:10px;"></a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <ul class="tree" style="display: {{isPoepleFunc isPeople}}">
+        {{#each userArr}}
+        <li>
+            <div id="{{id}}" class="treetitle tree2-people {{id}}" data-loginid="{{loginId}}" data-name="{{name}}" data-id="{{id}}" data-treeid="id">
+                <span class="round" style="background-color: {{nameColor name}};">{{firstName name}}</span>
+                <a class="icontitle">{{name}}</a>
+                <a class="icon icon-rdoadd right middle" style="padding:10px;"></a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+    {{/grpupFunc}}
+</script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script>
+    var hasLoadPlusReady=false,loadDept=false,loadGroup=false;
+    var Template = {
+        tree: $("#tree-tpl").html(),
+        "groupTree" : $('#tree2-tpl').html()
+    },
+    URL = {
+        queryMyVirtualGroup:"&method=mapps.user.myVirtualGroup&format=json&v=1.0&appKey="
+    }
+    //tree function 
+    var elLI,elUL,elIcon,selection,
+    treeType = "",//选择的树类型，二选一（tree,virtualGroupTree）
+    deleteSelection = function(){
+        $("#selection-box span").click(function(){
+            var selectionTop = $(this),
+                selectionID = $(this).data("treeid");
+//            selection = $("#"+treeType+" .treetitle[data-id="+selectionID+"]")[0];
+            selection = $("."+selectionID);
+            selectionTop.fadeOut(500,function(){
+                selectionTop.remove();
+                if($("#selection-box").is(':empty')){
+                    treeType = "";
+                    $('.statusbar').css('backgroundColor','rgba(0,0,0,0.3)');
+                }
+            });
+            removeCurrent(selection);
+            toggleChildren();
+        });
+    },
+    selectCurrent =  function (tree){
+        $(selection).addClass('active').addClass('addTop');
+        $(selection).find(".icon-rdoadd").fadeOut();
+        toggleChildren();
+    },
+    removeCurrent = function(){
+        $(selection).removeClass('active').removeClass('addTop');
+        $(selection).find(".icon-rdoadd").fadeIn();
+        toggleChildren();
+    },
+    toggleChildren = function(){
+        var selectedChildren = $(selection).next().find('.treetitle.active'),
+        allChildren = $(selection).next().find('.treetitle'),
+        allChildrenAddIcon = $(selection).next().find(".icon-rdoadd");
+        if ($(selection).hasClass('active')==true){
+            allChildren.addClass('active');
+            allChildrenAddIcon.fadeOut();
+        }else{
+            allChildren.removeClass('active');
+            allChildrenAddIcon.fadeIn();
+        }
+        if (selectedChildren.length > 0) {
+            selectedChildren.each(function(index, el){
+                var childrenID = $(el).data("id");
+                $("#select"+childrenID).fadeOut(500,function(){
+                    $(el).removeClass('addTop');
+                    $("#select"+childrenID).remove();
+                });
+            });
+        }
+    };
+    function onTapTree(){
+        EventUtil.addHandler(tree,"tap",function(e){
+            var addToDisplayDiv = function(){
+                var treeID = $(selection).data("id"),
+                groupName = $(selection).data("groupname"),
+                groupID = $(selection).data("groupid") || "",
+                memberId = $(selection).data("memberid") || "";
+                //看selection-box是否为空
+                if($("#selection-box").is(':empty')){
+                    $('.statusbar').css('backgroundColor','rgba(0,0,0,0.5)');
+                }
+                $("#selection-box").append('<span class="selected-group" data-groupid="'+groupID+'" data-memberid="'+memberId+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'</span>');
+                $("#selection-box").get(0).scrollLeft = $("#selection-box").get(0).scrollWidth;
+                deleteSelection();
+            };
+            if(e.target.tagName.toLowerCase()=="ul"){
+                return;
+            }
+            if(e.target.className.indexOf("icon-rdoadd")>= 0){
+                //当点击有a标签时
+                //elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+                if($(selection).hasClass("addTop")){
+                    return;
+                } 
+                if(treeType && treeType !== "tree"){
+                    new Toast("当前已选择虚拟组").show();
+                }else{
+                    selectCurrent("tree");
+                    addToDisplayDiv();
+                }
+                return;
+            }
+            if(e.target.className.indexOf("treetitle")>=0){
+                //当点击标题标签时
+                selection = e.target;
+                elLI=e.target.parentNode;
+            } else if(e.target.tagName.toLowerCase()=="i"){
+                //当点击i标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            } else if(e.target.tagName.toLowerCase()=="a"){
+                //当点击有a标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            } else if(e.target.className.indexOf("icon-persons")>=0){
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            }
+            elUL=elLI.querySelector("ul");
+            elIcon=elLI.querySelector(".treeicon");
+            if(!elUL){//展开没有子节点（获取数据）
+                //获取下级子部门及成员
+                var groupId = $(selection).data("id");
+                // alert(groupId);
+                if($(selection).data("memberid")){
+                    return;
+                }
+                getNodes(groupId,function(html){
+                    if(!$(selection).hasClass('loaded')){//不是此节点数据加载
+                        return;
+                    }
+                    $(selection).after(html);
+                    refreshPage("page1");
+                    $(elIcon).addClass('active');
+                    if($(html).find("li").length === 0){
+                        $(selection).find(".treeicon").remove();
+                        new Toast("已到最底层了", {delay:1000}).show();
+                        return;
+                    }
+                    if($(selection).hasClass("active")){//父节点已被选中
+                        $(elLI).find(".treetitle").addClass("active");
+                        $(elIcon).addClass('active');
+                        $(elLI).find(".icon-rdoadd").hide();
+                        $(elUL).show();
+                    }
+                });
+            }else if($(elUL).find("li").length>0){
+                // alert(elUL.style.display)
+                //已加载过子节点（有数据）
+                if(elUL.style.display == "block"){//收缩节点
+                    elIcon.className="treeicon";
+                    elUL.style.display="none";
+                }else{//展开节点
+                    elIcon.className="treeicon active";
+                    elUL.style.display="block";
+                }
+                refreshPage("page1");
+            }else{
+                 //已加载过子节点（没数据）
+                $(selection).find(".treeicon").remove();
+                var treeToast2 = new Toast("已到最底层了", {delay:2000});
+                treeToast2.show(); 
+                return;
+            }
+        });
+
+        EventUtil.addHandler(tree2,"tap",function(e){
+            var addToDisplayDiv = function(){
+                var id = $(selection).data("id"),
+                        loginId = $(selection).data("loginid"),
+                        name = $(selection).data("name");
+                //看selection-box是否为空
+                if($("#selection-box").is(':empty')){
+                    $('.statusbar').css('backgroundColor','rgba(0,0,0,0.5)');
+                }
+                var isPeople = true;//人员
+                if($(selection).hasClass('tree2-group')){
+                    isPeople = false;//群组
+                }
+                if(isPeople){//人员
+                    $("#selection-box").append('<span class="selected-group tree2-p" data-id="'+id+'" data-loginid="'+loginId+'" data-name="'+name+'" data-treeid="'+id+'" id="select'+id+'">'+name+'</span>');
+                    $("#selection-box").get(0).scrollLeft = $("#selection-box").get(0).scrollWidth;
+                    deleteSelection();
+                } else{//群组
+                    $("#selection-box").append('<span class="selected-group tree2-g" data-name="'+name+'" data-id="'+id+'" data-treeid="'+id+'" id="select'+id+'">'+name+'</span>');
+                    $("#selection-box").get(0).scrollLeft = $("#selection-box").get(0).scrollWidth;
+                    deleteSelection();
+                }
+            };
+            if(e.target.tagName.toLowerCase()=="ul"){
+                return;
+            }
+            if(e.target.className.indexOf("icon-rdoadd")>= 0){//点击（+）图标
+                var elUl = e.target.parentNode.parentNode.querySelector("ul");
+                if(!elUl){
+                    if($(e.target.parentNode).hasClass('tree2-group')){
+                        //请求群组成员
+                        $('#loadingPage').show();
+                        var _id1 =$(e.target.parentNode).data('id');
+                        getPeopleInfor(_id1,$(selection),true);
+                    }
+                }
+                //当点击有a标签时
+                selection = e.target.parentNode;
+                if($(selection).hasClass("addTop")){
+                    return;
+                }
+                selectCurrent("tree");
+                addToDisplayDiv();
+                return;
+            }
+            if(e.target.className.indexOf("treetitle")>=0){
+                //当点击标题标签时
+                selection = e.target;
+                elLI=e.target.parentNode;
+            } else if(e.target.tagName.toLowerCase()=="i"){
+                //当点击i标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            } else if(e.target.tagName.toLowerCase()=="a"){
+                //当点击有a标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            } else if(e.target.className.indexOf("icon-persons")>=0){
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            }
+            elUL=elLI.querySelector("ul");
+            elIcon=elLI.querySelector(".treeicon");
+            if(!elUL){//展开没有子节点（获取数据）//点击列表
+                if($(e.target).hasClass('tree2-group')){
+                    //请求群组成员
+                    $('#loadingPage').show();
+                    var _id1 =$(e.target).data('id');
+                    getPeopleInfor(_id1,$(selection),false);
+                }
+                //获取下级子部门及成员
+                var groupId = $(selection).data("id");
+                if($(selection).data("memberid")){
+                    return;
+                }
+            }else if($(elUL).find("li").length>0){
+                //已加载过子节点（有数据）
+                if(elUL.style.display == "block"){//收缩节点
+                    elIcon.className="treeicon";
+                    elUL.style.display="none";
+                }else{//展开节点
+                    elIcon.className="treeicon active";
+                    elUL.style.display="block";
+                }
+                refreshPage("page2");
+            }else{
+                //已加载过子节点（没数据）
+                $(selection).find(".treeicon").remove();
+                var treeToast2 = new Toast("已到最底层了", {delay:2000});
+                treeToast2.show();
+                return;
+            }
+        });
+
+    }
+
+    //请求群组成员
+    function getPeopleInfor(id,obj,flag) {
+        if (obj.hasClass('loaded')) {//只加载一次
+            return;
+        }
+        obj.addClass('loaded');
+        Mplus.getUserGroupMembers(id, function (userMemberArr) {
+//            userMemberArr = [{'id':'28a3cbaa-694c-45e9-b8f8-1c51749ac7e6','name':'彭乐'},{'id':'25834767-cf7a-4f1e-bdb9-55133558218c','name':'朱清清'}];
+//            userMemberArr = [{id:"28a3cbaa-694c-45e9-b8f8-1c51749ac7e6",'loginId':'pengle','name':'彭乐'},{'id':'25834767-cf7a-4f1e-bdb9-55133558218c','loginId':'zhuqingqing','name':'朱清清'}];
+            var _html = Handlebars.compile(Template.groupTree)({
+                'userArr': userMemberArr,
+                'isGroup': false,
+                'isPeople': flag
+            });
+            $('#' + id).after(_html);
+            if ($('#' + id).hasClass('active')) {
+                var _div = $('#' + id).next('ul').find('div');
+                _div.addClass('active');
+                _div.children('.icon-rdoadd').hide();
+            }
+            refreshPage("page2");
+            $('#loadingPage').hide();
+        },function(){
+            $('#loadingPage').hide();
+        });
+    }
+    function getNodes(groupId,callback){
+        var nodeDOM = $(".treetitle[data-id="+groupId+"]");//$("#"+groupId);
+        if(!nodeDOM || nodeDOM.hasClass("loadingNode")){
+            return;
+        } 
+        nodeDOM.addClass("loadingNode");
+        (function(node,fun){
+            Mplus.getOrgGroupsAndMembers(groupId,function(orgGroupArr,orgMemberArr){
+//                orgGroupArr = [{"id":"4526e81b-f4fa-477f-a45d-0304b0019306","name":"销售二部"},
+//                    {"id":"ec3ea37e-e5fb-4cfc-bfe4-00d24d750d2b","name":"移动平台产品线"},
+//                    {"id":"ad5e8a29-2744-4780-96e8-449e40563dff","name":"应用交付产品线"}];
+//                orgMemberArr = [{"id":"ed6a8e14-f6c8-4c8b-ab4f-a895a728aed5","loginId":"1","name":"1"}];
+                var html = Handlebars.compile(Template.tree)({
+                    "members":orgMemberArr,
+                    "groups":orgGroupArr
+                });
+                node.removeClass("loadingNode").addClass("loaded");
+                fun && fun(html);
+            },function(){
+                $('#loadingPage').hide();
+            })
+        })(nodeDOM,callback)
+    }
+    document.addEventListener("plusready",function(){
+        Mplus.closeBackListener();
+        if(!hasLoadPlusReady){
+            plusreadyFun();
+            userName = Mplus.getUserName();
+            hasLoadPlusReady = true;
+        }
+    }, false);
+    
+    function plusreadyFun(){
+        $('#loadingPage').show();
+
+        Mplus.getUserGroupFullId(function(groupFullId){
+            // var groupId = "b1f00858-0b99-4206-910d-c7533a7eb16f";//调试使用
+            var groupFullIdArr = groupFullId.split('@');
+            /* if(groupFullIdArr.length>1){
+                groupId = groupFullIdArr[groupFullIdArr.length-2];
+            } else if(groupFullIdArr.length == 1){
+                groupId = groupFullIdArr[groupFullIdArr.length-1];
+            } */
+            groupId = groupFullIdArr[0]
+            getNodes(groupId,function(html){
+                // new Toast($("#tree").length).show();
+                $("#tree").html(html);
+                refreshPage("page1");
+                // $(".slider-slide")[0].scrollTop = 1;
+                loadDept = true;
+                if(loadDept && loadGroup){
+                    $('#loadingPage').hide();
+                }
+            });
+        },function(){
+            $('#loadingPage').hide();
+        });
+
+
+        //获取群组信息
+        Mplus.getUserGroups(function(userGroupArr){
+//            userGroupArr = [{'id':'g11140155','name':'群组1'},{'id':'g11140161','name':'群组2'}];
+            var _html1 = Handlebars.compile(Template.groupTree)({
+                'userArr':userGroupArr,
+                'isGroup':true,
+                'isPeople':false
+            });
+            $('#tree2').html(_html1);
+            refreshPage("page2");
+            loadGroup = true;
+            if(loadDept && loadGroup){
+                $('#loadingPage').hide();
+            }
+        },function(){
+            $('#loadingPage').hide();
+        });
+
+    }
+    window.addEventListener("load",function(e){
+        onTapTree();
+        bindEvents();
+
+        //tab有关
+        initSlider();
+         tabBindClick();
+
+//        userName = 'zhuqingqing'
+//        plusreadyFun();
+    },false);
+    //定义exmobi返回
+    function back(){history.go(-1);}
+    function bindEvents(){
+        $(".titlebar .right").click(function(){
+            var selectedGroup = $("#selection-box").find(".selected-group"),
+                depIds = [],
+                userIds = [],
+                virtualGroupIds = [];
+            if(selectedGroup.length === 0){
+                new Toast("请选择部门或群组!").show();
+                return;
+            }
+            selectedGroup.each(function(index,el){
+                var memberid = $(el).data("memberid") || "",
+                    groupid = $(el).data("groupid") || "";
+               if(memberid){
+                    userIds.push(memberid);
+                }else{
+                    depIds.push(groupid);
+                }
+                if($(el).hasClass('tree2-g')){//群组
+                    var id = $(el).data('id');
+                    $('#' + id).next('ul').find('div').each(function(){
+                        var _loginId = $(this).data('loginid');
+                        userIds.push(_loginId);
+                    });
+                }
+                if($(el).hasClass('tree2-p')){//群组人员
+                    var loginId = $(el).data('loginid');
+                    userIds.push(loginId);
+                }
+            });
+            window.location.href = "signmap.html?userIds="+userIds.join(",")+"&depIds="+depIds.join(",")+"&virtualGroupIds="+virtualGroupIds.join(",");
+        })
+    }
+    function refreshPage(pageId){
+        var page = document.getElementById(pageId);
+        if(page.scrollHeight>page.clientHeight){
+            page.scrollTop += 1;
+        }else{
+            page.scrollTop = 1;
+        }
+    }
+    var slides=document.querySelectorAll(".slider-slide");
+    [].slice.call(slides).forEach(function(n,i,a){
+        n.addEventListener("scroll",function(e){
+            compatibleIosScroll(e);
+        },false);
+    });
+    function compatibleIosScroll(e){
+        var container=e.target;
+        var clientHeight=container.clientHeight; 
+        var scrollTop=container.scrollTop; 
+        var scrollHeight=container.scrollHeight;
+        if(scrollTop==0){
+            container.scrollTop=1;
+        }
+        // console.log(clientHeight+" - "+scrollTop+" - "+scrollHeight);
+        if (clientHeight+scrollTop>=scrollHeight){
+            container.scrollTop=container.scrollTop-1;
+            // console.log(carouselPage)
+        }
+    }
+    /*Handlebars*/
+    Handlebars.registerHelper("nameColor",function(name){
+        return name.toPinyin().substring(0,1).toColor();
+    });
+    Handlebars.registerHelper("firstName",function(name){
+        return name.substring(0,1);
+    });
+    Handlebars.registerHelper("grpupFunc",function(isGroup,options){
+        if(isGroup){
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
+    Handlebars.registerHelper("isPoepleFunc",function(isPeople,options){
+        if(isPeople){
+            return 'none';
+        } else {
+            return 'block';
+        }
+    });
+
+    //tab有关
+    var tabbar=document.getElementById("tabbar");
+    var tab=tabbar.querySelectorAll(".tab");
+    var carouselPage;
+    function initSlider(){
+        carouselPage=new Slider("#carouselPage",{
+            "onSlideChangeEnd":function(e){
+                tabActive(e.index);
+                compatibleIosScroll(e);
+            }
+        });
+    }
+    //选中tab
+    function tabActive(index){
+        for(var i=0,t;t=tab[i++];){
+            t.classList.remove("active");
+        }
+        tab[index].classList.add("active");
+    }
+    //绑定tab点击事件
+    function tabBindClick(){
+        for(var i=0,t;t=tab[i++];){
+            (function(i){
+                t.addEventListener("click",function(){
+                    carouselPage.slideTo(i-1);
+                    tabActive(i-1);
+                },false);
+            })(i);
+        }
+    }
+
+    </script>
+</body>
+</html>

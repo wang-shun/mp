@@ -1,0 +1,48 @@
+<!-- 问卷页面 -->
+<div class="pop-config-box SID-survey-page1">
+
+    <div class="pop-cons pop-cons-fall">
+        <div class="formBox">
+
+            <div class="crumb crumb-postion">
+                问卷模板&gt;<span><%=data.title%></span>
+
+                <label class="chose-questionnaire">
+                </label>
+	            <hr class="crumbLine">
+            </div>
+            <form id="formMsg" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+	            <input type="hidden" id="ID-survey-id" value="<%=data.id%>"/>
+	            <div class="questionnaire-content">
+	                <div class="mll-left questionnaire-right">
+	                    <div class="mll-left questionnaire-list">
+	                        <ul class="SID-question-ul1">
+	                            <li data-type="0">
+	                                <div contenteditable="true" data-maxlength="50" class="input-textNoLine SID-validate-div SID-survey-title ">
+										<%=data.titleHtml%>
+									</div>
+	                            </li>
+	                        </ul>
+	                        <ul class="SID-question-ul" id="ID-question-ul">
+	                        </ul>
+	                        <ul class="SID-question-ul2">
+	                            <li data-type="7">
+								    <dl>
+								        <dd>
+								           <p style="text-align: right; padding-right: 10px;"><span class="SID-page-title">页码1/1</span></p>
+								        </dd>
+								    </dl>
+								</li>
+							</ul>
+	                    </div>
+	
+	                    <div class="form-btns form-btns-middle" style="margin-bottom:80px;">
+	                        <a class="buttonblue SID-cancel-btn">取消</a>
+	                    </div>
+	
+	                </div>
+	            </div>
+			</form>
+        </div>        
+    </div>
+</div>

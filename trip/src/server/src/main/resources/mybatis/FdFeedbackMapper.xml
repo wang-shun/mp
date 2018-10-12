@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "classpath:mybatis-3-mapps.dtd" >
+<mapper namespace="com.fiberhome.mapps.trip.dao.FdFeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.trip.entity.FdFeedback">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="app_ver" jdbcType="VARCHAR" property="appVer" />
+    <result column="app_ver_fmt" jdbcType="VARCHAR" property="appVerFmt" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="os_ver" jdbcType="VARCHAR" property="osVer" />
+    <result column="feedback" jdbcType="VARCHAR" property="feedback" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="contack" jdbcType="VARCHAR" property="contack" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="confirm" jdbcType="VARCHAR" property="confirm" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="problem" jdbcType="VARCHAR" property="problem" />
+    <result column="solution" jdbcType="VARCHAR" property="solution" />
+    <result column="confirm_user_id" jdbcType="VARCHAR" property="confirmUserId" />
+    <result column="confirm_user_name" jdbcType="VARCHAR" property="confirmUserName" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+  </resultMap>
+  
+  <select id="getFdFeedback" parameterType="java.util.Map" resultType="FdFeedback">
+  select id,ecid,userId,userName,appId,appName,appVer,appVerFmt,deviceName,osVer,feedback,images,contack,submitTime,submitTimeStr,confirm,delFlag  
+        ,problem,solution,confirmUserId,confirmUserName,confirmTime 
+  from
+  (
+    select id,ecid,user_id userId,user_name userName,app_id appId,app_name appName,app_ver appVer
+          ,app_ver_fmt appVerFmt,device_name deviceName,os_ver osVer
+          ,feedback,images,contack,submit_time submitTime,to_char(submit_time,'yyyy-mm-dd hh24:mi:ss') submitTimeStr
+          ,confirm,del_flag delFlag
+          ,problem,solution,confirm_user_id confirmUserId,confirm_user_name confirmUserName,confirm_time confirmTime 
+	from fd_feedback r
+	where r.ecid = #{ecid,jdbcType=VARCHAR} 
+	  <if test="delFlag != null">
+	  and del_flag = #{delFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag == null">
+	  and del_flag = '0'
+      </if>
+	  <if test="feedbackId != null">
+	  and id = #{feedbackId,jdbcType=VARCHAR}
+      </if>
+	  <if test="name != null">
+	  and user_name like #{name,jdbcType=VARCHAR}
+      </if>
+	  <if test="submitStartTime != null">
+	  and submit_time &gt; #{submitStartTime}
+      </if>
+	  <if test="submitEndTime != null">
+	  and submit_time &lt;= #{submitEndTime}
+      </if>
+    ) a
+    where 1=1
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+	  <if test="order == null">
+	  order by submitTime desc
+	  </if>
+  </select>
+</mapper>

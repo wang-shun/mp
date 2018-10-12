@@ -1,0 +1,94 @@
+<% var ulStyle="",ulFlag="active"; if (pageNum != "1") { ulStyle="display:none;"; ulFlag=""; } %>
+<ul class="SID-question-ul <%=ulFlag%>" data-pageNum="<%=pageNum%>" style="<%=ulStyle%>">
+<% for(var i=0,question; question=questionArr[i++];) { %>
+    <li class="SID-question-li" data-question-id="<%=question.id%>" data-question-type="<%=question.type%>"
+     data-question-selmin="<%=question.selMin%>" data-question-selmax="<%=question.selMax%>" data-required="<%=question.required%>">
+        <dl>
+        	<% if (question.type != "6") { %>
+        	<% 
+        		var aa = "";
+        		if (question.required == 0) { 
+        			aa = "display:none;" 
+        		} 
+        		var msg = "";
+        		if (question.type == "3") {
+        			if (question.selMin != "0" && question.selMax != "0") {
+        				msg = "(选择"+question.selMin+"-"+question.selMax+"个选项)";
+        			} else if (question.selMin != "0") {
+        				msg = "(选择至少"+question.selMin+"个选项)";
+        			} else if (question.selMax != "0") {
+        				msg = "(选择至多"+question.selMax+"个选项)";
+        			}
+        		}
+        	%>
+            <dt>
+            <span class="SID-required-flag q-mi" style="color: red;<%=aa%>">*</span>
+            <span class="SID-question-sequ q-sequ"></span>
+            <span class="q-question"><%=question.questionHtml%></span>
+            <span style="color: red;"><%=msg%></span>
+            </dt>
+            <% } else {%>
+            <dt><span class="q-question"><%=question.questionHtml%></span></dt>
+            <% } %>
+			<% if (question.type == "1") { %>
+			<dd>
+            	<% for(var j=0,option; option=question.suQustionOptions[j++];) { %>
+                <label class="inputbox option-label" style="padding-bottom: 0.5rem;">
+                    <input type="radio" value="<%=option.id%>" name="NID-<%=question.id%>" data-customInput="<%=option.customInput%>" class="input-radio fhicon-radio option-input q-option-btn" name="rdo">
+                    <span class="option-span q-option"><%=option.optionHtml%></span>
+                </label>
+                    <% if (option.customInput == "1") { %>
+                    <label class="inputbox option-label" style="padding:0 0 0.5rem 0;">
+                    <input type="text" class="input-line" name="NID-<%=option.id%>" maxlength="1000" placeholder="请输入"><span style="color: red;">*</span>
+                    </label>
+                    <% } else if (option.customInput == "2") { %>
+                    <label class="inputbox option-label" style="padding:0 0 0.5rem 0;">
+                    <input type="text" class="input-line" name="NID-<%=option.id%>" maxlength="1000" placeholder="请输入">
+                    </label>
+                    <% } %>
+                <% } %>
+            </dd>
+			<% } else if (question.type == "2") { %>
+			<dd>
+                <div class="inputbox paddingBottom">
+                    <select class="input-text" name="NID-<%=question.id%>">
+                    	<option selected="selected" value="">请选择</option>
+                    <% for(var j=0,option; option=question.suQustionOptions[j++];) { %>
+                        <option value="<%=option.id%>"><%=option.optionHtml%></option>
+                    <% } %>
+                    </select>
+                    <i class="color-placeholder icon fhicon-narrowD1"></i>
+                </div>
+            </dd>
+            <% } else if (question.type == "3") { %>   
+            <dd>
+            	<% for(var j=0,option; option=question.suQustionOptions[j++];) { %>
+            	<label class="inputbox option-label" style="padding:0 0 0.5rem 0;">
+                    <input type="checkbox" value="<%=option.id%>" name="NID-<%=question.id%>" data-customInput="<%=option.customInput%>" class="input-checkbox fhicon-checkBox option-input q-option-btn">
+                    <span class="option-span q-option"><%=option.optionHtml%></span>
+                </label>
+                    <% if (option.customInput == "1") { %>
+                    <label class="inputbox option-label" style="padding:0 0 0.5rem 0;">
+                    <input type="text" class="input-line" name="NID-<%=option.id%>" maxlength="1000" placeholder="请输入"><span style="color: red;">*</span>
+                    </label>
+                    <% } else if (option.customInput == "2") { %>
+                    <label class="inputbox option-label" style="padding:0 0 0.5rem 0;">
+                    <input type="text" class="input-line" name="NID-<%=option.id%>" maxlength="1000" placeholder="请输入">
+                    </label>
+                    <% } %>
+				<% } %>
+            </dd>
+			<% } else if (question.type == "4") { %>
+			<dd>
+				<input type="text" name="NID-<%=question.id%>" class="width100P marginBottom" maxlength="50" />
+            </dd>
+			<% } else if (question.type == "5") { %> 
+			<dd>
+				<textarea name="NID-<%=question.id%>" class="textarea width100P marginBottom" maxlength="1000"></textarea>
+            </dd>
+			<% } else if (question.type == "6") { %> 
+    		<% } %>
+        </dl>
+    </li>
+<% } %>
+</ul>

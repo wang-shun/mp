@@ -1,0 +1,230 @@
+test_add_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 会议室1
+    address: 行政楼一楼
+    capacity: 10
+    area: 10
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true
+
+
+
+test_add_room_base1: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase                 
+    roomName: 这里是超过30个字符的名称的会议室名称超长校验这里是超过30个字符的名称的会议室名称超长校验这里是超过30个字符的名称的会议室名称超长校验
+    address: 行政楼一楼
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true
+
+    
+      
+
+test_add_room_base2: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 这里是超过30个字符的名称               //会议室地址超过100个字符
+    address: 这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验这里输入超过100个字符的超长校验
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true
+      
+
+
+test_add_room_base3: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 这里是超过30个字符的名称
+    address: 这里输入100个字符的个字符的超长校验
+    capacity: 1000001
+    area: 1
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true
+      
+      
+test_add_room_base4: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 这里是超过30个字符的名称
+    address: 这里输入100个字符的个字符的超长校验
+    capacity: 999999
+    area: 1
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true 
+      
+test_add_room_base5: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 这里是超过30个字符的名称
+    address: 这里输入100个字符的个字符的超长校验
+    capacity: 100
+    area: 1000001
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true
+      
+test_add_room_base6: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 这里是超过30个字符的名称
+    address: 这里输入100个字符的个字符的超长校验
+    capacity: 100
+    area: 999999
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true      
+      
+      
+test_add_room_base7: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 这里是超过30个字符的名称
+    address: 这里输入100个字符的个字符的超长校验
+    capacity: 50
+    area: 0.9
+    imageId: 
+    remarks: 年中总结会议
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true 
+      
+
+test_add_room_base8: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 这里是超过30个字符的名称
+    address: 这里输入100个字符的个字符的超长校验
+    capacity: 50
+    area: 200
+    imageId: 
+    remarks: 会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证会议室描述 这里要超过200个字符长度验证
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true                 
+      
+ #依次类推，会议室名称【30个字符】、会议室地址【100个字符】、   会场容量【最大1000000，999999、10000001,最小1、0】、
+ #会议室面积【最大1000000，最小1，验证数据同会场容量】、会议室描述【最长200字符，】等字段可逐一验证
+ 
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

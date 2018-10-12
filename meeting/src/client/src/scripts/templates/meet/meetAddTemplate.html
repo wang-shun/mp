@@ -1,0 +1,158 @@
+<header style="position: absolute;">
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">新建会议</h1>
+    </div>
+</header>
+<article class="article-absolute">
+    <!-- <a id="ID-MeetAddBack" class="button">点我</a> -->
+    <form id="ID-FormMeetAdd">
+    	<!--基本信息-->
+        <div class="group" id="ID-MeetAdd-GroupAdd">
+            <div class="sliver underline">
+                <p class="sliver-title">基本信息</p>
+            </div>
+            <div class="input-line underline">
+                <div class="inputbox">
+                    <i class="color-primary icon icon-label"></i>
+                    <input type="text" class="input-text" name="NID-MeetName" placeholder="会议名称">
+                </div>
+            </div>
+            <div class="input-line underline">
+                <div class="inputbox SID-DivDateTime">
+                    <i class="color-primary icon icon-time"></i>
+                    <input type="text" name="NID-MeetBegin" class="input-text SID-DateTimeStart" readonly placeholder="开始时间">
+                </div>
+                <div class="inputbox leftline SID-DivDateTime">
+                    <i class="color-primary icon icon-time" style="margin-left: 8px"></i>
+                    <input type="text" name="NID-MeetEnd" class="input-text SID-DateTimeEnd" readonly placeholder="结束时间">
+                </div>
+            </div>
+
+            <div class="input-line underline">
+                <div class="inputbox">
+                    <i class="color-primary icon icon-position"></i>
+                    <input type="text" class="countvalue input-text" name="NID-MeetAddress" placeholder="会议地址" data-rule-field="会议地址" data-rule="required">
+                </div>
+            </div>
+            <div class="input-line underline" id="ID-MeetAdd-Tree">
+                <i class="color-primary icon icon-person"></i>
+                <div style="padding:5px 0;margin:8px;">邀请参会人员</div>
+                <input type="text" readonly="" name="NID-MeetAdd-PeopleName" style="padding:5px 0;border:none;background-color:transparent;" class="app-btnToPage"/>
+                <input type="hidden" class="input-text" name="NID-MeetAdd-People" value=""/>
+                <!-- <input type="hidden" class="input-text" name="NID-MeetAdd-People" value="56a81fea-03f4-41e1-a521-ea14513a65c6:业务产品部:-1"/> -->
+                <i style="margin:0 12px 0 8px;" class="icon icon-arrowright size16 color-placeholder"></i>
+            </div>
+            <div class="input-line" id="ID-MeetAdd-ServiceTree">
+                <i class="color-primary icon icon-person"></i>
+                <div style="padding:5px 0;margin:8px;">会议服务人员</div>
+                <input type="text" readonly="" name="NID-MeetAdd-ServicePeopleName" style="padding:5px 0;border:none;background-color:transparent;" class="app-btnToPage"/>
+                <input type="hidden" class="input-text" name="NID-MeetAdd-ServicePeople" value=""/>
+                <!-- <input type="hidden" class="input-text" name="NID-MeetAdd-ServicePeople" value="56a81fea-03f4-41e1-a521-ea14513a65c6:业务产品部:-1"/> -->
+                <i style="margin:0 12px 0 8px;" class="icon icon-arrowright size16 color-placeholder"></i>
+            </div>
+        </div>
+        <!--会议议程-->
+        <div class="group app-groupSub" id="ID-MeetAdd-GroupAgenda">
+            <div class="sliver underline">
+                <p class="sliver-title">会议议程</p>
+                <div class="switch reverse notext" id="ID-MeetAdd-SwitchAgenda">
+                    <div class="switch-handle"></div>
+                </div>
+            </div>
+            <div class="SID-SwitchOptions">
+                <div class="SID-DynamicOptions"></div>
+                <a class="app-groupBtnAdd" id="ID-MeetAdd-BtnAddAgenda">+添加会议议程</a>
+            </div>
+        </div>
+        <!--会议签到-->
+        <div class="group app-groupSub" id="ID-MeetAdd-GroupSign">
+        	<div class="sliver underline">
+                <p class="sliver-title">会议签到</p>
+                <div class="switch reverse notext" id="ID-MeetAdd-SwitchSign">
+                    <div class="switch-handle"></div>
+                </div>
+            </div>
+            <div class="SID-SwitchOptions">
+                <div class="inputbox underline" style="margin:0 12px;padding: 10px 0;">
+                    <div>签到模式</div>
+                    <div class="box-flex-1"></div>
+                    <div class="turn" data-name="NID-SignMode" data-on-value="1" data-off-value="0" id="ID-MeetAdd-TurnSign">
+                        <div class="turn-on">反向</div>
+                        <div class="turn-off">正向</div>
+                    </div>
+                    <input type="hidden" class="input-text form-ignore" name="NID-SignMode" value="0">
+                </div>
+                <div class="relative underline" style="margin:0 12px;padding: 10px 0;">
+                    <i class="icon icon-info size16 color-warn"></i>
+                    <span style="font-size: 12px;color: #ccc;" id="ID-SignModeDescription">参会者扫描召开人/服务员的会议二维码签到。</span>
+                </div>
+                <div class="SID-DynamicOptions"></div>
+                <a class="app-groupBtnAdd" id="ID-MeetAdd-BtnAddSign">+添加签到</a>
+            </div>
+        </div>
+        <!--会议提醒-->
+        <div class="group app-groupSub" id="ID-MeetAdd-GroupAlarm">
+        	<div class="sliver underline">
+                <p class="sliver-title">会议提醒</p>
+                <div class="switch reverse notext" id="ID-MeetAdd-SwitchAlarm">
+                    <div class="switch-handle"></div>
+                </div>
+            </div>
+            <div class="SID-SwitchOptions">
+                <div class="inputbox" style="margin:0 12px;background-color: transparent;">
+				    <div>会前提醒</div>
+                    <div class="text-right box-flex-1">
+                        <input type="number" name="NID-Alarm" class="input-text form-ignore" value="15" style="width: 35px;border:none;display:inline-block;"  oninput="if(value.length>2)value=value.slice(0,2)">
+                    </div>
+				    <div class="turn" data-name="NID-AlarmUnit" data-on-value="60" data-off-value="1">
+				        <div class="turn-on">时</div>
+                        <div class="turn-off">分钟</div>
+				    </div>
+				    <input type="hidden" class="input-text form-ignore" name="NID-AlarmUnit" value="1">
+				</div>
+            </div>
+        </div>
+        <!--附件资料-->
+        <div class="group app-groupSub" id="ID-MeetAdd-GroupAttach">
+            <div class="sliver underline">
+                <p class="sliver-title">附件资料</p>
+                <div class="switch reverse notext" id="ID-MeetAdd-SwitchAttach">
+                    <div class="switch-handle"></div>
+                </div>
+            </div>
+            <div class="SID-SwitchOptions">
+                <div class="SID-DynamicOptions" id="ID-MeetAdd-DivAttach"></div>
+                <a class="app-groupBtnAdd" id="ID-MeetAdd-BtnAddAttach">+添加附件</a>
+            </div>
+        </div>
+        <!--会议备注-->
+        <div class="group app-groupSub" id="ID-MeetAdd-GroupRemark">
+        	<div class="sliver underline">
+                <p class="sliver-title">会议备注</p>
+                <div class="switch reverse notext" id="ID-MeetAdd-SwitchRemark">
+                    <div class="switch-handle"></div>
+                </div>
+            </div>
+            <div class="SID-SwitchOptions">
+                <div class="SID-DynamicOptions"></div>
+                <a class="app-groupBtnAdd" id="ID-MeetAdd-BtnAddRemark">+添加备注</a>
+            </div>
+        </div>
+        <!--创建讨论组-->
+        <div class="group app-groupSub" id="ID-MeetAdd-GroupCreate">
+        	<div class="sliver">
+                <p class="sliver-title">创建讨论组</p>
+                <div class="switch reverse notext" data-name="NID-IsCreateGroup" id="ID-MeetAdd-SwitchCreate">
+                    <div class="switch-handle"></div>
+                </div>
+                <input type="hidden" class="input-text" name="NID-IsCreateGroup" value="0">
+            </div>
+        </div>
+    </form>
+    <div class="app-blockbtn">
+        <a class="button primary radius4" style="width: 100%" id="ID-MeetAdd-BtnSubmit">发布</a>
+    </div>
+</article>

@@ -1,0 +1,22 @@
+package com.fiberhome.mapps.survey.request;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.rop.AbstractRopRequest;
+
+public class DelSurveyGroupRequest extends AbstractRopRequest
+{
+    @NotEmpty
+    private String groupId;
+
+    public String getGroupId()
+    {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId)
+    {
+        this.groupId = groupId;
+    }
+
+}

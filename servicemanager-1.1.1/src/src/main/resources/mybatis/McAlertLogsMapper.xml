@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.McAlertLogsMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.McAlertLogs">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="rule_id" jdbcType="VARCHAR" property="ruleId" />
+    <result column="alert_level" jdbcType="VARCHAR" property="alertLevel" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="alert_data" jdbcType="VARCHAR" property="alertData" />
+    <result column="alert_time" jdbcType="DATE" property="alertTime" />
+  </resultMap>
+</mapper>

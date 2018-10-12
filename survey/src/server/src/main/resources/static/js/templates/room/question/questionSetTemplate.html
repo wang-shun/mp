@@ -1,0 +1,37 @@
+<% 
+  var hasOther="";
+  if (data.required == "0") {
+  	hasOther = " checked='checked' ";
+  }
+  var selMin = "";
+  if (data.selMin != "0") {
+  	selMin = data.selMin;
+  }
+  var selMax = "";
+  if (data.selMax != "0") {
+  	selMax = data.selMax;
+  }
+%>
+<div class="pop-config-box"  style="margin:20px 0 0 0;">
+    <div class="pop-cons" style="margin:0 0 0 30px;">
+        <div class="formBox">
+            <div class="datePush margintTop">
+                <ul>
+                    <li>
+                        <input type="checkbox" <%=hasOther%> class="input-check SID-questionRequired">
+                        <label>该题可跳过不答</label>
+                    </li>
+                    <% if (data.questionType == "3") { %>
+                    <li>
+						<label>最少选</label><input type="text" style="width: 45px;padding-left:5px;margin:0px 5px;" maxlength="3" class="SID-question-selmin" value="<%=selMin%>"/><label>项</label>
+						<label>最多选</label><input type="text" style="width: 45px;padding-left:5px;margin:0px 5px;" maxlength="3" class="SID-question-selmax" value="<%=selMax%>"/><label>项</label>
+                    </li>
+                    <li>
+                    	<label class="red SID-set-error"></label>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>        
+    </div>
+</div>

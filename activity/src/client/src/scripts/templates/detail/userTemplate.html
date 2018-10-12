@@ -1,0 +1,21 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">已报名</h1>
+    </div>
+</header>
+<article>
+    <div class="group">
+        <ul class="list">
+        <% if (actData.enterList.length > 0) { %>
+		    <% for(var i=0,li; li=actData.enterList[i++];) { %>
+		    	<li class="underline">
+                <p class="list-container"><%=li.name%></p>
+            </li>
+		    <% } %>
+	    <% } %>
+        </ul>
+    </div>
+</article>

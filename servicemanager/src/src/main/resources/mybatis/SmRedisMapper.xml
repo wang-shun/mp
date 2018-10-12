@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmRedisMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmRedis" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="host" property="host" jdbcType="VARCHAR" />
+    <result column="port" property="port" jdbcType="NUMERIC" />
+    <result column="db_index" property="dbIndex" jdbcType="NUMERIC" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getRedisDetailById" parameterType="java.util.Map" resultType="SmRedis">
+    select id,remarks,host,port,db_index as dbIndex,user_name as userName,password,create_time as createTime,creator,enabled   
+    from SM_REDIS 
+	where id=#{id,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="getRedisList" parameterType="java.util.Map" resultType="ClientRedisInfo">
+    select smrds.id,smrds.remarks,smrds.host,smrds.port,smrds.db_index as dbIndex,smrds.user_name as userName,smrds.password,smrds.create_time as createTime,smrds.creator,smrds.enabled, 
+    (select count(0) from SM_DB_ASSIGN smdba where smdba.db_id = smrds.id) as appnums
+    from SM_REDIS smrds
+    where 1=1
+    <if test="isenabled != null">
+    and enabled=#{isenabled,jdbcType=VARCHAR}
+    </if>
+    <if test="keyword != null">
+	and host like #{keyword,jdbcType=VARCHAR} or user_name like #{keyword,jdbcType=VARCHAR}
+	</if>
+    <choose>
+    	<when test="sort != null">
+    		order by ${sort}
+    	</when>
+    	<otherwise>
+    		order by smrds.id
+    	</otherwise>
+    </choose>
+  </select>
+  
+  <update id="disableRedisById" parameterType="java.util.Map" >
+    update SM_REDIS set enabled = '0'
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="enableRedisById" parameterType="java.util.Map" >
+    update SM_REDIS set enabled = '1'
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

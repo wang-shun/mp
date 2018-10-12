@@ -1,0 +1,67 @@
+<!-- <div class="add-main">
+     <a class="meet-add SID-add-btn"><span class="fhicon-meeting-add"></span>添加保留策略</a>
+</div> -->
+<div class="tree-container tree-container-nobutton" style="border-top-width: 0;top: 60px;">
+    <div class="searchBlock">
+    	<form id = "subForm" onkeydown="if(event.keyCode==13)return false;">
+       <!--  变为展开查询的时候span标签调用样式fhicon-arrowD2,search-modle后增加hide -->
+        <div class="search-toggleBar" style="display: none;">
+            <a class="search-toggle SI-search-toggle">
+                <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+            </a>
+        </div>
+        <div class="search-modle">
+        	<ul class="search-list">
+        		<li class="search-item" style="width: 360px;">
+	        		<label class="search-label">服务名称：</label>
+	        		<select class="SID-services dashboardSelect" style="width: 280px;">
+					</select>
+        		</li>
+        		<li class="search-item" style="width: 480px;">
+	        		<label class="search-label">时间范围：</label>
+	        		<input type="text" class="SID-timeStart dashboardInput" style="width: 160px;" readonly>
+					<span style="margin: 0 2px;">~</span>
+					<input type="text" class="SID-timeEnd dashboardInput" style="width: 160px;" readonly>
+        		</li>
+        		<li class="search-item" style="width: 526px;">
+	        		<label class="search-label">请求地址：</label>
+	        		<select class="SID-spans dashboardSelect" style="width: 446px;">
+						<option value="all">all</option>
+					</select>
+        		</li>
+        		<li class="search-item" style="width: 300px;">
+	        		<label class="search-label" style="width: 110px;">请求时长(μs)>=</label>
+	        		<input type="text" class="SID-duration dashboardInput" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9]/g,'')" style="width: 160px;">
+        		</li>
+        		<!-- <div style="width: 240px;float: left;display: none;">
+					<span>排序</span>
+					<select class="SID-sort dashboardSelect" style="width: 200px;">
+						<option value="duration-desc">请求时长降序</option>
+						<option value="duration-asc">请求时长升序</option>
+						<option value="ervice-percentage-desc">服务占比降序</option>
+						<option value="ervice-percentage-asc">服务占比升序</option>
+						<option value="timestamp-desc">时间戳降序</option>
+						<option value="timestamp-asc">时间戳升序</option>
+					</select>
+				</div> -->
+        		<li class="search-item" style="width: 280px;">
+	        		<label class="search-label">查询总量：</label>
+	        		<select class="SID-limit dashboardSelect" style="width: 200px;">
+						<option value="10">10</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+						<option value="500">500</option>
+					</select>
+        		</li>
+        	</ul>
+            <div class="search-button">
+                <a class = "SID-search" style="float: right;">查询</a>
+            </div>
+        </div>
+       </form>
+    </div>
+    <!-- 表格内容 -->
+    <div class="tableblock">
+        <table id = "meet-hold" width = "100%" class = "common-table"></table>
+    </div>
+</div>

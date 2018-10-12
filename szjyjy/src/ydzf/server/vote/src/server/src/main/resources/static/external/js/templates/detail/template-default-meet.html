@@ -1,0 +1,33 @@
+<div style="height: 5px;"></div>
+<% for(var i=0,daysInfo; daysInfo=agendasInfo[i++];) { %>
+<details open="" style="margin-top:10px;">
+<summary class="app-timeline-title">
+	<a class="button outline">
+		<label class="events-none"><%=daysInfo.day%></label>
+		<i class="size12 summary-icon"></i>
+	</a>
+</summary>
+<ul class="timeline app-timeline">
+    <% for(var j=0,agendaData; agendaData=daysInfo.agendaList[j++];) { %>
+    <li>
+        <div class="timeline-badge clock">
+            <div class="clock-hour"></div>
+            <div class="clock-minute"></div>
+            <div class="clock-origin"></div>
+        </div>
+        <div class="app-timelineContent">
+            <p><%=agendaData.beginTimeStr%> - <%=agendaData.endTimeStr%></p>
+            <small>
+                <i class="icon icon-position-fill"></i>
+            	<span><%=agendaData.address%></span>
+            </small>
+            <p><%=agendaData.remarks%></p>
+        </div>
+    </li>
+    <% } %>
+</ul>
+</details>
+<!-- <ul class="list noclick timeline bg-white">
+    <li style="height: 10px;"></li>
+</ul> -->
+<% } %>

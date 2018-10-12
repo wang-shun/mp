@@ -1,0 +1,9 @@
+[
+{"code":"AR06513","name":"北京","type":2,"parentcode":"AR01438","parentname":"中国","path":"AR01438/","spell":"BEIJING","spell_s":"BJ"},
+{"code":"AR04567","name":"上海","type":2,"parentcode":"AR01438","parentname":"中国","path":"AR01438/","spell":"SHANGHAI","spell_s":"SH"},
+{"code":"AR00252","name":"广州","type":3,"parentcode":"AR06334","parentname":"广东","path":"AR01438/AR06334/","spell":"GUANGZHOU","spell_s":"GZ"},
+{"code":"AR05223","name":"深圳","type":3,"parentcode":"AR06334","parentname":"广东","path":"AR01438/AR06334/","spell":"SHENZHEN","spell_s":"SZ"},
+{"code":"AR01057","name":"南京","type":3,"parentcode":"AR05127","parentname":"江苏","path":"AR01438/AR05127/","spell":"NAJING","spell_s":"NJ"},
+{"code":"AR02960","name":"武汉","type":3,"parentcode":"AR04864","parentname":"湖北","path":"AR01438/AR04864/","spell":"WUHAN","spell_s":"WH"},
+{"code":"AR04692","name":"长春","type":3,"parentcode":"AR04104","parentname":"吉林","path":"AR01438/AR04104/","spell":"CHANGCHUN","spell_s":"CC"}
+]

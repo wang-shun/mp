@@ -1,0 +1,410 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		
+		<title>首页</title>
+
+		<script src="scripts/lib/mplus/mplus.js"></script>
+		<script src="scripts/lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<!--<script type="text/javascript" src="scripts/lib/layer/mobile/layer.js" ></script>-->
+		<script type="text/javascript" src="scripts/lib/layui/layui.all.js" ></script>
+		<script type="text/javascript" src="scripts/lib/laydate/laydate.js" ></script>
+		<script type="text/javascript" src="scripts/lib/moment/moment-with-locales.js" ></script>
+		<script type="text/javascript" src="scripts/baseModel.js" ></script>
+		<script type="text/javascript" src="scripts/common.js?v=1" ></script>
+		<script type="text/javascript" src="scripts/lib/arttemplate/template-native.js" ></script>
+	<!--	<script type="text/javascript" src="scripts/lib/mui/mui.min.js" ></script>
+		<script type="text/javascript" src="scripts/lib/mui/mui.picker.min.js" ></script>-->
+		
+		<!--<link rel="stylesheet" href="scripts/lib/mui/mui.css">
+		<link rel="stylesheet" href="scripts/lib/mui/mui.picker.min.css">-->
+		
+		
+	    <link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="scripts/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="scripts/lib/font-awesome/css/font-awesome-animation.min.css">
+		<link rel="stylesheet" href="style/trip.css?v=0.9">
+		<link rel="stylesheet" href="style/trip1.css?v=0.91">
+		
+	</head>
+
+	<body  class="bodybg">
+		<header>
+			<div class="titlebar">
+				<a href="#" onclick="ex(false)">
+					<i class="fa fa-angle-left fa-2x"></i>
+				</a>
+				<h1 class="titlebar-title text-center">酒店预订</h1>
+				<a href="#">
+					<i class="fa fa-none"></i>
+				</a>
+				
+			</div>
+		</header>
+				
+		<div class="panel panel-default panel-trip trip-margin25">
+			<!--<div class="panel-heading">
+				<i class="fa fa-search fa-lg"></i>
+				<input type="text" id="citypk" readonly="true" placeholder="选择城市" />
+				<span><i class="fa fa-map-marker fa-lg faa-burst animated"></i><font id="citycontent">定位中</font></span>
+				
+			</div>-->
+			<div class="panel-heading">
+				
+				<div class="row" style="text-align: center;">
+					<div class="date-panel">
+						<span>入住日期</span>
+						<span id="time1">&nbsp;</span>
+					</div>
+					<div id="days" class="date-tip">&nbsp;</div>
+					<div  class="date-panel">
+						<span>离店日期</span>
+						<span id="time2">&nbsp;</span>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body" style="padding: 10px; 0px;">
+				<div class="row-trip">
+					<i class="fa fa-map-marker fa-lg"></i>
+					<input type="text" placeholder="..." readonly="readonly"  style="width: 70%;border: 0;line-height: normal;text-overflow:ellipsis;" id="citycontent"/>
+					<div class="myposition" style="padding: 0 0;">
+						<!--<i class="fa fa-map-marker fa-lg" style="margin: 0 0;"></i>-->
+						<img src="images/repostion.png" style="height:25px;margin:0 0;padding: 0 0;"/>
+						<br/><i style="font-style:normal;" ></i>我的位置
+					</div>
+					
+				</div>
+				
+				<div class="row-trip" style="height: 60px;padding: 8px 0px;">
+					<i class="fa fa-search "></i>
+					<input type="text" placeholder="搜索酒店名、地名"  style="width: 80%;border: 0; " id="searchKey"/>
+				</div>
+			<!--	<div class="row-trip" id="showStarPicker">
+					<i class="fa fa-rmb fa-lg "></i>
+					<span id="starLevel">不限星级</span>
+					<i class="fa fa-angle-right fa-lg"></i>
+				</div>-->
+				<div class="row-trip" style="height: 60px;padding: 15px 0px;border:0;">
+					<button class="btn btn-theme"id="searchHotel">搜索酒店</button>
+				</div>
+			</div>
+			
+<!--			<div class="layui-form">
+					<div class="layui-input-block">
+						<input name="chkStar" title="不&nbsp;&nbsp;&nbsp;限" type="checkbox" value="" checked>
+						<input name="chkStar" title="经济型" type="checkbox" value="1">
+						<input name="chkStar" title="二&nbsp;&nbsp;&nbsp;星"   type="checkbox" value="2"><br/>
+						<input name="chkStar" title="三星级" type="checkbox" value="3">
+						<input name="chkStar" title="四星级" type="checkbox" value="4">
+						<input name="chkStar" title="五星/豪华" type="checkbox" value="5">
+					</div>
+				</div>
+		</div>-->
+			
+			
+			
+		</div>
+		
+
+		<div class="footer">
+			<ul class="nav tripmenu-bar">
+				<li class="tripmenu-item selected">
+					<a href="#">
+						<i class="fa fa-hotel fa-2x"></i><br/>预订
+					</a>
+				</li>
+				<li class="tripmenu-item" id="myorder">
+					<a href="#">
+						<i class="fa fa-user fa-2x"></i><br/>我
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="scripts/lib/layui/layui.all.js" ></script>
+	<script>
+		var datepick,citypicker ;
+		var cityName,cityCode,beginDate,endDate;
+		var address;
+		var lng,lat ;
+		var searchKey,level,price ;
+		function laytest(){
+			//layer.msg("1232131");
+			layer.msg("操作失败！ 错误原因：");
+			console.log(layer);
+		}
+		
+/*		(function($, doc) {
+					var showStarPicker = new $.PopPicker();
+					showStarPicker.setData([{
+						value: '1',
+						text: '经济型'
+					}, {
+						value: '2',
+						text: '二星'
+					}, {
+						value: '3',
+						text: '三星/舒适'
+					}, {
+						value: '4',
+						text: '四星/高档'
+					}, {
+						value: '5',
+						text: '五星/豪华'
+					}]);
+					var showUserPickerButton = doc.getElementById('showStarPicker');
+					showUserPickerButton.addEventListener('tap', function(event) {
+						showStarPicker.show(function(items) {
+							var pv=(items[0] || {}).text;
+							jQuery('#starLevel').html((items[0] || {}).text);
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+					//-------------
+			})(mui, document);*/
+		
+		function init(){
+			
+			cityName = getUrlParam("cityName");
+			cityCode = getUrlParam("cityCode");
+			beginDate = getUrlParam("beginDate");
+			endDate = getUrlParam("endDate");
+			lat = getUrlParam("lat");
+			lng = getUrlParam("lng");
+			searchKey=getUrlParam("searchKey");
+			level=getUrlParam("level");
+			price=getUrlParam("price");
+			if(beginDate && endDate){
+				formatDate(moment(beginDate),moment(endDate));
+			}else{
+				//设置默认时间
+				formatDate(moment(),moment().add(1,"day"));
+			}
+			
+			
+			/*			
+  			$("#showStarPicker").on("click",function(){
+			    layer.open({
+				      type: 1,
+				      offset: 'b',
+				      title:'星级价格',
+				      area: ['100%', '35%'],
+				      shadeClose: true, //点击遮罩关闭
+				      anim: 2,
+				      btn: ['  确定  '],
+				      content: '<div class="layui-form"> <div class="layui-form-item"></div></div>',
+				      yes: function(index, layero){
+						    //do something
+						layer.close(index); //如果设定了yes回调，需进行手工关闭
+					  }
+				    });
+
+			});
+			*/
+			
+			//弹出日期选择
+			$(".date-panel").on("click",function(){
+				var url =  "datePicker.html?returnUrl=index.html" ;
+				if(cityName){
+					url = setUrlParam(url,"cityName",cityName);	
+				}
+				if(cityCode){
+					url = setUrlParam(url,"cityCode",cityCode);
+				}
+				if(lat){
+					url = setUrlParam(url, "lat", lat) ;
+				}
+				if(lng){
+					url = setUrlParam(url, "lng", lng) ;
+				}
+				window.open(url,"_self");
+
+			});
+			
+			//弹出城市选择
+			$("#citycontent").on("click",function(){
+				var url =  "cityPicker.html?returnUrl=index.html" ;
+				if(beginDate){
+					url = setUrlParam(url,"beginDate",beginDate);	
+				}
+				if(endDate){
+					url = setUrlParam(url,"endDate",endDate);
+				}
+				if(lat){
+					url = setUrlParam(url, "lat", lat) ;
+				}
+				if(lng){
+					url = setUrlParam(url, "lng", lng) ;
+				}
+				window.open(url,"_self");
+			});
+			
+			//点击我的位置重新定位
+			$(".myposition").on("click",function(){
+				rePostion();
+			});
+			
+			$("#searchHotel").on("click",function(){
+				openHotelSearch();
+			}) ;
+			
+			//loadBand();
+			
+			//我的订单页面
+			$("#myorder").on("click",function(){
+				window.open("orderList.html" , "_self" );		
+			}) ;
+			
+			//选了城市则显示城市
+	        if(cityName){
+	        	$("#citycontent").val(cityName);
+	        }
+	        
+	        //没有定位点的时候发起定位
+        	if(!lat || !lng){
+        		$(".fa-map-marker").addClass("animated");
+        		Mplus.getLocation(function(res){
+        			
+        			lat = res.latitude;
+    				lng = res.longitude;
+        			$(".fa-map-marker").removeClass("animated");
+        			
+					var city = res.city;
+			        var district = res.district||'';
+			        var street= res.street||'';
+			        var streetNumber = res.streetNumber||'';
+			        
+//			        cityName = res.address ;
+					cityName = city+district+street+streetNumber;
+					//从编码库里面检索对应 的citycode 
+					//加载城市  城市编码为空的时候加载编码
+					if(!cityCode){
+						$.getJSON("data/city3.json", function (citys){
+				        	$.each(citys, function(i,item) {
+				        		if(city.indexOf(item.name) >= 0){
+				        			cityCode = item.code ;
+				        		}
+				        	});
+				        	
+				        });
+						$("#citycontent").val(cityName);
+					}
+			        
+				},function(){
+					//layer.msg("位置获取失败");
+					//$("#citycontent").html("定位失败");
+					$(".fa-map-marker").removeClass("animated");
+				})
+        	}
+			
+			
+			
+			
+		}
+		
+		//日期输出
+		function formatDate(date1,date2){
+			
+			$("#time1").html(date1.format("MM月DD日"));
+			$("#time2").html(date2.format("MM月DD日"));
+			$("#days").html(date2.diff(date1,"day")+"晚");
+			beginDate = date1.format("YYYY-MM-DD");
+			endDate = date2.format("YYYY-MM-DD");
+			//console.log(date1.format('dddd'));
+		}
+		
+		function rePostion(){
+			$("#citycontent").val("正在定位...");
+			$(".fa-map-marker").addClass("animated");
+			Mplus.getLocation(function(res){
+		        lat = res.latitude;
+    			lng = res.longitude;
+    			var city = res.city;
+			    var district = res.district||'';
+			    var street= res.street||'';
+			    var streetNumber = res.streetNumber||'';
+			        
+//			    cityName = res.address ;
+				cityName = city+district+street+streetNumber;
+    			
+				var city = res.city;
+				$.getJSON("data/city3.json", function (citys){
+		        	$.each(citys, function(i,item) {
+		        		if(city.indexOf(item.name) >= 0){
+		        			cityCode = item.code ;
+		        		}
+		        	});
+		        });
+				$("#citycontent").val(cityName);
+		         $(".fa-map-marker").removeClass("animated");
+			},function(){
+				 $("#citycontent").val("定位失败");
+				 $(".fa-map-marker").removeClass("animated");
+			})
+		}
+		
+		//加载酒店品牌
+		function loadBand(){
+			model.api("mapps.trip.hotelgrouplist","1.0",{}).then(function(data){
+					//console.log(data);
+			}) ;
+		}
+		
+		function openHotelSearch(){
+			searchKey=$("#searchKey").val();
+			var url = "hotelList.html" ;
+			url = setUrlParam(url, "beginDate", beginDate) ;
+			url = setUrlParam(url, "endDate", endDate) ;
+			if(cityName){
+				url = setUrlParam(url, "cityName", cityName) ;
+			}
+			if(cityCode){
+				url = setUrlParam(url, "cityCode", cityCode) ;
+			}
+			if(lat!=null && lat!=""&& lat!=undefined){
+				url = setUrlParam(url, "lat", lat) ;
+			}
+			if(lng!=null && lng!=""&& lng!=undefined){
+				url = setUrlParam(url, "lng", lng) ;
+			}
+			if(searchKey!=null && searchKey!=""&& searchKey!=undefined){
+				url = setUrlParam(url, "searchKey", searchKey) ;
+			}
+			window.open(url,"_self");
+			
+//			hotelSearch  = layer.open({
+//					  type: 2,//1
+//					  title: false,
+//					  closeBtn: 0,
+//					  shadeClose: false,
+//					  maxmin: false,
+//					  content:"hotelList.html" 
+//					});
+//			layer.full(hotelSearch);//全屏
+		}
+		
+//		init();
+		
+		document.addEventListener("plusready",plusreadyFun, false);
+	    function plusreadyFun(){
+	    	 Mplus.openBackListener();
+	        document.removeEventListener("plusready",plusreadyFun);
+	        init();
+	    }
+	    document.addEventListener("backpressed",function(){
+			ex(false);
+		}, false);
+		
+	</script>
+	
+
+</html>

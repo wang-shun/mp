@@ -1,0 +1,65 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">活动报名</h1>
+    </div>
+</header>
+<article>
+<form id="ID-Enter-Form">
+    <div class="group">
+        <div class="sliver underline">
+            <span class="peg"></span>
+            <p class="sliver-title">请完善以下信息</p>
+        </div>
+        <!-- <div style="padding: 0 12px;"> -->
+            <!--手机-->
+            <div class="inputbox underline" style="padding: 0 12px;">
+                <label class="inputbox-left">手机号<span class="app-required SID-title-phone"></span></label>
+                <div class="inputbox-right inputbox">
+                    <input type="tel" name="NID-Enter-Phone" id="ID-Enter-Phone" maxlength="11" class="input-text" placeholder="请输入手机号码" 
+                    oninput="if(!new RegExp('^[0-9]*[1-9][0-9]*$').test(value)){value=value.substring(0,value.length-1);}">
+                </div>
+            </div>
+            <!--性别-->
+            <div class="inputbox underline" style="padding: 0 12px;">
+                <label class="inputbox-left">性别<span class="app-required SID-title-sex"></span></label>
+                <div class="inputbox-right inputbox">
+                    <div class="input-text">
+                        <label>
+                            <input type="radio" name="NID-Enter-Sex" class="input-radio" value="男">
+                            <span>男</span>
+                        </label>
+                        <label style="margin-left:8px;">
+                            <input type="radio" name="NID-Enter-Sex" class="input-radio" value="女">
+                            <span>女</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--身份证-->
+            <div class="inputbox underline" style="padding: 0 12px;">
+                <label class="inputbox-left">身份证号<span class="app-required SID-title-idcard"></span></label>
+                <div class="inputbox-right inputbox">
+                    <input type="text" name="NID-Enter-IdCard" maxlength="18" id="ID-Enter-IdCard" class="input-text" placeholder="请输入身份证号">
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+
+    <div class="group">
+        <div class="sliver underline">
+            <p class="sliver-title">备注<span class="app-required SID-title-remark"></span></p>
+        </div>
+        <textarea class="input-textarea countvalue" name="NID-Enter-Remark" data-maxlength="100" maxlength="100" style="width: 100%;padding:0 12px;" placeholder="请输入备注内容，100字以内..."></textarea>
+        <div class="input-text color-placeholder text-right" style="padding: 0 12px;width: 100%;text-align: right;">
+            0/100
+        </div>
+        <hr>
+    </div>
+    <div style="margin:12px 80px;">
+    	<input class="button customBtn SID-EnterSubmitBtn" value="立即报名" type="button"/>
+    </div>
+</form>
+</article>

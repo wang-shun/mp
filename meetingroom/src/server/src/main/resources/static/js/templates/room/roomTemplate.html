@@ -1,0 +1,55 @@
+<div class="blockInside">
+    <div class="crumb">会议室维护</div>
+    <div style="margin-top: 6px;margin-bottom: 4px;">
+         <a class="meet-add SID-meet-add"><span class="fhicon-meeting-add"></span>新增会议室</a>
+    </div>
+    <div class="tree-container tree-container-nobutton" style="top: 68px;">
+        <div class="searchBlock">
+        <form id="subForm" onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+            <!--关闭查询的时候span标签调用样式fhicon-arrowU2,取消样式hide-->
+            <div class="search-toggleBar">
+                <a class="search-toggle SI-search-toggle">
+                    <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+                </a>
+            </div>
+            <div class="search-modle hide">
+                <div class="search-mod">
+                    <ul class="search-list">
+                        <li class="search-item"><label class="search-label">会议室名称：</label><input type="text" name="roomName" class="SID-roomName" /></li>
+                        <li class="search-item"><label class="search-label">会议室地址：</label><input type="text" name="address" class="SID-address" /></li>
+                        <li class="search-item"><label class="search-label">会议室类型：</label>
+	                        <select class = "SID-roomType" name = "roomType">
+	                            <option value="" selected>请选择</option>
+	                            <option value="0">普通</option>
+	                            <option value="1">特殊</option>
+	                        </select>
+	                    </li>
+                    </ul>
+                    <div class="equipment">
+                        <input type="checkbox" class="SID-projector" value="1" name="projector" id="SID-projector"><label for="SID-projector">投影</label>
+                    </div>
+                    <div class="equipment">
+                        <input type="checkbox" class="SID-display" value="1" name="display" id="SID-display"><label for="SID-display">显示</label>
+                    </div>
+                    <div class="equipment">
+                        <input type="checkbox" class="SID-microphone" value="1" name="microphone" id="SID-microphone"><label for="SID-microphone">麦克风</label>
+                    </div>
+                    <div class="equipment">
+                        <input type="checkbox" class="SID-stereo" value="1" name="stereo" id="SID-stereo"><label for="SID-stereo">音响</label>
+                    </div>
+                    <div class="equipment-no">
+                        <input type="checkbox" class="SID-wifi" value="1" name="wifi" id="SID-wifi"><label for="SID-wifi">无线网络</label>
+                    </div>
+                </div>
+                <div class="search-button"><a class="SID-search">查询</a><a class="SID-clearSearch">清空</a></div>
+            </div>
+            </form>
+        </div>
+        <!-- 表格内容 -->
+        <div class="tableblock">
+             <div class="tableblock">
+            	<table id="grid-table" width="100%" class="common-table"></table>
+            </div>	
+        </div>
+    </div>    
+</div>

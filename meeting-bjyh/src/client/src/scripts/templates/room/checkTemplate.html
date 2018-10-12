@@ -1,0 +1,32 @@
+<header>
+    <div class="titlebar">
+        <a class="titlebar-button titlebar-left SID-Back">
+            <i class="icon icon-back"></i>
+        </a>
+        <h1 class="titlebar-title text-center">审批</h1>
+    </div>
+    <div class="app-stateFilterBar underline" id="ID-Check-BtnFilter">
+        <div class="app-stateFilterBar-font">
+            <i class="icon-filter size20"></i>
+            <span>状态筛选</span>
+        </div>
+        <i class="app-stateFilterBar-icon icon-arrowdown"></i>
+        <i class="app-stateFilterBar-icon icon-arrowup"></i>
+    </div>
+</header>
+<article class="article-fixed" style="top:90px;">
+    <div id="ID-Check-List"></div>
+</article>
+<!--状态筛选-->
+<div id="ID-Check-DialogFilter" style="background-color:white;display:none;">
+    <ul class="app-popListSelect">
+        <li class="SID-Check-State active underline" data-status="0">
+            <div>待审批</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+        <li class="SID-Check-State" data-status="1">
+            <div>已审批</div>
+            <i class="icon icon-hook-fill"></i>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,50 @@
+<div class="group">
+	<div class="app-row">
+		<div class="app-rowLeft">会议地址</div>
+		<div class="app-rowRight">
+			<%=data.roomName %>
+		</div>
+	</div>
+</div>
+<div class="group">
+	<div class="app-row underline">
+		<div class="app-rowLeft">召开人</div>
+		<div class="app-rowRight">
+			<%=data.displayName %>
+		</div>
+	</div>
+	<div class="app-row">
+		<div class="app-rowLeft">联系方式</div>
+		<div class="app-rowRight SID-phone color-primary" data-phone="<%=data.phone %>">
+			<%=data.phone %>
+		</div>
+	</div>
+</div>
+<div class="group">
+	<div class="app-row underline">
+		<div class="app-rowLeft">会议名称</div>
+		<div class="app-rowRight">
+			<%=data.meetingName %>
+		</div>
+	</div>
+	<div class="app-row underline">
+		<div class="app-rowLeft">开始时间</div>
+		<div class="app-rowRight">
+			 <%=data.reservedStartTime %>
+		</div>
+	</div>
+	<div class="app-row underline">
+		<div class="app-rowLeft">结束时间</div>
+		<div class="app-rowRight">
+			<%=data.reservedEndTime %>
+		</div>
+	</div>
+	<!-- 
+	<div class="app-row">
+		<div class="app-rowLeft">会议备注</div>
+		<div class="app-rowRight">
+			请各位准时到1楼大厅签到，本次签到将纳入到个人考勤
+		</div>
+	</div>
+	 -->
+</div>

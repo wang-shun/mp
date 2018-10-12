@@ -1,0 +1,170 @@
+test_resource_setup_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.resource.setup
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "3"
+    resId: "3"
+    resCode: "ae86"
+    config: "{'wa':'o'}"
+  assert: &respbase    
+     code: 
+       _eq: 1
+       
+       
+test_resource_get_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.resource.get
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     resources: 
+       _notNull: true
+      
+             
+test_svcauth_assign_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.svcauth.assign
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "3"
+    svcId: "3"
+  assert: &respbase    
+     code: 
+       _eq: 1
+
+test_svcauth_get_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.svcauth.get
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     list:
+       _notNull: true
+
+test_svcauth_get_base1: 
+  service:  &svcbase
+    method: mapps.servicemanager.svcauth.get
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    svcId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     list:
+       _notNull: true
+       
+test_svcauth_get_base2: 
+  service:  &svcbase
+    method: mapps.servicemanager.svcauth.get
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+  assert: &respbase    
+     code: 
+       _eq: 1
+       
+test_app_status_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.app.status
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1       
+     nodes:
+       _notNull: true       
+
+test_app_list_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.app.list
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+  assert: &respbase    
+     code: 
+       _eq: 1       
+     list:
+       _notNull: true            
+
+test_app_config_save_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.app.config.save
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "1"
+    config: "[{\"key\":\"ha\",\"value\":\"lo\"},{\"key\":\"wo\",\"value\":\"o\"}]"
+  assert: &respbase    
+     code: 
+       _eq: 1       
+
+test_app_config_load_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.app.config.load
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1       
+     config:
+       _notNull: true 
+       
+test_dependecies_get_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.dependecies.get
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    appId: "mapps-fileservice"
+  assert: &respbase    
+     code: 
+       _eq: 1       
+     services:
+       _notNull: true 
+     resources:
+       _notNull: true 
+     configProperties: 
+       _notNull: true 
+
+
+
+
+#应用资源参数设置
+  
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

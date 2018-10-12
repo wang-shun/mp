@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.survey.dao.SuQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.survey.entity.SuQuestion">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="question" jdbcType="VARCHAR" property="question" />
+    <result column="question_html" jdbcType="VARCHAR" property="questionHtml" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="sel_max" jdbcType="NUMERIC" property="selMax" />
+    <result column="sel_min" jdbcType="NUMERIC" property="selMin" />
+    <result column="required" jdbcType="VARCHAR" property="required" />
+    <result column="usable" jdbcType="VARCHAR" property="usable" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modified_time" jdbcType="DATE" property="modifiedTime" />
+  </resultMap>
+  
+  <select id="getQuestionBySurveyId" resultType="SuQuestion">
+  	select q.id,q.code,q.question,q.question_html questionHtml,q.type,q.sel_max selMax,q.sel_min selMin,q.required,q.usable from su_survey_question s,su_question q
+  	where s.question_id = q.id and q.usable = '1'
+  	<if test="surveyId != null">
+  		and	s.survey_id = #{surveyId}
+  	</if>
+  	order by s.sequ
+  </select>
+  
+  <select id="getQuestionByTemplateId" resultType="SuQuestion">
+  	select q.id,q.code,q.question,q.question_html questionHtml,q.type,q.sel_max selMax,q.sel_min selMin,q.required,q.usable from su_template_question s,su_question q
+  	where s.question_id = q.id and q.usable = '1'
+  	<if test="templateId != null">
+  		and	s.template_id  = #{templateId}
+  	</if>
+  	order by s.sequ
+  </select>
+  
+  <delete id="deleteSurveyQuestionBySurveyId">
+  	delete from su_question where id in (select question_id from su_survey_question where survey_id = #{surveyId})
+  </delete>
+  
+  <delete id="deleteTemplateQuestionBySurveyId">
+  	delete from su_question where id in (select question_id from su_template_question where template_id = #{surveyId})
+  </delete>
+  
+  <select id="getSelectQuestion" resultType="SuQuestionJson">
+  	select q.id,q.code,q.question,q.question_html questionHtml,q.type,q.sel_max selMax,q.sel_min selMin,q.required,s.sequ from su_survey_question s,su_question q
+  	where s.question_id = q.id and q.usable = '1'
+  		and q.type in ('1','2','3')
+  	<if test="surveyId != null">
+  		and	s.survey_id = #{surveyId}
+  	</if>
+  	order by s.sequ
+  </select>
+  
+  <select id="getExportQuestion" resultType="SuQuestionJson">
+  	select q.id,q.code,q.question,q.question_html questionHtml,q.type,q.sel_max selMax,q.sel_min selMin,q.required,s.sequ from su_survey_question s,su_question q
+  	where s.question_id = q.id and q.usable = '1'
+  		and q.type in ('1','2','3','4','5')
+  	<if test="surveyId != null">
+  		and	s.survey_id = #{surveyId}
+  	</if>
+  	order by s.sequ
+  </select>
+  
+  
+  
+</mapper>

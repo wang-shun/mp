@@ -1,0 +1,15 @@
+<!--轮播图-->
+<div class="slider-container" id="ID-Index-Carousel">
+    <div class="slider-wrapper">
+    	<% for(var i=0,li; li=data[i++];) { %>
+        <div class="slider-slide SID-Index-Li" data-actId="<%=li.id%>" style="background-image: url(<%=imgPath%>/<%=li.defaultImage%>)">
+            <div class="slide-title">
+                <span class="nowrap slide-title-font" style="margin-right: 20px;">
+                    <%- li.actTitle%>
+                </span>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <div class="slider-pagination"></div>
+</div>

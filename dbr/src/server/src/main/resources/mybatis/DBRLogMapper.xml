@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.mapps.dbr.dao.DBRLogMapper">
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.dbr.entity.DBRLog">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="ecid" jdbcType="VARCHAR" property="ecid" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="log_flag" jdbcType="VARCHAR" property="logFlag" />
+    <result column="borrow_time" jdbcType="TIMESTAMP" property="borrowTime" />
+    <result column="return_time" jdbcType="TIMESTAMP" property="returnTime" />
+  </resultMap>
+  
+  <select id="getOpLog" parameterType="java.util.Map" resultType="DBRLog">
+    select id,module,object,op,content,result,ecid,user_name userName,user_id userId,op_time opTime ,dept_name deptName  
+	from dbr_borrow_return_log
+	where ecid = #{ecid} and op in ('borrow','return','结束')
+	  <if test="op != null">
+	  and op = #{op}
+      </if>
+	  <if test="userIds != null">
+	  and user_id in (${userIds})
+      </if>
+	  <if test="userName != null">
+	  and user_name like #{userName}
+      </if>
+	  <if test="depName != null">
+	  and dept_name like #{depName}
+      </if>
+      <if test="statBeginTime != null">
+	  and op_time > #{statBeginTime}
+      </if>
+      <if test="statEndTime != null">
+	  and op_time &lt;= #{statEndTime}
+      </if>
+      <if test="order != null">
+	  order by ${order}
+	  </if>
+      <if test="order == null">
+	  order by op_time desc
+	  </if>
+  </select>
+</mapper>

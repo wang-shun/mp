@@ -1,0 +1,110 @@
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
+      
+spring: 
+  application:
+    name: mapps-trip     
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://192.168.160.180:5432/trip
+    username: icube
+    password: FHuma025 
+
+flywaydb: 
+  locations: db/migration
+
+server: 
+  port: 18018
+  
+mybatis:
+  config-location: classpath:mybatis.cfg.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.fiberhome.mapps.trip.entity
+  
+api:
+  endpoint: /api  
+  
+mplus: 
+  sso:
+    serviceUrl: http://192.168.160.98:6001/thirdpartaccess
+    appKey: mr
+    secret: FHuma025
+    appId: trip
+    appType: 4
+  login:
+    serviceUrl: http://192.168.160.98:6001/clientaccess
+    loginPage: https://miap.cc:8209/PageRedirect?path=login.jsp
+  mos:
+    serviceUrl: http://192.168.160.72:7777/mos/api  
+  
+
+services: 
+  fileservice:
+    serviceUrl: http://192.168.100.102:9081/api
+    appKey: trip
+    appSecret: FHuma025
+    format: json
+    v: 2.0
+    method: mapps.fileservice.file.upload
+
+client: 
+  appId: trip
+  appName: 酒店预订
+  
+logging:
+  path: logs
+  
+  
+priv:
+  roles: 
+    user: 
+      - mapps.trip.orderadd
+      - mapps.trip.orderlist
+      - mapps.trip.orderdetail
+      - mapps.trip.ordercancel
+      - mapps.trip.checkbookingresult
+      - mapps.trip.checkcancelresult
+      - mapps.trip.orderlist.bt
+      - mapps.trip.orderdetail.bt
+      - mapps.trip.userinfo
+      - mapps.trip.setadmin
+      - mapps.trip.closeaudit
+      - mapps.trip.corpinfo
+      - mapps.trip.hotelgrouplist
+      - mapps.trip.hotelbrand
+      - mapps.trip.queryhotelids
+      - mapps.trip.gethotelinfo
+      - mapps.trip.hotelimages
+      - mapps.trip.hotelroomtype
+      - mapps.trip.roomstatus
+      - mapps.trip.queryhotels
+      - mapps.trip.hoteldetail
+      - mapps.trip.roomstatuswithrmtype
+      - mapps.trip.orderlistall.bt
+    admin: 
+      - mapps.trip.orderadd
+      - mapps.trip.orderlist
+      - mapps.trip.orderdetail
+      - mapps.trip.ordercancel
+      - mapps.trip.checkbookingresult
+      - mapps.trip.checkcancelresult
+      - mapps.trip.orderlist.bt
+      - mapps.trip.orderdetail.bt
+      - mapps.trip.userinfo
+      - mapps.trip.setadmin
+      - mapps.trip.closeaudit
+      - mapps.trip.corpinfo
+      - mapps.trip.hotelgrouplist
+      - mapps.trip.hotelbrand
+      - mapps.trip.queryhotelids
+      - mapps.trip.gethotelinfo
+      - mapps.trip.hotelimages
+      - mapps.trip.hotelroomtype
+      - mapps.trip.roomstatus
+      - mapps.trip.queryhotels
+      - mapps.trip.hoteldetail
+      - mapps.trip.roomstatuswithrmtype
+      - mapps.trip.orderlistall.bt

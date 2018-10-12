@@ -1,0 +1,115 @@
+<!--活动封面-->
+<div class="card bordered">
+    <div class="card-photo underline" id="ID-mainImage" style="background-image: url(<%if(data.actPosterUrl==""){%><%=imgPath%>/<%=data.defaultImage%><%}else{%><%=data.actPosterUrl%><%}%>)">
+    </div>
+    <div class="inputbox" style="padding: 10px 12px 10px 12px;">
+        <div class="box-flex-1 card-title"><%-data.actTitle%></div>
+        <small style="color: #9e7eff;">报名人数：<%=data.enterNum%>/<%if(data.numLimit==999999999){%>无限制<%}else{%><%=data.numLimit%><%}%></small>
+    </div>
+</div>
+<!--活动介绍-->
+<div class="group">
+	<div class="sliver underline">
+        <span class="peg"></span>
+        <p class="sliver-title">活动火热进行中</p>
+    </div>
+    <div style="padding: 12px 0;">
+	    <!--文字-->
+	    <div id="ID-ContentDiv" class="app-activity-content">
+	    	<%var content=data.actContent;if(content.length>contentMaxLength)content=content.substring(0,contentMaxLength)+"...";%>
+	    	<%-content%>
+	    </div>
+	    <!--图片-->
+	    <div style="display:none;margin:6px 12px 0px 12px;" id="ID-DetailImageDiv">
+	    <% if (data.photoList.length > 0) { %>
+		    <% for(var i=0,li; li=data.photoList[i++];) { %>
+		    <img alt="" style="width: 80px;height: 80px;margin:0px 0px 6px 0px;" data-url="<%=li.phoneRoute%>" class="SID-detailPhoto" src="<%=li.phoneRoute%>_100x100"/>
+		    <% } %>
+	    <% } %>
+	    </div>
+	    <!--查看详情-->
+	    <% if(data.actContent.length>contentMaxLength || data.photoList.length > 0) {%>
+	    <div style="text-align: right;margin: 0 12px;" class="SID-open-detail">
+	    	<a class="button primary outline" style="border:none">
+	    		<i class="icon icon-arrowdown size12"></i>
+	    		<span>查看详情</span>
+	    	</a>
+	    </div>
+	    <div style="display:none;text-align: right;margin: 0 12px;" class="SID-close-detail">
+	    	<a class="button primary outline" style="border:none">
+	    		<i class="icon icon-arrowup size12"></i>
+	    		<span>收起详情</span>
+	    	</a>
+	    </div>
+	    <% } %>
+    </div>
+    <hr>
+    <div class="inputbox" style="padding: 10px 12px 10px 12px;">
+        <small style="color: #9e7eff;display: block;">
+            <i class="icon icon-person size16"></i>
+            <span>已报名</span>
+        </small>
+        <small style="display: block;" class="box-flex-1 text-right SID-enterUser">
+		<% if (data.enterList.length > 0) { %>
+		    <% for(var i=0,li; li=data.enterList[i++];) { %>
+		    	<% if (i == 1) { %>
+		    		<%=li.name%>
+		    	<% } else {%>
+		    		、<%=li.name%>
+		    	<% } %>
+		    <% } %>
+	    <% } %>
+		</small>
+        <i class="icon icon-arrowright size12" style="color: #aaa"></i>
+    </div>
+    
+</div>
+<!--活动信息-->
+<div class="group">
+    <div class="inputbox underline" style="padding: 10px 12px 10px 12px;">
+        <i class="icon icon-time size16" style="color: #e27ba6;-webkit-transform: rotateY(180deg);-webkit-transform-origin: center;"></i>
+        <div style="display: block;padding: 0 0 0 8px;color:#aaa;" class="box-flex-1">
+        	<span>报名截止：</span>
+        	<span><%=data.enterEndTimeStr%></span>
+        </div>
+    </div>
+    <div class="inputbox underline" style="padding: 10px 12px 10px 12px;">
+        <i class="icon icon-time size16" style="color: #9e7eff;"></i>
+        <div style="display: block;padding: 0 0 0 8px;color:#aaa;" class="box-flex-1">
+        	<span>活动时间：</span>
+        	<span><%=data.actStartTimeStr%> ~ <%=data.actEndTimeStr%></span>
+        </div>
+    </div>
+    <div class="inputbox underline" style="padding: 10px 12px 10px 12px;">
+        <i class="icon icon-position size16" style="color: #9e7eff;"></i>
+        <p style="display: block;padding: 0 0 0 8px;color:#aaa;" class="box-flex-1"><%=data.address%></p>
+    </div>
+    <div class="inputbox" style="padding: 10px 12px 10px 12px;">
+        <span>发起者：</span>
+        <p style="display: block;padding: 0 0 0 8px;color:#aaa;" class="box-flex-1"><%=data.createName%></p>
+        <% if (imFlag) { %>
+        <% if (data.createFlag == 1) { %>
+        <i class="icon icon-chatline size16 " style="color: #aaa"></i>
+        <% } else {%>
+        <i class="icon icon-chatline size16 SID-ChatMessage" style="color: #9e7eff"></i>
+        <% } %>
+        <% } %>
+    </div>
+</div>
+<!--提交按钮-->
+<% if (data.joinFlag == 1) { %>
+<% if (imFlag) { %>
+<div style="margin:12px 80px;"><input class="button customBtn SID-GroupBtn" data-groupId="<%=data.disGroupId%>" value="进入讨论组" type="button"/></div>
+<% } %>
+<div style="margin:12px 80px;"><input class="button customBtn SID-EnterBtn" style="display:none;" value="我要报名" type="button"/></div>
+<% } else {%>
+<% if (imFlag) { %>
+<div style="margin:12px 80px;"><input class="button customBtn SID-GroupBtn" data-groupId="<%=data.disGroupId%>" style="display:none;" value="进入讨论组" type="button"/></div>
+<% } %>
+	<% if (data.enterFlag == 1) { %>
+	<div style="margin:12px 80px;"><input class="button customBtn SID-EnterBtn" value="我要报名" type="button"/></div>
+	<div style="margin:12px 80px;"><input class="button customBtn SID-DisEnterBtn disabled" disabled="disabled" style="display:none;" value="我要报名" type="button"/></div>
+	<% } else {%>
+	<div style="margin:12px 80px;"><input class="button customBtn disabled" disabled="disabled" value="我要报名" type="button"/></div>
+	<% } %>
+<% } %>

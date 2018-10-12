@@ -1,0 +1,161 @@
+/*variable*/
+
+/*路径*/
+$path :'..';
+
+/*圆角*/
+$radiusBig: 10px;
+$radiusSmall: 4px;
+
+/*百分比*/
+$percentageFull : 100%;
+$percentageHalf : 50%;
+
+/*文字大小*/
+$fontSizeIcon:20px; /* 左侧菜单文字图标大小*/
+$fontSizeIconW:40px; /* 欢迎页文字图标大小*/
+$fontSizeMobileIcon:64px; /* 欢迎页手机图标文字图标大小*/
+$fontSizeLarger:30px; 
+$fontSizeBig:18px;
+$fontSizeMiddle:16px;
+$fontSizeSmall:14px;
+$fontSizeSs:12px;
+
+/*color*/
+$colorMain:#1788fb; /*主色调 -- 这里是蓝色*/
+$colorRed:#eb2929; /*这里是红色*/
+$fontColorDark:#333; /*常态文字颜色*/
+$fontColorDarkT:#666; /*常态文字颜色*/
+$fontColorDarkS:#999; /*常态文字颜色*/
+$fontColorMenu:#fff; /* 左侧菜单常态文字颜色*/
+$fontColorBottom:#666; /* header常态文字颜色*/
+$fontcolorsmallW:#a2a7ab; /* 欢迎页浅灰色小字*/
+$fontcolorRedW:#fd6d64; /* 欢迎页红色字*/
+$fontcolorBlueW:#2b98f0; /* 欢迎页蓝色字*/
+$fontcolorGreenW:#89d571; /* 欢迎页绿色字*/
+$fonticonData:#82bfff; /* 欢迎页数据模块文字图标颜色*/
+$fontColorMenusublist:#333; /* 左侧二级菜单常态文字颜色*/
+$fontColorMenusublistH:#1788fb; /* 左侧二级菜单hover文字颜色*/
+
+//$fontColorOnion:#1d80dd; /* 右侧洋葱常态文字颜色*/
+//$fontColorRightBtnUn:#c5c5c5;/*右侧按钮不可点击文字颜色*/
+//$fontColorRightBtn:#000;/*右侧按钮可点击常态文字颜色*/
+//$fontColorSmall :#8d8d8d; /*浅灰色小字*/
+
+/*左侧按钮*/
+$buttonColor:#f5f5f5; /*默认按钮背景色颜色*/
+$buttonFontColor:#fff; /*默认按钮文字色颜色*/
+$buttonFontColorH:#1788fb; /*默认按钮Hover文字色颜色*/
+$buttonLineColorH:#1788fb; /*默认按钮Hover左侧竖条颜色*/
+$buttonHeight:61px;/*默认按钮高度*/
+$buttonHeight-leftsublist:50px;/*左侧二级列表按钮高度*/
+
+/*背景色*/
+$backgroundDefault:#fefefe; /*页面背景色*/
+$backgroundWelcome:#e8ebf1; /*欢迎页背景色*/
+$backgroundColorMenu:#2a3c4e; /*左侧菜单背景色*/
+$backgroundColorSubmenu:#f5f5f5; /*左侧二级菜单背景色*/
+$backgroundColorSubmenuH:#fafafa; /*左侧二级菜单hover背景色*/
+$treebackgroundCurrent:#d9edfd; /*树结构hover背景色*/
+$backgroundLabel:#e3e3e3; /*弹出层版本号标注-背景色*/
+
+/*表单*/
+//$tableHeight:25PX; /*表单行距行高*/
+
+//$tableVerticalHeight:40PX; /*竖列表单行距行高*/
+//$tableVerticalRowColor:#ecf4f7; /*竖列表单第一列背景色*/
+//$tableVerticalRowAlign:right; /*竖列表单第一列文字对其*/
+
+/*input*/
+//$inputHeight :24px; /*input行距行高*/
+//$inputWidthShort :30px; /* 数字短输入框*/
+//$inputWidthMiddle :180px; /* 中等输入框*/
+
+//$inputWidthLong :196px;/*文字长输入框*/
+//$inputWidthLongMore :300px;/*文字长输入框*/
+//$inputFull :100% - 1;
+
+
+
+$selsctWithd : 190px;/*selsct宽度*/
+//$selsctWithdLong : 204px;/*selsct宽度*/
+
+/*pop三栏宽度*/
+
+
+
+/*******************      模块          *******************/
+
+$MinWidthHeader : 1150px; /* header最小宽度变量 */
+$MinWidthRight : 1060px; /* content最小宽度变量 */
+$MinHeightRight : 500px;
+
+$heightHeaderTop : 70px; /* top-header 的高度控制变量 center部分相对定位TOP变量 */
+$widthLeftMenu : 90px; /* 主菜单宽度变量 */
+$widthLeftSubmenu : 130px; /* 二级菜单宽度变量 */
+$widthLeft : $widthLeftMenu + $widthLeftSubmenu; /* center-left 左侧宽度变量 */
+//$widthLeftSubmenuHeight:$percentageFull - 30;/* 二级菜单高度变量 */
+
+$borderLineColorSubmenu:#e0e0e0; /* 二级菜单 border颜色 */
+
+//$widthRightL : 200px; /* center-right -left  左侧宽度变量 */
+//$borderLineColor :#c2c2d3; /* center-right -left  border颜色 */
+//$btnWidth :$widthRightL/4 - 1;  /* center-right -left  左侧menuButton宽度变量 */
+//$btnWidthLast :$widthRightL/4;  /* center-right -left  左侧menuButton最后一个button宽度变量 */
+
+//$btRightnWidth :80px;  /* center-right -left  右侧menuButton宽度变量 */
+//$widthRightBtnHeight :40px; /* center-right menuButton 高度 行高 */
+//$widthRightPostTop :$widthRightBtnHeight + 8px; /* center-right menuButton 高度 行高 */
+//$widthRightBtnLHeight :16px; /* center-right menuButton 高度 行高 */
+//$borderLineHeight :4px; /* center-right line 高度 行高 */
+
+//$searchFormWdith :300px; /*右侧搜索框宽度*/
+//$searchTextWdith :$searchFormWdith - 40;/*右侧搜索框输入部分宽度*/
+
+//$tabHeight : 35px; /*右侧 tab高度 行高*/
+//$borderHeight:4px; /*右侧 tab border状态高度*/
+//$tabHeightHover:$tabHeight - $borderHeight; /*右侧 tab hover状态高度 行高*/
+
+/*3列表格*/
+//$rowOneWidth:25%;
+//$paramenterListTd :($percentageFull - $rowOneWidth)/2 - 20; /*3列表格宽度*/
+//$rowThreeWidth:30%;
+//$rowTwoWidth: $percentageFull - $rowOneWidth - $rowThreeWidth; /*3列表格宽度*/
+
+//$rowFourWidthOne:20% - 10;
+//$rowFourWidthTwo :($percentageFull - $rowFourWidthOne - $rowFourWidthOne)/2 - 20; /*4列表格宽度*/
+//$rowFourWidthTwoLi:100%  ;
+
+//$fourrowOneWidth:20%;
+//$fourrowTwoWidth:50% - $fourrowOneWidth;
+
+
+//$tablerowTwo : #f4f4f4; /*第二列背景色*/
+//$tablerowThree : #f8f8f8; /*第三列背景色*/
+
+
+/*******************      边框线颜色          *******************/
+$bordercolorWelcome:#c6d6de; /*欢迎页边框线颜色*/
+$borderLinecolor:#e8e8e8; /*边线颜色*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

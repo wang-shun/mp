@@ -1,0 +1,42 @@
+<!--开始-->
+<div class="app-axis-start">
+	<span>
+		<div class="app-axis-dot"></div>
+	</span>
+</div>
+<!--延长线轴-->
+<div class="app-axis-box" style="height: 30px;">
+	<div class="app-axis"></div>
+</div>
+<!--第一次签到-->
+<% for(var i=0,seq; seq=data[i++];) { %>
+<div class="app-axis-box theme1">
+	<div class="app-axis-half">
+		<div class="app-axis-title">
+			<span>第<%=seq.sequStr %>次签到</span>
+		</div>
+	</div>
+	<div class="app-axis-half">
+		<div class="app-axis-chat">
+			<p>
+			<%=seq.remarks %>
+			</p>
+		</div>
+	</div>
+	<div class="app-axis"></div>
+	<a class="app-axis-chatound SID-signIn" data-signId="<%=seq.id %>"  data-time="<%=seq.sequ%>">
+		<i class="icon icon-qrcodeline"></i>
+		<span>扫码签到</span>
+	</a>
+</div>
+<% } %>
+<!--延长线轴-->
+<div class="app-axis-box" style="height: 30px;">
+	<div class="app-axis"></div>
+</div>
+<!--结束-->
+<div class="app-axis-end">
+	<span>
+		<div class="app-axis-dot"></div>
+	</span>
+</div>

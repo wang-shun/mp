@@ -1,0 +1,31 @@
+<!-- <div class="add-main">
+     <a class="meet-add SID-add-btn"><span class="fhicon-meeting-add"></span>添加保留策略</a>
+</div> -->
+<div class="tree-container tree-container-nobutton" style="border-top-width: 0;top: 60px;">
+    <div class="searchBlock">
+    	<form id = "subForm" onkeydown="if(event.keyCode==13)return false;">
+       <!--  变为展开查询的时候span标签调用样式fhicon-arrowD2,search-modle后增加hide -->
+        <div class="search-toggleBar" style="display: none;">
+            <a class="search-toggle SI-search-toggle">
+                <span class="icon-set fhicon-arrowD2"></span><span>展开查询条件</span>
+            </a>
+        </div>
+        <div class="search-modle">
+        	<ul class="search-list">
+        		<li class="search-item" style="width: 480px;">
+	        		<label class="search-label">时间范围：</label>
+	        		<input type="text" class="SID-timeStart dashboardInput" style="width: 160px;" readonly>
+					<span style="margin: 0 2px;">~</span>
+					<input type="text" class="SID-timeEnd dashboardInput" style="width: 160px;" readonly>
+        		</li>
+        	</ul>
+            <div class="search-button">
+                <a class = "SID-search" style="float: right;">查询</a>
+            </div>
+        </div>
+       </form>
+    </div>
+    <!-- 图表内容 -->
+    <div class="SID-echartBox" style="width: 98%;height: 90%">
+    </div>
+</div>

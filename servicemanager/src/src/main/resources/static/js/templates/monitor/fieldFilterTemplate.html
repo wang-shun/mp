@@ -1,0 +1,46 @@
+<div id="fieldvalueBox" style="width: 50%;float: left;border-right: solid 1px grey;height: 200px;overflow: auto;">
+	<table class="stable" width="100%" border="0" cellspacing="0" cellpadding="0"  style="table-layout: fixed;">
+	    <tr>
+	    	<td class="tabletit" width="20%">选择</td>
+	    	<td class="tabletit" width="40%">字段</td>
+	        <td class="tabletit" width="40%">函数</td>
+	    </tr>
+	    <%
+	    for(var i=0,fieldList; field=fieldList[i++];){
+	    var even = "";
+	    if(i%2 == 0){
+	    	even = "even";
+	    }
+	    %>
+	    <tr class="datatr <%=even %>">
+	    	<td class="tdfield" width="20%">
+	    		<input class="definecheck" type="checkbox"/>
+			</td>
+	    	<td class="tdfield textinoneline" width="40%" title="<%=field.field %>"><%=field.field %></td>
+	        <td class="" width="40%">
+	        	<select class="SID-func tdselect">
+	        		<option value=""></option>
+					<option value="mean">平均值</option>
+					<option value="min">最小值</option>
+					<option value="max">最大值</option>
+					<option value="count">计数</option>
+					<option value="sum">求和</option>
+					<option value="stddev">标准差</option>
+				</select>
+			</td>
+	    </tr>
+	    <%
+	    }
+	    %>
+	</table>
+</div>
+<div id="selfdefineBox" style="width: calc(50% - 10px);float: left;">
+	<div style="margin: 5px;width: 100%">
+		<input class="selfdefinecheck" type="checkbox"/>
+		<label>自定义字段</label>
+		<input class="fieldinput" placeholder="请输入字段中文名称" type="text" style="width: 49%;margin-left: 4px;"/>
+		<br/>
+		<textarea class="fieldtextarea" readonly placeholder="点击添加表达式"></textarea>
+	</div>
+</div>
+<input class="SID-valuedefineListInput" type="hidden"/>

@@ -1,0 +1,214 @@
+test_route_query_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.query
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    offset: 1
+    limit: 10
+    sort: "serviceId asc"
+    keyword: ""
+  assert: &respbase    
+     code: 
+       _eq: 1
+     routes:
+       _notNull: true
+     total:
+       _notNull: true
+       
+test_route_query_base1: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.query
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    offset: 1
+    limit: 10
+    sort: "serviceId desc"
+    keyword: ""
+  assert: &respbase    
+     code: 
+       _eq: 1
+     routes:
+       _notNull: true
+     total:
+       _notNull: true       
+
+test_route_query_base2: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.query
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    offset: 1
+    limit: 10
+    sort: ""
+    keyword: "m"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     routes:
+       _notNull: true
+     total:
+       _notNull: true
+
+test_route_detail_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.detail
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    routeId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     routeDetail:
+       _notNull: true
+
+test_route_addReg_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.addReg
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    serviceId: "testReg"
+    serviceName: "testReg"
+    path: "testpath"
+    stripPrefix: "1"
+    retryable: "1"
+    ssHeaders: "testHeaders"
+    needAuth: "1"
+    enabled: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     id: 
+       _notNull: true
+
+test_route_saveReg_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.saveReg
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    id: "1"
+    serviceId: "mapps-fileservice"
+    serviceName: "mapps-fileservice"
+    path: "/fs/**"
+    stripPrefix: "1"
+    retryable: "1"
+    ssHeaders: "testCookies"
+    needAuth: "1"
+    enabled: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     id: 
+       _notNull: true
+
+test_route_addEx_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.addEx
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    url: "www.taobao.com"
+    serviceName: "taobao"
+    path: "taobao"
+    stripPrefix: "1"
+    retryable: "1"
+    ssHeaders: "testCookies"
+    needAuth: "0"
+    enabled: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     id: 
+       _notNull: true
+
+test_route_saveEx_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.saveEx
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    id: "2"
+    url: "www.baidu.com"
+    serviceName: "baidu"
+    path: "/baidu/**"
+    stripPrefix: "1"
+    retryable: "1"
+    ssHeaders: "testHeaders"
+    needAuth: "1"
+    enabled: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     id: 
+       _notNull: true
+
+test_route_disable_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.disable
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    routeId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1
+     id: 
+       _notNull: true
+
+test_route_enable_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.enable
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+    routeId: "1"
+  assert: &respbase    
+     code: 
+       _eq: 1     
+     id: 
+       _notNull: true  
+       
+test_route.queryservice_base: 
+  service:  &svcbase
+    method: mapps.servicemanager.route.queryservice
+    v: 1.0
+    session: true
+  request: &reqbase
+    sessionId: 1231231223xxxxx
+  assert: &respbase    
+     code: 
+       _eq: 1
+     services: 
+       _notNull: true  
+
+
+
+
+
+#应用资源参数设置
+  
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

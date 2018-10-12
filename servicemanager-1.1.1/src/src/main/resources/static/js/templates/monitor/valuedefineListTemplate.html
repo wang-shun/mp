@@ -1,0 +1,38 @@
+<% for(var i=0,list; onedata=list[i++];) { 
+	%>
+	<tr class="">
+		<td class="field" width="40%">
+			<%=onedata.field%>
+		</td>
+        <td class="" width="40%">
+        	<%
+        	var fieldName = ""
+        	if(onedata.name != undefined){
+        		fieldName = unescape(onedata.name).replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+        	}
+        	%>
+        	<input class="name" placeholder="此字段为必填项" style="border-width:0;padding:0;margin:0;width:100%;background-color:transparent;" maxlength="80" value="<%=fieldName%>"></input>
+        </td>
+        <td class="" width="20%" style="vertical-align: bottom;">
+        	<select class="unitselect" style="width: calc(80% - 44px);float:left;border-width:0;padding:0;margin:0;background-color:transparent;">
+        		<% var noselect = 1;
+        		for(var j=0,unitlist; unit=unitlist[j++];) { 
+        				var selectedvalue = unescape(onedata.unit).replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+        				var selected = "";
+        				if(selectedvalue == unit.unit){
+        					selected = "selected";
+        					noselect = 0;
+        				}
+        		%>
+        		<option value="<%=unit.unit%>" <%=selected%>><%=unit.unit%></option>
+        		<%}
+        		if(noselect == 1){
+        		%>
+        		<option value="" selected></option>
+        		<%}%>
+        	</select>
+        	<a href="javascript:void(0)" class="SID-fieldvalue-delete" style="float: right;padding-top: 4px;" data-id="<%=onedata.id%>"><span class="fhicon-delete" style="font-size: 18px;pointer-events:none;float:right;width:22px"></span></a>
+        	<a href="javascript:void(0)" class="SID-fieldvalue-save" style="float: right;padding-top: 4px;" data-id="<%=onedata.id%>"><span class="fhicon-active" style="font-size: 18px;pointer-events:none;float:right;width:22px"></span></a>
+        </td>
+    </tr>
+<%}%>

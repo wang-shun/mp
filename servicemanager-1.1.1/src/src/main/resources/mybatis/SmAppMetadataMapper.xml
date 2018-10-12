@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fiberhome.mapps.servicemanager.dao.SmAppMetadataMapper" >
+  <resultMap id="BaseResultMap" type="com.fiberhome.mapps.servicemanager.entity.SmAppMetadata" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="metadata" property="metadata" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

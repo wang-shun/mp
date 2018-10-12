@@ -1,0 +1,42 @@
+test_detail_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.detail
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId: 
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true
+      
+      
+  test_detail_room_base1: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.detail
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomId: 1and 2
+  assert: &respbase    
+    code: 
+      _eq: 0
+    roomId: 
+      _null: true    
+      
+
+#查询所选会议室的详情数据
+#查询两条所选会议室的详情数据，给出报错提示--只能选择一条看详情
+
+    
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

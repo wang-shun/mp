@@ -1,0 +1,36 @@
+test_add_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.add
+    v: 1.0
+    session: true    
+    sessionId: "mobileark#470142a5-2803-43d7-8726-58dbf6de63cf"     
+  request: &reqbase    
+    roomName: 小会议室1
+    address: 一楼101室
+    capacity: 1
+    area: 1
+    imageId: 
+    remarks: 简陋的房间
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true
+    
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含
+  
+    

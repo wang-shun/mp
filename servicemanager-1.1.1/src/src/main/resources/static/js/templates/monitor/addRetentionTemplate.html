@@ -1,0 +1,58 @@
+<div class="outmain-cons">
+<form id="formMsg">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+        	<input type = "hidden" class = "SID-id" name = "id" value = ""/>
+
+            <!--<div class="form-item">-->
+                <!-- 如果内容输入错误,在form-item-text后加error,把form-item-tip的hide去掉 -->
+                    <!--<input class="SID-name form-item-text {required: true}" maxlength="30" type="text" name="databassType" value="" />-->
+
+            <div class="form-item">
+                <label class="form-item-label" style="width: 30%;"><span>*</span>策略标识：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-rp form-item-text {required: true} smendigit" maxlength="30" type="text" name="rp" value=""/>
+                </div>
+                <div class="form-item-tip" style="width: 25%;"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width: 30%;"><span>*</span>策略名称：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-rpName form-item-text {required: true}" maxlength="30" type="text" name="rpName" value=""/>
+                </div>
+                <div class="form-item-tip" style="width: 25%;"><div class="wrong-text"></div></div>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width: 30%;"><span>*</span>保留时间：</label>
+                <div class="form-item-editbox">
+                    <input class="SID-retainTime form-item-text {required: true} sminfluxdbtime" maxlength="30" type="text" name="retainTime" value=""/>
+                </div>
+                <div class="form-item-tip" style="width: 25%;"><div class="wrong-text"></div></div>
+                <br/>
+                <label class="" style="width: 70%;float: right;color: red;">*填写方式:数字+单位,单位可选:s(秒),m(分),h(小时),d(天),w(周).例如:1d,3w,4h</label>
+            </div>
+            
+            <div class="form-item">
+                <label class="form-item-label" style="width: 30%;"><span>*</span>是否应用到缺省策略：</label>
+                <div class="form-item-editbox">
+                	<input class="form-item-text {required: true} isDefault-y" style="width:15px;height: 15px;position: relative" group="isDefault" type="radio" name="isDefault" value="1" id="isDefault-y" checked/><label style="margin:0 4px;" for="isDefault-y">是</label>
+                	<input class="form-item-text {required: true} isDefault-n" style="width:15px;height: 15px;position: relative" group="isDefault" type="radio" name="isDefault" value="0" id="isDefault-n"/><label style="margin:0 4px;" for="isDefault-n">否</label>
+                </div>
+                <div class="form-item-tip" style="width: 25%;"><div class="wrong-text"></div></div>
+            </div>
+        </div>
+
+    </div>
+</form>
+</div>
+
+<style>
+
+</style>
+
+<script type="text/javascript">
+
+</script>

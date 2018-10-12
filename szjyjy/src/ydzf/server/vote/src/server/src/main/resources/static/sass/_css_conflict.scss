@@ -1,0 +1,10 @@
+/*表格控件跟截图控件bottom样式冲突*/
+.pic-add-div {
+
+	.jcrop-holder{       
+	
+		.bottom { padding:0; margin:0; }
+	
+	}
+
+}

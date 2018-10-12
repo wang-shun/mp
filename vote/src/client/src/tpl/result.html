@@ -1,0 +1,113 @@
+
+{{#with result}}
+<ul class="list noclick">
+	<li class="nojustify nopadding">
+        <div class="justify-content" style="padding:12px;">
+            <p>{{title}}</p>
+            <small>投票决定，最高票数当选</small>
+        </div>
+        <div class="justify nopadding">
+        <!-- img/picture/banner.jpg -->
+            <img src="img/content/poll-main-default.jpg" data-img="{{image}}" data-href="{{image}}" id="bannerPic" class="width-full">
+        </div>
+    </li>
+    {{#with firstItem}}
+    <li class="nopadding top-result">
+    <!-- img/picture/login.png -->
+        {{#if image}}
+		<div class="justify nopadding result-img" style="background-image:url(img/placeholder/placeholder-main.png);" data-bg="{{image}}"></div>
+        {{/if}}
+		<div class="justify-content text-center" style="padding:12px 24px;">
+			<img src="img/icon/icon-crown.png" class="crown">
+			<h1>TOP CHOICE</h1>
+			<div class="progress-bar radiusround float-right">
+                <span class="progress" style="width: {{percent itemCount ../voteCount}}"></span>
+                <span class="text"><a class="timer" data-duration="1000" data-to="25">{{itemCount}}</a>/{{../voteCount}}</span>
+            </div>
+            <div class="selection-text">
+            	{{content}}
+            </div>
+		</div>
+    </li>
+    {{/with}}
+</ul>
+
+<ul class="list noclick">
+	<li>
+		<div class="justify-content box box-middle">
+			<p>投票结果</p>
+		</div>
+        <div class="justify">
+            <i class="icon-chartpie" style="font-size:24px;color:#4587f7;" onclick="toggleCharts(this)"></i>
+        </div>
+	</li>
+</ul>
+<div id="barcharts" class="chart">
+    <ul class="list result-list {{#if image}} {{else}} no-img{{/if}}">
+        {{#each items}}
+        <li class="result-list nopadding box" data-href="{{image}}">
+            {{#if image}}
+            <div class="justify nopadding result-img img-click" style="background-image:url(img/placeholder/placeholder-main.png);" data-bg="{{image}}"></div>
+            {{/if}}
+            <div class="progress-bar float-right box-flex-1">
+                <span class="progress" style="width: {{percents itemCount ../voteCount}}%"></span>
+                <span class="text"><a class="timer" data-duration="1000" data-to="25">{{itemCount}}</a>/{{../voteCount}}</span>
+            </div>
+            <div class="selection-text box box-middle">
+                {{content}}
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<div id="piecharts"  class="pie-chart chart" style="display: none;" data-votecount="{{voteCount}}">
+    <ul class="grid" data-col="2">
+        {{#each items}}
+        <li class="doughnutblock text-center" data-href="{{image}}">
+            <div class="doughnutblock-canvas" style="background-image:url(img/placeholder/placeholder-main.png)" data-bg="{{image}}">
+                <!-- <canvas id="chart6" width="140" height="140" data-itemCount="{{percents itemCount ../voteCount}}"/> -->
+                <canvas id="chart6" width="140" height="140" data-itemCount="{{itemCount}}"/>
+            </div>
+            <div class="doughnutblock-overlay box box-middlecenter img-click">
+                <div>
+                    <p class="percent">{{percents itemCount ../voteCount}}%</p>
+                    <p>{{itemCount}}/{{../voteCount}}</p>
+                </div>
+            </div>
+            <label style="">{{content}}</label>
+        </li>
+        <!-- <li class="doughnutblock text-center" data-src="{{image}}">
+            <div class="doughnutpercent img-click" style="background-image:url({{image}})">
+                <div class="doughnutpercent-overlay box box-middlecenter">
+                    <div>
+                        <p class="percent">{{percents itemCount ../scopeCount}}%</p>
+                        <p>{{itemCount}}/{{../scopeCount}}</p>
+                    </div>
+                </div>
+            </div>
+            <label style="">{{content}}</label>
+            <canvas width="140" data-itemCount="{{percents itemCount ../scopeCount}}"/>
+        </li> -->
+        {{/each}}
+    </ul>
+</div>
+<ul class="list noclick noborder">
+	<li class="between">
+		<div class="justify">
+            <div class="round" style="background-image:url(img/photo/tx1.jpg)"></div>
+        </div>
+		<div class="justify-content">
+			<p>{{creatorName}}</p>
+			<small class="top right">于{{timer expire}}截止</small>
+			<small>
+				创建:{{timer createTime}}
+				<div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                    <span class="progress" style="width: {{percent voteCount scopeCount}}"></span>
+                    <span class="text"><a class="timer" data-duration="1000" data-to="25">{{voteCount}}</a>/{{scopeCount}}</span>
+                </div>
+			</small>
+		</div>
+	</li>
+</ul>
+
+{{/with}}

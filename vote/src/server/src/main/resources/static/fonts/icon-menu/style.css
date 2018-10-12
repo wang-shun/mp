@@ -1,0 +1,75 @@
+@font-face {
+  font-family: 'fhicon';
+  src:  url('fonts/fhicon.eot?vi0k2o');
+  src:  url('fonts/fhicon.eot?vi0k2o#iefix') format('embedded-opentype'),
+    url('fonts/fhicon.ttf?vi0k2o') format('truetype'),
+    url('fonts/fhicon.woff?vi0k2o') format('woff'),
+    url('fonts/fhicon.svg?vi0k2o#fhicon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="fhicon-"], [class*=" fhicon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'fhicon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fhicon-active:before {
+  content: "\e900";
+}
+.fhicon-meeting-add:before {
+  content: "\e901";
+}
+.fhicon-admin:before {
+  content: "\e902";
+}
+.fhicon-arrowD2:before {
+  content: "\e903";
+}
+.fhicon-arrowU2:before {
+  content: "\e904";
+}
+.fhicon-close3:before {
+  content: "\e906";
+}
+.fhicon-delete:before {
+  content: "\e905";
+}
+.fhicon-meeting-exit:before {
+  content: "\e907";
+}
+.fhicon-eye:before {
+  content: "\e908";
+}
+.fhicon-home:before {
+  content: "\e909";
+}
+.fhicon-pencil:before {
+  content: "\e90a";
+}
+.fhicon-search:before {
+  content: "\e90b";
+}
+.fhicon-set2:before {
+  content: "\e90c";
+}
+.fhicon-trash:before {
+  content: "\e90d";
+}
+.fhicon-back:before {
+  content: "\e90e";
+}
+.fhicon-go:before {
+  content: "\e90f";
+}
+

@@ -1,0 +1,55 @@
+<div class="outmain-cons">
+    <div class="main-cons">
+        <!-- 基本信息模块开始 -->
+        <div class="formBox base-info">
+            <div class="form-item">
+                <div class="form-item-editbox" style="width: 100%">
+                    <textarea class="SID-editarea form-item-textarea" style="height: 200px" maxlength="200"></textarea>
+                </div>
+            </div>
+            <div class="form-item">
+				<div class="form-item-editbox" style="width: 100%">
+					<select class="SID-func form-item-text form-item-select" style="width: 120px;">
+						<option value=""></option>
+						<option value="mean">平均值</option>
+						<option value="min">最小值</option>
+						<option value="max">最大值</option>
+						<option value="count">计数</option>
+						<option value="sum">求和</option>
+						<option value="stddev">标准差</option>
+					</select>
+					<select class="SID-field form-item-text form-item-select" style="width: 360px;">
+					
+					</select>
+					<input class="SID-insertword insert-button" type="button" value="插入变量" style="width: 120px">
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="form-item-editbox" style="width: 100%">
+					<input class="SID-insertsymbol insert-button" type="button" value="+" style="width: 50px">
+					<input class="SID-insertsymbol insert-button" type="button" value="-" style="width: 50px">
+					<input class="SID-insertsymbol insert-button" type="button" value="*" style="width: 50px">
+					<input class="SID-insertsymbol insert-button" type="button" value="/" style="width: 50px">
+					<input class="SID-insertsymbol insert-button" type="button" value="(" style="width: 50px">
+					<input class="SID-insertsymbol insert-button" type="button" value=")" style="width: 50px">
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+<style>
+.insert-button{
+	height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 0 15px;
+    border: solid 1px #1788fb;
+    color: #1788fb;
+    background-color: white;
+}
+.insert-button:active{
+	color: white;
+	background-color: #1788fb;
+}
+</style>

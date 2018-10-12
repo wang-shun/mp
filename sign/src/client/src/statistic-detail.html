@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－签到</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="pageSignList" class="active">
+		<header>
+           <div class="titlebar" style="z-index:99;">
+                <a class="left" href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">统计</h1>
+                <a class="right">
+                    <i class="icon-text"></i>
+                </a>
+            </div>
+        </header>
+        <article style="top:44px;bottom:0px;background:#fff;border:1px solid #e8e8e8;">
+        <div class="sign-count" style="display:none"><i class="icon-calendar" style="margin-right: 10px;"></i><a class="count" style="color:#fff"></a><!-- 共签到5次 --></div>
+            <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
+                <div class="nodata-content ">
+                    <img src="img/icon/no-data.png">
+                    <br>
+                    暂无签到记录！
+                </div> 
+            </div>
+            <div class="list-count"></div>
+            <div class="list-person-info" style="margin-top: 40px;">
+                <!-- <a style="background-color: #53c6fd;border-color: #53c6fd;">
+                    阳
+                </a>
+                <span class="name">蔡宇阳</span> -->
+            </div>
+            <ul class="sign-list animated fadeInUp" id="signList">
+                <!-- <li class="sign-info">
+                    <div class="clock" data-clock="8:30">
+                        <div class="hour"></div>
+                        <div class="minute"></div>
+                        <div class="origin"></div>
+                    </div>
+                    <span class="time">8:30</span>
+                    <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
+                    <div class="title">我来上班了！！快看我地点!!!! 我来上班了！！快看我地点快看我地点快看我地点快看我地点</div>
+                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <hr> 
+                </li> -->
+            </ul>
+        </article>
+	</section>
+<script id="mySignTop-tpl" type="text/x-handlebars-template">
+    <a class="icon-name"  data-icon-name="{{creator}}" style="background-color: {{nameColor}};background-size:cover;border-color: #53c6fd;">{{subName}}</a>
+    <span class="name">{{name}}</span>
+</script>
+<script id="mySignInfo-tpl" type="text/x-handlebars-template">
+{{#each signList}}
+<li class="sign-info" data-sign-id="{{signId}}" data-sign-time="{{signTimeStr}}">
+    <div class="clock" data-clock="{{timer signTimeStr}}">
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="origin"></div>
+    </div>
+    <span class="time">{{timer signTimeStr}}&nbsp;&nbsp;&nbsp;{{taskNo}}</span>
+    <span class="location"><i class="icon-position"></i>{{address}}</span>
+    <div class="title"><pre>{{content}}</pre></div>
+    {{#each images}}
+    <a class="img-location" style="background-image:url(img/placeholder/placeholder-small.png);" data-bg="{{this}}" data-href="{{this}}"></a>
+    {{/each}}
+    <hr> 
+</li>
+{{/each}} 
+</script>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/Mplus.js"></script>
+    <script src="js/inobounce.min.js"></script>
+    <script>
+    var URL = {
+        queryMySign:"&method=mapps.sign.query&format=json&v=1.0&appKey="
+    },
+    Template = {
+        "mySignInfo":$("#mySignInfo-tpl").html(),
+        "mySignTop":$("#mySignTop-tpl").html()
+    },creator,signTime,dayArray = ["日", "一", "二", "三", "四", "五", "六"];;
+    //日历
+    //初始化function
+    window.addEventListener("load",function(){
+        // var c=DataClock();
+        creator = getParameter("creator");
+        signTime = getParameter("signTime");
+        queryMySign(creator,signTime);
+        bindEvents();
+    },false);
+
+    function queryMySign(creator,signDate){
+
+        ajaxModel.getData(URL.queryMySign,{
+            "creator":creator,
+            "signDate":signDate//"2016-03-22"
+        }).then(function(res){
+            if(res.code === "1"){
+                var data = res.data;
+                if(data.length == 0){
+                    $(".no-data").removeClass("hidden");
+                    $("#signList").html("");
+                    $(".sign-count").hide();
+                    $(".sign-count ").html("暂无签到")
+                }else{
+                    $(".no-data").addClass("hidden");
+                    var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
+                    $("#signList").html(html);
+                    $(".sign-count").show();
+                    // $(".sign-count a.count").after("共签到"+data.length+"次");//signTime
+                    var d= signTime.split("-");
+                    var signTimeDay = new Date(d[0],d[1]-1,d[2]).getDay();
+                    $(".sign-count a.count").after(signTime+" 星期"+dayArray[signTimeDay]);
+                    var name = data[0].creatorName;
+                    html = Handlebars.compile(Template.mySignTop)({
+                        "name":name,
+                        "subName":name.charAt(name.length-1),
+                        "nameColor":name.toPinyin().substring(0,1).toColor(),
+                        "creator":data[0].creator
+                    });
+                    $(".list-person-info").html(html);
+                    $(".icon-name").getUserIcon();
+                    DataClock();
+                    lazyloadImg();
+                }
+                
+            }else{
+                new Toast("请求失败").show();
+            }
+        })
+    }
+    function getDateStr(date){
+        // var date = new Date();
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
+        return yyyy+"-"+mm+"-"+dd;
+    }
+    function previewImage(container,clickDom){
+        var $container = $(container),
+            $clickDom = $(clickDom);
+        var urls = [];
+        var current = window.photoDownload + $clickDom.data("href");
+        $container.find("[data-href]").each(function(){
+            (function(s){
+                var url = window.photoDownload + $(s).data("href");
+                urls.push(url);
+            })(this);  
+        })
+        Mplus.previewImage(current,urls);
+    }
+    function lazyloadImg(container){
+        $("[data-bg],[data-img]").each(function(){
+            (function(s){
+                var img = new Image();
+                var data = $(s).data();
+                if($(s).data("img")){
+                    img.src = window.photoDownload_m + $(s).data('img');
+                    // img.src = $(s).data('img');
+                    img.onload=function(){
+                        $(s).attr('src', img.src);
+                    }
+                }else{
+                    // img.src = $(s).data('bg');
+                    img.src = window.photoDownload_m + $(s).data('bg');
+                    img.onload=function(){
+                        $(s).css("background-image","url(" + img.src + ")");
+                    }
+                }
+                
+            })(this);
+        });
+    }
+    function bindEvents(){
+        $(document).on("click","#signList .img-location",function(){
+            var $this = $(this)
+            previewImage($this.parents(".sign-info"),$this);
+        }); 
+        $(".titlebar .icon-text").click(function(){
+            // alert("mySignmap.html?date="+DateStr);
+            window.location.href = "mySignmap.html?date="+signTime+"&creator="+creator;
+        });
+        $("#signList").on("click",".location",function(){
+            var signLi = $(this).parents(".sign-info");
+            var signId = signLi.data("signId"),
+                signTime = signLi.data("signTime").split(/[\s]/)[0];
+            window.location.href="map.html?signId="+signId+"&date="+signTime;
+        });
+    }
+    function getParameter(argName){
+        var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
+        return param ? param[1] : param;
+    }
+
+    /*Handlebars*/
+    Handlebars.registerHelper("timer",function(value){
+        return value.split(/[\s]/)[1].substring(0,5);
+    })
+	//定义exmobi返回
+	function back(){history.go(-1);}
+	</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+test_query_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.query
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 会议室
+    address: 一楼
+    reservedStartTime: 2016-07-18
+    reservedEndTime: 2016-07-30
+    capacity: 10
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+    order: 1
+    timestamp: 0
+    offset: 1
+    limit: 10
+  assert: &respbase    
+    code: 
+      _eq: 1
+    roomId: 
+      _notNull: true
+
+test_query_room_base1: 
+  service:  &svcbase
+    method: mapps.meetingroom.room.query
+    v: 1.0
+    session: true
+  request: &reqbase
+    roomName: 会议室
+    address: 一楼
+    reservedStartTime: 2016-07-30
+    reservedEndTime: 2016-07-18
+    capacity: 10
+    projector: 0
+    display: 0
+    microphone: 0
+    stereo: 0
+    wifi: 0
+    order: 1
+    timestamp: 0
+    offset: 1
+    limit: 10
+  assert: &respbase    
+    code: 
+      _eq: 1003
+    roomId: 
+      _null: true
+
+#查询一条名称包含【会议室】，会议地址在【一楼】的 且预定时间在【7/18到7/30】之间的有预定的会议室的数据列表【每页显示10】条数据；
+#查询同第一条，时间颠倒，接口应有校验，返回空，提示时间错误
+
+#以此类推换参数，执行查询操作，验证接口是否正确，查询数据是否正确展现；
+    
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

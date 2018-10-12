@@ -1,0 +1,56 @@
+test_reserved_delete_room_base: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.delete
+    v: 1.0
+    session: true
+  request: &reqbase
+    reservedId:
+    operationType: 1
+  assert: &respbase    
+    code: 
+      _eq: 1
+    reservedId: 
+      _notNull: true
+
+
+test_reserved_delete_room_base1: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.delete
+    v: 1.0
+    session: true
+  request: &reqbase
+    reservedId:
+    operationType: 2
+  assert: &respbase    
+    code: 
+      _eq: 1
+    reservedId: 
+      _notNull: true
+      
+test_reserved_delete_room_base2: 
+  service:  &svcbase
+    method: mapps.meetingroom.reserved.delete
+    v: 1.0
+    session: true
+  request: &reqbase
+    reservedId:
+    operationType: 3
+  assert: &respbase    
+    code: 
+      _eq: 1
+    reservedId: 
+      _notNull: true
+      
+      
+#操作类型[operationType] :1：准备中取消会议，2：使用中结束会议，3：已结束/已取消--删除会议
+  
+# 操作符
+# _eq 等于
+# _notNull 非空
+# _null 空
+# _gt >
+# _ge >=
+# _lt <
+# _le <=
+# _like 包含
+# _notlike 不包含

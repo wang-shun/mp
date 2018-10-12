@@ -1,0 +1,287 @@
+
+/*public*/
+.size32 { width: 1.3rem; height:1.3rem; }
+a { color: #11cdde; }
+
+/* 覆盖
+*/
+.titlebar-title {
+    font-size: 0.7rem;
+}
+.fhicon-back { color: #24d1e1; } 
+.tabbar-rect .tab.active {
+    color: white;
+    background-color: #11cdde;
+    border-color: #11cdde;
+}
+
+.tab {
+    font-size: 0.55rem;
+}
+
+.tab-label {
+    font-size: 0.55rem;
+}
+
+.progressbox-content { padding:0.3rem 0 0 0 ; margin-left: 0.5rem; }
+
+.grid[data-col="4"] li {
+    width: 2.4rem;
+}
+.doughtut { width: 2.4rem; height: 2.4rem; }
+.doughtut-wrapper { width: 1.2rem; height: 2.4rem; }
+.doughtut-circle { width: 2.4rem; height: 2.4rem; }
+.doughtut-label { font-size: 0.5rem; }
+.doughtut.orange .doughtut-circle { border-width: 0.12rem ; }
+.doughtut.orange .doughtut-circle.right { border-right-width: 0.12rem ; border-left-width: 0.12rem; }
+.doughtut.orange .doughtut-circle.left { border-bottom-width: 0.12rem ; border-left-width: 0.12rem ; }
+
+.progress-bar { height: 0.6rem; border-width: 0.05rem; }
+.progress { padding: 0.2rem; }
+.grid { left: 50%; margin-left: -1.2rem; }
+
+
+.surveyList .complete .progress-bar.theme-1 {
+    background-color: #d9d9d9;
+    border-color: #bfbfbf;
+}
+
+.titlebar-button { color: #11cdde; height: 32px; line-height: 32px;}
+
+.input-checkbox:checked, .input-radio:checked, .input-checkbox.active, .input-radio.active {
+    color: #11cdde;
+}
+
+.input-checkbox[disabled], .input-radio[disabled] {
+    color: #d1d1d1;
+}
+
+.fhicon-checkbox, .fhicon-radio, .fhicon-checkBox {
+    height:0.8rem;
+    width: 0.8rem;
+    line-height:0.8rem;
+    font-family: "fhicon";
+    font-size:0.8rem;
+}
+
+.fhicon-radio:checked:before {
+  content: "\e905";
+}
+.fhicon-checkBox:checked:before {
+  content: "\e902";
+}
+
+.input-text {
+    min-height: 0.7rem;
+    line-height: 0.7rem;
+    padding: 0;
+}
+
+.error-font {
+    color: #888;
+    text-align: center;
+    margin-top: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 0.65rem;
+}
+
+.button {
+    height: 1.5rem;
+    border-width: 0.05rem;
+}
+
+
+.button.submit {
+    color: white;
+    background-color: #11cdde;
+    border-color: #11cdde;
+}
+
+.button.submit:active {
+  background-color: #82e0e9;
+  border-color: #82e0e9;
+}
+
+
+/* 新增
+*/
+.topBar { margin: 10px 0; }
+
+.marginBottom { margin-bottom: 10px; }
+.width100P { width: 100%; }
+
+.surveyList{ border-top:#cecece solid 0.05rem ; background-color: #fff;  display: block; overflow: hidden;}
+.surveyList li { border-bottom:#cecece solid 0.05rem ; padding:0.5rem 0;  display: block; overflow: hidden;}
+.surveyList li .sur-left { width:75%; float: left; display: block; overflow: hidden;}
+.surveyList li .sur-left h2 { font-size: 0.75rem; color: #333333; font-weight: normal; line-height: 1.5rem; margin-left: 0.5rem; overflow: hidden;
+text-overflow:ellipsis; white-space: nowrap; }
+.surveyList li .sur-left p { font-size: 0.7rem; color: #9e9e9e;  line-height: 1rem;  margin-left: 0.5rem;}
+.surveyList .fhicon-label,.surveyList .fhicon-time { color:#11cdde; font-size: 0.9rem; vertical-align:middle; margin-top: -0.1rem; margin-right: 0.1rem; }
+
+
+.surveyList li .sur-right { width: 25%; float: left; display: block; overflow: hidden;}
+.surveyList li .sur-right li { border:none;}
+.surveyList li .sUmber {font-size: 0.5rem; text-align: center; line-height: 1.04rem; margin: 0.15rem 0.4rem 0; border-radius: 2rem; background-color: #f2f2f2; color: #494949; }
+
+.bodyWhite { background-color: #fff; }
+.uestionnaire { padding: 1rem; }
+.uestionnaire li { font-size:0.65rem; margin-bottom: 1rem; }
+.uestionnaire li dt { line-height: 1.2rem; }
+.uestionnaire li dt span { display:inline; }
+.uestionnaire li dd { background-color: #fcfcfc; border:#e1e1e1 solid 0.05rem; border-radius: 0.2rem; padding:0.5rem 0.5rem 0 0.5rem ; }
+.uestionnaire li dd p { margin-bottom: 0.5rem; }
+.uestionnaire li dd.active { border: #11ccdd solid 1px; }
+
+.paddingBottom { padding-bottom: 0.5rem; }
+
+.input-line { width: 11.5rem; margin:0rem 0 0 1rem; border:#dedede solid 0.05rem; border-radius:0.2rem; line-height: 1.3rem; height: 1.3rem; min-height: 1.3rem; text-indent: 0.2rem; }
+.input-gray { background-color: #dedede; }
+
+.textarea { border: none; height: 100px; overflow: auto;}
+
+.button-questionnaire { width: 100%; padding: 10px 0 20px; width: 100%; text-align: center; }
+.button-questionnaire  a { padding: 0.3rem 1rem; margin: 0 0.7rem; border-radius: 50px; display: inline-block; text-align: center; border:#13cce0 1px solid; color: #13cce0; }
+.button-questionnaire  a:hover { opacity: 0.5; }
+
+.option-input {display: block;
+    vertical-align: top;
+    float: left;
+    margin-top: 3px;}
+.option-span {display: block;
+    vertical-align: top;
+    width: 90%;
+    float: left;}
+.option-label {display: block; overflow:hidden;}
+
+
+
+.dunit01 { width: 96%; margin:0 2%; }
+.dunit01 .dunit01-inner01 {
+    width: 70%;
+}
+.dunit01  .dunint-inner { width: 1rem; padding-top: 0.35rem; }
+
+
+
+.surveyList li .dunit01 h2 { font-size: 0.75rem; color: #333333; font-weight: normal; line-height: 1.2rem; margin-left: 0.1rem;  }
+.surveyList li .dunit01 p { font-size: 0.7rem; color: #9e9e9e;  line-height: 1rem;  margin-left: 0.1rem;}
+.surveyList li .dunit01 .sur-right { width:90%; float: none; margin-left: 10%; }
+.surveyList li .dunit01 .progressbox-content { margin-left: 0; }
+
+.surveyList .complete .fhicon-label,.surveyList .complete .fhicon-time,.surveyList li .complete h2,.surveyList li .complete p { color:#9da5a6; }
+
+.uestionnaire li dt {
+    line-height: 1.875rem;
+    margin-bottom: 0.3rem;
+}
+.uestionnaire li dd p {
+    margin-bottom: 0; 
+}
+.option-input {
+    margin-top: 0.08rem;
+}
+/** 预览定制 **/
+/** 全局 **/
+.q-preview-computer {
+	line-height:30px;
+	line-height:1.875rem;
+}
+.q-question p,.q-question span,.q-question u,.q-question em,.q-question strong{
+	line-height:30px;
+	line-height:1.875rem;
+} 
+.q-option p,.q-option span,.q-option u,.q-option em,.q-option strong{
+	line-height:30px;
+	line-height:1.875rem;
+} 
+/** 标题 **/
+.q-preview-computer .q-title {
+	font-size: 24px;
+}
+/** 题号 **/
+.q-preview-computer .q-mi{
+	line-height:30px;
+	line-height:1.875rem;
+	float: left;
+    word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    color: red;
+}
+.q-preview-computer .q-sequ{
+	line-height:30px;
+	line-height:1.875rem;
+	float: left;
+    word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+/** 题目 **/
+.q-preview-computer .q-question{
+	line-height:30px;
+	line-height:1.875rem;
+	word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+/** 选项按钮 **/
+.q-preview-computer .q-option-btn{
+	line-height:1.875rem;
+    word-break: normal;
+    width: auto;
+    display: block;
+}
+/** 选项 **/
+.q-preview-computer .q-option{
+	line-height:30px;
+	line-height:1.875rem;
+	word-break: normal;
+    width: 90%;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+/** 选项备注 **/
+.q-preview-computer .q-option-remark{
+	line-height:30px;
+	line-height:1.875rem;
+	word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

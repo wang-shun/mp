@@ -1,0 +1,49 @@
+<% for(var i=0,configProperties; cp=configProperties[i++];) { %>
+        <div class="form-item">
+            <label class="form-item-label"><%=cp.name%></label>
+            <div class="form-item-editbox config-inputbox" data-regex="<%=cp.regex%>">
+            	<% if(cp.type == 'text'){%>
+                	<input class="form-item-text {required: true}" group="<%=cp.groupName%>" maxlength="<%=cp.controlSize%>" type="<%=cp.type%>" name="<%=cp.key%>" value="<%=cp.defaultValue%>"/>
+                <%}else if(cp.type == 'radio'){
+						var options = cp.options.split(",");  
+						var def = cp.defaultValue;
+						for(var j=0,options;op=options[j++];){
+							var opval = op.split(":")[0];
+							var optext = op.split(":")[1];
+							var opid = cp.key+"-"+opval;
+							var checked = "";
+							if(def != ""){
+								if(def == opval){
+									checked = "checked";
+								}
+							}else{
+								if(j == 1){
+									checked = "checked";
+								}
+							}
+							%>
+							<input class="form-item-text {required: true}" style="width:15px;height: 15px;position: relative" group="<%=cp.groupName%>" maxlength="<%=cp.controlSize%>" type="<%=cp.type%>" name="<%=cp.key%>" <%=checked %> value="<%=opval%>" id="<%=opid %>"/><label style="margin:0 4px;" for="<%=opid %>"><%=optext%></label>
+	            <%		}
+                  }else if(cp.type == 'checkbox'){
+						var options = cp.options.split(",");  
+						var def = cp.defaultValue;
+						for(var j=0,options;op=options[j++];){
+							var opval = op.split(":")[0];
+							var optext = op.split(":")[1];
+							var opid = cp.key+"-"+opval;
+							var checked = "";
+							if(def != ""){
+								if(def.indexOf(opval) > -1){
+									checked = "checked";
+								}
+							}
+							%>
+							<input class="form-item-text {required: true}" style="width:15px;height: 15px;position: relative;" group="<%=cp.groupName%>" maxlength="<%=cp.controlSize%>" type="<%=cp.type%>" name="<%=cp.key%>" <%=checked %> value="<%=opval%>" id="<%=opid %>"/><label style="margin:0 4px;" for="<%=opid %>"><%=optext%></label>
+	            <%		}
+                  }
+                %>
+            </div>
+            <lable class="form-item-label" style="width:27%"><%=cp.remarks%></lable><br/>
+            <div class="form-item-tip" style="width:80%;float:right;padding:0;"><div class="wrong-text"></div></div>
+        </div>
+<%}%>

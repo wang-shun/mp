@@ -1,0 +1,20 @@
+<% for(var i=0,list; instance=list[i++];) { 
+	var wholeLogo = instance.logoPath+'/'+instance.logo;
+%>
+        <div class="SID-block config-block" data-appId="<%=instance.appId%>" data-path="<%=instance.path%>">
+        	<img src="<%=wholeLogo%>" onerror="imgError(this);" class="logo">
+        	<span class="name"><%=instance.appName%></span> 
+        	<!-- <span class="name">mapps-fileservice</span> -->
+        	<!-- <div class="content">
+        		<span class="path"><%=instance.path%></span>
+        		<div class=statusOn/>
+        	</div> -->
+		</div>	
+<%}%>
+<script>
+function imgError(image) {
+    image.onerror = "";
+    image.src = "logo.png";
+    return true;
+}
+</script>
